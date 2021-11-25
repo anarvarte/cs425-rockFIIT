@@ -8,6 +8,8 @@ import Goals from "./components/Goals";
 export default function App() {
   return (
     <View style={styles.screen}>
+      <Text style={styles.logo}> rockFIIT </Text>
+      <View />
       <View style={styles.button}>
         <Button title="Climbing" />
       </View>
@@ -22,17 +24,22 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  logo: {
+    fontSize: 50,
+    marginBottom: 80,
+  },
   screen: {
     flex: 1,
     backgroundColor: "#ccc",
     alignItems: "center",
-    justifyContent: "center",
+    padding: 100,
+    //justifyContent: "center",
   },
   button: {
-    padding: 0,
+    //padding: 0,
     margin: 15,
     borderColor: "black",
     borderWidth: 2,
-    width: "50%",
+    width: "80%",
   },
 });
