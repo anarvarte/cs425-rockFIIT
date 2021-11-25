@@ -1,6 +1,9 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
+
+import Climbing from "./components/Climbing";
+import Lifting from "./components/Lifting";
+import Goals from "./components/Goals";
 
 export default function App() {
   return (
