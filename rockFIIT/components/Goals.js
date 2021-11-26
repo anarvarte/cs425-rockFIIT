@@ -8,6 +8,14 @@ const Goals = (props) => {
         <View style={styles.backButton}>
           <Button color="grey" title="Back" onPress={props.onBack} />
         </View>
+        <View style={styles.buttonSpot}>
+          <View style={styles.button}>
+            <Button title="Climbing goals" />
+          </View>
+          <View style={styles.button}>
+            <Button title="Lifting goals" />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -25,6 +33,18 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 3,
     width: "20%",
+  },
+
+  buttonSpot: {
+    marginLeft: 82,
+    marginTop: 150,
+  },
+
+  button: {
+    margin: 15,
+    borderColor: "black",
+    borderWidth: 2,
+    width: "60%",
   },
 });
 
