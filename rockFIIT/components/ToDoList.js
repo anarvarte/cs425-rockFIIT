@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
@@ -15,21 +15,19 @@ export default function TodoList({ item, deleteItem }) {
           <TextItem>{item.value}</TextItem>
           <TextDate>Task</TextDate>
         </View>
-        <IconContainer onPress={() => deleteItem(item.key)}>
-          <MaterialIcons.Button name="delete" size={24} color="midnightblue" />
-        </IconContainer>
+        <View style={styles.button}>
+          <Button title="Delete" onPress={() => deleteItem(item.key)} />
+        </View>
       </ListContainer>
     </ComponentContainer>
   );
 }
+
 /*
-<TouchableOpacity
-        style={styles.button}
-        onPress={() => deleteItem(item.key)}
-      >
-        <Text>Delete</Text>
-      </TouchableOpacity>
-      */
+<TouchableOpacity style={styles.button} onPress={() => deleteItem(item.key)}>
+  <Text>Delete</Text>
+</TouchableOpacity>;
+*/
 
 const ListContainer = styled.TouchableOpacity`
   background-color: whitesmoke;
@@ -69,12 +67,12 @@ const TextDate = styled.Text`
 //  font-family: poppins-regular;
 
 const IconContainer = styled.TouchableOpacity`
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-  margin-top: 15px;
-  height: 40px;
-  border-radius: 10px;
+  border-radius: 30px;
+  padding: 3px;
+  margin-top: 10px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  height: auto;
 `;
 
 const CircleContainer = styled.View`
@@ -89,5 +87,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
+  },
+  button: {
+    paddingRight: 150,
+    marginTop: 15,
+    marginBottom: 15,
+    flexDirection: "row",
   },
 });
