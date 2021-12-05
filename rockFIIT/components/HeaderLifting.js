@@ -3,11 +3,10 @@ import styled from "styled-components";
 
 let today = new Date().toISOString().slice(0, 10);
 
-export default function Header() {
+export default function HeaderLifting() {
   return (
     <ComponentContainer>
-      <HeaderText>Goals:</HeaderText>
-      <HeaderList>{today}</HeaderList>
+      <HeaderText>Lifting workout: </HeaderText>
     </ComponentContainer>
   );
 }
@@ -19,10 +18,9 @@ const ComponentContainer = styled.View`
   align-items: center;
 `;
 
-
 const HeaderText = styled.Text`
   color: white;
-  
+
   font-size: 30px;
 `;
 //font-family: poppins-bold;
