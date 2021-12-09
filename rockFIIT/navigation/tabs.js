@@ -185,6 +185,32 @@ const Tabs = () => {
           ),
         }}
       />
+        <Tab.Screen
+        name="About Us"
+        component={AboutUsScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                top: 10,
+              }}
+            >
+              <Image
+                source={require("../assets/aboutus.png")}
+                resizeMode="contain"
+                style={{
+                  width: 50,
+                  height: 50,
+                  tintColor: focused ? "#e32f45" : "#748c94",
+                }}
+              />
+              <Text>About Us</Text>
+            </View>
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
