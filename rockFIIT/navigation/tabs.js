@@ -7,6 +7,8 @@ import WeightLiftingScreen from "../screens/WeightLiftingScreen";
 import GoalsScreen from "../screens/GoalsScreen";
 import RockClimbingScreen from "../screens/RockClimbingScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import SignInScreen from "../screens/SignInScreen"
+import SignUpScreen from "../screens/SignUpScreen"
 
 const Tab = createBottomTabNavigator();
 
@@ -27,6 +29,32 @@ const Tabs = () => {
         },
       }}
     >
+    <Tab.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                top: 10,
+              }}
+            >
+              <Image
+                source={require("../assets/login.png")}
+                resizeMode="contain"
+                style={{
+                  width: 50,
+                  height: 50,
+                  tintColor: focused ? "#e32f45" : "#748c94",
+                }}
+              />
+              <Text>Account</Text>
+            </View>
+          ),
+        }}
+      />
       <Tab.Screen
         name="Home"
         component={HomeScreen}
