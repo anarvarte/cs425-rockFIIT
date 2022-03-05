@@ -1,12 +1,32 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import Tabs from "./navigation/tabs";
+import 'react-native-gesture-handler';
 
-const App = () => {
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from '@react-navigation/stack';
+
+import LogIn from './screens/LogInScreen';
+import SignUp from './screens/SignUpScreen';
+import Tabs from './navigation/tabs';
+
+
+
+const App: () =>  Node = () =>{
+
+  const Stack = createStackNavigator();
+
   return (
-    <NavigationContainer>
+    /*<NavigationContainer>
       <Tabs />
     </NavigationContainer>
+    */
+
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="LogIn" component={LogIn} options={{headerShown: false}} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+      </Stack.Navigator>
+    </NavigationContainer>
+
   );
 };
 
