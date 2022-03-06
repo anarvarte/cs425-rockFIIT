@@ -8,48 +8,57 @@ export default function TodoList({ item, deleteItem }) {
   return (
     <ComponentContainer>
       <ListContainer>
-        <TouchableOpacity>
-          <Entypo name ="circle" size={20} color="midnightblue" />
-          </TouchableOpacity>
+        <CircleContainer>
+          <TouchableOpacity>
+            <Entypo name ="circle" size={20} color="midnightblue" />
+            </TouchableOpacity>
+          </CircleContainer>
         <View>
           <TextItem>{item.value}</TextItem>
         </View>
         <View style={styles.button}>
-          <Button title="Delete" onPress={() => deleteItem(item.key)} />
+          <MaterialIcons name="delete" size={20} onPress={() => deleteItem(item.key)} />
         </View>
       </ListContainer>
     </ComponentContainer>
   );
 }
 
+const HeaderText = styled.View`
+  margin-top: 10px;
+`;
+
 const ListContainer = styled.TouchableOpacity`
   background-color: whitesmoke;
   height: auto;
   width: 350px;
-  margin-bottom: 30px;
-  border-radius: 10px;
+  border-radius: 15px;
   flex-direction: row;
-  justify-content: space-between;
-  margin-top: 10px
 `;
 
+const CircleContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+`;
 
 const ComponentContainer = styled.View`
   flex-direction: row;
   justify-content: center;
   height: auto;
   width: auto;
+  margin-top: 50px;
 `;
 
 const TextItem = styled.Text`
   color: black;
-  width: 260px;
+  width: 270px;
   height: auto;
   font-size: 20px;
   margin-right: 5px;
   margin-left: 10px;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 12px;
 `;
 //  font-family: poppins-regular;
 
