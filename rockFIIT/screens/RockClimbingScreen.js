@@ -10,7 +10,6 @@ import {
 import styled from "styled-components";
 import AddInput from "../components/AddInput";
 import ToDoList from "../components/ToDoList";
-import HeaderClimbing from "../components/HeaderClimbing";
 import EmptyClimbing from "../components/EmptyClimbing";
 
 const RockClimbingScreen = ({ navigation }) => {
@@ -40,7 +39,6 @@ const RockClimbingScreen = ({ navigation }) => {
       <View>
         <FlatList
           data={data}
-          ListHeaderComponent={() => <HeaderClimbing />}
           ListEmptyComponent={() => <EmptyClimbing />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (

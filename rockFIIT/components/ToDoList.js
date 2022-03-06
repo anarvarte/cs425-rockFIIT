@@ -8,12 +8,11 @@ export default function TodoList({ item, deleteItem }) {
   return (
     <ComponentContainer>
       <ListContainer>
-        <CircleContainer>
-          <Entypo name="circle" size={20} color="midnightblue" />
-        </CircleContainer>
+        <TouchableOpacity>
+          <Entypo name ="circle" size={20} color="midnightblue" />
+          </TouchableOpacity>
         <View>
           <TextItem>{item.value}</TextItem>
-          <TextDate>Task</TextDate>
         </View>
         <View style={styles.button}>
           <Button title="Delete" onPress={() => deleteItem(item.key)} />
@@ -23,12 +22,6 @@ export default function TodoList({ item, deleteItem }) {
   );
 }
 
-/*
-<TouchableOpacity style={styles.button} onPress={() => deleteItem(item.key)}>
-  <Text>Delete</Text>
-</TouchableOpacity>;
-*/
-
 const ListContainer = styled.TouchableOpacity`
   background-color: whitesmoke;
   height: auto;
@@ -37,7 +30,9 @@ const ListContainer = styled.TouchableOpacity`
   border-radius: 10px;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 10px
 `;
+
 
 const ComponentContainer = styled.View`
   flex-direction: row;
@@ -51,35 +46,13 @@ const TextItem = styled.Text`
   width: 260px;
   height: auto;
   font-size: 20px;
-  margin-top: 10px;
-  margin-right: 20px;
-`;
-//  font-family: poppins-regular;
-
-const TextDate = styled.Text`
-  color: goldenrod;
-  font-size: 15px;
-  margin-right: 20px;
-
-  border-radius: 10px;
-  width: 40px;
-`;
-//  font-family: poppins-regular;
-
-const IconContainer = styled.TouchableOpacity`
-  border-radius: 30px;
-  padding: 3px;
-  margin-top: 10px;
-  margin-right: 15px;
-  margin-bottom: 10px;
-  height: auto;
-`;
-
-const CircleContainer = styled.View`
-  align-items: center;
+  margin-right: 5px;
+  margin-left: 10px;
   justify-content: center;
-  padding-left: 5px;
+  margin-top: 20px;
 `;
+//  font-family: poppins-regular;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -87,6 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
+    
   },
   button: {
     paddingRight: 150,

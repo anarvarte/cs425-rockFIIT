@@ -31,6 +31,7 @@ const Tabs = () => {
       name="Home"
       component={HomeScreen}
       options={{
+        headerShown: false,
         tabBarIcon: ({ focused }) => (
           <View
             style={{
@@ -57,6 +58,7 @@ const Tabs = () => {
         name="Weightlifting"
         component={WeightLiftingScreen}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -83,6 +85,7 @@ const Tabs = () => {
         name="Goals"
         component={GoalsScreen}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -109,6 +112,7 @@ const Tabs = () => {
         name="Rock Climbing"
         component={RockClimbingScreen}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -135,6 +139,7 @@ const Tabs = () => {
         name="Settings"
         component={SettingsScreen}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View
               style={{
