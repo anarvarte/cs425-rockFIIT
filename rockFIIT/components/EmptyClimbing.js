@@ -4,7 +4,6 @@ import styled from "styled-components";
 export default function Empty() {
   return (
     <ComponentContainer>
-      <EmptyText>Add exercises!</EmptyText>
       <EmptyImage source={require("../assets/rockclimbing.png")} />
     </ComponentContainer>
   );
@@ -17,8 +16,9 @@ const ComponentContainer = styled.View`
 `;
 
 const EmptyImage = styled.Image`
+  align-items: center;
   width: 350px;
-  height: 300px;
+  height: 400px;
 `;
 
 const EmptyText = styled.Text`

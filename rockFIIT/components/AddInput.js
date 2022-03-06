@@ -12,7 +12,7 @@ export default function AddInput({ submitHandler }) {
   return (
     <ComponentContainer>
       <InputContainer>
-        <Input placeholder="Add Task..." onChangeText={onChangeText} />
+        <Input placeholder="Create Program..." onChangeText={onChangeText} />
       </InputContainer>
       <SubmitButton
         onPress={() => {
@@ -32,6 +32,7 @@ const ComponentContainer = styled.View`
 const InputContainer = styled.View`
   flex-direction: row;
   border-radius: 10px;
+  
 `;
 
 const Input = styled.TextInput`
@@ -42,6 +43,7 @@ const Input = styled.TextInput`
   padding: 10px;
   margin-bottom: 150px;
   border-radius: 10px;
+  
 `;
 
 const SubmitButton = styled.TouchableOpacity`

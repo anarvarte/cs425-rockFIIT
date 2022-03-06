@@ -9,34 +9,37 @@ export default function TodoList({ item, deleteItem }) {
     <ComponentContainer>
       <ListContainer>
         <CircleContainer>
-          <Entypo name="circle" size={20} color="midnightblue" />
-        </CircleContainer>
+          <TouchableOpacity>
+            <Entypo name ="circle" size={20} color="midnightblue" />
+            </TouchableOpacity>
+          </CircleContainer>
         <View>
           <TextItem>{item.value}</TextItem>
-          <TextDate>Task</TextDate>
         </View>
         <View style={styles.button}>
-          <Button title="Delete" onPress={() => deleteItem(item.key)} />
+          <MaterialIcons name="delete" size={20} onPress={() => deleteItem(item.key)} />
         </View>
       </ListContainer>
     </ComponentContainer>
   );
 }
 
-/*
-<TouchableOpacity style={styles.button} onPress={() => deleteItem(item.key)}>
-  <Text>Delete</Text>
-</TouchableOpacity>;
-*/
+const HeaderText = styled.View`
+  margin-top: 10px;
+`;
 
 const ListContainer = styled.TouchableOpacity`
   background-color: whitesmoke;
   height: auto;
   width: 350px;
-  margin-bottom: 30px;
-  border-radius: 10px;
+  border-radius: 15px;
   flex-direction: row;
-  justify-content: space-between;
+`;
+
+const CircleContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
 `;
 
 const ComponentContainer = styled.View`
@@ -44,42 +47,21 @@ const ComponentContainer = styled.View`
   justify-content: center;
   height: auto;
   width: auto;
+  margin-top: 50px;
 `;
 
 const TextItem = styled.Text`
   color: black;
-  width: 260px;
+  width: 270px;
   height: auto;
   font-size: 20px;
-  margin-top: 10px;
-  margin-right: 20px;
-`;
-//  font-family: poppins-regular;
-
-const TextDate = styled.Text`
-  color: goldenrod;
-  font-size: 15px;
-  margin-right: 20px;
-
-  border-radius: 10px;
-  width: 40px;
-`;
-//  font-family: poppins-regular;
-
-const IconContainer = styled.TouchableOpacity`
-  border-radius: 30px;
-  padding: 3px;
-  margin-top: 10px;
-  margin-right: 15px;
-  margin-bottom: 10px;
-  height: auto;
-`;
-
-const CircleContainer = styled.View`
-  align-items: center;
+  margin-right: 5px;
+  margin-left: 10px;
   justify-content: center;
-  padding-left: 5px;
+  margin-top: 12px;
 `;
+//  font-family: poppins-regular;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -87,6 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
+    
   },
   button: {
     paddingRight: 150,

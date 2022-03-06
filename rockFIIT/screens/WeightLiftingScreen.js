@@ -10,7 +10,6 @@ import {
 import styled from "styled-components";
 import AddInput from "../components/AddInput";
 import ToDoList from "../components/ToDoList";
-import HeaderLifting from "../components/HeaderLifting";
 import EmptyLifting from "../components/EmptyLifting";
 
 const WeightLiftingScreen = ({ navigation }) => {
@@ -40,7 +39,6 @@ const WeightLiftingScreen = ({ navigation }) => {
       <View>
         <FlatList
           data={data}
-          ListHeaderComponent={() => <HeaderLifting />}
           ListEmptyComponent={() => <EmptyLifting />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
@@ -68,6 +66,7 @@ const ComponentContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
 `;
 
 export default WeightLiftingScreen;
