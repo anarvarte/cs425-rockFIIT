@@ -1,11 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput} from 'react-native';
-import { TouchableOpacity } from "react-native-gesture-handler";
+
 import '../assets/LogInScreenLogo.png';
+
+import CustomInput from '../components/CustomInput';
+import CustomButton from '../components/CustomButton';
+
 import Tabs from '../navigation/tabs';
 import SignUp from './SignUpScreen';
 
 const LogIn = ({navigation}) => {
+
+    const[username, setUsername] = useState('');
+    const[password, setPassword] = useState('');
+
+    const onLogInPressed = () => {
+        navigation.navigate('Tabs');
+    };
+
+    const onForgotPasswordPressed = () => {
+        console.warn("FORGOT PASSWORD");
+    };
+
 
     function navigateTabs(){
         navigation.navigate('Tabs');
@@ -33,27 +49,34 @@ const LogIn = ({navigation}) => {
                     &nbsp;&nbsp;&nbsp;Log In
                 </Text>
                 <View style={styles.logInForm}>
-                    <TextInput
-                        style={styles.logInInputFields}
-                        placeholder={"Username / Email Address"}
-                        placeholderTextColor={"white"}
-                    /> 
-                    <TextInput
-                        style={styles.logInInputFields}
-                        placeholder={"Password"}
-                        placeholderTextColor={"white"}
+                    <CustomInput
+                        placeholder="Username"
+                        value={username}
+                        setValue={setUsername}
+
+                    />
+                    <CustomInput
+                        placeholder="Password"
+                        value={password}
+                        setValue={setPassword}
                         secureTextEntry={true}
                     />
-                    <TouchableOpacity style={styles.logInButton} onPress = {navigateTabs}>
-                        <Text style={styles.logInButtonText}>Sign In</Text>
-                    </TouchableOpacity>                      
-                </View>
+                    <CustomButton
+                        text="Log In"
+                        onPress={onLogInPressed}
+                    />  
+                    <CustomButton
+                        text="Forgot Password"
+                        onPress={onForgotPasswordPressed}
+                        type="Tertiary"
+                    /> 
+                    <CustomButton
+                        text="Create New Account"
+                        onPress={navigateSignUp}
+                        type="Tertiary"
+                    />  
 
-                <TouchableOpacity style={styles.createAccountButton} onPress = {navigateSignUp}>
-                    <Text style={styles.createAccountText}>
-                        Create Account
-                    </Text>
-                </TouchableOpacity>
+                </View>
             </View>
         </View>
     )
@@ -105,41 +128,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop:45,
     },
-    logInInputFields:{
-        width:'85%',
-        borderWidth: 3,
-        borderColor: 'white',
-        height: 50,
-        borderRadius:10,
-        paddingLeft:10,
-        marginTop:20,
-        color:'white',
-    },
-    logInButton:{
-        width:'85%',
-        color:'#000',
-        height:50,
-        backgroundColor:'white',
-        borderRadius:10,
-        marginTop:20,
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        padding:10,
-    },
-    logInButtonText:{
-        fontWeight:'bold',
-        fontSize:18,
-    },
-    createAccountText:{
-        color:'gray',
-    },
-    createAccountButton:{
-        width:'100%',
-        display:'flex',
-        alignItems:'center',
-        marginTop:20,
-    }
 })
 
 export default LogIn

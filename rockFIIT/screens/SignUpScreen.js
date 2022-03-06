@@ -1,10 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput} from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
+
 import '../assets/LogInScreenLogo.png';
+
+import CustomInput from '../components/CustomInput';
+import CustomButton from '../components/CustomButton';
+
 import LogIn from './LogInScreen';
 
 const SignUp = ({navigation}) => {
+
+    const[name, setName] = useState('');
+    const[username, setUserName] = useState('');
+    const[emailaddress, setEmailAddress] = useState('');
+    const[password, setPassword] = useState('');
+    const[confirmpassword, setConfirmPassword] = useState('');
 
     function navigateLogIn(){
         navigation.navigate('LogIn');
@@ -28,31 +39,31 @@ const SignUp = ({navigation}) => {
                     Sign Up Below!
                 </Text>
                 <View style={styles.logInForm}>
-                    <TextInput
-                        style={styles.logInInputFields}
-                        placeholder={"Full Name"}
-                        placeholderTextColor={"white"}
+                    <CustomInput
+                        placeholder="Full Name"
+                        value={name}
+                        setValue={setName}
                     />
-                    <TextInput
-                        style={styles.logInInputFields}
-                        placeholder={"Username"}
-                        placeholderTextColor={"white"}
-                    /> 
-                    <TextInput
-                        style={styles.logInInputFields}
-                        placeholder={"Email Address"}
-                        placeholderTextColor={"white"}
-                    /> 
-                    <TextInput
-                        style={styles.logInInputFields}
-                        placeholder={"Password"}
-                        placeholderTextColor={"white"}
+                    <CustomInput
+                        placeholder="Username"
+                        value={username}
+                        setValue={setUserName}
+                    />
+                    <CustomInput
+                        placeholder="Email Address"
+                        value={emailaddress}
+                        setValue={setEmailAddress}
+                    />
+                    <CustomInput
+                        placeholder="Password"
+                        value={password}
+                        setValue={setPassword}
                         secureTextEntry={true}
                     />
-                    <TextInput
-                        style={styles.logInInputFields}
-                        placeholder={"Confirm Password"}
-                        placeholderTextColor={"white"}
+                    <CustomInput
+                        placeholder="Confirm Password"
+                        value={confirmpassword}
+                        setValue={setConfirmPassword}
                         secureTextEntry={true}
                     />
                     <TouchableOpacity style={styles.logInButton} >
