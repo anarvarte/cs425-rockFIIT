@@ -2,11 +2,16 @@ import React from "react";
 import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput} from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import '../assets/LogInScreenLogo.png';
-import Tabs from '../navigation/tabs'
+import Tabs from '../navigation/tabs';
+import SignUp from './SignUpScreen';
 
 const LogIn = ({navigation}) => {
 
-    function navigate(){
+    function navigateTabs(){
+        navigation.navigate('Tabs');
+    }
+
+    function navigateSignUp(){
         navigation.navigate('SignUp');
     }
 
@@ -24,8 +29,8 @@ const LogIn = ({navigation}) => {
 
             <View style={styles.pageBottom}>
                 <Text style={styles.logInHeading}>
-                    Welcome Back!{'\n'}
-                    &nbsp;&nbsp;&nbsp;Log In Below
+                    RockFIIT{'\n'}
+                    &nbsp;&nbsp;&nbsp;Log In
                 </Text>
                 <View style={styles.logInForm}>
                     <TextInput
@@ -39,10 +44,16 @@ const LogIn = ({navigation}) => {
                         placeholderTextColor={"white"}
                         secureTextEntry={true}
                     />
-                    <TouchableOpacity style={styles.logInButton} onPress = {navigation.navigate('Tabs')}>
-                        <Text style={styles.buttonText}>Sign In</Text>
+                    <TouchableOpacity style={styles.logInButton} onPress = {navigateTabs}>
+                        <Text style={styles.logInButtonText}>Sign In</Text>
                     </TouchableOpacity>                      
                 </View>
+
+                <TouchableOpacity style={styles.createAccountButton} onPress = {navigateSignUp}>
+                    <Text style={styles.createAccountText}>
+                        Create Account
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -114,10 +125,20 @@ const styles = StyleSheet.create({
         display:'flex',
         justifyContent:'center',
         alignItems:'center',
+        padding:10,
     },
-    buttonText:{
+    logInButtonText:{
         fontWeight:'bold',
         fontSize:18,
+    },
+    createAccountText:{
+        color:'gray',
+    },
+    createAccountButton:{
+        width:'100%',
+        display:'flex',
+        alignItems:'center',
+        marginTop:20,
     }
 })
 
