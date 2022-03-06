@@ -2,6 +2,7 @@ import React from "react";
 import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput} from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import '../assets/LogInScreenLogo.png';
+import Tabs from '../navigation/tabs'
 
 const LogIn = ({navigation}) => {
 
@@ -38,7 +39,7 @@ const LogIn = ({navigation}) => {
                         placeholderTextColor={"white"}
                         secureTextEntry={true}
                     />
-                    <TouchableOpacity style={styles.logInButton} onPress = {navigate}>
+                    <TouchableOpacity style={styles.logInButton} onPress = {navigation.navigate('Tabs')}>
                         <Text style={styles.buttonText}>Sign In</Text>
                     </TouchableOpacity>                      
                 </View>
