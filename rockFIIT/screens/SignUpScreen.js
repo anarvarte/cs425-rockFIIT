@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput} from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
+import {useForm} from 'react-hook-form';
+import * as SQLite from 'expo-sqlite';
 
 import '../assets/LogInScreenLogo.png';
 
@@ -9,15 +11,98 @@ import CustomButton from '../components/CustomButton';
 
 import LogIn from './LogInScreen';
 
+const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/
+
+const db = SQLite.openDatabase(
+    {
+        name:'rockFIITversion2',
+        location:'default',
+    },
+    () => {},
+    error => {console.log('openDB error')}
+);
+
 const SignUp = ({navigation}) => {
 
-    const[name, setName] = useState('');
-    const[username, setUserName] = useState('');
-    const[emailaddress, setEmailAddress] = useState('');
-    const[password, setPassword] = useState('');
-    const[confirmpassword, setConfirmPassword] = useState('');
+    const {control, handleSubmit, watch} = useForm();
 
-    function navigateLogIn(){
+    var testUser;
+    var testPass;
+
+    var checkPassword = watch('password');
+    var checkName = watch('fullname');
+    var checkUserName = watch('username');
+    var checkEmail = watch('emailaddress');
+
+    useEffect(() => {
+        createTable();
+        getData();
+    }, []);
+
+    const createTable = () => {
+        try{
+            db.transaction((tx) => {
+                tx.executeSql(
+                    "CREATE TABLE IF NOT EXISTS "
+                    + "userTable "
+                    + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, userName TEXT, password TEXT);"
+                )
+            })
+        } catch(error){
+            console.log('createTable error')
+        }
+    }
+
+    const getData = () => {
+        try {
+            // AsyncStorage.getItem('UserData')
+            //     .then(value => {
+            //         if (value != null) {
+            //             navigation.navigate('Home');
+            //         }
+            //     })
+            db.transaction((tx) => {
+                tx.executeSql(
+                    "SELECT userName, password FROM userTable",
+                    [],
+                    (tx, results) => {
+                        testUser = results.rows.item(0).userName;
+                        testPass = results.rows.item(0).password;
+                    }
+                )
+            })
+        } catch (error) {
+            console.log('getData error');
+        }
+    }
+
+    const setData = async () => {
+        try {
+            await db.transaction(async (tx) => {
+                // await tx.executeSql(
+                //     "INSERT INTO Users (Name, Age) VALUES ('" + name + "'," + age + ")"
+                // );
+                await tx.executeSql(
+                    "INSERT INTO userTable (userName, password) VALUES (?,?)",
+                    [checkUserName, checkPassword]
+                );
+            })
+        } catch (error) {
+            console.log('setData error');
+        }
+    }
+
+    const onSignUpPressed = (data)=>{
+        //navigation.navigate('LogIn');
+        createTable();
+        setData();
+        getData();
+        console.log('Database user is' + testUser);
+        console.log('Database pass is' + testPass);
+        alert('New Account Successfully Created!');
+    }
+
+    const navigateLogIn = () =>{
         navigation.navigate('LogIn');
     }
 
@@ -40,42 +125,75 @@ const SignUp = ({navigation}) => {
                 </Text>
                 <View style={styles.logInForm}>
                     <CustomInput
+                        name="fullname"
+                        control={control}
                         placeholder="Full Name"
-                        value={name}
-                        setValue={setName}
+                        rules={{required:'Full Name is required'}}
+                        
                     />
                     <CustomInput
+                        name="username"
+                        control={control}
                         placeholder="Username"
-                        value={username}
-                        setValue={setUserName}
+                        rules={{
+                            required:'Username is required',
+                            minLength:{
+                                value: 5,
+                                message: 'Username should have a minimum of 5 characters',
+                            },
+                            maxLength:{
+                                value: 32,
+                                message: 'Username should have a maximum of 32 characters',
+                            },
+                        }}
                     />
                     <CustomInput
-                        placeholder="Email Address"
-                        value={emailaddress}
-                        setValue={setEmailAddress}
+                         name="emailaddress"
+                         control={control}
+                         placeholder="Email Address"
+                         rules={{
+                             required:'Email Address is required',
+                             pattern:{
+                                 value: email_regex,
+                                 message:'Please enter a valid email address'
+                             },
+                         }}
                     />
                     <CustomInput
-                        placeholder="Password"
-                        value={password}
-                        setValue={setPassword}
+                        name="password"
+                        control={control}
+                        placeholder="password"
                         secureTextEntry={true}
+                        rules={{
+                            required:'Password is required',
+                            minLength:{
+                                value: 8,
+                                message: 'Password should have a minimum of 8 characters',
+                            }
+                        }}
                     />
                     <CustomInput
+                        name="confirmpassword"
+                        control={control}
                         placeholder="Confirm Password"
-                        value={confirmpassword}
-                        setValue={setConfirmPassword}
                         secureTextEntry={true}
+                        rules={{
+                            required:'Please confirm password',
+                            validate: value => 
+                                value == checkPassword || 'Password does not match',
+                        }}
                     />
-                    <TouchableOpacity style={styles.logInButton} >
-                        <Text style={styles.logInButtonText}>Create New Account</Text>
-                    </TouchableOpacity>                      
+                    <CustomButton
+                        text="Sign Up"
+                        onPress={handleSubmit(onSignUpPressed)}
+                    />                   
                 </View>
 
-                <TouchableOpacity style={styles.createAccountButton} onPress = {navigateLogIn}>
-                    <Text style={styles.createAccountText}>
-                        Already have account? Log In here!
-                    </Text>
-                </TouchableOpacity>
+                <CustomButton
+                        text="Already have an account?"
+                        onPress={navigateLogIn}
+                        type="Tertiary"
+                    />  
             </View>
         </View>
     )
@@ -153,15 +271,6 @@ const styles = StyleSheet.create({
     logInButtonText:{
         fontWeight:'bold',
         fontSize:18,
-    },
-    createAccountText:{
-        color:'gray',
-    },
-    createAccountButton:{
-        width:'100%',
-        display:'flex',
-        alignItems:'center',
-        marginTop:20,
     }
 })
 

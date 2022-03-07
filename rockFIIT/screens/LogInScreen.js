@@ -1,5 +1,6 @@
-import React, {useState} from "react";
-import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput} from 'react-native';
+import React, {useEffect, useState} from "react";
+import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput, Alert} from 'react-native';
+import * as SQLite from 'expo-sqlite';
 
 import '../assets/LogInScreenLogo.png';
 
@@ -8,24 +9,68 @@ import CustomButton from '../components/CustomButton';
 
 import Tabs from '../navigation/tabs';
 import SignUp from './SignUpScreen';
+import { getActiveChildNavigationOptions } from "react-navigation";
+
+import {useForm, Controller} from 'react-hook-form';
+
+const db = SQLite.openDatabase(
+    {
+        name:'rockFIITversion2',
+        location:'default',
+    },
+    () => {},
+    error => {console.log('error') }
+);
 
 const LogIn = ({navigation}) => {
 
-    const[username, setUsername] = useState('');
-    const[password, setPassword] = useState('');
+    const {
+        control, 
+        handleSubmit, 
+        formState: {errors}
+    } = useForm();
+        
+    useEffect(() => {
+        createTable();
+        //getData();
+    }, []);
+    
+   const createTable = () => {
+       db.transaction((tx) =>{
+           tx.executeSql(
+               "CREATE TABLE IF NOT EXISTS" 
+               +"Users "
+               +"(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Password TEXT);"
+           )
+       })
+   }
 
-    const onLogInPressed = () => {
+   const setData = async() => {
+       if(username.length == 0 || password.length == 0){
+           Alert.alert('Warning!', 'Please enter your username and password.')
+       }
+       else{
+           try{
+               await db.transaction(async (tx) => {
+                    await tx.executeSql(
+                        "INSERT INTO Users (Name, Password) VALUES ('"+username+"', '"+password+"')"
+                    )
+               })
+           } catch(error){
+               console.log(error);
+           }
+
+       }
+   }
+
+    const onLogInPressed = (data) => {
+        console.log(data);
         navigation.navigate('Tabs');
     };
 
     const onForgotPasswordPressed = () => {
         console.warn("FORGOT PASSWORD");
     };
-
-
-    function navigateTabs(){
-        navigation.navigate('Tabs');
-    }
 
     function navigateSignUp(){
         navigation.navigate('SignUp');
@@ -49,27 +94,34 @@ const LogIn = ({navigation}) => {
                     &nbsp;&nbsp;&nbsp;Log In
                 </Text>
                 <View style={styles.logInForm}>
-                    <CustomInput
+
+                    
+                   <CustomInput
+                        name="username"
                         placeholder="Username"
-                        value={username}
-                        setValue={setUsername}
+                        control={control}
+                        rules={{required:'Username is required'}}
 
                     />
                     <CustomInput
+                        name="password"
                         placeholder="Password"
-                        value={password}
-                        setValue={setPassword}
+                        control={control}
                         secureTextEntry={true}
+                        rules={{required: 'Password is required'}}
                     />
+
                     <CustomButton
                         text="Log In"
-                        onPress={onLogInPressed}
+                        onPress={handleSubmit(onLogInPressed)}
                     />  
+
                     <CustomButton
                         text="Forgot Password"
                         onPress={onForgotPasswordPressed}
                         type="Tertiary"
                     /> 
+
                     <CustomButton
                         text="Create New Account"
                         onPress={navigateSignUp}

@@ -15,20 +15,14 @@ const App: () =>  Node = () =>{
   const Stack = createStackNavigator();
 
   return (
-    /*<NavigationContainer>
-      <Tabs />
-    </NavigationContainer>
-    */
 
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown: false}} />
         <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
-        <Stack.Screen name="Tabs" component={Tabs} />
+        <Stack.Screen name="Tabs" component={Tabs} options={{headerShown: false}}  />
       </Stack.Navigator>
     </NavigationContainer>
-      
-
 
   );
 };
