@@ -11,16 +11,19 @@ import CustomButton from '../components/CustomButton';
 
 import LogIn from './LogInScreen';
 
-const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/
+const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+let db;
 
+/*
 const db = SQLite.openDatabase(
     {
-        name:'rockFIITversion2',
+        name:'rockFIITversion2.db',
         location:'default',
     },
     () => {},
     error => {console.log('openDB error')}
 );
+*/
 
 const SignUp = ({navigation}) => {
 
@@ -34,6 +37,24 @@ const SignUp = ({navigation}) => {
     var checkUserName = watch('username');
     var checkEmail = watch('emailaddress');
 
+    SQLite.openDatabase(
+        {
+        name: 'rockFIITversion2.db',
+        createFromLocation: 1,
+        },
+        successToOpenDB(),
+        failToOpenDb('err'),
+    );
+
+    function successToOpenDB(){
+        alert('success');
+    }
+
+    function failToOpenDb(err){
+        console.log(err);
+    }
+    
+    /*
     useEffect(() => {
         createTable();
         getData();
@@ -91,14 +112,17 @@ const SignUp = ({navigation}) => {
             console.log('setData error');
         }
     }
+    */
 
     const onSignUpPressed = (data)=>{
-        //navigation.navigate('LogIn');
+        /*navigation.navigate('LogIn');
         createTable();
         setData();
         getData();
+        
         console.log('Database user is' + testUser);
         console.log('Database pass is' + testPass);
+        */
         alert('New Account Successfully Created!');
     }
 

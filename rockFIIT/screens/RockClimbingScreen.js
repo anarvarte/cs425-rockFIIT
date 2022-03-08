@@ -7,10 +7,14 @@ import {
   StatusBar,
   FlatList,
 } from "react-native";
+import CustomInput from '../components/CustomInput';
+import CustomButton from '../components/CustomButton';
 import styled from "styled-components";
 import AddInput from "../components/AddInput";
 import ToDoList from "../components/ToDoList";
 import EmptyClimbing from "../components/EmptyClimbing";
+import LogIn from './LogInScreen';
+import Program from './ProgramScreen';
 
 const RockClimbingScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -30,6 +34,11 @@ const RockClimbingScreen = ({ navigation }) => {
       return prevTodo.filter((todo) => todo.key != key);
     });
   };
+
+  const navigateProgram = () => {
+    navigation.navigate("Program");
+  };
+
   return (
     <ComponentContainer>
       <View>
@@ -46,7 +55,12 @@ const RockClimbingScreen = ({ navigation }) => {
           )}
         />
         <AddInput submitHandler={submitHandler} />
+        <CustomButton
+            text="Test"
+            onPress={navigateProgram}
+      />  
       </View>
+
     </ComponentContainer>
   );
 };
