@@ -2,25 +2,29 @@ import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Modal, TextInput} from 'react-native';
 import {useForm} from 'react-hook-form';
+import styled from 'styled-components';
+import AddInput from '../components/AddInput';
 
 import Exercise from '../components/Exercise';
 import CustomInput from '../components/CustomInput';
 
-
-const ExerciseModal = ({visible, children}) => {
+/*
+const ExerciseModal = ({isVisible, children}) => {
 
     const{watch} = useForm();
+    const [showModal, setShowModal] = useState(false);
 
     var exerciseVar = watch('exercise');
     var exerciseVar = watch('exercise');
     var exerciseVar = watch('exercise');
     var exerciseVar = watch('exercise');
     
-
-    const [showModal, setShowModal] = useState(false);
+    if(isVisible==true){
+        setShowModal(true)
+    }
     
     return(
-        <Modal transparent visible={true}>
+        <Modal transparent visible={isVisible}>
             <View style={styles.exerciseModalBackground}>
                 <View style={[styles.exerciseModalContainer]}>
                     <Text style={styles.modalFieldLabels}>
@@ -43,9 +47,9 @@ const ExerciseModal = ({visible, children}) => {
                     </Text>
                     <TextInput name='day' style={styles.modalFieldInputs}>
                     </TextInput>
-                    <TouchableOpacity onPress={()=> setVisible(false)}>
+                    <TouchableOpacity onPress={() => isVisible(false) }>
                         <View style={styles.addWrapper}>
-                            <Text style={styles.addButtonText}>X</Text>
+                            <Text style={styles.addButtonText}>x</Text>
                         </View>
                  </TouchableOpacity>    
                 </View>
@@ -54,14 +58,16 @@ const ExerciseModal = ({visible, children}) => {
     );
 };
 
+*/
+
 const Program = ({navigation}) => {
 
-    const[visible, setVisible] = useState(false);
+    const [isVisible, setisVisible] = useState(false);
 
     return (
         <View style={styles.container}>
             <View style={styles.headerWrapper}>
-                <Text style={styles.programScreenTitle}>Program Title</Text>
+                <Text style={styles.programScreenTitle}>  /* {} */</Text>
             </View>
             <View style={styles.headerLine}><Text></Text></View>
             <View style={styles.exerciseContainer}>
@@ -69,13 +75,46 @@ const Program = ({navigation}) => {
                 <Exercise text={'Walking DB Lunges'}/>
             </View>
 
-            {/*<ExerciseModal visible={false}></ExerciseModal>*/}
+            {//<ExerciseModal visible={isVisible}> </ExerciseModal>
+            <Modal transparent visible={isVisible}>
+            <View style={styles.exerciseModalBackground}>
+                <View style={[styles.exerciseModalContainer]}>
+                    <Text style={styles.modalFieldLabels}>
+                        Sets: 
+                    </Text>
+                    <TextInput name='sets' style={styles.modalFieldInputs}>
+                    </TextInput>
+                    <Text style={styles.modalFieldLabels}>
+                        Reps: 
+                    </Text>
+                    <TextInput name='reps' style={styles.modalFieldInputs}>
+                    </TextInput>
+                    <Text style={styles.modalFieldLabels}>
+                        Comments: 
+                    </Text>
+                    <TextInput name='day' style={styles.modalFieldInputs}>
+                    </TextInput>
+                    <TouchableOpacity onPress={() => setisVisible(false) }>
+                        <View style={styles.addWrapper}>
+                            <Text style={styles.addButtonText}>x</Text>
+                        </View>
+                 </TouchableOpacity>    
+                </View>
+            </View>
+        </Modal>
+            }
+
             <KeyboardAvoidingView style={styles.addExerciseWrapper}>
-                <TouchableOpacity onPress={()=> setVisible(true)}>
+                <TouchableOpacity onPress={()=> setisVisible(true)}>
                     <View style={styles.addWrapper}>
                         <Text style={styles.addButtonText}>+</Text>
                     </View>
-                 </TouchableOpacity>               
+                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => {navigation.navigate('Tabs')}}>
+                    <View style={styles.addWrapper}>
+                        <Text style={styles.addButtonText}>x</Text>
+                    </View>
+                    </TouchableOpacity>            
             </KeyboardAvoidingView>
         </View>
     );
@@ -158,5 +197,14 @@ const styles = StyleSheet.create({
         height:30,
     }
 })
+
+const SubmitButton = styled.TouchableOpacity`
+  width: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  margin-bottom: 150px;
+  border-radius: 50px;
+`;
 
 export default Program
