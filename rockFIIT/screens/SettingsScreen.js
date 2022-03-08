@@ -5,7 +5,7 @@ const SettingsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Settings Screen</Text>
-      <Button title="Click" onPress={() => alert("Button Clicked!")} />
+      <Button title="Sign Out" onPress={() => navigation.navigate('LogIn')} />
     </View>
   );
 };

@@ -4,7 +4,6 @@ import styled from "styled-components";
 export default function Empty() {
   return (
     <ComponentContainer>
-      <EmptyText>Add Goals!</EmptyText>
       <EmptyImage
         source={require('../assets/empty.png')}
       />

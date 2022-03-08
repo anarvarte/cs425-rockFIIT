@@ -4,13 +4,23 @@ import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 
-export default function TodoList({ item, deleteItem , navigation}) {
+
+export default function TodoList({ item, deleteItem }) {
+
+    //KEEPS TRACK OF ICON CHANGE
+    const [active, setActive] = useState(true);
+    const handleChangeActive = () => {
+        setActive((val) => {
+            return !val;
+        });
+    };
+
   return (
     <ComponentContainer>
       <ListContainer>
         <CircleContainer>
           <TouchableOpacity>
-            <Entypo name ="triangle-right" size={25} color="midnightblue" onPress={() => navigation.navigate('Program')} />
+            <Entypo name ={active ? 'circle' : 'circle-with-cross'} size={23} color="midnightblue" onPress={() => handleChangeActive()}/>
             </TouchableOpacity>
           </CircleContainer>
         <View>
@@ -24,10 +34,8 @@ export default function TodoList({ item, deleteItem , navigation}) {
   );
 }
 
-const HeaderText = styled.Text`
-  color: white;
-  
-  font-size: 30px;
+const HeaderText = styled.View`
+  margin-top: 5px;
 `;
 
 const ListContainer = styled.TouchableOpacity`

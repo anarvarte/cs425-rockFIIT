@@ -14,7 +14,7 @@ import AddInput from "../components/AddInput";
 import ToDoList from "../components/ToDoList";
 import EmptyClimbing from "../components/EmptyClimbing";
 import LogIn from './LogInScreen';
-import Program from './ProgramScreen';
+//import Program from './ProgramScreen';
 
 const RockClimbingScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -42,7 +42,11 @@ const RockClimbingScreen = ({ navigation }) => {
   return (
     <ComponentContainer>
       <View>
-        <StatusBar barStyle="light-content" backgroundColor="midnightblue" />
+      <HeaderText> </HeaderText>
+      <CustomButton
+            text="Test"
+            onPress={navigateProgram}
+      />  
       </View>
 
       <View>
@@ -55,15 +59,18 @@ const RockClimbingScreen = ({ navigation }) => {
           )}
         />
         <AddInput submitHandler={submitHandler} />
-        <CustomButton
-            text="Test"
-            onPress={navigateProgram}
-      />  
+        
       </View>
-
     </ComponentContainer>
   );
 };
+
+const HeaderText = styled.Text`
+  color: white;
+  
+  font-size: 30px;
+  margin-top: 50px;
+`;
 
 const styles = StyleSheet.create({
   container: {

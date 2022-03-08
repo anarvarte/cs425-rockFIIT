@@ -33,6 +33,7 @@ const WeightLiftingScreen = ({ navigation }) => {
   return (
     <ComponentContainer>
       <View>
+      <HeaderText> </HeaderText>
         <StatusBar barStyle="light-content" backgroundColor="midnightblue" />
       </View>
 
@@ -59,6 +60,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#8fcbbc"
   }
 });
+const HeaderText = styled.Text`
+  color: white;
+  
+  font-size: 30px;
+  margin-top: 50px;
+`;
 
 const ComponentContainer = styled.View`
   background-color: midnightblue;

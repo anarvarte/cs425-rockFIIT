@@ -8,8 +8,8 @@ import {
   FlatList,
 } from "react-native";
 import styled from "styled-components";
-import AddInput from "../components/AddInput";
-import ToDoList from "../components/ToDoList";
+import AddGoal from "../components/AddGoal";
+import GoalList from "../components/GoalList";
 import Header from "../components/Header";
 import Empty from "../components/Empty";
 
@@ -44,10 +44,10 @@ const GoalsScreen = ({ navigation }) => {
           ListEmptyComponent={() => <Empty />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
-            <ToDoList item={item} deleteItem={deleteItem} />
+            <GoalList item={item} deleteItem={deleteItem} />
           )}
         />
-        <AddInput submitHandler={submitHandler} />
+        <AddGoal submitHandler={submitHandler} />
       </View>
     </ComponentContainer>
   );
@@ -61,4 +61,5 @@ const ComponentContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
 `;

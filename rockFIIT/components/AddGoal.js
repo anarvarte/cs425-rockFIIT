@@ -12,7 +12,7 @@ export default function AddInput({ submitHandler }) {
   return (
     <ComponentContainer>
       <InputContainer>
-        <Input placeholder="Create Program..." onChangeText={onChangeText} />
+        <Input placeholder="Add Goals..." onChangeText={onChangeText} />
       </InputContainer>
       <SubmitButton
         onPress={() => {
@@ -41,7 +41,7 @@ const Input = styled.TextInput`
   width: 300px;
   margin-right: 20px;
   padding: 10px;
-  margin-bottom: 180px;
+  margin-bottom: 137px;
   border-radius: 10px;
   
 `;
@@ -51,6 +51,6 @@ const SubmitButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background-color: whitesmoke;
-  margin-bottom: 180px;
+  margin-bottom: 137px;
   border-radius: 50px;
 `;
