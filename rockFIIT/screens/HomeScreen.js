@@ -1,11 +1,21 @@
-import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import React, {useState} from "react";
+import { View, Text, Button, StyleSheet, ImageBackground } from "react-native";
+
+import DateTime from '../components/DateTime'
+import Workouts from '../components/workoutsHome'
+const homeImg = require('../assets/homeImg.png')
+
 
 const HomeScreen = ({ navigation }) => {
+
+  const [data, setData] = useState({});
+
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button title="Click" onPress={() => alert("Button Clicked!")} />
+      <ImageBackground source={homeImg} style={styles.image} >
+        <DateTime current={data.current} timezone={data.timezone} lat={data.lat} lon={data.lon}/>
+        <Workouts weatherData={data.daily}/>
+      </ImageBackground>
     </View>
   );
 };
@@ -15,8 +25,10 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#8fcbbc",
   },
+  image:{
+    flex:1, 
+    resizeMode:"cover", 
+    justifyContent:"center"
+  }
 });
