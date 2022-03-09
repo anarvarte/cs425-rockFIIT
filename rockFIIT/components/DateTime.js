@@ -52,10 +52,10 @@ const DateTime = ({timezone}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex:1.5,
+        flex:.7,
         flexDirection:"row",
         justifyContent:'space-between',
-        padding: 15
+        padding: 20
     },
     heading: {
         fontSize: 45,

@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
   },
   graph: {
-    flex: 1,
+    flex: 1.5,
     justifyContent:"center",
     flexDirection: "column",
     height: 100
