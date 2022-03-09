@@ -98,7 +98,6 @@ const TextItem = styled.Text`
 `;
 
 const Logo = styled.Text`
-  flexDirection: column;
   color: black;
   width: auto;
   height: auto;

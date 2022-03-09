@@ -59,15 +59,16 @@ const styles = StyleSheet.create({
         padding: 20
     },
     heading: {
-        fontSize: 45,
+        fontSize: 30,
         color:'black',
         fontWeight: 'bold',
-        padding: 10,
+        padding: 5,
+        paddingTop: 20,
         textShadowColor: 'rgb(255,255,255)',
         textShadowRadius: 3
     },
     subheading: {
-        fontSize: 25,
+        fontSize: 20,
         color: 'black',
         fontWeight: 'bold',
         textShadowColor: 'rgb(255,255,255)',
