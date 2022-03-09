@@ -13,8 +13,8 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground source={homeImg} style={styles.image} >
-        <DateTime current={data.current} timezone={data.timezone} lat={data.lat} lon={data.lon}/>
-        <Workouts weatherData={data.daily}/>
+        <DateTime current={data.current} timezone={data.timezone} />
+        <Workouts workoutData={data.daily}/>
       </ImageBackground>
     </View>
   );
