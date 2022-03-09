@@ -8,7 +8,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import LogIn from './screens/LogInScreen';
 import SignUp from './screens/SignUpScreen';
 import Tabs from './navigation/tabs';
-import Program from './screens/ProgramScreen';
+import RealProgram from './screens/RealProgramScreen';
 
 import useDatabase from './components/UseDatabase';
 import {database} from './components/Database';
@@ -19,6 +19,7 @@ const App: () =>  Node = () =>{
   //SplashScreen.preventAutoHideAsync();
   const Stack = createStackNavigator();
 
+<<<<<<< HEAD
   const isDBLoadingComplete = useDatabase();
 
   if(isDBLoadingComplete){
@@ -32,12 +33,17 @@ const App: () =>  Node = () =>{
 
   return (
     
+=======
+  return (
+//<Stack.Screen name="Program" component={Program} options={{headerShown: false}}/>
+>>>>>>> 18b8e61d6965ca81dbc70f8bddb3e0c98763a45b
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown: false}} />
         <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
         <Stack.Screen name="Tabs" component={Tabs} options={{headerShown: false}}  />
-        <Stack.Screen name="Program" component={Program} options={{headerShown: false}}/>
+        
+        <Stack.Screen name="Program" component={RealProgram} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
     

@@ -6,17 +6,25 @@ import {
   StyleSheet,
   StatusBar,
   FlatList,
+  KeyboardAvoidingView,
+  Modal,
+  TouchableOpacity,
+  Styles,
 } from "react-native";
+
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import styled from "styled-components";
 import AddInput from "../components/AddInput";
 import ToDoList from "../components/ToDoList";
-import EmptyClimbing from "../components/EmptyClimbing";
+import EmptyLifting from "../components/EmptyLifting"
 import LogIn from './LogInScreen';
+import AddExercise from "../components/AddExercise";
 //import Program from './ProgramScreen';
 
-const RockClimbingScreen = ({ navigation }) => {
+const RealProgram = ({ navigation }) => {
+    const [isVisible, setisVisible] = useState(false);
+
   const [data, setData] = useState([]);
   const submitHandler = (value) => {
     setData((prevTodo) => {
@@ -48,18 +56,21 @@ const RockClimbingScreen = ({ navigation }) => {
       <View>
         <FlatList
           data={data}
-          ListEmptyComponent={() => <EmptyClimbing />}
+          ListEmptyComponent={() => <EmptyLifting />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
             <ToDoList item={item} deleteItem={deleteItem} navigation={navigation}/>
           )}
         />
-        <AddInput submitHandler={submitHandler} />
+        <AddExercise navigation={navigation}/>
+        
         
       </View>
     </ComponentContainer>
   );
 };
+
+
 
 const HeaderText = styled.Text`
   color: white;
@@ -84,4 +95,4 @@ const ComponentContainer = styled.View`
   justify-content: center;
 `;
 
-export default RockClimbingScreen;
+export default RealProgram;
