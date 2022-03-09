@@ -7,8 +7,9 @@ print()
 print(response.status_code)
 print(response.content)
 print(response.json())
-
-newUser = {"userName" : "billy@gmail.com", "password": "asdjfaksdjf" }
+'''
+newUser = {'userName':'billy@gmail.com', 'firstName':'Billy',
+    'password':'asdjfaksdjf','unitPreference':'lbs', 'weight':132}
 path = "/addUser"
 response = requests.post(api_host + path, json=newUser)
 print()
@@ -19,7 +20,7 @@ try:
 except:
     print("Response not json")
 
-'''
+
 
 '''
 exerciseID = 4
@@ -35,7 +36,7 @@ except:
 '''
 
 
-
+'''
 path = '/exercises'
 response = requests.get(api_host + path)
 print()
@@ -45,3 +46,4 @@ try:
     print(response.json())
 except:
     print("Response not json")
+'''
