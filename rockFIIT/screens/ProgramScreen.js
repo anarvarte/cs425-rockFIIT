@@ -80,6 +80,11 @@ const Program = ({navigation}) => {
             <View style={styles.exerciseModalBackground}>
                 <View style={[styles.exerciseModalContainer]}>
                     <Text style={styles.modalFieldLabels}>
+                        Exercise: 
+                    </Text>
+                    <TextInput name='exercise' style={styles.modalFieldInputs}>
+                    </TextInput>
+                    <Text style={styles.modalFieldLabels}>
                         Sets: 
                     </Text>
                     <TextInput name='sets' style={styles.modalFieldInputs}>

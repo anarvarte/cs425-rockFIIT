@@ -25,11 +25,9 @@ const CustomInput = ({control, name, placeholder, secureTextEntry, rules = {}}) 
                     {error && (
                         <Text style={{color: 'red'}}>{error.message || 'Error'}</Text>
                     )}
-                    
                 </>
                 )}   
             />
-        
     )
 }
 

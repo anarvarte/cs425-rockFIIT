@@ -13,14 +13,6 @@ import { getActiveChildNavigationOptions } from "react-navigation";
 
 import {useForm, Controller} from 'react-hook-form';
 
-const db = SQLite.openDatabase(
-    {
-        name:'rockFIITversion2',
-        location:'default',
-    },
-    () => {},
-    error => {console.log('error') }
-);
 
 const LogIn = ({navigation}) => {
 
@@ -31,9 +23,11 @@ const LogIn = ({navigation}) => {
     } = useForm();
         
     useEffect(() => {
-        createTable();
+        //createTable();
         //getData();
     }, []);
+
+    /*
     
    const createTable = () => {
        db.transaction((tx) =>{
@@ -44,6 +38,7 @@ const LogIn = ({navigation}) => {
            )
        })
    }
+   
 
    const setData = async() => {
        if(username.length == 0 || password.length == 0){
@@ -62,7 +57,8 @@ const LogIn = ({navigation}) => {
 
        }
    }
-
+   */
+   
     const onLogInPressed = (data) => {
         console.log(data);
         navigation.navigate('Tabs');
@@ -75,6 +71,7 @@ const LogIn = ({navigation}) => {
     function navigateSignUp(){
         navigation.navigate('SignUp');
     }
+    
 
     return(
         <View style={styles.mainView}>

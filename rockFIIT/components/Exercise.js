@@ -14,7 +14,6 @@ const Exercise = (properties, day, sets, reps) => {
             <View style={styles.rightIcon}></View>
         </View>
 
-
     )
 }
 

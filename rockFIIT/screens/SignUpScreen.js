@@ -12,20 +12,11 @@ import CustomButton from '../components/CustomButton';
 import LogIn from './LogInScreen';
 
 const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-let db;
 
-/*
-const db = SQLite.openDatabase(
-    {
-        name:'rockFIITversion2.db',
-        location:'default',
-    },
-    () => {},
-    error => {console.log('openDB error')}
-);
-*/
 
 const SignUp = ({navigation}) => {
+
+    
 
     const {control, handleSubmit, watch} = useForm();
 
@@ -36,83 +27,8 @@ const SignUp = ({navigation}) => {
     var checkName = watch('fullname');
     var checkUserName = watch('username');
     var checkEmail = watch('emailaddress');
-
-    SQLite.openDatabase(
-        {
-        name: 'rockFIITversion2.db',
-        createFromLocation: 1,
-        },
-        successToOpenDB(),
-        failToOpenDb('err'),
-    );
-
-    function successToOpenDB(){
-        alert('success');
-    }
-
-    function failToOpenDb(err){
-        console.log(err);
-    }
     
-    /*
-    useEffect(() => {
-        createTable();
-        getData();
-    }, []);
 
-    const createTable = () => {
-        try{
-            db.transaction((tx) => {
-                tx.executeSql(
-                    "CREATE TABLE IF NOT EXISTS "
-                    + "userTable "
-                    + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, userName TEXT, password TEXT);"
-                )
-            })
-        } catch(error){
-            console.log('createTable error')
-        }
-    }
-
-    const getData = () => {
-        try {
-            // AsyncStorage.getItem('UserData')
-            //     .then(value => {
-            //         if (value != null) {
-            //             navigation.navigate('Home');
-            //         }
-            //     })
-            db.transaction((tx) => {
-                tx.executeSql(
-                    "SELECT userName, password FROM userTable",
-                    [],
-                    (tx, results) => {
-                        testUser = results.rows.item(0).userName;
-                        testPass = results.rows.item(0).password;
-                    }
-                )
-            })
-        } catch (error) {
-            console.log('getData error');
-        }
-    }
-
-    const setData = async () => {
-        try {
-            await db.transaction(async (tx) => {
-                // await tx.executeSql(
-                //     "INSERT INTO Users (Name, Age) VALUES ('" + name + "'," + age + ")"
-                // );
-                await tx.executeSql(
-                    "INSERT INTO userTable (userName, password) VALUES (?,?)",
-                    [checkUserName, checkPassword]
-                );
-            })
-        } catch (error) {
-            console.log('setData error');
-        }
-    }
-    */
 
     const onSignUpPressed = (data)=>{
         /*navigation.navigate('LogIn');
@@ -123,7 +39,8 @@ const SignUp = ({navigation}) => {
         console.log('Database user is' + testUser);
         console.log('Database pass is' + testPass);
         */
-        alert('New Account Successfully Created!');
+
+        //alert('New Account Successfully Created!');
     }
 
     const navigateLogIn = () =>{
