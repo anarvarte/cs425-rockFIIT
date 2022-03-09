@@ -7,20 +7,21 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LogIn from './screens/LogInScreen';
 import SignUp from './screens/SignUpScreen';
 import Tabs from './navigation/tabs';
-import Program from './screens/ProgramScreen';
+import RealProgram from './screens/RealProgramScreen';
 
 const App: () =>  Node = () =>{
 
   const Stack = createStackNavigator();
 
   return (
-
+//<Stack.Screen name="Program" component={Program} options={{headerShown: false}}/>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown: false}} />
         <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
         <Stack.Screen name="Tabs" component={Tabs} options={{headerShown: false}}  />
-        <Stack.Screen name="Program" component={Program} options={{headerShown: false}}/>
+        
+        <Stack.Screen name="Program" component={RealProgram} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
 

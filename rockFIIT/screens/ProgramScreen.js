@@ -67,7 +67,7 @@ const Program = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.headerWrapper}>
-                <Text style={styles.programScreenTitle}>  /* {} */</Text>
+                <Text style={styles.programScreenTitle}>  PROGRAM NAME</Text>
             </View>
             <View style={styles.headerLine}><Text></Text></View>
             <View style={styles.exerciseContainer}>
