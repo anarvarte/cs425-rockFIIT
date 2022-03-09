@@ -1,12 +1,19 @@
 import React, {useState} from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, ImageBackground } from "react-native";
+
+import DateTime from '../components/DateTime';
+import Workouts from '../components/workoutsHome';
 
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';
 
+const homeImg = require('../assets/homeImg.png');
+
 const HomeScreen = ({ navigation }) => {
 
   const[item, setItem] = useState('');
+
+  const[data,setData] = useState({});
 
   async function loadUser(){
     var result = await database.getExerciseValues();

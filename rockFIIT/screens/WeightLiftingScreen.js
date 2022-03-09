@@ -10,9 +10,16 @@ import {
 import styled from "styled-components";
 import AddInput from "../components/AddInput";
 import ToDoList from "../components/ToDoList";
+import DefaultList from "../components/DefaultList";
 import EmptyLifting from "../components/EmptyLifting";
+import useDatabase from '../components/UseDatabase';
+import {database} from '../components/Database';
+
 
 const WeightLiftingScreen = ({ navigation }) => {
+
+  const[defaultExercise, setExercise] = useState('');
+  
   const [data, setData] = useState([]);
   const submitHandler = (value) => {
     setData((prevTodo) => {
@@ -38,6 +45,9 @@ const WeightLiftingScreen = ({ navigation }) => {
       </View>
 
       <View>
+      <DefaultList item={'Strength'} deleteItem={deleteItem} navigation={navigation}/>
+      <DefaultList item={'Push/Pull/Legs'} deleteItem={deleteItem} navigation={navigation}/>
+      <DefaultList item={'Arnold Split'} deleteItem={deleteItem} navigation={navigation}/>
         <FlatList
           data={data}
           ListEmptyComponent={() => <EmptyLifting />}
