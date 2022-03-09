@@ -64,7 +64,7 @@ def addUser():
     'weight')
     try:
         msg = request.json
-        print(msg)
+        #print(msg)
         for field in requiredFields:
             if field not in msg:
                 responseMsg["info"] = "Missing required field"
@@ -73,24 +73,20 @@ def addUser():
         responseMsg["info"] = "Request not json content"
         return jsonify(responseMsg), 400
 
-    query = 'INSERT INTO ' + userTable + ' ('
-    for field in requiredFields:
-        query = query + field + ', '
+    insertQuery = 'INSERT INTO ' + 'userTable' + " (" + ",".join(requiredFields) + ') VALUES(?,?,?,?,?)'
 
-    query = query[:-2] + ')' + ' VALUES ('
-
-    for field in requiredFields:
-        if isinstance(msg[field], float) or isinstance(msg[field], int):
-            query = query + str(msg[field]) + ', '
-        else:
-            query = query + "'" + str(msg[field]) + "'" + ', '
-    query = query[:-2] + ')'
-    print(query)
+    # store hashed password
+    # bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
     try:
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
-        cur.execute(query)
+        # check if user does not exist (403 response)
+        # Use SELECT statement for userName
+            # close db before return
+        cur.execute(insertQuery,list(msg.values()))
+        con.commit()
+
         responseMsg["info"] = "Successfully added user"
         return jsonify(responseMsg), 201
     except sqlite3.Error as err:
@@ -98,13 +94,6 @@ def addUser():
         return jsonify(responseMsg), 500
     finally:
         con.close()
-    # open database
-    # check if user does not exist (403 response)
-        # close db before return
-    # add user to database
-    # store hashed password
-    # bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-    # close database
 
 
 # POST request to log new exercises completed
