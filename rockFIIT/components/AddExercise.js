@@ -1,19 +1,29 @@
 import React, { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Modal, } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 
 export default function AddExercise({ submitHandler, navigation }) {
   const [value, setValue] = useState("");
   const [isVisible, setisVisible] = useState(false);
+  const [isVisibleExModal, setisVisibleExModal] = useState(false);
+  let exercises = ['Squat', 'Bench'];
 
   const onChangeText = (text) => {
     setValue(text);
   };
 
+  for(var i = 0; i < 2; i++){
+        <View key = {i}>
+            <Text>{i}
+            </Text>
+        </View>
+    }
+
   return (
     <ComponentContainer>
         {
-            <Modal transparent visible={isVisible}>
+            <Modal transparent visible={isVisibleExModal}>
             <View style={styles.exerciseModalBackground}>
                 <View style={[styles.exerciseModalContainer]}>
                     <Text style={styles.modalFieldLabels}>
@@ -31,6 +41,23 @@ export default function AddExercise({ submitHandler, navigation }) {
                     </Text>
                     <TextInput name='comments' style={styles.modalFieldInputs}>
                     </TextInput>
+                    <TouchableOpacity onPress={() => setisVisibleExModal(false) }>
+                        <View style={styles.addWrapper}>
+                            <Text style={styles.addButtonText}>x</Text>
+                        </View>
+                 </TouchableOpacity>    
+                </View>
+            </View>
+        </Modal>
+        }
+        {
+            <Modal transparent visible={isVisible}>
+            <View style={styles.exerciseModalBackground}>
+                <View style={[styles.exerciseModalContainer]}>
+                    <TouchableOpacity>
+                         <Text>{exercises}</Text>
+                         </TouchableOpacity>
+                         
                     <TouchableOpacity onPress={() => setisVisible(false) }>
                         <View style={styles.addWrapper}>
                             <Text style={styles.addButtonText}>x</Text>
@@ -40,6 +67,7 @@ export default function AddExercise({ submitHandler, navigation }) {
             </View>
         </Modal>
         }
+
         <KeyboardAvoidingView style={styles.addExerciseWrapper}>
                 <TouchableOpacity onPress={()=> setisVisible(true)}>
                     <View style={styles.addWrapper}>
@@ -59,6 +87,8 @@ export default function AddExercise({ submitHandler, navigation }) {
 const ComponentContainer = styled.View`
   flex-direction: row;
   justify-content: center;
+  height: auto;
+  width: auto;
   
   
 `;
