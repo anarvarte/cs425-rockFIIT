@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     flex: 1.5,
     justifyContent:"center",
     flexDirection: "column",
-    height: 100
+    height: 100,
   }
 });
 
@@ -93,7 +93,8 @@ const TextItem = styled.Text`
   justify-content: center;
   background-color: white;
   width: 100%
-
+  shadowColor: white;
+  shadowRadius: 1000px;
 `;
 
 const Logo = styled.Text`
@@ -103,6 +104,8 @@ const Logo = styled.Text`
   height: auto;
   font-size: 50px;
   font-weight: bold;
-  justify-content: center;
-  alignItems: center;
+  borderColor: yellow;
+  justify-content: space-between;
+  textShadowColor: rgb(255,255,255);
+  textShadowRadius: 3px
 `

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {View, Text, StyleSheet} from 'react-native';
+import { YellowBox } from 'react-native-web';
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -61,12 +62,16 @@ const styles = StyleSheet.create({
         fontSize: 45,
         color:'black',
         fontWeight: 'bold',
-        padding: 10
+        padding: 10,
+        textShadowColor: 'rgb(255,255,255)',
+        textShadowRadius: 3
     },
     subheading: {
         fontSize: 25,
         color: 'black',
         fontWeight: 'bold',
+        textShadowColor: 'rgb(255,255,255)',
+        textShadowRadius: 3
     },
     rightAlign: {
         textAlign:'right',

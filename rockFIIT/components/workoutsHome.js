@@ -68,7 +68,7 @@ const TextItem = styled.Text`
 `;
 
 const ListContainer = styled.TouchableOpacity`
-  background-color: #00FFFbcd;
+  background-color: rgb(255,255,255);
   height: 100px;
   width: 300px;
   border-radius: 15px;
