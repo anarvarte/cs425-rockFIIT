@@ -60,7 +60,8 @@ def exercises():
 @app.route('/addUser', methods=['POST'])
 def addUser():
     responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ('userID', 'userName', 'password', 'firstName','unitPreference')
+    requiredFields = ('userName', 'password', 'firstName','unitPreference',
+    'weight')
     try:
         msg = request.json
         print(msg)
@@ -72,17 +73,26 @@ def addUser():
         responseMsg["info"] = "Request not json content"
         return jsonify(responseMsg), 400
 
-
-    query = 'INSERT INTO ' + userTable + ' VALUES ('
+    query = 'INSERT INTO ' + userTable + ' ('
     for field in requiredFields:
-        query = query + field
+        query = query + field + ', '
+
+    query = query[:-2] + ')' + ' VALUES ('
+
+    for field in requiredFields:
+        if isinstance(msg[field], float) or isinstance(msg[field], int):
+            query = query + str(msg[field]) + ', '
+        else:
+            query = query + "'" + str(msg[field]) + "'" + ', '
+    query = query[:-2] + ')'
     print(query)
 
     try:
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
         cur.execute(query)
-        return jsonify(responseMsg), 200
+        responseMsg["info"] = "Successfully added user"
+        return jsonify(responseMsg), 201
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
         return jsonify(responseMsg), 500
@@ -95,8 +105,7 @@ def addUser():
     # store hashed password
     # bcrypt.hashpw(password.encode(), bcrypt.gensalt())
     # close database
-    responseMsg["info"] = "Successfully added user"
-    return jsonify(responseMsg), 201
+
 
 # POST request to log new exercises completed
 @app.route("/logActivity", methods=["POST"])

@@ -8,8 +8,8 @@ print(response.status_code)
 print(response.content)
 print(response.json())
 '''
-newUser = {'userName':'billy@gmail.com', 'firstName':'Billy',
-    'password':'asdjfaksdjf','unitPreference':'lbs', 'weight':132}
+newUser = {'userName':'billy@gmail.com', 'password':'asdjfaksdjf',
+'firstName':'Billy', 'unitPreference':'lbs', 'weight':150}
 path = "/addUser"
 response = requests.post(api_host + path, json=newUser)
 print()
