@@ -60,13 +60,13 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 45,
         color:'black',
-        fontWeight: '100',
+        fontWeight: 'bold',
         padding: 10
     },
     subheading: {
         fontSize: 25,
         color: 'black',
-        fontWeight: '300',
+        fontWeight: 'bold',
     },
     rightAlign: {
         textAlign:'right',
@@ -79,8 +79,6 @@ const styles = StyleSheet.create({
     workoutItemContainer: {
         backgroundColor: "#18181b98",
         borderRadius: 10,
-        padding: 10,
-        marginTop: 10
     }, 
     workoutItem: {
         flexDirection: 'row',

@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 const WorkoutScroll = ({workoutData}) => {
     return (
-
         <ScrollView horizontal={true} style={styles.scrollView}>
         <ListContainer>
             <View>
