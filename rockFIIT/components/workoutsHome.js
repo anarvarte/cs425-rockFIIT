@@ -1,10 +1,22 @@
 import React from 'react'
 import {View, ScrollView, Image, Text, StyleSheet} from 'react-native'
+import styled from "styled-components";
+
 
 const WorkoutScroll = ({workoutData}) => {
     return (
+
         <ScrollView horizontal={true} style={styles.scrollView}>
-            <Text> "hello" </Text>
+        <ListContainer>
+            <View>
+          <TextItem> Workout: Dead hangs, pull ups, circuits</TextItem>
+            </View>
+        </ListContainer>
+        <ListContainer>
+            <View>
+          <TextItem> Workout: Front squats, deadlifts, box jumps</TextItem>
+            </View>
+        </ListContainer>
         </ScrollView>
     )
 }
@@ -19,16 +31,16 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150
     },
-    currentTempContainer: {
-        flexDirection: 'row',
+    itemContainer: {
+        flex:1,
+        justifyContent: 'center',
         backgroundColor: '#00000033',
-        justifyContent:"center",
-        alignItems:'center',
-        borderRadius: 10,
-        borderColor:'#eee',
+        borderRadius:10,
+        borderColor:"#eee",
         borderWidth:1,
-        padding: 15
-    },
+        padding: 20,
+        marginLeft: 10
+    }, 
     day: {
         fontSize: 20,
         color:"black",
@@ -44,5 +56,27 @@ const styles = StyleSheet.create({
         paddingRight: 40
     }
 })
+
+const TextItem = styled.Text`
+  color: black;
+  width: 270px;
+  height: auto;
+  font-size: 20px;
+  margin-right: 5px;
+  margin-left: 10px;
+  justify-content: center;
+  margin-top: 12px;
+`;
+
+const ListContainer = styled.TouchableOpacity`
+  background-color: #00FFFbcd;
+  height: 100px;
+  width: 300px;
+  border-radius: 15px;
+  flex-direction: row;
+  padding: 10px;
+  margin-right: 10px;
+`;
+
 
 export default WorkoutScroll

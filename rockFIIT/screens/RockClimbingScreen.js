@@ -43,10 +43,6 @@ const RockClimbingScreen = ({ navigation }) => {
     <ComponentContainer>
       <View>
       <HeaderText> </HeaderText>
-      <CustomButton
-            text="Test"
-            onPress={navigateProgram}
-      />  
       </View>
 
       <View>
@@ -55,7 +51,7 @@ const RockClimbingScreen = ({ navigation }) => {
           ListEmptyComponent={() => <EmptyClimbing />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
-            <ToDoList item={item} deleteItem={deleteItem} />
+            <ToDoList item={item} deleteItem={deleteItem} navigation={navigation}/>
           )}
         />
         <AddInput submitHandler={submitHandler} />
