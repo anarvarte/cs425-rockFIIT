@@ -75,7 +75,7 @@ def addUser():
 
     query = 'INSERT INTO ' + userTable + ' VALUES ('
     for field in requiredFields:
-        query = query + field[]
+        query = query + field
     print(query)
 
     try:
