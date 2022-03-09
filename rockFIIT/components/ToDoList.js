@@ -4,7 +4,7 @@ import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 
-export default function TodoList({ item, deleteItem , navigation}) {
+const TodoList = ({ item, deleteItem , navigation}) => {
   return (
     <ComponentContainer>
       <ListContainer>
@@ -23,6 +23,8 @@ export default function TodoList({ item, deleteItem , navigation}) {
     </ComponentContainer>
   );
 }
+
+export default TodoList;
 
 const HeaderText = styled.Text`
   color: white;

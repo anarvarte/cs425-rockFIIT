@@ -92,7 +92,7 @@ const Program = ({navigation}) => {
                     <Text style={styles.modalFieldLabels}>
                         Comments: 
                     </Text>
-                    <TextInput name='day' style={styles.modalFieldInputs}>
+                    <TextInput name='comments' style={styles.modalFieldInputs}>
                     </TextInput>
                     <TouchableOpacity onPress={() => setisVisible(false) }>
                         <View style={styles.addWrapper}>

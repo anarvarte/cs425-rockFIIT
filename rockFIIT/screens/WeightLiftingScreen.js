@@ -43,7 +43,7 @@ const WeightLiftingScreen = ({ navigation }) => {
           ListEmptyComponent={() => <EmptyLifting />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
-            <ToDoList item={item} deleteItem={deleteItem} />
+            <ToDoList item={item} deleteItem={deleteItem} navigation={navigation}/>
           )}
         />
         <AddInput submitHandler={submitHandler} />
