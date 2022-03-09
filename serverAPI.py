@@ -60,9 +60,10 @@ def exercises():
 @app.route('/addUser', methods=['POST'])
 def addUser():
     responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ('userName', 'password')#,"firstName", "lastName", "weight")
+    requiredFields = ('userID', 'userName', 'password', 'firstName','unitPreference')
     try:
         msg = request.json
+        print(msg)
         for field in requiredFields:
             if field not in msg:
                 responseMsg["info"] = "Missing required field"
@@ -71,6 +72,22 @@ def addUser():
         responseMsg["info"] = "Request not json content"
         return jsonify(responseMsg), 400
 
+
+    query = 'INSERT INTO ' + userTable + ' VALUES ('
+    for field in requiredFields:
+        query = query + field[]
+    print(query)
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        cur.execute(query)
+        return jsonify(responseMsg), 200
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
     # open database
     # check if user does not exist (403 response)
         # close db before return
