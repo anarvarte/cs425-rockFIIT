@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Empty() {
+export default function EmptyProgram() {
   return (
     <ComponentContainer>
-      <EmptyImage
-        source={require('../assets/empty.png')}
-      />
-      
+      <EmptyImage source={require("../assets/exercise.png")} />
     </ComponentContainer>
   );
 }
@@ -19,8 +16,11 @@ const ComponentContainer = styled.View`
 `;
 
 const EmptyImage = styled.Image`
-  width: 350px;
-  height: 300px;
+  align-items: center;
+  width: 175px;
+  height: 200px;
+  margin-top: 250px;
+  
 `;
 
 const EmptyText = styled.Text`

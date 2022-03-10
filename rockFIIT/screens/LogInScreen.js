@@ -12,53 +12,31 @@ import SignUp from './SignUpScreen';
 import { getActiveChildNavigationOptions } from "react-navigation";
 
 import {useForm, Controller} from 'react-hook-form';
+import {database} from '../components/Database';
 
 const LogIn = ({navigation}) => {
 
     const {
         control, 
+        watch,
         handleSubmit, 
         formState: {errors}
     } = useForm();
+
+    var checkUserName = watch('username');
+    var checkPassword = watch('password');
     
-    /*
-    useEffect(() => {
-        //createTable();
-        //getData();
-    }, []);
-    */
-
-    /*
-    
-   const createTable = () => {
-       db.transaction((tx) =>{
-           tx.executeSql(
-               "CREATE TABLE IF NOT EXISTS" 
-               +"Users "
-               +"(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Password TEXT);"
-           )
-       })
-   }
-   
-
-   const setData = async() => {
-       if(username.length == 0 || password.length == 0){
-           Alert.alert('Warning!', 'Please enter your username and password.')
-       }
-       else{
-           try{
-               await db.transaction(async (tx) => {
-                    await tx.executeSql(
-                        "INSERT INTO Users (Name, Password) VALUES ('"+username+"', '"+password+"')"
-                    )
-               })
-           } catch(error){
-               console.log(error);
-           }
-
-       }
-   }
-   */
+    async function checkIfUserExists(){
+        var result = await database.getUserTable();
+        for(var i = 0; i < result.rows.length ; i++){
+            if((result.rows.item(i).userName == checkUserName) && (result.rows.item(i).password == checkPassword)){
+                alert('You are a registered user!')
+                navigation.navigate('Tabs');
+                return 0;
+            }
+        }
+        alert('Invalid Username and Password!');
+    }
    
     const onLogInPressed = (data) => {
         console.log(data);
@@ -93,7 +71,6 @@ const LogIn = ({navigation}) => {
                 </Text>
                 <View style={styles.logInForm}>
 
-                    
                    <CustomInput
                         name="username"
                         placeholder="Username"
@@ -111,7 +88,7 @@ const LogIn = ({navigation}) => {
 
                     <CustomButton
                         text="Log In"
-                        onPress={handleSubmit(onLogInPressed)}
+                        onPress={handleSubmit(checkIfUserExists)}
                     />  
 
                     <CustomButton
@@ -139,7 +116,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#2B3D53',
+        backgroundColor:'#C6B8C1',
     },
     pageTop:{
         width:'100%',
@@ -151,20 +128,21 @@ const styles = StyleSheet.create({
     pageBottom:{
         width:'100%',
         height:'68%',
-        backgroundColor:'#2B3D53',
+        backgroundColor:'#C6B8C1',
         borderTopLeftRadius:35,
         borderTopRightRadius:35,
         alignItems:'center',
     },
     textStyle:{
         color: '#fff',
+        fontFamily: 'Georgia',
     },
     logoStyle:{
         width:'100%',
         resizeMode:'contain',
     },
     logInHeading:{
-        color:'#ffc107',
+        color:'black',
         fontSize:32,
         fontWeight:'bold',
         justifyContent:'center',
@@ -177,6 +155,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         alignItems:'center',
         marginTop:45,
+        
     },
 })
 

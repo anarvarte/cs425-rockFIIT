@@ -34,7 +34,7 @@ const GoalsScreen = ({ navigation }) => {
   return (
     <ComponentContainer>
       <View>
-        <StatusBar barStyle="light-content" backgroundColor="midnightblue" />
+        
       </View>
 
       <View>
@@ -55,8 +55,10 @@ const GoalsScreen = ({ navigation }) => {
 
 export default GoalsScreen;
 
+
+
 const ComponentContainer = styled.View`
-  background-color: midnightblue;
+  background-color: #C6B8C1;
   height: 100%;
   flex-direction: column;
   align-items: center;

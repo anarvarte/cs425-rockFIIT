@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
       
       <View style={styles.graph}>
       <View>
-          <TextItem> Squat max monthly progress: </TextItem>
+          <TextItem> Back Squat Max (by month): </TextItem>
       </View>
         <PureChart data = {sampleData} type = 'line' height = {100} />
       </View>
@@ -77,13 +77,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: 'black',
     fontWeight: '300',
+    fontFamily: 'Georgia',
   },
   graph: {
     flex: 1.5,
     justifyContent:"center",
     flexDirection: "column",
     height: 100,
-  }
+  },
 });
 
 const TextItem = styled.Text`
@@ -96,6 +97,7 @@ const TextItem = styled.Text`
   width: 100%
   shadowColor: white;
   shadowRadius: 1000px;
+  fontFamily: Georgia;
 `;
 
 const Logo = styled.Text`
@@ -108,4 +110,5 @@ const Logo = styled.Text`
   justify-content: space-between;
   textShadowColor: rgb(255,255,255);
   textShadowRadius: 3px
+  fontFamily: Georgia;
 `

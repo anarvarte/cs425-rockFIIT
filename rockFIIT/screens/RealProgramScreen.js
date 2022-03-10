@@ -16,27 +16,29 @@ import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import styled from "styled-components";
 import AddInput from "../components/AddInput";
-import ToDoList from "../components/ToDoList";
-import EmptyLifting from "../components/EmptyLifting"
+import ExerciseList from "../components/ExerciseList";
 import LogIn from './LogInScreen';
 import AddExercise from "../components/AddExercise";
+import EmptyProgram from "../components/EmptyProgram";
 //import Program from './ProgramScreen';
 
 const RealProgram = ({ navigation }) => {
     const [isVisible, setisVisible] = useState(false);
 
   const [data, setData] = useState([]);
-  const submitHandler = (value) => {
+
+  const pressHandler = (value) => {
     setData((prevTodo) => {
       return [
         {
           value: value,
-          key: Math.random().toString(),
+          key: Math.random().toString()
         },
-        ...prevTodo,
+        ...prevTodo
       ];
     });
   };
+
   const deleteItem = (key) => {
     setData((prevTodo) => {
       return prevTodo.filter((todo) => todo.key != key);
@@ -49,21 +51,21 @@ const RealProgram = ({ navigation }) => {
 
   return (
     <ComponentContainer>
-      <View>
-      <HeaderText> </HeaderText>
+      <View style={styles.headerContainer}>
+        <HeaderText style={styles.programHeader}></HeaderText>
       </View>
 
       <View>
         <FlatList
           data={data}
-          ListEmptyComponent={() => <EmptyLifting />}
+          ListEmptyComponent={() => <EmptyProgram />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
-            <ToDoList item={item} deleteItem={deleteItem} navigation={navigation}/>
+            <ExerciseList item={item} deleteItem={deleteItem} navigation={navigation}/>
           )}
         />
-        <AddExercise navigation={navigation}/>
         
+        <AddExercise navigation={navigation} pressHandler={pressHandler}/>
         
       </View>
     </ComponentContainer>
@@ -84,11 +86,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#8fcbbc",
+    backgroundColor: "#C6B8C1",
   },
+  headerContainer:{
+    marginTop:55,
+  },
+  programHeader:{
+    fontWeight:'bold',
+    color:'black',
+  }
 });
 const ComponentContainer = styled.View`
-  background-color: midnightblue;
+  background-color: #C6B8C1;
   height: 100%;
   flex-direction: column;
   align-items: center;

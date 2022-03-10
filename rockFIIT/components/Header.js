@@ -22,15 +22,16 @@ const ComponentContainer = styled.View`
 
 
 const HeaderText = styled.Text`
-  color: white;
-  
+  color: black;
+  fontFamily: Georgia;
   font-size: 30px;
 `;
+
 //font-family: poppins-bold;
 const HeaderList = styled.Text`
-  color: white;
-
-  font-size: 20px;
+  color: black;
+  fontFamily: Georgia;
+  font-size: 30px;
   margin-right: 20px;
 `;
 //  font-family: poppins-bold;

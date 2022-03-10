@@ -14,14 +14,23 @@ import DefaultList from "../components/DefaultList";
 import EmptyLifting from "../components/EmptyLifting";
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';
+import StrengthScreen from './StrengthScreen';
 
 
 const WeightLiftingScreen = ({ navigation }) => {
 
   const[defaultExercise, setExercise] = useState('');
-  
   const [data, setData] = useState([]);
+
+  async function insertProgramIntoDB(value){
+    var result = await database.insertProgramName(value);
+    console.log(value);
+  }
+
   const submitHandler = (value) => {
+
+    insertProgramIntoDB(value);
+
     setData((prevTodo) => {
       return [
         {
@@ -45,7 +54,7 @@ const WeightLiftingScreen = ({ navigation }) => {
       </View>
 
       <View>
-      <DefaultList item={'Strength'} deleteItem={deleteItem} navigation={navigation}/>
+      <DefaultList item={'Strength Program'} deleteItem={deleteItem} navigation={navigation} location={'Strength'}/>
       <DefaultList item={'Push/Pull/Legs'} deleteItem={deleteItem} navigation={navigation}/>
       <DefaultList item={'Arnold Split'} deleteItem={deleteItem} navigation={navigation}/>
         <FlatList
@@ -78,7 +87,7 @@ const HeaderText = styled.Text`
 `;
 
 const ComponentContainer = styled.View`
-  background-color: midnightblue;
+  background-color: #C6B8C1;
   height: 100%;
   flex-direction: column;
   align-items: center;

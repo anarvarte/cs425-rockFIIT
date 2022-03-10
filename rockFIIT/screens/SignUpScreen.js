@@ -35,6 +35,17 @@ const SignUp = ({navigation}) => {
         console.log(result.rows);
     }
 
+    async function checkProgramTable(){
+        var result = await database.getProgramTable();
+        console.log(result.rows);
+    }
+
+    async function getExerciseList(){
+        var result = await database.getExerciseValues();
+        console.log(result);
+    }
+
+
     async function addNewUser(){
         database.insertNewUserInfo(checkUserName, checkPassword, checkName);
         var result = await database.getUserValues();
@@ -79,8 +90,8 @@ const SignUp = ({navigation}) => {
                     <CustomInput
                         name="fullname"
                         control={control}
-                        placeholder="Full Name"
-                        rules={{required:'Full Name is required'}}
+                        placeholder="Name"
+                        rules={{required:'Name is required'}}
                         
                     />
                     <CustomInput
@@ -138,11 +149,13 @@ const SignUp = ({navigation}) => {
                     <CustomButton
                         text="Sign Up"
                         onPress={handleSubmit(onSignUpPressed)}
-                    />  
+                    /> 
+                    {
                     <CustomButton
-                        text="Check User Table"
-                        onPress={checkUserTable}
-                    />                                                                                        
+                        text="Check Program Table"
+                        onPress={checkProgramTable}
+                    />   
+                    }                                                                                     
                 </View>
 
                 <CustomButton
@@ -174,7 +187,7 @@ const styles = StyleSheet.create({
     pageBottom:{
         width:'100%',
         height:'85%',
-        backgroundColor:'#2B3D53',
+        backgroundColor:'#C6B8C1',
         borderTopLeftRadius:35,
         borderTopRightRadius:35,
         alignItems:'center',
@@ -187,12 +200,12 @@ const styles = StyleSheet.create({
         resizeMode:'contain',
     },
     logInHeading:{
-        color:'#ffc107',
+        color:'black',
         fontSize:32,
         fontWeight:'bold',
         justifyContent:'center',
         alignItems:'center',
-        paddingTop:10,
+        paddingTop:20,
         fontFamily: 'Georgia',
     },
     logInForm:{
@@ -227,6 +240,7 @@ const styles = StyleSheet.create({
     logInButtonText:{
         fontWeight:'bold',
         fontSize:18,
+        fontFamily: 'Georgia',
     }
 })
 

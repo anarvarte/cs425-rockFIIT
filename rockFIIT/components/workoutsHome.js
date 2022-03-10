@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
         textAlign:"center",
         borderRadius: 50,
         fontWeight: "200",
-        marginBottom: 15
+        marginBottom: 15,
+        fontFamily: 'Georgia',
     },
     
     otherContainer: {
@@ -67,6 +68,7 @@ const TextItem = styled.Text`
   margin-left: 10px;
   justify-content: center;
   margin-top: 12px;
+  fontFamily: Georgia;
 `;
 
 const ListContainer = styled.TouchableOpacity`
