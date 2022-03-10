@@ -3,61 +3,50 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingVi
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 
-export default function AddExercise({ submitHandler, navigation }) {
-  const [value, setValue] = useState("");
+import {database} from '../components/Database';
+
+export default function AddExercise({ pressHandler, navigation }) {
+  const [value, setValue] = useState('');
   const [isVisible, setisVisible] = useState(false);
-  const [isVisibleExModal, setisVisibleExModal] = useState(false);
-  let exercises = ['Squat', 'Bench'];
+  const [exerciseArray, setExerciseArray] = useState('');
+  const [data, setData] = useState([]);
+  
 
-  const onChangeText = (text) => {
-    setValue(text);
+  const onPressItem = (item) => {
+    setValue(item);
   };
+  
+  
 
-  for(var i = 0; i < 2; i++){
-        <View key = {i}>
-            <Text>{i}
-            </Text>
-        </View>
-    }
+  async function getExerciseList(){
+      var result = await database.getExerciseValues();
+        setExerciseArray(result);
+  }
+
+  const renderItem = ({ item } ) => (
+      <TouchableOpacity onPress={() => {
+        setValue(pressHandler(item));
+      }} >
+          <Text>{item}</Text>
+      </TouchableOpacity>
+  );
+
+    getExerciseList();
 
   return (
     <ComponentContainer>
         {
-            <Modal transparent visible={isVisibleExModal}>
-            <View style={styles.exerciseModalBackground}>
-                <View style={[styles.exerciseModalContainer]}>
-                    <Text style={styles.modalFieldLabels}>
-                        Sets: 
-                    </Text>
-                    <TextInput name='sets' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Reps: 
-                    </Text>
-                    <TextInput name='reps' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Comments: 
-                    </Text>
-                    <TextInput name='comments' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <TouchableOpacity onPress={() => setisVisibleExModal(false) }>
-                        <View style={styles.addWrapper}>
-                            <Text style={styles.addButtonText}>x</Text>
-                        </View>
-                 </TouchableOpacity>    
-                </View>
-            </View>
-        </Modal>
+            
         }
         {
             <Modal transparent visible={isVisible}>
             <View style={styles.exerciseModalBackground}>
                 <View style={[styles.exerciseModalContainer]}>
-                    <TouchableOpacity>
-                         <Text>{exercises}</Text>
-                         </TouchableOpacity>
-                         
+                    <FlatList
+                        data={exerciseArray}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => item}
+                         />
                     <TouchableOpacity onPress={() => setisVisible(false) }>
                         <View style={styles.addWrapper}>
                             <Text style={styles.addButtonText}>x</Text>
@@ -101,7 +90,7 @@ const Input = styled.TextInput`
   padding: 10px;
   margin-bottom: 180px;
   border-radius: 10px;
-  
+  fontFamily: Georgia;
 `;
 
 const styles = StyleSheet.create({

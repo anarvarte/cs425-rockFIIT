@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     buttonContainer_Primary:{
-        backgroundColor:'#ffc107',
+        backgroundColor:'#DD7F4A',
         marginTop:20,
     },
     buttonContainer_Tertiary:{
@@ -31,12 +31,13 @@ const styles = StyleSheet.create({
     buttonText:{
         fontWeight:'bold',
         fontSize:18,
+        fontFamily: 'Georgia',
     },
     buttonText_Primary:{
-
+        color: 'white',
     },
     buttonText_Tertiary:{
-        color:'lightgray',
+        color:'black',
         fontSize:14,
     }
 })

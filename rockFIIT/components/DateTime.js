@@ -65,14 +65,16 @@ const styles = StyleSheet.create({
         padding: 5,
         paddingTop: 20,
         textShadowColor: 'rgb(255,255,255)',
-        textShadowRadius: 3
+        textShadowRadius: 3,
+        fontFamily: 'Georgia',
     },
     subheading: {
         fontSize: 20,
         color: 'black',
         fontWeight: 'bold',
         textShadowColor: 'rgb(255,255,255)',
-        textShadowRadius: 3
+        textShadowRadius: 3,
+        fontFamily: 'Georgia',
     },
     rightAlign: {
         textAlign:'right',
@@ -93,7 +95,8 @@ const styles = StyleSheet.create({
     workoutItemTitle: {
         color:'#eee',
         fontSize: 14,
-        fontWeight: '100'
+        fontWeight: '100',
+        fontFamily: 'Georgia',
     }
 })
 

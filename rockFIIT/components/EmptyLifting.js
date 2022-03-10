@@ -23,7 +23,7 @@ const EmptyImage = styled.Image`
 
 const EmptyText = styled.Text`
   color: white;
-
+  fontFamily: Georgia;
   margin-top: 30px;
   font-size: 30px;
 `;

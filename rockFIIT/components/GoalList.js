@@ -20,7 +20,7 @@ export default function TodoList({ item, deleteItem }) {
       <ListContainer>
         <CircleContainer>
           <TouchableOpacity>
-            <Entypo name ={active ? 'circle' : 'circle-with-cross'} size={23} color="midnightblue" onPress={() => handleChangeActive()}/>
+            <Entypo name ={active ? 'circle' : 'circle-with-cross'} size={23} color="#DD7F4A" onPress={() => handleChangeActive()}/>
             </TouchableOpacity>
           </CircleContainer>
         <View>
@@ -69,6 +69,7 @@ const TextItem = styled.Text`
   margin-left: 10px;
   justify-content: center;
   margin-top: 12px;
+  fontFamily: Georgia;
 `;
 //  font-family: poppins-regular;
 

@@ -78,7 +78,7 @@ const HeaderText = styled.Text`
 `;
 
 const ComponentContainer = styled.View`
-  background-color: midnightblue;
+  background-color: #C6B8C1;
   height: 100%;
   flex-direction: column;
   align-items: center;

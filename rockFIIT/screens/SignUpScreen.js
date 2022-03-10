@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     pageBottom:{
         width:'100%',
         height:'85%',
-        backgroundColor:'#2B3D53',
+        backgroundColor:'#C6B8C1',
         borderTopLeftRadius:35,
         borderTopRightRadius:35,
         alignItems:'center',
@@ -187,12 +187,12 @@ const styles = StyleSheet.create({
         resizeMode:'contain',
     },
     logInHeading:{
-        color:'#ffc107',
+        color:'black',
         fontSize:32,
         fontWeight:'bold',
         justifyContent:'center',
         alignItems:'center',
-        paddingTop:10,
+        paddingTop:20,
         fontFamily: 'Georgia',
     },
     logInForm:{
@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
     logInButtonText:{
         fontWeight:'bold',
         fontSize:18,
+        fontFamily: 'Georgia',
     }
 })
 

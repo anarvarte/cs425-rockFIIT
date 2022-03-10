@@ -8,57 +8,6 @@ import AddInput from '../components/AddInput';
 import Exercise from '../components/Exercise';
 import CustomInput from '../components/CustomInput';
 
-/*
-const ExerciseModal = ({isVisible, children}) => {
-
-    const{watch} = useForm();
-    const [showModal, setShowModal] = useState(false);
-
-    var exerciseVar = watch('exercise');
-    var exerciseVar = watch('exercise');
-    var exerciseVar = watch('exercise');
-    var exerciseVar = watch('exercise');
-    
-    if(isVisible==true){
-        setShowModal(true)
-    }
-    
-    return(
-        <Modal transparent visible={isVisible}>
-            <View style={styles.exerciseModalBackground}>
-                <View style={[styles.exerciseModalContainer]}>
-                    <Text style={styles.modalFieldLabels}>
-                        Exercise: 
-                    </Text>
-                    <TextInput name='exercise' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Sets: 
-                    </Text>
-                    <TextInput name='sets' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Reps: 
-                    </Text>
-                    <TextInput name='reps' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Day of Week: 
-                    </Text>
-                    <TextInput name='day' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <TouchableOpacity onPress={() => isVisible(false) }>
-                        <View style={styles.addWrapper}>
-                            <Text style={styles.addButtonText}>x</Text>
-                        </View>
-                 </TouchableOpacity>    
-                </View>
-            </View>
-        </Modal>
-    );
-};
-
-*/
 
 const Program = ({navigation}) => {
 
@@ -79,6 +28,11 @@ const Program = ({navigation}) => {
             <Modal transparent visible={isVisible}>
             <View style={styles.exerciseModalBackground}>
                 <View style={[styles.exerciseModalContainer]}>
+                    <Text style={styles.modalFieldLabels}>
+                        Date: 
+                    </Text>
+                    <TextInput name='date' style={styles.modalFieldInputs}>
+                    </TextInput>
                     <Text style={styles.modalFieldLabels}>
                         Exercise: 
                     </Text>

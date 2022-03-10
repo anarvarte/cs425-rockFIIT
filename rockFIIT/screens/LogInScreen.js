@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#2B3D53',
+        backgroundColor:'#C6B8C1',
     },
     pageTop:{
         width:'100%',
@@ -151,20 +151,21 @@ const styles = StyleSheet.create({
     pageBottom:{
         width:'100%',
         height:'68%',
-        backgroundColor:'#2B3D53',
+        backgroundColor:'#C6B8C1',
         borderTopLeftRadius:35,
         borderTopRightRadius:35,
         alignItems:'center',
     },
     textStyle:{
         color: '#fff',
+        fontFamily: 'Georgia',
     },
     logoStyle:{
         width:'100%',
         resizeMode:'contain',
     },
     logInHeading:{
-        color:'#ffc107',
+        color:'black',
         fontSize:32,
         fontWeight:'bold',
         justifyContent:'center',
@@ -177,6 +178,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         alignItems:'center',
         marginTop:45,
+        
     },
 })
 

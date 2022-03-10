@@ -46,10 +46,11 @@ const Tabs = () => {
               style={{
                 width: 50,
                 height: 50,
-                tintColor: focused ? "#e32f45" : "#748c94",
+                tintColor: focused ? "#DD7F4A" : "#748c94",
               }}
             />
-            <Text>Home</Text>
+            <Text style={{
+                fontFamily: 'Georgia',}}>Home</Text>
           </View>
         ),
       }}
@@ -65,6 +66,7 @@ const Tabs = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 top: 10,
+                
               }}
             >
               <Image
@@ -73,10 +75,12 @@ const Tabs = () => {
                 style={{
                   width: 50,
                   height: 50,
-                  tintColor: focused ? "#e32f45" : "#748c94",
+                  tintColor: focused ? "#DD7F4A" : "#748c94",
                 }}
               />
-              <Text>Weights</Text>
+              <Text style={{
+                fontFamily: 'Georgia',
+              }}>Weights</Text>
             </View>
           ),
         }}
@@ -100,10 +104,11 @@ const Tabs = () => {
                 style={{
                   width: 50,
                   height: 50,
-                  tintColor: focused ? "#e32f45" : "#748c94",
+                  tintColor: focused ? "#DD7F4A" : "#748c94",
                 }}
               />
-              <Text>Goals</Text>
+              <Text style={{
+                fontFamily: 'Georgia',}}>Goals</Text>
             </View>
           ),
         }}
@@ -127,10 +132,11 @@ const Tabs = () => {
                 style={{
                   width: 50,
                   height: 50,
-                  tintColor: focused ? "#e32f45" : "#748c94",
+                  tintColor: focused ? "#DD7F4A" : "#748c94",
                 }}
               />
-              <Text>Climbing</Text>
+              <Text style={{
+                fontFamily: 'Georgia',}}>Climbing</Text>
             </View>
           ),
         }}
@@ -154,10 +160,11 @@ const Tabs = () => {
                 style={{
                   width: 50,
                   height: 50,
-                  tintColor: focused ? "#e32f45" : "#748c94",
+                  tintColor: focused ? "#DD7F4A" : "#748c94",
                 }}
               />
-              <Text>Settings</Text>
+              <Text style={{
+                fontFamily: 'Georgia',}}>Settings</Text>
             </View>
           ),
         }}
