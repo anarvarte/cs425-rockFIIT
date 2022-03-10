@@ -4,8 +4,6 @@ import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 import {database} from '../components/Database';
 
-import {database} from '../components/Database';
-
 export default function AddExercise({ pressHandler, navigation }) {
   const [value, setValue] = useState('');
   const [isVisible, setisVisible] = useState(false);
@@ -16,8 +14,6 @@ export default function AddExercise({ pressHandler, navigation }) {
   const onPressItem = (item) => {
     setValue(item);
   };
-  
-  
 
   async function getExerciseList(){
       var result = await database.getExerciseValues();
@@ -31,14 +27,6 @@ export default function AddExercise({ pressHandler, navigation }) {
           <Text>{item}</Text>
       </TouchableOpacity>
   );
-
-    getExerciseList();
-
-    const renderItem = ({ item } ) => (
-        <TouchableOpacity>
-            <Text>{item}</Text>
-        </TouchableOpacity>
-    );
     
     getExerciseList();
   return (
@@ -141,6 +129,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: '#C0C0C0',
         borderWidth: 1,
+        
     },
     addButtonText:{
         fontSize: 20,

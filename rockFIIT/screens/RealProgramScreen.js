@@ -17,9 +17,9 @@ import CustomButton from '../components/CustomButton';
 import styled from "styled-components";
 import AddInput from "../components/AddInput";
 import ExerciseList from "../components/ExerciseList";
-import EmptyLifting from "../components/EmptyLifting"
 import LogIn from './LogInScreen';
 import AddExercise from "../components/AddExercise";
+import EmptyProgram from "../components/EmptyProgram";
 //import Program from './ProgramScreen';
 
 const RealProgram = ({ navigation }) => {
@@ -52,13 +52,13 @@ const RealProgram = ({ navigation }) => {
   return (
     <ComponentContainer>
       <View>
-      <HeaderText> This One?</HeaderText>
+      <HeaderText></HeaderText>
       </View>
 
       <View>
         <FlatList
           data={data}
-          ListEmptyComponent={() => <EmptyLifting />}
+          ListEmptyComponent={() => <EmptyProgram />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
             <ExerciseList item={item} deleteItem={deleteItem} navigation={navigation}/>
