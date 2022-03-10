@@ -27,9 +27,6 @@ const HomeScreen = ({ navigation }) => {
     //setItem(result);
   };
 
-<<<<<<< HEAD
-  
-=======
   let sampleData = 
   [
     {x: 'May', y: 215}, 
@@ -39,7 +36,6 @@ const HomeScreen = ({ navigation }) => {
     {x: 'September', y: 315},
     {x: 'October', y: 330}
   ]
->>>>>>> 8731b432be7eda5b0e02de1601db26a5e948228a
 
   return (
     <View style={styles.container}>
