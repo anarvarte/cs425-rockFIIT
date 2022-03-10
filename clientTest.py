@@ -1,7 +1,7 @@
 import requests
 api_host = "http://localhost:5000"
 
-api_host = "https://rockFIITapi.lousterrd.repl.co"#response = requests.get(api_host)
+#api_host = "https://rockFIITapi.lousterrd.repl.co"#response = requests.get(api_host)
 
 '''response = requests.get(api_host+"/")
 print()
@@ -9,7 +9,7 @@ print(response.status_code)
 print(response.content)
 print(response.json())
 '''
-newUser = {'userName':'bobert@gmail.com', 'password':'asdjfaksdjf',
+newUser = {'userName':'example3@gmail.com', 'password':'asdjfaksdjf',
 'firstName':'Billy', 'unitPreference':'lbs', 'weight':150}
 path = "/addUser"
 response = requests.post(api_host + path, json=newUser)
@@ -37,7 +37,7 @@ except:
 '''
 
 
-
+'''
 path = '/exercises'
 response = requests.get(api_host + path)
 print()
@@ -47,3 +47,4 @@ try:
     print(response.json())
 except:
     print("Response not json")
+'''

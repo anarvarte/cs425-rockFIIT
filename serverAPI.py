@@ -76,7 +76,11 @@ def addUser():
     insertQuery = 'INSERT INTO ' + 'userTable' + " (" + ",".join(requiredFields) + ') VALUES(?,?,?,?,?)'
 
     # store hashed password
-    # bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+    plaintext = msg[requiredFields[1]]
+    hashedPwd = bcrypt.hashpw(plaintext.encode(), bcrypt.gensalt())
+    msg[requiredFields[1]] = hashedPwd.decode()
+    print(msg[requiredFields[1]])
 
     try:
         con = sqlite3.connect(DATABASE)
