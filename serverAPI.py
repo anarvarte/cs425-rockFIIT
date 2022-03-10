@@ -6,7 +6,7 @@ import bcrypt
 import json
 
 # Global Variables + Constants
-DATABASE = 'rockFIITversion2.db'
+DATABASE = 'rockFIITServer.db'
 exerciseLibrary = 'exerciseLibrary'
 exerciseLog = 'exerciseLog'
 userTable = 'userTable'
@@ -73,14 +73,13 @@ def addUser():
         responseMsg["info"] = "Request not json content"
         return jsonify(responseMsg), 400
 
-    insertQuery = 'INSERT INTO ' + 'userTable' + " (" + ",".join(requiredFields) + ') VALUES(?,?,?,?,?)'
+    insertQuery = 'INSERT INTO ' + 'userTable' + " (" + \
+    ",".join(requiredFields) + ') VALUES(?,?,?,?,?)'
 
-    # store hashed password
-
+    # Store hashed password
     plaintext = msg[requiredFields[1]]
     hashedPwd = bcrypt.hashpw(plaintext.encode(), bcrypt.gensalt())
     msg[requiredFields[1]] = hashedPwd.decode()
-    print(msg[requiredFields[1]])
 
     try:
         con = sqlite3.connect(DATABASE)

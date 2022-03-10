@@ -1,6 +1,6 @@
 import sqlite3
 import bcrypt
-DATABASE = 'rockFIITversion2.db'
+DATABASE = 'rockFIITversion3.db'
 #requiredFields = ('userName', 'password', 'firstName','unitPreference',
 #'weight')
 
