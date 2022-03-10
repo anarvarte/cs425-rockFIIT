@@ -1,6 +1,6 @@
 import requests
 
-api_host = "https://rockFIITapi.lousterrd.repl.co"
+api_host = 'https://rockFIITapi.lousterrd.repl.co'
 
 newUser1 = {'userName':'newUser1@gmail.com', 'password':'asdfjjoinnas',
 'firstName':'Billy', 'weight':150}
@@ -15,4 +15,4 @@ print(response.status_code)
 try:
     print(response.json())
 except:
-    print("Response not json")
+    print('Response not json')

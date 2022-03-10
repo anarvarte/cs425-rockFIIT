@@ -20,42 +20,6 @@ def index():
     return jsonify('RockFIIT Server API Homepage')
 
 
-# Route to get a specific exercise from the exerciseLibrary table
-@app.route('/exercise/<exerciseID>', methods=['GET'])
-def exercise(exerciseID):
-    responseMsg = {'info' : '', 'data' : False}
-    query = 'SELECT * FROM ' + exerciseLibrary + ' WHERE exerciseID = ?'
-
-    try:
-        con = sqlite3.connect(DATABASE)
-        cur = con.cursor()
-        responseMsg['data'] = cur.execute(query,(exerciseID)).fetchone()
-        return jsonify(responseMsg), 200
-    except sqlite3.Error as err:
-        responseMsg['info'] = err.args[0]
-        return jsonify(responseMsg), 500
-    finally:
-        con.close()
-
-
-# Route to get entire exerciseLibrary table
-@app.route('/exercises', methods=['GET'])
-def exercises():
-    responseMsg = {'info' : '', 'data' : False}
-    query = 'SELECT * FROM ' + exerciseLibrary
-
-    try:
-        con = sqlite3.connect(DATABASE)
-        cur = con.cursor()
-        responseMsg['data'] = cur.execute(query).fetchall()
-        return jsonify(responseMsg), 200
-    except sqlite3.Error as err:
-        responseMsg['info'] = err.args[0]
-        return jsonify(responseMsg), 500
-    finally:
-        con.close()
-
-
 # Route to add a user to the server-side database
 @app.route('/addUser', methods=['POST'])
 def addUser():
@@ -94,6 +58,40 @@ def addUser():
     finally:
         con.close()
 
+# Route to get a specific exercise from the exerciseLibrary table
+@app.route('/exercise/<exerciseID>', methods=['GET'])
+def exercise(exerciseID):
+    responseMsg = {'info' : '', 'data' : False}
+    query = 'SELECT * FROM ' + exerciseLibrary + ' WHERE exerciseID = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        responseMsg['data'] = cur.execute(query,(exerciseID)).fetchone()
+        return jsonify(responseMsg), 200
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
+
+
+# Route to get entire exerciseLibrary table
+@app.route('/exercises', methods=['GET'])
+def exercises():
+    responseMsg = {'info' : '', 'data' : False}
+    query = 'SELECT * FROM ' + exerciseLibrary
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        responseMsg['data'] = cur.execute(query).fetchall()
+        return jsonify(responseMsg), 200
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
 
 # POST request to log new exercises completed
 @app.route("/logActivity", methods=["POST"])

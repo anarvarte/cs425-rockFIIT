@@ -1,6 +1,6 @@
 import requests
 
-api_host = "https://rockFIITapi.lousterrd.repl.co"
+api_host = 'https://rockFIITapi.lousterrd.repl.co'
 
 exerciseID = 4
 path = '/exercise/' + str(exerciseID) + ''
