@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         height:50,
     },
     input:{
+        fontFamily: 'Georgia',
         fontSize:20,
     },
 })

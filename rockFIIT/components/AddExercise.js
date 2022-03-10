@@ -4,28 +4,35 @@ import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 import {database} from '../components/Database';
 
-export default function AddExercise({ submitHandler, navigation }) {
-  const [value, setValue] = useState("");
-  const [isVisible, setisVisible] = useState(false);
-  const [isVisibleExModal, setisVisibleExModal] = useState(false);
-  const[exerciseArray,setExerciseArray] = useState('')
-  let exercises = ['Squat', 'Bench'];
+import {database} from '../components/Database';
 
-  const onChangeText = (text) => {
-    setValue(text);
+export default function AddExercise({ pressHandler, navigation }) {
+  const [value, setValue] = useState('');
+  const [isVisible, setisVisible] = useState(false);
+  const [exerciseArray, setExerciseArray] = useState('');
+  const [data, setData] = useState([]);
+  
+
+  const onPressItem = (item) => {
+    setValue(item);
   };
+  
+  
 
   async function getExerciseList(){
-    var result = await database.getExerciseValues();
-    setExerciseArray(result)
- }
+      var result = await database.getExerciseValues();
+        setExerciseArray(result);
+  }
 
-  for(var i = 0; i < 2; i++){
-        <View key = {i}>
-            <Text>{i}
-            </Text>
-        </View>
-    }
+  const renderItem = ({ item } ) => (
+      <TouchableOpacity onPress={() => {
+        setValue(pressHandler(item));
+      }} >
+          <Text>{item}</Text>
+      </TouchableOpacity>
+  );
+
+    getExerciseList();
 
     const renderItem = ({ item } ) => (
         <TouchableOpacity>
@@ -37,32 +44,7 @@ export default function AddExercise({ submitHandler, navigation }) {
   return (
     <ComponentContainer>
         {
-        <Modal transparent visible={isVisibleExModal}>
-            <View style={styles.exerciseModalBackground}>
-                <View style={[styles.exerciseModalContainer]}>
-                    <Text style={styles.modalFieldLabels}>
-                        Sets: 
-                    </Text>
-                    <TextInput name='sets' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Reps: 
-                    </Text>
-                    <TextInput name='reps' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Comments: 
-                    </Text>
-                    <TextInput name='comments' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <TouchableOpacity onPress={() => setisVisibleExModal(false) }>
-                        <View style={styles.addWrapper}>
-                            <Text style={styles.addButtonText}>x</Text>
-                        </View>
-                 </TouchableOpacity>    
-                </View>
-            </View>
-        </Modal>
+            
         }
         {
             <Modal transparent visible={isVisible}>
@@ -72,8 +54,7 @@ export default function AddExercise({ submitHandler, navigation }) {
                         data={exerciseArray}
                         renderItem={renderItem}
                         keyExtractor={(item, index) => item}
-                        />         
-                         
+                         />
                     <TouchableOpacity onPress={() => setisVisible(false) }>
                         <View style={styles.addWrapper}>
                             <Text style={styles.addButtonText}>x</Text>
@@ -117,7 +98,7 @@ const Input = styled.TextInput`
   padding: 10px;
   margin-bottom: 180px;
   border-radius: 10px;
-  
+  fontFamily: Georgia;
 `;
 
 const styles = StyleSheet.create({

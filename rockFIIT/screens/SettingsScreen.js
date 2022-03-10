@@ -4,7 +4,6 @@ import { View, Text, Button, StyleSheet } from "react-native";
 const SettingsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Settings Screen</Text>
       <Button title="Sign Out" onPress={() => navigation.navigate('LogIn')} />
     </View>
   );
@@ -17,6 +16,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#8fcbbc",
+    backgroundColor: "#C6B8C1",
+    fontFamily: 'Georgia',
+    color: 'black',
   },
 });

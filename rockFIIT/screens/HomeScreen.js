@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: 'black',
     fontWeight: '300',
+    fontFamily: 'Georgia',
   },
   graph: {
     flex: 1.5,
@@ -96,6 +97,7 @@ const TextItem = styled.Text`
   width: 100%
   shadowColor: white;
   shadowRadius: 1000px;
+  fontFamily: Georgia;
 `;
 
 const Logo = styled.Text`
@@ -108,4 +110,5 @@ const Logo = styled.Text`
   justify-content: space-between;
   textShadowColor: rgb(255,255,255);
   textShadowRadius: 3px
+  fontFamily: Georgia;
 `

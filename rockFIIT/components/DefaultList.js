@@ -11,7 +11,7 @@ const DefaultList = ({ item, deleteItem , navigation, location}) => {
       <ListContainer>
         <CircleContainer>
           <TouchableOpacity>
-            <Entypo name ="triangle-right" size={25} color="midnightblue" onPress={() => navigation.navigate('StrengthScreen')} />
+            <Entypo name ="triangle-right" size={25} color="#DD7F4A" onPress={() => navigation.navigate('Program')} />
             </TouchableOpacity>
           </CircleContainer>
         <View>
@@ -61,6 +61,7 @@ const TextItem = styled.Text`
   margin-left: 10px;
   justify-content: center;
   margin-top: 12px;
+  fontFamily: Georgia;
 `;
 //  font-family: poppins-regular;
 

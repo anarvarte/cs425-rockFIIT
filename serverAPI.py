@@ -15,10 +15,48 @@ app = Flask(__name__)
 
 
 # Index Page Test
-@app.route("/")
+@app.route('/')
 def index():
-    return jsonify([1,2,3,4,5, "asdf"])
+    return jsonify('RockFIIT Server API Homepage')
 
+
+# Route to add a user to the server-side database
+@app.route('/addUser', methods=['POST'])
+def addUser():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'password', 'firstName', 'weight')
+    try:
+        msg = request.json
+        #print(msg)
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg["info"] = "Missing required field"
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg["info"] = "Request not json content"
+        return jsonify(responseMsg), 400
+
+    insertQuery = 'INSERT INTO ' + 'userTable' + " (" + \
+    ",".join(requiredFields) + ') VALUES(?,?,?,?)'
+
+    # Store hashed password
+    plaintext = msg[requiredFields[1]]
+    hashedPwd = bcrypt.hashpw(plaintext.encode(), bcrypt.gensalt())
+    msg[requiredFields[1]] = hashedPwd.decode()
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        cur.execute(insertQuery,list(msg.values()))
+        con.commit()
+
+        responseMsg["info"] = "Successfully added user"
+        return jsonify(responseMsg), 201
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
 
 # Route to get a specific exercise from the exerciseLibrary table
 @app.route('/exercise/<exerciseID>', methods=['GET'])
@@ -55,50 +93,6 @@ def exercises():
     finally:
         con.close()
 
-
-# Route to add a user to the server-side database
-@app.route('/addUser', methods=['POST'])
-def addUser():
-    responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ('userName', 'password', 'firstName','unitPreference',
-    'weight')
-    try:
-        msg = request.json
-        #print(msg)
-        for field in requiredFields:
-            if field not in msg:
-                responseMsg["info"] = "Missing required field"
-                return jsonify(responseMsg), 400
-    except:
-        responseMsg["info"] = "Request not json content"
-        return jsonify(responseMsg), 400
-
-    insertQuery = 'INSERT INTO ' + 'userTable' + " (" + \
-    ",".join(requiredFields) + ') VALUES(?,?,?,?,?)'
-
-    # Store hashed password
-    plaintext = msg[requiredFields[1]]
-    hashedPwd = bcrypt.hashpw(plaintext.encode(), bcrypt.gensalt())
-    msg[requiredFields[1]] = hashedPwd.decode()
-
-    try:
-        con = sqlite3.connect(DATABASE)
-        cur = con.cursor()
-        # check if user does not exist (403 response)
-        # Use SELECT statement for userName
-            # close db before return
-        cur.execute(insertQuery,list(msg.values()))
-        con.commit()
-
-        responseMsg["info"] = "Successfully added user"
-        return jsonify(responseMsg), 201
-    except sqlite3.Error as err:
-        responseMsg['info'] = err.args[0]
-        return jsonify(responseMsg), 500
-    finally:
-        con.close()
-
-
 # POST request to log new exercises completed
 @app.route("/logActivity", methods=["POST"])
 def logActivity():
@@ -116,6 +110,7 @@ def logActivity():
 
     # open database
     # authenticate user (hash password and compare to stored hashed password)
+    # bcrypt.checkpw(plaintext.encode(), hashedPwd)
         # responseMsg["error"] = "Unauthorized"
         # return jsonify(responseMsg), 401
     # write into exerciseLog
@@ -124,3 +119,6 @@ def logActivity():
     # close database
     responseMsg["result"] = "Successfully updated exerciseLog table"
     return jsonify(responseMsg), 201
+
+
+app.run(host = '0.0.0.0')

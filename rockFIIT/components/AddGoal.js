@@ -43,7 +43,7 @@ const Input = styled.TextInput`
   padding: 10px;
   margin-bottom: 137px;
   border-radius: 10px;
-  
+  fontFamily: Georgia;
 `;
 
 const SubmitButton = styled.TouchableOpacity`
