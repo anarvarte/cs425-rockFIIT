@@ -67,7 +67,6 @@ const TextItem = styled.Text`
 `;
 //  font-family: poppins-regular;
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

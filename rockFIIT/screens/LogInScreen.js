@@ -13,7 +13,6 @@ import { getActiveChildNavigationOptions } from "react-navigation";
 
 import {useForm, Controller} from 'react-hook-form';
 
-
 const LogIn = ({navigation}) => {
 
     const {
@@ -21,11 +20,13 @@ const LogIn = ({navigation}) => {
         handleSubmit, 
         formState: {errors}
     } = useForm();
-        
+    
+    /*
     useEffect(() => {
         //createTable();
         //getData();
     }, []);
+    */
 
     /*
     

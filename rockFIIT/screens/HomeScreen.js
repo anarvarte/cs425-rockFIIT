@@ -8,6 +8,7 @@ import Workouts from '../components/workoutsHome';
 
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';
+import { LongPressGestureHandler } from "react-native-gesture-handler";
 
 import PureChart from 'react-native-pure-chart';
 
@@ -23,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
   async function loadUser(){
     var result = await database.getExerciseValues();
     console.log('LOADUSER: ' + result);
-    setItem(result);
+    //setItem(result);
   };
 
   let sampleData = 
