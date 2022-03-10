@@ -4,7 +4,6 @@ import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 import {database} from '../components/Database';
 
-
 export default function AddExercise({ pressHandler, navigation }) {
   const [value, setValue] = useState('');
   const [isVisible, setisVisible] = useState(false);
@@ -131,6 +130,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: '#C0C0C0',
         borderWidth: 1,
+        
     },
     addButtonText:{
         fontSize: 20,
