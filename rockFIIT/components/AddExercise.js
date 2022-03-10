@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Modal, } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
+import {database} from '../components/Database';
 
 export default function AddExercise({ submitHandler, navigation }) {
   const [value, setValue] = useState("");
   const [isVisible, setisVisible] = useState(false);
   const [isVisibleExModal, setisVisibleExModal] = useState(false);
+  const[exerciseArray,setExerciseArray] = useState('')
   let exercises = ['Squat', 'Bench'];
 
   const onChangeText = (text) => {
     setValue(text);
   };
+
+  async function getExerciseList(){
+    var result = await database.getExerciseValues();
+    setExerciseArray(result)
+ }
 
   for(var i = 0; i < 2; i++){
         <View key = {i}>
@@ -20,10 +27,17 @@ export default function AddExercise({ submitHandler, navigation }) {
         </View>
     }
 
+    const renderItem = ({ item } ) => (
+        <TouchableOpacity>
+            <Text>{item}</Text>
+        </TouchableOpacity>
+    );
+    
+    getExerciseList();
   return (
     <ComponentContainer>
         {
-            <Modal transparent visible={isVisibleExModal}>
+        <Modal transparent visible={isVisibleExModal}>
             <View style={styles.exerciseModalBackground}>
                 <View style={[styles.exerciseModalContainer]}>
                     <Text style={styles.modalFieldLabels}>
@@ -54,9 +68,11 @@ export default function AddExercise({ submitHandler, navigation }) {
             <Modal transparent visible={isVisible}>
             <View style={styles.exerciseModalBackground}>
                 <View style={[styles.exerciseModalContainer]}>
-                    <TouchableOpacity>
-                         <Text>{exercises}</Text>
-                         </TouchableOpacity>
+                    <FlatList
+                        data={exerciseArray}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => item}
+                        />         
                          
                     <TouchableOpacity onPress={() => setisVisible(false) }>
                         <View style={styles.addWrapper}>

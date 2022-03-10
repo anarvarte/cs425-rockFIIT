@@ -35,6 +35,12 @@ const SignUp = ({navigation}) => {
         console.log(result.rows);
     }
 
+    async function getExerciseList(){
+        var result = await database.getExerciseValues();
+        console.log(result);
+    }
+
+
     async function addNewUser(){
         database.insertNewUserInfo(checkUserName, checkPassword, checkName);
         var result = await database.getUserValues();
@@ -138,11 +144,13 @@ const SignUp = ({navigation}) => {
                     <CustomButton
                         text="Sign Up"
                         onPress={handleSubmit(onSignUpPressed)}
-                    />  
+                    /> 
+                    {
                     <CustomButton
                         text="Check User Table"
-                        onPress={checkUserTable}
-                    />                                                                                        
+                        onPress={getExerciseList}
+                    />   
+                    }                                                                                     
                 </View>
 
                 <CustomButton

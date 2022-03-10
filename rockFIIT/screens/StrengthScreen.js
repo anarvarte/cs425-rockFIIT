@@ -20,9 +20,8 @@ import ToDoList from "../components/ToDoList";
 import EmptyLifting from "../components/EmptyLifting"
 import LogIn from './LogInScreen';
 import AddExercise from "../components/AddExercise";
-//import Program from './ProgramScreen';
 
-const RealProgram = ({ navigation }) => {
+const StrengthScreen = ({ navigation }) => {
     const [isVisible, setisVisible] = useState(false);
 
   const [data, setData] = useState([]);
@@ -50,7 +49,7 @@ const RealProgram = ({ navigation }) => {
   return (
     <ComponentContainer>
       <View>
-      <HeaderText> This One?</HeaderText>
+      <HeaderText>Strength Program</HeaderText>
       </View>
 
       <View>
@@ -63,8 +62,6 @@ const RealProgram = ({ navigation }) => {
           )}
         />
         <AddExercise navigation={navigation}/>
-        
-        
       </View>
     </ComponentContainer>
   );
@@ -95,4 +92,4 @@ const ComponentContainer = styled.View`
   justify-content: center;
 `;
 
-export default RealProgram;
+export default StrengthScreen;

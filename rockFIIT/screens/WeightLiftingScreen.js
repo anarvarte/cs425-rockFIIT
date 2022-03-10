@@ -14,12 +14,13 @@ import DefaultList from "../components/DefaultList";
 import EmptyLifting from "../components/EmptyLifting";
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';
+import StrengthScreen from './StrengthScreen';
 
 
 const WeightLiftingScreen = ({ navigation }) => {
 
   const[defaultExercise, setExercise] = useState('');
-  
+
   const [data, setData] = useState([]);
   const submitHandler = (value) => {
     setData((prevTodo) => {
@@ -45,7 +46,7 @@ const WeightLiftingScreen = ({ navigation }) => {
       </View>
 
       <View>
-      <DefaultList item={'Strength'} deleteItem={deleteItem} navigation={navigation}/>
+      <DefaultList item={'Strength Program'} deleteItem={deleteItem} navigation={navigation} location={'StrengthScreen'}/>
       <DefaultList item={'Push/Pull/Legs'} deleteItem={deleteItem} navigation={navigation}/>
       <DefaultList item={'Arnold Split'} deleteItem={deleteItem} navigation={navigation}/>
         <FlatList

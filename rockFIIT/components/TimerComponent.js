@@ -23,7 +23,7 @@ const TimerComponent = () => {
             reset={resetStopwatch}
             // To reset
             getTime={(time) => {
-              console.log(time);
+              //console.log(time);
             }}
           />
           <TouchableHighlight

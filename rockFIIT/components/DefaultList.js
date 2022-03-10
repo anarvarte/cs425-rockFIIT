@@ -3,14 +3,15 @@ import { View, TouchableOpacity, Text, StyleSheet, Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
+import StrengthScreen from '../screens/StrengthScreen'
 
-const DefaultList = ({ item, deleteItem , navigation}) => {
+const DefaultList = ({ item, deleteItem , navigation, location}) => {
   return (
     <ComponentContainer>
       <ListContainer>
         <CircleContainer>
           <TouchableOpacity>
-            <Entypo name ="triangle-right" size={25} color="midnightblue" onPress={() => navigation.navigate('Program')} />
+            <Entypo name ="triangle-right" size={25} color="midnightblue" onPress={() => navigation.navigate('StrengthScreen')} />
             </TouchableOpacity>
           </CircleContainer>
         <View>
