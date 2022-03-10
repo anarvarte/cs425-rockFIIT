@@ -15,9 +15,9 @@ app = Flask(__name__)
 
 
 # Index Page Test
-@app.route("/")
+@app.route('/')
 def index():
-    return jsonify([1,2,3,4,5, "asdf"])
+    return jsonify('RockFIIT Server API Homepage')
 
 
 # Route to get a specific exercise from the exerciseLibrary table
@@ -60,8 +60,7 @@ def exercises():
 @app.route('/addUser', methods=['POST'])
 def addUser():
     responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ('userName', 'password', 'firstName','unitPreference',
-    'weight')
+    requiredFields = ('userName', 'password', 'firstName', 'weight')
     try:
         msg = request.json
         #print(msg)
@@ -74,7 +73,7 @@ def addUser():
         return jsonify(responseMsg), 400
 
     insertQuery = 'INSERT INTO ' + 'userTable' + " (" + \
-    ",".join(requiredFields) + ') VALUES(?,?,?,?,?)'
+    ",".join(requiredFields) + ') VALUES(?,?,?,?)'
 
     # Store hashed password
     plaintext = msg[requiredFields[1]]
@@ -84,9 +83,6 @@ def addUser():
     try:
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
-        # check if user does not exist (403 response)
-        # Use SELECT statement for userName
-            # close db before return
         cur.execute(insertQuery,list(msg.values()))
         con.commit()
 
@@ -116,6 +112,7 @@ def logActivity():
 
     # open database
     # authenticate user (hash password and compare to stored hashed password)
+    # bcrypt.checkpw(plaintext.encode(), hashedPwd)
         # responseMsg["error"] = "Unauthorized"
         # return jsonify(responseMsg), 401
     # write into exerciseLog
@@ -124,3 +121,6 @@ def logActivity():
     # close database
     responseMsg["result"] = "Successfully updated exerciseLog table"
     return jsonify(responseMsg), 201
+
+
+app.run(host = '0.0.0.0')
