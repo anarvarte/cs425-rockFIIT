@@ -2,7 +2,7 @@ import requests
 
 api_host = 'http://localhost:5000'
 
-newUser1 = {'userName':'NewUser1@gmail.com', 'password':'flowers682',
+newUser3 = {'userName':'NewUser3@gmail.com', 'password':'flowers682',
 'firstName':'Billy', 'weight':150}
 
 newUser2 = {'userName':'NewUser2@gmail.com', 'password':'admin12345',
