@@ -31,6 +31,13 @@ const exerciseTable = [
     ['Max Hangs', 'Climbing', 5, 1],
     ];
 
+const programTable = [
+    [1, 'Strength Program', 'Bench Press', 'Back Squat', 'Pull Ups', 'Deadlift', '', '', '', ''],
+    [2, 'Push/Pull/Legs', 'Bench Press', 'Back Squat', 'Barbell Rows', 'Lat Pull Downs', 'DB Incline Bench', 'Leg Extensions', 'Calf Raises', 'Bicep Curls'],
+    [3, 'Arnold Split', 'DB Bench', 'Cable Rows', 'Lat Raises', 'Bicep Curls', 'Hacksquat', '', '', '']
+];
+   
+
  async function isDatabaseExists(){
     var result = await database.getExerciseValues();
     if(result.length > 0){
@@ -51,7 +58,7 @@ export default function useDatabase() {
                 /*
                 await database.dropDatabaseTablesAsync();
                 await database.setupDatabaseAsync();
-                await database.setupUsersAsync(userList, exerciseTable);
+                await database.setupUsersAsync(userList, exerciseTable, programTable);
                 */
                 
                 

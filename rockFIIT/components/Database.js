@@ -74,6 +74,30 @@ function getUserTable(){
     })
 }
 
+function getProgramTable(){
+    return new Promise((resolve) => {
+        db.transaction(
+            tx => {
+            tx.executeSql(
+                'SELECT * FROM programTable;',
+                [],
+                (tx, results) =>{
+                    /*
+                    for(var i = 0; i < results.rows.length; i++){
+                        userList[i]= results.rows.item(i).userName;
+                    }
+                    */
+                    resolve(results);
+                    return results;
+                    
+                },
+                (_, error) => { console.log("db error selecting from Program tables"); console.log(error); reject(error)},
+            );
+        }
+        );
+    })
+}
+
 function getUserValues(){
     return new Promise((resolve) => {
         db.transaction(
@@ -188,6 +212,15 @@ const insertExercise = (exercise) => {
     )
 }
 
+const insertProgramName = (program) => {
+    db.transaction( tx => {
+        tx.executeSql( 'INSERT into programTable (programName) values (?)', [program] );
+        },
+        (t, error) => { console.log("db error insertProgram"); console.log(error);},
+        (t, success) => {console.log('insertExercise success!')  }
+    )
+}
+
 const dropDatabaseTablesAsync = async () => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -205,6 +238,13 @@ const dropDatabaseTablesAsync = async () => {
             (_, error) => { console.log("error dropping users table"); reject(error)
             }
           );
+          tx.executeSql(
+            'DROP TABLE if exists programTable;',
+            [],
+            (_, result) => { resolve(result) },
+            (_, error) => { console.log("error dropping program table"); reject(error)
+            }
+          );
       })
     })
   }
@@ -218,6 +258,9 @@ return new Promise((resolve, reject) => {
         tx.executeSql(
             'CREATE TABLE if not exists exerciseLibrary (exerciseID integer primary key not null, category text, exercise text, description text, sets integer, reps integer, time integer);'
         );
+        tx.executeSql(
+            'CREATE TABLE if not exists programTable (programID integer, programName text, exercise1 text, exercise2 text, exercise3 text, exercise4 text, exercise5 text, exercise6 text, exercise7 text, exercise8 text);'
+        );
     },
     (_, error) => { console.log("db error creating tables"); console.log(error); reject(error) },
     (_, success) => { resolve(success)}
@@ -225,7 +268,7 @@ return new Promise((resolve, reject) => {
 })
 }
 
-const setupUsersAsync = async (userList,exerciseList) => {
+const setupUsersAsync = async (userList,exerciseList, programTable) => {
 return new Promise((resolve, _reject) => {
     db.transaction( tx => {
         for(var i = 0; i < userList.length; i++ ){
@@ -234,6 +277,10 @@ return new Promise((resolve, _reject) => {
         
         for(var i = 0; i < exerciseList.length; i++ ){
             tx.executeSql( 'INSERT into exerciseLibrary (exerciseID, category, exercise, sets, reps) values (?,?,?,?,?);', [i, exerciseList[i][1], exerciseList[i][0], exerciseList[i][2], exerciseList[i][3]]);
+        };
+
+        for(var i = 0; i < programTable.length; i++ ){
+            tx.executeSql( 'INSERT into programTable (programID, programName, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6, exercise7, exercise8) values (?,?,?,?,?,?,?,?,?,?);', [i, programTable[i][1], programTable[i][2], programTable[i][3], programTable[i][4], programTable[i][5], programTable[i][6], programTable[i][7], programTable[i][8], programTable[i][9]]);
         };
         
     },
@@ -248,12 +295,14 @@ export const database = {
     getExerciseValues,
     getCategoryValues,
     getExerciseTable,
+    getProgramTable,
     getUserTable,
     insertNewUserInfo,
     insertUser,
     insertName,
     insertPassword,
     insertExercise,
+    insertProgramName,
     setupDatabaseAsync,
     setupUsersAsync,
     dropDatabaseTablesAsync,

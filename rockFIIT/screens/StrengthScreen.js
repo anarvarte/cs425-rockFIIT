@@ -67,8 +67,6 @@ const StrengthScreen = ({ navigation }) => {
   );
 };
 
-
-
 const HeaderText = styled.Text`
   color: white;
   
@@ -81,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#8fcbbc",
+    backgroundColor: "#C6B8C1",
   },
   headerContainer:{
     marginTop:55,
@@ -92,7 +90,7 @@ const styles = StyleSheet.create({
   }
 });
 const ComponentContainer = styled.View`
-  background-color: midnightblue;
+  background-color: #C6B8C1;
   height: 100%;
   flex-direction: column;
   align-items: center;

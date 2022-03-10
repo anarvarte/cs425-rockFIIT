@@ -20,9 +20,17 @@ import StrengthScreen from './StrengthScreen';
 const WeightLiftingScreen = ({ navigation }) => {
 
   const[defaultExercise, setExercise] = useState('');
-
   const [data, setData] = useState([]);
+
+  async function insertProgramIntoDB(value){
+    var result = await database.insertProgramName(value);
+    console.log(value);
+  }
+
   const submitHandler = (value) => {
+
+    insertProgramIntoDB(value);
+
     setData((prevTodo) => {
       return [
         {

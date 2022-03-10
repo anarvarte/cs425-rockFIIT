@@ -64,6 +64,7 @@ const RealProgram = ({ navigation }) => {
             <ExerciseList item={item} deleteItem={deleteItem} navigation={navigation}/>
           )}
         />
+        
         <AddExercise navigation={navigation} pressHandler={pressHandler}/>
         
       </View>

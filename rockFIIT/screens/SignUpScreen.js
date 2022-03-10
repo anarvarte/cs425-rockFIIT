@@ -35,6 +35,11 @@ const SignUp = ({navigation}) => {
         console.log(result.rows);
     }
 
+    async function checkProgramTable(){
+        var result = await database.getProgramTable();
+        console.log(result.rows);
+    }
+
     async function getExerciseList(){
         var result = await database.getExerciseValues();
         console.log(result);
@@ -147,8 +152,8 @@ const SignUp = ({navigation}) => {
                     /> 
                     {
                     <CustomButton
-                        text="Check User Table"
-                        onPress={checkUserTable}
+                        text="Check Program Table"
+                        onPress={checkProgramTable}
                     />   
                     }                                                                                     
                 </View>
