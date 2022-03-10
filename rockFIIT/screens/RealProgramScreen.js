@@ -51,8 +51,8 @@ const RealProgram = ({ navigation }) => {
 
   return (
     <ComponentContainer>
-      <View>
-      <HeaderText> This One?</HeaderText>
+      <View style={styles.headerContainer}>
+      <HeaderText style={styles.programHeader}>Custom Program!</HeaderText>
       </View>
 
       <View>
@@ -65,7 +65,6 @@ const RealProgram = ({ navigation }) => {
           )}
         />
         <AddExercise navigation={navigation} pressHandler={pressHandler}/>
-        
         
       </View>
     </ComponentContainer>
@@ -88,6 +87,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#C6B8C1",
   },
+  headerContainer:{
+    marginTop:55,
+  },
+  programHeader:{
+    fontWeight:'bold',
+    color:'black',
+  }
 });
 const ComponentContainer = styled.View`
   background-color: #C6B8C1;

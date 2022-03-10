@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
       
       <View style={styles.graph}>
       <View>
-          <TextItem> Squat max monthly progress: </TextItem>
+          <TextItem> Back Squat Max (by month): </TextItem>
       </View>
         <PureChart data = {sampleData} type = 'line' height = {100} />
       </View>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     flexDirection: "column",
     height: 100,
-  }
+  },
 });
 
 const TextItem = styled.Text`

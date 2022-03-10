@@ -85,8 +85,8 @@ const SignUp = ({navigation}) => {
                     <CustomInput
                         name="fullname"
                         control={control}
-                        placeholder="Full Name"
-                        rules={{required:'Full Name is required'}}
+                        placeholder="Name"
+                        rules={{required:'Name is required'}}
                         
                     />
                     <CustomInput
@@ -148,7 +148,7 @@ const SignUp = ({navigation}) => {
                     {
                     <CustomButton
                         text="Check User Table"
-                        onPress={getExerciseList}
+                        onPress={checkUserTable}
                     />   
                     }                                                                                     
                 </View>

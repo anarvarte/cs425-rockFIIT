@@ -11,7 +11,7 @@ const DefaultList = ({ item, deleteItem , navigation, location}) => {
       <ListContainer>
         <CircleContainer>
           <TouchableOpacity>
-            <Entypo name ="triangle-right" size={25} color="#DD7F4A" onPress={() => navigation.navigate('Program')} />
+            <Entypo name ="triangle-right" size={25} color="#DD7F4A" onPress={() => navigation.navigate(location)} />
             </TouchableOpacity>
           </CircleContainer>
         <View>

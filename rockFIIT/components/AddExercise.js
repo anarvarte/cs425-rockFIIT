@@ -4,7 +4,6 @@ import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 import {database} from '../components/Database';
 
-import {database} from '../components/Database';
 
 export default function AddExercise({ pressHandler, navigation }) {
   const [value, setValue] = useState('');
@@ -17,8 +16,6 @@ export default function AddExercise({ pressHandler, navigation }) {
     setValue(item);
   };
   
-  
-
   async function getExerciseList(){
       var result = await database.getExerciseValues();
         setExerciseArray(result);
@@ -34,13 +31,6 @@ export default function AddExercise({ pressHandler, navigation }) {
 
     getExerciseList();
 
-    const renderItem = ({ item } ) => (
-        <TouchableOpacity>
-            <Text>{item}</Text>
-        </TouchableOpacity>
-    );
-    
-    getExerciseList();
   return (
     <ComponentContainer>
         {

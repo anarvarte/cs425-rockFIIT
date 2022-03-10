@@ -48,8 +48,8 @@ const StrengthScreen = ({ navigation }) => {
 
   return (
     <ComponentContainer>
-      <View>
-      <HeaderText>Strength Program</HeaderText>
+      <View style={styles.headerContainer}>
+      <HeaderText style={styles.programHeader}>Strength Program</HeaderText>
       </View>
 
       <View>
@@ -83,6 +83,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#8fcbbc",
   },
+  headerContainer:{
+    marginTop:55,
+  },
+  programHeader:{
+    fontWeight:'bold',
+    color:'black',
+  }
 });
 const ComponentContainer = styled.View`
   background-color: midnightblue;
