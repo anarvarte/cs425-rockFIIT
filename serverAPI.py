@@ -30,10 +30,10 @@ def addUser():
         #print(msg)
         for field in requiredFields:
             if field not in msg:
-                responseMsg["info"] = "Missing required field"
+                responseMsg['info'] = 'Missing required field'
                 return jsonify(responseMsg), 400
     except:
-        responseMsg["info"] = "Request not json content"
+        responseMsg['info'] = 'Request not json content'
         return jsonify(responseMsg), 400
 
     insertQuery = 'INSERT INTO ' + 'userTable' + " (" + \
@@ -50,7 +50,7 @@ def addUser():
         cur.execute(insertQuery,list(msg.values()))
         con.commit()
 
-        responseMsg["info"] = "Successfully added user"
+        responseMsg['info'] = 'Successfully added user'
         return jsonify(responseMsg), 201
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
