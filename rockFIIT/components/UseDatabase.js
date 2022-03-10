@@ -48,11 +48,18 @@ export default function useDatabase() {
         async function loadDataAsync(){
             try {
                 
+<<<<<<< HEAD
                 /*
                 await database.dropDatabaseTablesAsync();
                 await database.setupDatabaseAsync();
                 await database.setupUsersAsync(userList, exerciseTable);
                 */
+=======
+                
+                await database.dropDatabaseTablesAsync();
+                await database.setupDatabaseAsync();
+                await database.setupUsersAsync(userList, exerciseTable);
+>>>>>>> 8731b432be7eda5b0e02de1601db26a5e948228a
                 
                 
                 if(!isDatabaseExists){

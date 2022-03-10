@@ -1,25 +1,26 @@
 import React from 'react'
 import {View, ScrollView, Image, Text, StyleSheet} from 'react-native'
 import styled from "styled-components";
+import TimerComponent from "./TimerComponent";
 
-
-const WorkoutScroll = ({workoutData}) => {
-    return (
-
-        <ScrollView horizontal={true} style={styles.scrollView}>
-        <ListContainer>
-            <View>
+const WorkoutScroll = ({ workoutData }) => {
+  return (
+    <ScrollView horizontal={true} style={styles.scrollView}>
+      <ListContainer>
+        <View>
           <TextItem> Workout: Dead hangs, pull ups, circuits</TextItem>
-            </View>
-        </ListContainer>
-        <ListContainer>
-            <View>
+        </View>
+      </ListContainer>
+      <ListContainer>
+        <View>
           <TextItem> Workout: Front squats, deadlifts, box jumps</TextItem>
-            </View>
-        </ListContainer>
-        </ScrollView>
-    )
-}
+        </View>
+      </ListContainer>
+
+      <TimerComponent />
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
     scrollView: {
@@ -69,7 +70,7 @@ const TextItem = styled.Text`
 `;
 
 const ListContainer = styled.TouchableOpacity`
-  background-color: #00FFFbcd;
+  background-color: rgb(255,255,255);
   height: 100px;
   width: 300px;
   border-radius: 15px;

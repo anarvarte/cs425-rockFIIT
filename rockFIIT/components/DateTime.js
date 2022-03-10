@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {View, Text, StyleSheet} from 'react-native';
+import { YellowBox } from 'react-native-web';
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -52,21 +53,26 @@ const DateTime = ({timezone}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex:1.5,
+        flex:.7,
         flexDirection:"row",
         justifyContent:'space-between',
-        padding: 15
+        padding: 20
     },
     heading: {
-        fontSize: 45,
+        fontSize: 30,
         color:'black',
-        fontWeight: '100',
-        padding: 10
+        fontWeight: 'bold',
+        padding: 5,
+        paddingTop: 20,
+        textShadowColor: 'rgb(255,255,255)',
+        textShadowRadius: 3
     },
     subheading: {
-        fontSize: 25,
+        fontSize: 20,
         color: 'black',
-        fontWeight: '300',
+        fontWeight: 'bold',
+        textShadowColor: 'rgb(255,255,255)',
+        textShadowRadius: 3
     },
     rightAlign: {
         textAlign:'right',
@@ -79,8 +85,6 @@ const styles = StyleSheet.create({
     workoutItemContainer: {
         backgroundColor: "#18181b98",
         borderRadius: 10,
-        padding: 10,
-        marginTop: 10
     }, 
     workoutItem: {
         flexDirection: 'row',

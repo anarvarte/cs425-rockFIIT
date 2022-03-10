@@ -6,7 +6,7 @@ import bcrypt
 import json
 
 # Global Variables + Constants
-DATABASE = 'rockFIITversion2.db'
+DATABASE = 'rockFIITServer.db'
 exerciseLibrary = 'exerciseLibrary'
 exerciseLog = 'exerciseLog'
 userTable = 'userTable'
@@ -60,10 +60,11 @@ def exercises():
 @app.route('/addUser', methods=['POST'])
 def addUser():
     responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ('userID', 'userName', 'password', 'firstName','unitPreference')
+    requiredFields = ('userName', 'password', 'firstName','unitPreference',
+    'weight')
     try:
         msg = request.json
-        print(msg)
+        #print(msg)
         for field in requiredFields:
             if field not in msg:
                 responseMsg["info"] = "Missing required field"
@@ -72,31 +73,31 @@ def addUser():
         responseMsg["info"] = "Request not json content"
         return jsonify(responseMsg), 400
 
+    insertQuery = 'INSERT INTO ' + 'userTable' + " (" + \
+    ",".join(requiredFields) + ') VALUES(?,?,?,?,?)'
 
-    query = 'INSERT INTO ' + userTable + ' VALUES ('
-    for field in requiredFields:
-        query = query + field
-    print(query)
+    # Store hashed password
+    plaintext = msg[requiredFields[1]]
+    hashedPwd = bcrypt.hashpw(plaintext.encode(), bcrypt.gensalt())
+    msg[requiredFields[1]] = hashedPwd.decode()
 
     try:
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
-        cur.execute(query)
-        return jsonify(responseMsg), 200
+        # check if user does not exist (403 response)
+        # Use SELECT statement for userName
+            # close db before return
+        cur.execute(insertQuery,list(msg.values()))
+        con.commit()
+
+        responseMsg["info"] = "Successfully added user"
+        return jsonify(responseMsg), 201
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
         return jsonify(responseMsg), 500
     finally:
         con.close()
-    # open database
-    # check if user does not exist (403 response)
-        # close db before return
-    # add user to database
-    # store hashed password
-    # bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-    # close database
-    responseMsg["info"] = "Successfully added user"
-    return jsonify(responseMsg), 201
+
 
 # POST request to log new exercises completed
 @app.route("/logActivity", methods=["POST"])
