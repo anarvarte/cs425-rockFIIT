@@ -6,6 +6,10 @@ import TimerComponent from "./TimerComponent";
 const WorkoutScroll = ({ workoutData }) => {
   return (
     <ScrollView horizontal={true} style={styles.scrollView}>
+
+      <TimerComponent />
+
+
       <ListContainer>
         <View>
           <TextItem> Workout: Dead hangs, pull ups, circuits</TextItem>
@@ -17,7 +21,6 @@ const WorkoutScroll = ({ workoutData }) => {
         </View>
       </ListContainer>
 
-      <TimerComponent />
     </ScrollView>
   );
 };
