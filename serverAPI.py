@@ -94,18 +94,18 @@ def exercises():
         con.close()
 
 # POST request to log new exercises completed
-@app.route("/logActivity", methods=["POST"])
+@app.route('/logActivity', methods=['POST'])
 def logActivity():
     responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ("userName", "exerciseName")#,"firstName", "lastName", "weight")
+    requiredFields = ('userName', 'exerciseName')
     try:
         msg = request.json
         for field in requiredFields:
             if field not in msg:
-                responseMsg["info"] = "Missing required field"
+                responseMsg['info'] = 'Missing required field'
                 return jsonify(responseMsg), 400
     except:
-        responseMsg["info"] = "Request not json content"
+        responseMsg['info'] = 'Request not json content'
         return jsonify(responseMsg), 400
 
     # open database
@@ -117,7 +117,7 @@ def logActivity():
         # close db before return
     # add user to database
     # close database
-    responseMsg["result"] = "Successfully updated exerciseLog table"
+    responseMsg['info'] = 'Successfully updated exerciseLog table'
     return jsonify(responseMsg), 201
 
 
