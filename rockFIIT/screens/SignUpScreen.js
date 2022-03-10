@@ -11,36 +11,47 @@ import CustomButton from '../components/CustomButton';
 
 import LogIn from './LogInScreen';
 
+import useDatabase from '../components/UseDatabase';
+import {database} from '../components/Database';
+
 const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
 
 const SignUp = ({navigation}) => {
 
-    
-
     const {control, handleSubmit, watch} = useForm();
-
-    var testUser;
-    var testPass;
 
     var checkPassword = watch('password');
     var checkName = watch('fullname');
     var checkUserName = watch('username');
     var checkEmail = watch('emailaddress');
-    
 
+    async function checkExerciseTable(){
+        var result = await database.getExerciseTable();
+        console.log(result.rows);
+    }
+    async function checkUserTable(){
+        var result = await database.getUserTable();
+        console.log(result.rows);
+    }
 
-    const onSignUpPressed = (data)=>{
-        /*navigation.navigate('LogIn');
-        createTable();
-        setData();
-        getData();
-        
-        console.log('Database user is' + testUser);
-        console.log('Database pass is' + testPass);
-        */
+    async function addNewUser(){
+        database.insertNewUserInfo(checkUserName, checkPassword, checkName);
+        var result = await database.getUserValues();
+        console.log('Amount of users after insertion is: ' + result.length);
+        console.log('All of the users are: ' + result);
+      };   
 
-        //alert('New Account Successfully Created!');
+    async function onSignUpPressed(){
+        var result = await database.getUserValues();
+        if(result.includes(checkUserName)){
+            alert('This username has already been registered with RockFIIT!');
+        }
+        else if(!result.includes(checkUserName)){
+            addNewUser();
+            alert('New Account Successfully Created!');
+            navigateLogIn();
+        }
     }
 
     const navigateLogIn = () =>{
@@ -103,7 +114,7 @@ const SignUp = ({navigation}) => {
                     <CustomInput
                         name="password"
                         control={control}
-                        placeholder="password"
+                        placeholder="Password"
                         secureTextEntry={true}
                         rules={{
                             required:'Password is required',
@@ -127,7 +138,11 @@ const SignUp = ({navigation}) => {
                     <CustomButton
                         text="Sign Up"
                         onPress={handleSubmit(onSignUpPressed)}
-                    />                   
+                    />  
+                    <CustomButton
+                        text="Check User Table"
+                        onPress={checkUserTable}
+                    />                                                                                        
                 </View>
 
                 <CustomButton
