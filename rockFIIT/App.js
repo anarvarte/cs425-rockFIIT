@@ -10,6 +10,7 @@ import SignUp from './screens/SignUpScreen';
 import Tabs from './navigation/tabs';
 import RealProgram from './screens/RealProgramScreen';
 import StrengthScreen from './screens/StrengthScreen';
+import ArnoldSplit from './screens/ArnoldSplit';
 
 import useDatabase from './components/UseDatabase';
 import {database} from './components/Database';
@@ -38,6 +39,7 @@ const App: () =>  Node = () =>{
         <Stack.Screen name="Tabs" component={Tabs} options={{headerShown: false}}  />
         <Stack.Screen name="Program" component={RealProgram} options={{headerShown: false}}/>
         <Stack.Screen name="Strength" component={StrengthScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="ArnoldSplit" component={ArnoldSplit} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

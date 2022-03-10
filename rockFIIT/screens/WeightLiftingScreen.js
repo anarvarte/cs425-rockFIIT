@@ -55,8 +55,7 @@ const WeightLiftingScreen = ({ navigation }) => {
 
       <View>
       <DefaultList item={'Strength Program'} deleteItem={deleteItem} navigation={navigation} location={'Strength'}/>
-      <DefaultList item={'Push/Pull/Legs'} deleteItem={deleteItem} navigation={navigation}/>
-      <DefaultList item={'Arnold Split'} deleteItem={deleteItem} navigation={navigation}/>
+
         <FlatList
           data={data}
           ListEmptyComponent={() => <EmptyLifting />}

@@ -23,7 +23,7 @@ import AddExercise from "../components/AddExercise";
 import Exercise from "../components/Exercise";
 import DefaultList from "../components/DefaultList";
 
-const StrengthScreen = ({ navigation }) => {
+const ArnoldSplit = ({ navigation }) => {
     const [isVisible, setisVisible] = useState(false);
 
   const [data, setData] = useState([]);
@@ -51,20 +51,14 @@ const StrengthScreen = ({ navigation }) => {
   return (
     <ComponentContainer>
       <View style={styles.headerContainer}>
-        <HeaderText style={styles.programHeader}> </HeaderText>
-        <DefaultList item={'Bench Press'} deleteItem={deleteItem} navigation={navigation}/>
-        <DefaultList item={'Deadlift'} deleteItem={deleteItem} navigation={navigation}/>
-        <DefaultList item={'Back Squat'} deleteItem={deleteItem} navigation={navigation}/>
-        <DefaultList item={'Pull Ups'} deleteItem={deleteItem} navigation={navigation}/>
-        
+        <HeaderText style={styles.programHeader}>Arnold Split</HeaderText>
+
       </View>
-      <View style={{ top: 600, marginLeft: 70}}>
-        <AddExercise navigation={navigation}/>
-            </View>
 
       <View>
         <FlatList
           data={data}
+          ListEmptyComponent={() => <EmptyLifting />}
           keyExtractor={(item) => item.key}
           renderItem={({  }) => (
             <DefaultList item={'Bench Press'} deleteItem={deleteItem} navigation={navigation}/>
@@ -92,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#C6B8C1",
   },
   headerContainer:{
-    marginTop:250,
+    marginTop:55,
   },
   programHeader:{
     fontWeight:'bold',
@@ -107,4 +101,4 @@ const ComponentContainer = styled.View`
   justify-content: center;
 `;
 
-export default StrengthScreen;
+export default ArnoldSplit;
