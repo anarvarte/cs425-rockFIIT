@@ -9,7 +9,7 @@ newUser2 = {'userName':'NewUser2@gmail.com', 'password':'admin12345',
 'firstName':'Dora', 'weight':130}
 
 path = '/addUser'
-response = requests.post(api_host + path, json=newUser1)
+response = requests.post(api_host + path, json=newUser3)
 print()
 print(response.status_code)
 try:
