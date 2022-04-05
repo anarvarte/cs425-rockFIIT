@@ -1,6 +1,6 @@
 import requests
 
-api_host = 'http://localhost:5000'
+api_host = 'https://rockFIITapi.lousterrd.repl.co'
 
 changeNewUser3Pwd = {'userName':'NewUser3@gmail.com', 'oldPwd':'flowers682',
 'newPwd':'gamer775'}

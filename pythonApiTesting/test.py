@@ -10,6 +10,12 @@ DATABASE = 'rockFIITversion3.db'
 #query = 'INSERT INTO ' + 'userTable' + " (" + ",".join(requiredFields) + ') VALUES(?,?,?,?,?)'
 
 #print(query)
+
+requiredFields = ('Category', 'Exercises', 'Description', 'Sets',
+                  'Reps', 'Link')
+
+print(requiredFields)
+'''
 password = "hahabing123".encode()
 hashedPwd = bcrypt.hashpw(password, bcrypt.gensalt())
 
@@ -18,7 +24,7 @@ anotherHashed = bcrypt.hashpw(anotherPwd, bcrypt.gensalt())
 print(hashedPwd.decode())
 print(bcrypt.checkpw(password, hashedPwd))
 print(bcrypt.checkpw(anotherPwd,anotherHashed))
-
+'''
 '''try:
     con = sqlite3.connect(DATABASE)
     cur = con.cursor()

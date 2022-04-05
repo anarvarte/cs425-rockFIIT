@@ -58,6 +58,39 @@ def addUser():
     finally:
         con.close()
 
+# Route to add an exercise to the exercise table
+@app.route('/addExercise', methods=['POST'])
+def addExercise():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('Category', 'Exercises', 'Description', 'Sets',
+                      'Reps', 'Link')
+    try:
+        msg = request.json
+        #print(msg)
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    insertQuery = 'INSERT INTO ' + exerciseLibrary + " (" + \
+    ",".join(requiredFields) + ') VALUES(?,?,?,?,?,?)'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        cur.execute(insertQuery,list(msg.values()))
+        con.commit()
+
+        responseMsg['info'] = 'Successfully added exercise'
+        return jsonify(responseMsg), 201
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
 
 # Route to get a specific exercise from the exerciseLibrary table
 @app.route('/exercise/<exerciseID>', methods=['GET'])
