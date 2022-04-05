@@ -36,7 +36,7 @@ def addUser():
         responseMsg['info'] = 'Request not json content'
         return jsonify(responseMsg), 400
 
-    insertQuery = 'INSERT INTO ' + 'userTable' + " (" + \
+    insertQuery = 'INSERT INTO ' + userTable + " (" + \
     ",".join(requiredFields) + ') VALUES(?,?,?,?)'
 
     # Store hashed password
@@ -57,6 +57,7 @@ def addUser():
         return jsonify(responseMsg), 500
     finally:
         con.close()
+
 
 # Route to get a specific exercise from the exerciseLibrary table
 @app.route('/exercise/<exerciseID>', methods=['GET'])
@@ -119,6 +120,73 @@ def logActivity():
     # close database
     responseMsg['info'] = 'Successfully updated exerciseLog table'
     return jsonify(responseMsg), 201
+
+
+# Route to allow users to change their password
+@app.route('/changePassword', methods=['POST'])
+def changePassword():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'oldPwd', 'newPwd')
+
+    try:
+        msg = request.json
+        #print(msg)
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+
+    userName = msg[requiredFields[0]]
+    oldPwd = msg[requiredFields[1]]
+    newPwd = msg[requiredFields[2]]
+
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        oldHashedPwd = cur.execute(findUserQuery, (userName,)).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
+
+
+    oldHashedPwd = oldHashedPwd[0].encode()
+    #print(oldHashedPwd)
+
+    if bcrypt.checkpw(oldPwd.encode(), oldHashedPwd):
+
+        # Update hashed password
+        plaintext = newPwd
+        hashedPwd = bcrypt.hashpw(plaintext.encode(), bcrypt.gensalt())
+        newPwd = hashedPwd.decode()
+
+        updateQuery = 'UPDATE ' + userTable + ' SET password = ?' + \
+        ' WHERE userName = ?'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            cur.execute(updateQuery, (newPwd, userName))
+            con.commit()
+
+            responseMsg['info'] = 'Successfully updated password'
+            return jsonify(responseMsg), 201
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 500
+
 
 
 app.run(host = '0.0.0.0')
