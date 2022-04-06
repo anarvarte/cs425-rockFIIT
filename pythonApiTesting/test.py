@@ -1,5 +1,7 @@
 import sqlite3
 import bcrypt
+import jwt
+
 DATABASE = 'rockFIITversion3.db'
 #requiredFields = ('userName', 'password', 'firstName','unitPreference',
 #'weight')

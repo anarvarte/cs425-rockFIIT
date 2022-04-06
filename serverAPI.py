@@ -131,7 +131,8 @@ def exercises():
 @app.route('/logActivity', methods=['POST'])
 def logActivity():
     responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ('userName', 'exerciseName')
+    requiredFields = ('userName', 'exerciseID', 'setsCompleted',
+                      'repsCompleted', 'weight', 'notes', 'date')
     try:
         msg = request.json
         for field in requiredFields:
@@ -142,11 +143,28 @@ def logActivity():
         responseMsg['info'] = 'Request not json content'
         return jsonify(responseMsg), 400
 
+    insertQuery = 'INSERT INTO ' + exerciseLog + " (" + \
+    ",".join(requiredFields) + ') VALUES(?,?,?,?,?,?,?)'
+
     # open database
     # authenticate user (hash password and compare to stored hashed password)
     # bcrypt.checkpw(plaintext.encode(), hashedPwd)
         # responseMsg["error"] = "Unauthorized"
         # return jsonify(responseMsg), 401
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        cur.execute(insertQuery,list(msg.values()))
+        con.commit()
+
+        responseMsg['info'] = 'Successfully logged exercise'
+        return jsonify(responseMsg), 201
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
+
     # write into exerciseLog
         # close db before return
     # add user to database
@@ -154,6 +172,23 @@ def logActivity():
     responseMsg['info'] = 'Successfully updated exerciseLog table'
     return jsonify(responseMsg), 201
 
+
+# Route to get entire exerciseLibrary table
+@app.route('/activities/<userName>', methods=['GET'])
+def activities(userName):
+    responseMsg = {'info' : '', 'data' : False}
+    query = 'SELECT * FROM ' + exerciseLog + ' WHERE userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        responseMsg['data'] = cur.execute(query,[userName]).fetchall()
+        return jsonify(responseMsg), 200
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
 
 # Route to allow users to change their password
 @app.route('/changePassword', methods=['POST'])
