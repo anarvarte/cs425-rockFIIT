@@ -173,22 +173,58 @@ def logActivity():
     return jsonify(responseMsg), 201
 
 
-# Route to get entire exerciseLibrary table
-@app.route('/activities/<userName>', methods=['GET'])
-def activities(userName):
+# Route to get a user's logged activites from exerciseLog
+@app.route('/activities', methods=['GET'])
+def activities():
     responseMsg = {'info' : '', 'data' : False}
-    query = 'SELECT * FROM ' + exerciseLog + ' WHERE userName = ?'
+    requiredFields = ('userName', 'password')
+
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    password = msg[requiredFields[1]]
+
+    # Authentication for users
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
 
     try:
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
-        responseMsg['data'] = cur.execute(query,[userName]).fetchall()
-        return jsonify(responseMsg), 200
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
         return jsonify(responseMsg), 500
     finally:
         con.close()
+
+    dbPwd = dbPwd[0].encode()
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        query = 'SELECT * FROM ' + exerciseLog + ' WHERE userName = ?'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            responseMsg['data'] = cur.execute(query,[userName]).fetchall()
+            return jsonify(responseMsg), 200
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
+
 
 # Route to allow users to change their password
 @app.route('/changePassword', methods=['POST'])
@@ -253,7 +289,7 @@ def changePassword():
             con.close()
     else:
         responseMsg['info'] = 'Authentication failed'
-        return jsonify(responseMsg), 500
+        return jsonify(responseMsg), 403
 
 
 
