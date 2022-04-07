@@ -13,10 +13,13 @@ DATABASE = 'rockFIITversion3.db'
 
 #print(query)
 
-requiredFields = ('Category', 'Exercises', 'Description', 'Sets',
-                  'Reps', 'Link')
+requiredFields = ['Category', 'Exercises', 'Description', 'Sets',
+                  'Reps', 'Link', 'thing']
+
 
 print(requiredFields)
+#print(requiredFields.pop())
+print(','.join(requiredFields[:len(requiredFields)-1]))
 '''
 password = "hahabing123".encode()
 hashedPwd = bcrypt.hashpw(password, bcrypt.gensalt())

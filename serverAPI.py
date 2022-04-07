@@ -92,6 +92,7 @@ def addExercise():
     finally:
         con.close()
 
+
 # Route to get a specific exercise from the exerciseLibrary table
 @app.route('/exercise/<exerciseID>', methods=['GET'])
 def exercise(exerciseID):
@@ -127,12 +128,13 @@ def exercises():
     finally:
         con.close()
 
-# POST request to log new exercises completed
+
+# Route to log new exercises completed
 @app.route('/logActivity', methods=['POST'])
 def logActivity():
     responseMsg = {'info' : '', 'data' : False}
     requiredFields = ('userName', 'exerciseID', 'setsCompleted',
-                      'repsCompleted', 'weight', 'notes', 'date')
+                      'repsCompleted', 'weight', 'notes', 'date', 'password')
     try:
         msg = request.json
         for field in requiredFields:
@@ -143,34 +145,46 @@ def logActivity():
         responseMsg['info'] = 'Request not json content'
         return jsonify(responseMsg), 400
 
-    insertQuery = 'INSERT INTO ' + exerciseLog + " (" + \
-    ",".join(requiredFields) + ') VALUES(?,?,?,?,?,?,?)'
+    userName = msg[requiredFields[0]]
+    password = msg[requiredFields[7]]
+    del msg['password']
 
-    # open database
-    # authenticate user (hash password and compare to stored hashed password)
-    # bcrypt.checkpw(plaintext.encode(), hashedPwd)
-        # responseMsg["error"] = "Unauthorized"
-        # return jsonify(responseMsg), 401
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
     try:
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
-        cur.execute(insertQuery,list(msg.values()))
-        con.commit()
-
-        responseMsg['info'] = 'Successfully logged exercise'
-        return jsonify(responseMsg), 201
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
         return jsonify(responseMsg), 500
     finally:
         con.close()
+    dbPwd = dbPwd[0].encode()
 
-    # write into exerciseLog
-        # close db before return
-    # add user to database
-    # close database
-    responseMsg['info'] = 'Successfully updated exerciseLog table'
-    return jsonify(responseMsg), 201
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        insertQuery = 'INSERT INTO ' + exerciseLog + " (" + \
+        ','.join(requiredFields[:len(requiredFields)-1]) + \
+        ') VALUES(?,?,?,?,?,?,?)'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            cur.execute(insertQuery,list(msg.values()))
+            con.commit()
+
+            responseMsg['info'] = 'Successfully logged exercise'
+            return jsonify(responseMsg), 201
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
 
 
 # Route to get a user's logged activites from exerciseLog
