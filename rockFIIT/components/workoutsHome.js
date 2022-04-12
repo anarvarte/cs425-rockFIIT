@@ -12,12 +12,22 @@ const WorkoutScroll = ({ workoutData }) => {
 
       <ListContainer>
         <View>
-          <TextItem> Workout: Dead hangs, pull ups, circuits</TextItem>
+        <TextItem> Barbell Bench Press{'\n'} 4 sets, 10 reps, 225 LBS</TextItem>
         </View>
       </ListContainer>
       <ListContainer>
         <View>
-          <TextItem> Workout: Front squats, deadlifts, box jumps</TextItem>
+          <TextItem> Cable Tricep Pulldowns{'\n'} 4 sets, 10 reps, 75 LBS</TextItem>
+        </View>
+      </ListContainer>
+      <ListContainer>
+        <View>
+          <TextItem> Pull Ups{'\n'} 4 sets, 8 reps, Unweighted</TextItem>
+        </View>
+      </ListContainer>
+      <ListContainer>
+        <View>
+          <TextItem> DB Bicep Curls{'\n'} 4 sets, 12 reps, 25 LBS</TextItem>
         </View>
       </ListContainer>
 
@@ -59,7 +69,8 @@ const styles = StyleSheet.create({
     
     otherContainer: {
         paddingRight: 40
-    }
+    },
+
 })
 
 const TextItem = styled.Text`

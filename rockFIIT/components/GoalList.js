@@ -13,14 +13,15 @@ export default function TodoList({ item, deleteItem }) {
         setActive((val) => {
             return !val;
         });
+
     };
 
   return (
     <ComponentContainer>
-      <ListContainer>
+      <ListContainer style={styles.completeGoal}>
         <CircleContainer>
           <TouchableOpacity>
-            <Entypo name ={active ? 'circle' : 'circle-with-cross'} size={23} color="#DD7F4A" onPress={() => handleChangeActive()}/>
+            <Entypo name ={active ? 'circle' : 'circle-with-cross'} size={23} color="black" onPress={() => handleChangeActive()}/>
             </TouchableOpacity>
           </CircleContainer>
         <View>
@@ -88,4 +89,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     flexDirection: "row",
   },
+  incompleteGoal:{
+    backgroundColor:'#FF7F7F',
+  },
+  completeGoal:{
+    backgroundColor:'#90ee90',
+  }
+
 });

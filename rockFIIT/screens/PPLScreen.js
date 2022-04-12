@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   View,
+  ScrollView,
   Text,
   Button,
   StyleSheet,
@@ -23,7 +24,7 @@ import AddExercise from "../components/AddExercise";
 import DefaultList from "../components/DefaultList";
 import DefaultExercise from "../components/DefaultExercise";
 
-const ArnoldSplitScreen = ({ navigation }) => {
+const PPLScreen = ({ navigation }) => {
     const [isVisible, setisVisible] = useState(false);
 
   const [data, setData] = useState([]);
@@ -48,17 +49,22 @@ const ArnoldSplitScreen = ({ navigation }) => {
   return (
     <ComponentContainer>
       <View style={styles.headerContainer}>
-        <HeaderText style={styles.programHeader}>Arnold Split</HeaderText>
-        <Text style={styles.exerciseGroup}>Upper Body Focus</Text>
+        <HeaderText style={styles.programHeader}>Push/Pull/Legs Split</HeaderText>
+        <Text style={styles.exerciseGroup}>Push</Text>
         <DefaultExercise exerciseName={'Barbell Bench Press'} sets={4} reps={10}/>
-        <DefaultExercise exerciseName={'Cable Tricep Pulldowns'} sets={4} reps={10} />
-        <DefaultExercise exerciseName={'Pull Ups'} sets={4} reps={8}/>
-        <DefaultExercise exerciseName={'DB Bicep Curls'} sets={4} reps={12} />
-        <Text style={styles.exerciseGroup}>Lower Body Focus</Text>
-        <DefaultExercise exerciseName={'Back Squat'} sets={5} reps={10} comments={"Start at 10 on set 1, subtract 2 reps per set."}/>
-        <DefaultExercise exerciseName={'Barbell Deadlift'} sets={4} reps={6}/>
-        <DefaultExercise exerciseName={'Dumbell Lunges'} sets={4} reps={20}/>
-        <DefaultExercise exerciseName={'Calf Raises'} sets={4} reps={20}/>
+        <DefaultExercise exerciseName={'DB Shoulder Press'} sets={4} reps={6} />
+        <DefaultExercise exerciseName={'Incline DB Press'} sets={4} reps={8}/>
+        <DefaultExercise exerciseName={'Tricep Overhead Press'} sets={4} reps={12} />
+        <Text style={styles.exerciseGroup}>Pull</Text>
+        <DefaultExercise exerciseName={'Bent-Over Rows'} sets={3} reps={8} />
+        <DefaultExercise exerciseName={'Pull Ups'} sets={3} reps={6}/>
+        <DefaultExercise exerciseName={'Barbell Shrugs'} sets={4} reps={8}/>
+        <DefaultExercise exerciseName={'DB Bicep Curl'} sets={4} reps={10}/>
+        <Text style={styles.exerciseGroup}>Legs</Text>
+        <DefaultExercise exerciseName={'Back Squats'} sets={3} reps={8} />
+        <DefaultExercise exerciseName={'Leg Press'} sets={4} reps={8}/>
+        <DefaultExercise exerciseName={'Weighted Calf Raises'} sets={4} reps={15}/>
+        <DefaultExercise exerciseName={'Hanging Leg Raise'} sets={4} reps={10}/>
       </View>
       <View style={{ top: 250, right:25}}>
         <AddExercise navigation={navigation}/>
@@ -119,4 +125,4 @@ const ComponentContainer = styled.View`
   justify-content: center;
 `;
 
-export default ArnoldSplitScreen;
+export default PPLScreen;

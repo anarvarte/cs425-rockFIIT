@@ -20,8 +20,8 @@ import ToDoList from "../components/ToDoList";
 import EmptyLifting from "../components/EmptyLifting"
 import LogIn from './LogInScreen';
 import AddExercise from "../components/AddExercise";
-import Exercise from "../components/Exercise";
 import DefaultList from "../components/DefaultList";
+import DefaultExercise from "../components/DefaultExercise";
 
 const StrengthScreen = ({ navigation }) => {
     const [isVisible, setisVisible] = useState(false);
@@ -44,21 +44,23 @@ const StrengthScreen = ({ navigation }) => {
     });
   };
 
-  const navigateProgram = () => {
-    navigation.navigate("Program");
-  };
 
   return (
     <ComponentContainer>
       <View style={styles.headerContainer}>
-        <HeaderText style={styles.programHeader}> </HeaderText>
-        <DefaultList item={'Bench Press'} deleteItem={deleteItem} navigation={navigation}/>
-        <DefaultList item={'Deadlift'} deleteItem={deleteItem} navigation={navigation}/>
-        <DefaultList item={'Back Squat'} deleteItem={deleteItem} navigation={navigation}/>
-        <DefaultList item={'Pull Ups'} deleteItem={deleteItem} navigation={navigation}/>
-        
+        <HeaderText style={styles.programHeader}>Strength Program</HeaderText>
+        <Text style={styles.exerciseGroup}>Upper Body Focus</Text>
+        <DefaultExercise exerciseName={'Barbell Bench Press'} sets={4} reps={10} weight={'225 LBS'} comments={"- Paused Reps"}/>
+        <DefaultExercise exerciseName={'Cable Tricep Pulldowns'} sets={4} reps={10} weight={'70 LBS'} comments={"- Lock out elbows"} />
+        <DefaultExercise exerciseName={'Pull Ups'} sets={4} reps={8} weight={'Unweighted'} comments={"- Failure sets"}/>
+        <DefaultExercise exerciseName={'DB Bicep Curls'} sets={4} reps={12} weight={'25 LBS'}/>
+        <Text style={styles.exerciseGroup}>Lower Body Focus</Text>
+        <DefaultExercise exerciseName={'Back Squat'} sets={5} reps={10} weight={'245 LBS'} comments={"Dropset"}/>
+        <DefaultExercise exerciseName={'Barbell Deadlift'} sets={4} reps={6} weight={'365 LBS'} />
+        <DefaultExercise exerciseName={'Dumbell Lunges'} sets={4} reps={20} weight={'35 LBS'} />
+        <DefaultExercise exerciseName={'Calf Raises'} sets={4} reps={20} weight={'50 LBS'} />
       </View>
-      <View style={{ top: 600, marginLeft: 70}}>
+      <View style={{ top: 250, right:39}}>
         <AddExercise navigation={navigation}/>
             </View>
 
@@ -97,7 +99,17 @@ const styles = StyleSheet.create({
   programHeader:{
     fontWeight:'bold',
     color:'black',
-  }
+    marginTop:520,
+    marginBottom:15,
+  },
+  exerciseGroup:{
+    fontStyle:'italic',
+    fontWeight: 'bold',
+    color:'black',
+    textDecorationLine: 'underline',
+    fontSize:25,
+    marginTop:20,
+  },
 });
 const ComponentContainer = styled.View`
   background-color: #C6B8C1;
