@@ -15,6 +15,9 @@ import EmptyLifting from "../components/EmptyLifting";
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';
 import StrengthScreen from './StrengthScreen';
+import ArnoldSplitScreen from "./ArnoldSplit";
+import PPLScreen from "./PPLScreen";
+import CustomProgramScreen from "./CustomProgramScreen";
 
 
 const WeightLiftingScreen = ({ navigation }) => {
@@ -55,6 +58,9 @@ const WeightLiftingScreen = ({ navigation }) => {
 
       <View>
       <DefaultList item={'Strength Program'} deleteItem={deleteItem} navigation={navigation} location={'Strength'}/>
+      <DefaultList item={'PPL Split'} deleteItem={deleteItem} navigation={navigation} location={'PPLScreen'}/>
+      {<DefaultList item={'Custom Program'} deleteItem={deleteItem} navigation={navigation} location={'CustomProgramScreen'}/>}
+      
 
         <FlatList
           data={data}

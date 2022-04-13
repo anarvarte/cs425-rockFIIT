@@ -4,7 +4,7 @@ import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 import {database} from '../components/Database';
 
-export default function AddExercise({ pressHandler, navigation }) {
+export default function SaveExercise({ pressHandler, navigation }) {
   const [value, setValue] = useState('');
   const [isVisible, setisVisible] = useState(false);
   const [exerciseArray, setExerciseArray] = useState('');
@@ -27,6 +27,11 @@ export default function AddExercise({ pressHandler, navigation }) {
           <Text>{item}</Text>
       </TouchableOpacity>
   );
+
+  function saveNewProgram(){
+      alert('You have successfully created a new custom program!');
+      navigation.navigate('Tabs')
+  }
 
     getExerciseList();
 
@@ -59,6 +64,7 @@ export default function AddExercise({ pressHandler, navigation }) {
             </View>
         </Modal>
         }
+
         <KeyboardAvoidingView style={styles.addExerciseWrapper}>
                 <TouchableOpacity onPress={()=> setisVisible(true)}>
                     <View style={styles.addWrapper}>
@@ -70,6 +76,15 @@ export default function AddExercise({ pressHandler, navigation }) {
                         <Text style={styles.addButtonText}>x</Text>
                     </View>
                     </TouchableOpacity>
+                {
+                    
+                <TouchableOpacity onPress={() => {saveNewProgram()}}>
+                    <View style={styles.addWrapper}>
+                        <Text style={styles.addButtonText}>Save</Text>
+                    </View>
+                </TouchableOpacity> 
+                
+                }  
             </KeyboardAvoidingView>
     </ComponentContainer>
   );

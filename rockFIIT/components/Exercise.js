@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Exercise = (properties, day, sets, reps) => {
+const Exercise = (properties, exercise, sets, reps) => {
     return(
         <View style={styles.itemContainer}>
             <View style={styles.leftSide}>
@@ -13,7 +13,6 @@ const Exercise = (properties, day, sets, reps) => {
             </View>
             <View style={styles.rightIcon}></View>
         </View>
-
     )
 }
 

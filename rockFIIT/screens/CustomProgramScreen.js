@@ -15,15 +15,12 @@ import {
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import styled from "styled-components";
-import AddInput from "../components/AddInput";
-import ToDoList from "../components/ToDoList";
-import EmptyLifting from "../components/EmptyLifting"
-import LogIn from './LogInScreen';
 import AddExercise from "../components/AddExercise";
 import DefaultList from "../components/DefaultList";
 import DefaultExercise from "../components/DefaultExercise";
+import SaveExercise from "../components/SaveExercise";
 
-const ArnoldSplitScreen = ({ navigation }) => {
+const CustomProgramScreen = ({ navigation }) => {
     const [isVisible, setisVisible] = useState(false);
 
   const [data, setData] = useState([]);
@@ -48,19 +45,16 @@ const ArnoldSplitScreen = ({ navigation }) => {
   return (
     <ComponentContainer>
       <View style={styles.headerContainer}>
-        <HeaderText style={styles.programHeader}>Arnold Split</HeaderText>
-        <Text style={styles.exerciseGroup}>Upper Body Focus</Text>
-        <DefaultExercise exerciseName={'Barbell Bench Press'} sets={4} reps={10}/>
-        <DefaultExercise exerciseName={'Cable Tricep Pulldowns'} sets={4} reps={10} />
-        <DefaultExercise exerciseName={'Pull Ups'} sets={4} reps={8}/>
-        <DefaultExercise exerciseName={'DB Bicep Curls'} sets={4} reps={12} />
-        <Text style={styles.exerciseGroup}>Lower Body Focus</Text>
-        <DefaultExercise exerciseName={'Back Squat'} sets={5} reps={10} comments={"Start at 10 on set 1, subtract 2 reps per set."}/>
-        <DefaultExercise exerciseName={'Barbell Deadlift'} sets={4} reps={6}/>
-        <DefaultExercise exerciseName={'Dumbell Lunges'} sets={4} reps={20}/>
-        <DefaultExercise exerciseName={'Calf Raises'} sets={4} reps={20}/>
+        <HeaderText style={styles.programHeader}>Custom Program</HeaderText>
+        {/*
+        <DefaultExercise exerciseName={'Tricep Pushdowns'} sets={4} reps={12} weight={'60 LBS'} comments={'- Lock out elbows'}/>
+        <DefaultExercise exerciseName={'Tricep Kickbacks'} sets={4} reps={15} weight={'15 LBS'} />
+        <DefaultExercise exerciseName={'Bicep Curls'} sets={4} reps={10} weight={'30 LBS'}/>
+        */
+        }
+
       </View>
-      <View style={{ top: 250, right:25}}>
+      <View style={{ top: 300, right:37}}>
         <AddExercise navigation={navigation}/>
             </View>
 
@@ -73,7 +67,7 @@ const ArnoldSplitScreen = ({ navigation }) => {
           )}
         />
         
-        <AddExercise navigation={navigation}/>
+        <SaveExercise navigation={navigation}/>
           </View>
     </ComponentContainer>
   );
@@ -81,7 +75,6 @@ const ArnoldSplitScreen = ({ navigation }) => {
 
 const HeaderText = styled.Text`
   color: white;
-  
   font-size: 30px;
   margin-top: 50px;
 `;
@@ -99,7 +92,7 @@ const styles = StyleSheet.create({
   programHeader:{
     fontWeight:'bold',
     color:'black',
-    marginTop:520,
+    marginTop:170,
     marginBottom:15,
   },
   exerciseGroup:{
@@ -119,4 +112,4 @@ const ComponentContainer = styled.View`
   justify-content: center;
 `;
 
-export default ArnoldSplitScreen;
+export default CustomProgramScreen;

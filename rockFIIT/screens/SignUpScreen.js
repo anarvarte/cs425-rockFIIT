@@ -16,7 +16,6 @@ import {database} from '../components/Database';
 
 const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
-
 const SignUp = ({navigation}) => {
 
     const {control, handleSubmit, watch} = useForm();
@@ -150,11 +149,11 @@ const SignUp = ({navigation}) => {
                         text="Sign Up"
                         onPress={handleSubmit(onSignUpPressed)}
                     /> 
-                    {
+                    {/*
                     <CustomButton
                         text="Check Program Table"
                         onPress={checkProgramTable}
-                    />   
+                    />   */
                     }                                                                                     
                 </View>
 
