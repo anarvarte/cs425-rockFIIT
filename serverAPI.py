@@ -171,7 +171,7 @@ def logActivity():
         ') VALUES(?,?,?,?,?,?,?)'
 
         try:
-            con = sqlite3.connect(DATABASE)log
+            con = sqlite3.connect(DATABASE)
             cur = con.cursor()
             cur.execute(insertQuery,list(msg.values()))
             con.commit()
@@ -244,7 +244,7 @@ def activities():
 
 # Route to add new user program
 @app.route('/addProgram', methods=['POST'])
-def logActivity():
+def addProgram():
     responseMsg = {'info' : '', 'data' : False}
     requiredFields = ('userName', 'programName', 'exerciseID', 'password')
     try:
@@ -301,7 +301,7 @@ def logActivity():
 
 # Route to get a user's programs from the programTable
 @app.route('/programs', methods=['GET'])
-def activities():
+def programs():
     responseMsg = {'info' : '', 'data' : False}
     requiredFields = ('userName', 'password')
 
