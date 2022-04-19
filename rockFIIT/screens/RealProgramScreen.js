@@ -27,12 +27,15 @@ const RealProgram = ({ navigation }) => {
 
   const [data, setData] = useState([]);
 
+  
+
   const pressHandler = (value) => {
     setData((prevTodo) => {
       return [
         {
           value: value,
-          key: Math.random().toString()
+          key: Math.random().toString(),
+          
         },
         ...prevTodo
       ];

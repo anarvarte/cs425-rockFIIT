@@ -5,10 +5,16 @@ import styled from "styled-components";
 export default function AddInput({ submitHandler }) {
   const [value, setValue] = useState("");
 
+  const [programArray, setprogramArray] = useState([]);
+  const addEntryClick = () => {
+    setprogramArray([...programArray, `Entry ${programArray.length}`]);
+  };
+
   const onChangeText = (text) => {
     setValue(text);
   };
 
+  console.log(programArray.map)
   return (
     <ComponentContainer>
       <InputContainer>
@@ -16,7 +22,7 @@ export default function AddInput({ submitHandler }) {
       </InputContainer>
       <SubmitButton
         onPress={() => {
-          setValue(submitHandler(value));
+          setValue(submitHandler(value)), addEntryClick;
         }}
       >
         <Text> + </Text>
