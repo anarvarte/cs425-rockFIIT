@@ -298,6 +298,7 @@ def logActivity():
         responseMsg['info'] = 'Authentication failed'
         return jsonify(responseMsg), 403
 
+
 # Route to get a user's programs from the programTable
 @app.route('/programs', methods=['GET'])
 def activities():
