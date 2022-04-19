@@ -10,6 +10,7 @@ DATABASE = 'rockFIITServer.db'
 exerciseLibrary = 'exerciseLibrary'
 exerciseLog = 'exerciseLog'
 userTable = 'userTable'
+programTable = 'programTable'
 
 app = Flask(__name__)
 
@@ -170,7 +171,7 @@ def logActivity():
         ') VALUES(?,?,?,?,?,?,?)'
 
         try:
-            con = sqlite3.connect(DATABASE)
+            con = sqlite3.connect(DATABASE)log
             cur = con.cursor()
             cur.execute(insertQuery,list(msg.values()))
             con.commit()
@@ -238,6 +239,117 @@ def activities():
     else:
         responseMsg['info'] = 'Authentication failed'
         return jsonify(responseMsg), 403
+
+
+
+# Route to add new user program
+@app.route('/addProgram', methods=['POST'])
+def logActivity():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'programName', 'exerciseID', 'password')
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    password = msg[requiredFields[3]]
+    del msg['password']
+
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
+    dbPwd = dbPwd[0].encode()
+
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        insertQuery = 'INSERT INTO ' + programTable + " (" + \
+        ','.join(requiredFields[:len(requiredFields)-1]) + \
+        ') VALUES(?,?,?)'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            cur.execute(insertQuery,list(msg.values()))
+            con.commit()
+
+            responseMsg['info'] = 'Successfully added program'
+            return jsonify(responseMsg), 201
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
+
+# Route to get a user's programs from the programTable
+@app.route('/programs', methods=['GET'])
+def activities():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'password')
+
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    password = msg[requiredFields[1]]
+
+    # Authentication for users
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
+
+    dbPwd = dbPwd[0].encode()
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        query = 'SELECT * FROM ' + programTable + ' WHERE userName = ?'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            responseMsg['data'] = cur.execute(query,[userName]).fetchall()
+            return jsonify(responseMsg), 200
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
+
 
 
 # Route to allow users to change their password
