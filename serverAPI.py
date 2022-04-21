@@ -270,7 +270,7 @@ def addProgram():
         dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
-        return jsonify(responseMsg), 500
+        return jsonify(responseMsg), 5001
     finally:
         con.close()
     dbPwd = dbPwd[0].encode()
