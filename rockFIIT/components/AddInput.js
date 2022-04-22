@@ -6,6 +6,8 @@ export default function AddInput({ submitHandler }) {
   const [value, setValue] = useState("");
 
   const [programArray, setprogramArray] = useState([]);
+
+  const [programName, setProgramName] = useState('');
   const addEntryClick = () => {
     setprogramArray([...programArray, `Entry ${programArray.length}`]);
   };
@@ -14,15 +16,22 @@ export default function AddInput({ submitHandler }) {
     setValue(text);
   };
 
-  console.log(programArray.map)
+  const customProgramArray = [];
+  
+  function saveArray(){
+    customProgramArray.push(programName);
+  }
+
+  console.log(customProgramArray)
+
   return (
     <ComponentContainer>
       <InputContainer>
-        <Input placeholder="Create Program..." onChangeText={onChangeText} />
+        <Input placeholder="Create Program..." onChangeText={onChangeText} onChange ={event => setProgramName(event.target.value)} id="input"/>
       </InputContainer>
       <SubmitButton
         onPress={() => {
-          setValue(submitHandler(value)), addEntryClick;
+          setValue(submitHandler(value)), addEntryClick, saveArray;
         }}
       >
         <Text> + </Text>

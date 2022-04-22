@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Button, Modal} from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
+
 import styled from "styled-components";
-import StrengthScreen from '../screens/StrengthScreen';
+
 
 const DefaultExercise = ({exerciseName, sets, reps, weight, comments}) => {
 

@@ -7,10 +7,6 @@ import '../assets/LogInScreenLogo.png';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 
-import Tabs from '../navigation/tabs';
-import SignUp from './SignUpScreen';
-import { getActiveChildNavigationOptions } from "react-navigation";
-
 import {useForm, Controller} from 'react-hook-form';
 import {database} from '../components/Database';
 
