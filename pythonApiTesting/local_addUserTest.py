@@ -2,14 +2,11 @@ import requests
 
 api_host = 'http://localhost:5000'
 
-newUser3 = {'userName':'NewUser3@gmail.com', 'password':'flowers682',
-'firstName':'Billy', 'weight':150}
-
-newUser2 = {'userName':'NewUser2@gmail.com', 'password':'admin12345',
-'firstName':'Dora', 'weight':130}
+newUser = {'userName':'newestUser@gmail.com', 'password':'passwordTest',
+'firstName':'Gordan', 'weight':200}
 
 path = '/addUser'
-response = requests.post(api_host + path, json=newUser3)
+response = requests.post(api_host + path, json=newUser)
 print()
 print(response.status_code)
 try:

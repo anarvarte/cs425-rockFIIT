@@ -2,8 +2,7 @@ import requests
 
 api_host = 'http://localhost:5000'
 
-data = {'userName':'NewUser3@gmail.com', 'password':'gamer775'}
-bad_data = {'userName':'NewUser3@gmail.com', 'password':'wrongPassword'}
+data = {'userName':'newestUser@gmail.com', 'password':'passwordTest'}
 
 
 path = '/goals'
