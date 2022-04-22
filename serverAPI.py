@@ -123,6 +123,7 @@ def exercises():
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
         responseMsg['data'] = cur.execute(query).fetchall()
+        responseMsg['info'] = 'Successfully retrieved all exercises'
         return jsonify(responseMsg), 200
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
@@ -231,6 +232,7 @@ def activities():
             con = sqlite3.connect(DATABASE)
             cur = con.cursor()
             responseMsg['data'] = cur.execute(query,[userName]).fetchall()
+            responseMsg['info'] = 'Successfully retrieved user activity logs'
             return jsonify(responseMsg), 200
         except sqlite3.Error as err:
             responseMsg['info'] = err.args[0]
@@ -342,6 +344,7 @@ def programs():
             con = sqlite3.connect(DATABASE)
             cur = con.cursor()
             responseMsg['data'] = cur.execute(query,[userName]).fetchall()
+            responseMsg['info'] = 'Successfully retrieved the programs'
             return jsonify(responseMsg), 200
         except sqlite3.Error as err:
             responseMsg['info'] = err.args[0]
@@ -512,6 +515,7 @@ def goals():
             con = sqlite3.connect(DATABASE)
             cur = con.cursor()
             responseMsg['data'] = cur.execute(query,[userName]).fetchall()
+            responseMsg['info'] = 'Successfully retrieved goals'
             return jsonify(responseMsg), 200
         except sqlite3.Error as err:
             responseMsg['info'] = err.args[0]

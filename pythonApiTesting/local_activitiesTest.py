@@ -6,7 +6,7 @@ data = {'userName':'NewUser3@gmail.com', 'password':'gamer775'}
 
 
 path = '/activities'
-response = requests.get(api_host+path, json=data)
+response = requests.post(api_host+path, json=data)
 print()
 print(response.status_code)
 try:
