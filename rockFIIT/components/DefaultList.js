@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
-import StrengthScreen from '../screens/StrengthScreen';
-import ArnoldSplitScreen from "../screens/ArnoldSplit";
-import PPLScreen from "../screens/PPLScreen";
+
 
 const DefaultList = ({ item, deleteItem , navigation, location}) => {
   return (

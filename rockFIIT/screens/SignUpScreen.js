@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput} from 'react-native';
-import { TouchableOpacity } from "react-native-gesture-handler";
 import {useForm} from 'react-hook-form';
 import * as SQLite from 'expo-sqlite';
 
@@ -9,7 +8,7 @@ import '../assets/LogInScreenLogo.png';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 
-import LogIn from './LogInScreen';
+
 
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';

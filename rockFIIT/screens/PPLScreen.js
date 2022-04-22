@@ -13,13 +13,7 @@ import {
   Styles,
 } from "react-native";
 
-import CustomInput from '../components/CustomInput';
-import CustomButton from '../components/CustomButton';
 import styled from "styled-components";
-import AddInput from "../components/AddInput";
-import ToDoList from "../components/ToDoList";
-import EmptyLifting from "../components/EmptyLifting"
-import LogIn from './LogInScreen';
 import AddExercise from "../components/AddExercise";
 import DefaultList from "../components/DefaultList";
 import DefaultExercise from "../components/DefaultExercise";
