@@ -32,16 +32,44 @@ const App: () =>  Node = () =>{
   }
   
   return (
-//<Stack.Screen name="Program" component={Program} options={{headerShown: false}}/>
+    //<Stack.Screen name="Program" component={Program} options={{headerShown: false}}/>
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="LogIn" component={LogIn} options={{headerShown: false}} />
-        <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
-        <Stack.Screen name="Tabs" component={Tabs} options={{headerShown: false}}  />
-        <Stack.Screen name="Program" component={RealProgram} options={{headerShown: false}}/>
-        <Stack.Screen name="Strength" component={StrengthScreen} options={{headerShown: false}}/>
-        <Stack.Screen name="PPLScreen" component={PPLScreen} options={{headerShown: false}}/>
-        <Stack.Screen name="CustomProgramScreen" component={CustomProgramScreen} options={{headerShown: false}}/>
+        <Stack.Screen
+          name="LogIn"
+          component={LogIn}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Tabs"
+          component={Tabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Program"
+          component={RealProgram}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Strength"
+          component={StrengthScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PPLScreen"
+          component={PPLScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CustomProgramScreen"
+          component={CustomProgramScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

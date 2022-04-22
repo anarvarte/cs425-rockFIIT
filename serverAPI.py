@@ -10,6 +10,8 @@ DATABASE = 'rockFIITServer.db'
 exerciseLibrary = 'exerciseLibrary'
 exerciseLog = 'exerciseLog'
 userTable = 'userTable'
+programTable = 'programTable'
+goalTable = 'goalTable'
 
 app = Flask(__name__)
 
@@ -112,7 +114,7 @@ def exercise(exerciseID):
 
 
 # Route to get entire exerciseLibrary table
-@app.route('/exercises', methods=['GET'])
+@app.route('/exercises', methods=['GET','POST'])
 def exercises():
     responseMsg = {'info' : '', 'data' : False}
     query = 'SELECT * FROM ' + exerciseLibrary
@@ -188,7 +190,7 @@ def logActivity():
 
 
 # Route to get a user's logged activites from exerciseLog
-@app.route('/activities', methods=['GET'])
+@app.route('/activities', methods=['GET', 'POST'])
 def activities():
     responseMsg = {'info' : '', 'data' : False}
     requiredFields = ('userName', 'password')
@@ -238,6 +240,288 @@ def activities():
     else:
         responseMsg['info'] = 'Authentication failed'
         return jsonify(responseMsg), 403
+
+
+
+# Route to add new user program
+@app.route('/addProgram', methods=['POST'])
+def addProgram():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'programName', 'exerciseID', 'password')
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    password = msg[requiredFields[3]]
+    del msg['password']
+
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 5001
+    finally:
+        con.close()
+    dbPwd = dbPwd[0].encode()
+
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        insertQuery = 'INSERT INTO ' + programTable + " (" + \
+        ','.join(requiredFields[:len(requiredFields)-1]) + \
+        ') VALUES(?,?,?)'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            cur.execute(insertQuery,list(msg.values()))
+            con.commit()
+
+            responseMsg['info'] = 'Successfully added program'
+            return jsonify(responseMsg), 201
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
+
+
+# Route to get a user's programs from the programTable
+@app.route('/programs', methods=['GET', 'POST'])
+def programs():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'password')
+
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    password = msg[requiredFields[1]]
+
+    # Authentication for users
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
+
+    dbPwd = dbPwd[0].encode()
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        query = 'SELECT * FROM ' + programTable + ' WHERE userName = ?'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            responseMsg['data'] = cur.execute(query,[userName]).fetchall()
+            return jsonify(responseMsg), 200
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
+
+
+
+# Route to add new user goal
+@app.route('/addGoal', methods=['POST'])
+def addGoal():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'goalName', 'completed', 'password')
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    password = msg[requiredFields[len(requiredFields)-1]]
+    del msg['password']
+
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 5001
+    finally:
+        con.close()
+    dbPwd = dbPwd[0].encode()
+
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        insertQuery = 'INSERT INTO ' + goalTable + " (" + \
+        ','.join(requiredFields[:len(requiredFields)-1]) + \
+        ') VALUES(?,?,?)'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            cur.execute(insertQuery,list(msg.values()))
+            con.commit()
+
+            responseMsg['info'] = 'Successfully added goal'
+            return jsonify(responseMsg), 201
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
+
+
+# Route to update a user's goal
+@app.route('/updateGoal', methods=['POST'])
+def updateGoal():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'goalName', 'completed', 'password')
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    goalName = msg[requiredFields[1]]
+    completed = msg[requiredFields[2]]
+    password = msg[requiredFields[len(requiredFields)-1]]
+    del msg['password']
+
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 5001
+    finally:
+        con.close()
+    dbPwd = dbPwd[0].encode()
+
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        updateQuery = 'UPDATE ' + goalTable + ' SET completed = ?' + \
+        ' WHERE userName = ? AND goalName = ?'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            cur.execute(updateQuery, (completed, userName, goalName))
+            con.commit()
+
+            responseMsg['info'] = 'Successfully updated goal'
+            return jsonify(responseMsg), 201
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
+
+
+
+# Route to get a user's goals from the goalTable
+@app.route('/goals', methods=['GET','POST'])
+def goals():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'password')
+
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    password = msg[requiredFields[1]]
+
+    # Authentication for users
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
+
+    dbPwd = dbPwd[0].encode()
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        query = 'SELECT * FROM ' + goalTable + ' WHERE userName = ?'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            responseMsg['data'] = cur.execute(query,[userName]).fetchall()
+            return jsonify(responseMsg), 200
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
+
 
 
 # Route to allow users to change their password
