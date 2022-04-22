@@ -3,10 +3,10 @@ import requests
 api_host = 'https://rockFIITapi.lousterrd.repl.co'
 
 data = {'userName':'NewUser3@gmail.com', 'goalName' : 'gain 15lbs',
-        'completed': 0, 'password':'gamer775'}
+        'completed': 1, 'password':'gamer775'}
 
 
-path = '/addGoal'
+path = '/updateGoal'
 response = requests.post(api_host+path, json=data)
 print()
 print(response.status_code)

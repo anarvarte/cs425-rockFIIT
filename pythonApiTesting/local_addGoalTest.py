@@ -3,7 +3,7 @@ import requests
 api_host = 'http://localhost:5000'
 
 data = {'userName':'NewUser3@gmail.com', 'goalName' : 'gain 15lbs',
-        'completed': 0, 'date': '4/22/2022', 'password':'gamer775'}
+        'completed': 0, 'password':'gamer775'}
 
 
 path = '/addGoal'
