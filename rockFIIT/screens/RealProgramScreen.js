@@ -52,11 +52,6 @@ const RealProgram = ({ navigation, route }) => {
       </View>
 
       <View style={{flex:1, flexDirection:'row', alignItems:'flex-end', marginLeft:60, marginBottom:30}}>     
-          <TouchableOpacity  style={{width:'40%'}}>
-                <View style={styles.addWrapper}>
-                    <Text style={styles.addButtonText}>+</Text>
-                </View>
-              </TouchableOpacity>
             <TouchableOpacity style={{width:'40%'}} onPress={() => {navigation.navigate('Tabs')}}>
                 <View style={styles.addWrapper}>
                     <Text style={styles.addButtonText}>x</Text>

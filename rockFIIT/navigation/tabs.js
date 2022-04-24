@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeScreen from "../screens/HomeScreen";
 import WeightLiftingScreen from "../screens/WeightLiftingScreen";
+import CalendarScreen from "../screens/CalendarScreen";
 import GoalsScreen from "../screens/GoalsScreen";
 import RockClimbingScreen from "../screens/RockClimbingScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -56,6 +57,36 @@ const Tabs = () => {
       }}
     />
       <Tab.Screen
+        name="Calendar"
+        component={CalendarScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                top: 10,
+                
+              }}
+            >
+              <Image
+                source={require("../assets/calendar.png")}
+                resizeMode="contain"
+                style={{
+                  width: 50,
+                  height: 50,
+                  opacity: 0.7,
+                }}
+              />
+              <Text style={{
+                fontFamily: 'Georgia',
+              }}>Calendar</Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
         name="Weightlifting"
         component={WeightLiftingScreen}
         options={{
@@ -80,12 +111,12 @@ const Tabs = () => {
               />
               <Text style={{
                 fontFamily: 'Georgia',
-              }}>Weights</Text>
+              }}>Programs</Text>
             </View>
           ),
         }}
       />
-      <Tab.Screen
+            <Tab.Screen
         name="Goals"
         component={GoalsScreen}
         options={{
@@ -109,34 +140,6 @@ const Tabs = () => {
               />
               <Text style={{
                 fontFamily: 'Georgia',}}>Goals</Text>
-            </View>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Rock Climbing"
-        component={RockClimbingScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                top: 10,
-              }}
-            >
-              <Image
-                source={require("../assets/rockclimbing.png")}
-                resizeMode="contain"
-                style={{
-                  width: 50,
-                  height: 50,
-                  tintColor: focused ? "#DD7F4A" : "#748c94",
-                }}
-              />
-              <Text style={{
-                fontFamily: 'Georgia',}}>Climbing</Text>
             </View>
           ),
         }}

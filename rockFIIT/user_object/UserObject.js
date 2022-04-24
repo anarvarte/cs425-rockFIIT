@@ -13,8 +13,8 @@ let currentUser;
 let currentUserName = 'test';
 
 let programListTest = [
-    ['PPL', 'DB Bench', 'Barbell Squats', 'DB Shoulder Press'],
-    ['Strength', 'Walking DB Lunges', 'Max Hangs', 'Pull Ups'],
+    ['PPL Split', 'DB Bench', 'Barbell Squats', 'DB Shoulder Press'],
+    ['Strength Program', 'Walking DB Lunges', 'Max Hangs', 'Pull Ups'],
 ]
 let exerciseListTest = [
     ['DB Bench', 5, 8, 'DB Bench Comment'],

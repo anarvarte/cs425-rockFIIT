@@ -29,21 +29,9 @@ import {useForm} from 'react-hook-form';
 const WeightLiftingScreen = ({ navigation }) => {
 
   var userPrograms = UserObject.currentUser.programs;
-  var empty = ['exercise'];
-
-  console.log('userPrograms are   ' + userPrograms)
-
-  /*
-  for(var i = 0 ; i < UserObject.currentUser.programs.length ; i++){
-    for(var j = 1 ; j < UserObject.currentUser.programs[i].length ; j++){
-      userPrograms[i][0] = UserObject.currentUser.programs[i][0];
-      userPrograms[i][j] = UserObject.currentUser.programs[i][j];
-    }
-  }
-  */
 
   var userProgramsList = userPrograms.map((programs) => 
-    <DefaultList item={programs[0]} navigation={navigation} exercises={programs}/>
+    <DefaultList item={programs[0]} navigation={navigation} exercises={programs} location={'Program'}/>
     )
 
   const [newProgram, setNewProgram] = useState("");
@@ -76,7 +64,7 @@ const WeightLiftingScreen = ({ navigation }) => {
             }
             {
               programList.map(programs  => (
-                <DefaultList item={programs.value} navigation={navigation} exercises={empty}/>
+                <DefaultList item={programs.value} navigation={navigation} exercises={[]} location={'CustomProgramScreen'}/>
               ))
             }
           </ScrollView>

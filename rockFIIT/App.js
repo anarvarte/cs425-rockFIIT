@@ -15,22 +15,15 @@ import CustomProgramScreen from "./screens/CustomProgramScreen";
 
 import useDatabase from './components/UseDatabase';
 import {database} from './components/Database';
+import { UserObject } from "./user_object/UserObject";
 
 
 const App: () =>  Node = () =>{
 
-  //SplashScreen.preventAutoHideAsync();
   const Stack = createStackNavigator();
 
-  const isDBLoadingComplete = useDatabase();
+  //const isDBLoadingComplete = useDatabase();
 
-  if(isDBLoadingComplete){
-    console.log('db opened successfully on App');
-  }
-  else{
-    console.log('db not opened on App');
-  }
-  
   return (
     //<Stack.Screen name="Program" component={Program} options={{headerShown: false}}/>
     <NavigationContainer>
