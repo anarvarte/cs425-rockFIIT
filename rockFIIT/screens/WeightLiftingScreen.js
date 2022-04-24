@@ -28,16 +28,22 @@ import {useForm} from 'react-hook-form';
 
 const WeightLiftingScreen = ({ navigation }) => {
 
-  var userPrograms = [];
+  var userPrograms = UserObject.currentUser.programs;
+  var empty = ['exercise'];
 
+  console.log('userPrograms are   ' + userPrograms)
+
+  /*
   for(var i = 0 ; i < UserObject.currentUser.programs.length ; i++){
-    userPrograms[i] = UserObject.currentUser.programs[i][0];
+    for(var j = 1 ; j < UserObject.currentUser.programs[i].length ; j++){
+      userPrograms[i][0] = UserObject.currentUser.programs[i][0];
+      userPrograms[i][j] = UserObject.currentUser.programs[i][j];
+    }
   }
+  */
 
-
-  var userProgramsList;
-  userProgramsList = userPrograms.map(programs => 
-    <DefaultList item={programs} navigation={navigation}/>
+  var userProgramsList = userPrograms.map((programs) => 
+    <DefaultList item={programs[0]} navigation={navigation} exercises={programs}/>
     )
 
   const [newProgram, setNewProgram] = useState("");
@@ -45,7 +51,6 @@ const WeightLiftingScreen = ({ navigation }) => {
 
   function getProgramName(val){
     setNewProgram(val);
-    console.log(newProgram);
   }
 
   function addNewProgram(){
@@ -65,35 +70,15 @@ const WeightLiftingScreen = ({ navigation }) => {
         <StatusBar barStyle="light-content" backgroundColor="midnightblue" />
       </View>  
       <View>
-        {/*
-        <FlatList
-          data={data}
-          ListEmptyComponent={() => 
-            userProgramArray.map(programs => <DefaultList item={programs[0]} navigation={navigation} location={'StrengthScreen'}></DefaultList>)
-          }
-          keyExtractor={(item) => item.key}
-          renderItem={({ item }) => (
-            <ToDoList item={item} deleteItem={deleteItem} navigation={navigation}/>
-          )}
-        />
-        <FlatList
-          data={userProgramArray}
-          renderItem={({item}) => (
-            <DefaultList item={userProgramArray[0]} navigation={navigation} location={'StrengthScreen'}></DefaultList>
-          )}
-        />
-          */}
-
           <ScrollView>
             {
               userProgramsList
             }
             {
               programList.map(programs  => (
-                <DefaultList item={programs.value} navigation={navigation}/>
+                <DefaultList item={programs.value} navigation={navigation} exercises={empty}/>
               ))
             }
-
           </ScrollView>
           
             <InputContainer>
@@ -104,9 +89,6 @@ const WeightLiftingScreen = ({ navigation }) => {
                 <Text> + </Text>
               </SubmitButton>
             </InputContainer>
-        {/*
-        <AddInput submitHandler={submitHandler} />
-          */}
       </View>
     </ComponentContainer>
   );

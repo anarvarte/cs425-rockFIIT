@@ -31,14 +31,11 @@ export default function AddExercise({ pressHandler, navigation }) {
   return (
     <ComponentContainer>
         {
-            
-        }
-        {
             <Modal transparent visible={isVisible}>
             <View style={styles.exerciseModalBackground}>
                 <View>
                     <Text style={styles.modalHeader}>
-                        Exercise List
+                        Exercise List Test
                     </Text>
                 </View>
                 <View style={[styles.exerciseModalContainer]}>
