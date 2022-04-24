@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { View, Text, TextInput, Button, StyleSheet, Modal, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
@@ -9,10 +9,9 @@ const SettingsScreen = ({ navigation }) => {
   const [value, setValue] = useState('');
   const [isVisible, setisVisible] = useState(false);
   const [modalVal, setModalVal] = useState(false);
-  const [exerciseArray, setExerciseArray] = useState('');
+  const [exerciseArray, setExerciseArray] = useState(['DB Bench Press', 'Incline Bench Press', 'Back Squats', 'Walking Lunges', 'Weighted Pullups', 'Calf Raises', 'Military Press', 'Bicep Curls']);
 
-  async function getExerciseList(){
-    var result = await database.getExerciseValues();
+function getExerciseList(){
       setExerciseArray(result);
   }
 
@@ -28,12 +27,8 @@ function setExerciseDetails(){
 
   alert('New exercise successfully saved!');
   setModalVal(false);
-  exerciseArray[exerciseArray.length] = 'Skullcrushers';
-  console.log(exerciseArray);
+  exerciseArray[exerciseArray.length] = 'Hamstring Curls';
 }
-
-//getExerciseList();
-
   
 
   return (

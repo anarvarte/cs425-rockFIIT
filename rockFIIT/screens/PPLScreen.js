@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   ScrollView,
@@ -39,13 +39,29 @@ const PPLScreen = ({ navigation }) => {
     });
   };
 
+  
+  const [exerciseObjectList, setExerciseObjectList] = useState([]);
+
+  function getExercises(){
+        fetch('http://172.27.32.199:5000/exercises').then(response => response.json().then(data => {
+          setExerciseObjectList(data.data);
+          for(var i = 0; i < data.data.length ; i++){
+            exerciseObjectList[i] = data.data[i];
+          }
+        }))
+  }
+
+  useEffect(() => {
+    getExercises();
+  }, [])
+  
 
   return (
     <ComponentContainer>
       <View style={styles.headerContainer}>
         <HeaderText style={styles.programHeader}>Push/Pull/Legs Split</HeaderText>
         <Text style={styles.exerciseGroup}>Push</Text>
-        <DefaultExercise exerciseName={'Barbell Bench Press'} sets={4} reps={10}/>
+        <DefaultExercise exerciseName={'Barbell Bench Press'} sets={exerciseObjectList[6][4]} reps={exerciseObjectList[6][5]}/>
         <DefaultExercise exerciseName={'DB Shoulder Press'} sets={4} reps={6} />
         <DefaultExercise exerciseName={'Incline DB Press'} sets={4} reps={8}/>
         <DefaultExercise exerciseName={'Tricep Overhead Press'} sets={4} reps={12} />
@@ -54,11 +70,13 @@ const PPLScreen = ({ navigation }) => {
         <DefaultExercise exerciseName={'Pull Ups'} sets={3} reps={6}/>
         <DefaultExercise exerciseName={'Barbell Shrugs'} sets={4} reps={8}/>
         <DefaultExercise exerciseName={'DB Bicep Curl'} sets={4} reps={10}/>
+        {/*
         <Text style={styles.exerciseGroup}>Legs</Text>
         <DefaultExercise exerciseName={'Back Squats'} sets={3} reps={8} />
         <DefaultExercise exerciseName={'Leg Press'} sets={4} reps={8}/>
         <DefaultExercise exerciseName={'Weighted Calf Raises'} sets={4} reps={15}/>
         <DefaultExercise exerciseName={'Hanging Leg Raise'} sets={4} reps={10}/>
+      */}
       </View>
       <View style={{ top: 250, right:25}}>
         <AddExercise navigation={navigation}/>

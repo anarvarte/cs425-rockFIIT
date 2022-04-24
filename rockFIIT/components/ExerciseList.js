@@ -60,7 +60,7 @@ const ExerciseList = ({ item, deleteItem , navigation }) => {
             </TouchableOpacity>
           </CircleContainer>
         <View>
-          <TextItem>{item.value}</TextItem>
+          <TextItem>{item.vralue}</TextItem>
         </View>
 
         <View style={styles.button}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Modal, } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
@@ -27,8 +27,6 @@ export default function AddExercise({ pressHandler, navigation }) {
           <Text>{item}</Text>
       </TouchableOpacity>
   );
-
-    getExerciseList();
 
   return (
     <ComponentContainer>

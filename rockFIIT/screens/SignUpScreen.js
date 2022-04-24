@@ -16,133 +16,137 @@ import {database} from '../components/Database';
 const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
 const SignUp = ({navigation}) => {
-  const { control, handleSubmit, watch } = useForm();
 
-  var checkPassword = watch("password");
-  var checkName = watch("fullname");
-  var checkUserName = watch("username");
-  var checkEmail = watch("emailaddress");
+    const {control, handleSubmit, watch} = useForm();
 
-  async function checkExerciseTable() {
-    var result = await database.getExerciseTable();
-    console.log(result.rows);
-  }
-  async function checkUserTable() {
-    var result = await database.getUserTable();
-    console.log(result.rows);
-  }
+    const [userNameList, setUserList] = useState([]);
+    var possibleError = " ";
 
-  async function checkProgramTable() {
-    var result = await database.getProgramTable();
-    console.log(result.rows);
-  }
+    var checkPassword = watch('password');
+    var checkName = watch('fullname');
+    var checkUserName = watch('username');
+    var checkEmail = watch('emailaddress');
+    
 
-  async function getExerciseList() {
-    var result = await database.getExerciseValues();
-    console.log(result);
-  }
+    function onSignUpPressed(){
+        const newData = 
+        {
+            userName: checkEmail,
+            password: checkPassword,
+            firstName: checkName,
+            weight: '',
+        };
 
-  async function addNewUser() {
-    database.insertNewUserInfo(checkUserName, checkPassword, checkName);
-    var result = await database.getUserValues();
-    console.log("Amount of users after insertion is: " + result.length);
-    console.log("All of the users are: " + result);
-  }
-
-  async function onSignUpPressed() {
-    var result = await database.getUserValues();
-    if (result.includes(checkUserName)) {
-      alert("This username has already been registered with RockFIIT!");
-    } else if (!result.includes(checkUserName)) {
-      addNewUser();
-      alert("New Account Successfully Created!");
-      navigateLogIn();
+        fetch('https://servertesting.juancaridad.repl.co/addUser', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json;',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(newData)
+        }).then(response => response.json().then(data => {
+            possibleError = data.info
+        }))
+        setTimeout(() => {
+            if(possibleError == 'UNIQUE constraint failed: userTable.userName'){
+                alert('This username has already been registered with RockFIIT!');
+            }
+            else if(possibleError != 'UNIQUE constraint failed: userTable.userName'){
+                alert('New Account Successfully Created!');
+                navigateLogIn();
+            }
+            
+        }, 1500);
     }
-  }
 
-  const navigateLogIn = () => {
-    navigation.navigate("LogIn");
-  };
+    const navigateLogIn = () =>{
+        navigation.navigate('LogIn');
+    }
 
-  return (
-    <View style={styles.mainView}>
-      <View style={styles.pageTop}>
-        <Image
-          source={require("../assets/LogInScreenLogo.png")}
-          style={styles.logoStyle}
-        />
-        <Text>RockFIIT</Text>
-      </View>
+    return(
+        <View style={styles.mainView}>
+            <View style={styles.pageTop}>
+                <Image 
+                    source={require('../assets/LogInScreenLogo.png')}
+                    style={styles.logoStyle}
+                />
+                <Text>
+                    RockFIIT
+                </Text>
+            </View>
 
-      <View style={styles.pageBottom}>
-        <Text style={styles.logInHeading}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New User?{"\n"}
-          Sign Up Below!
-        </Text>
-        <View style={styles.logInForm}>
-          <CustomInput
-            name="fullname"
-            control={control}
-            placeholder="Name"
-            rules={{ required: "Name is required" }}
-          />
-          <CustomInput
-            name="username"
-            control={control}
-            placeholder="Username"
-            rules={{
-              required: "Username is required",
-              minLength: {
-                value: 5,
-                message: "Username should have a minimum of 5 characters"
-              },
-              maxLength: {
-                value: 32,
-                message: "Username should have a maximum of 32 characters"
-              }
-            }}
-          />
-          <CustomInput
-            name="emailaddress"
-            control={control}
-            placeholder="Email Address"
-            rules={{
-              required: "Email Address is required",
-              pattern: {
-                value: email_regex,
-                message: "Please enter a valid email address"
-              }
-            }}
-          />
-          <CustomInput
-            name="password"
-            control={control}
-            placeholder="Password"
-            secureTextEntry={true}
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password should have a minimum of 8 characters"
-              }
-            }}
-          />
-          <CustomInput
-            name="confirmpassword"
-            control={control}
-            placeholder="Confirm Password"
-            secureTextEntry={true}
-            rules={{
-              required: "Please confirm password",
-              validate: (value) =>
-                value == checkPassword || "Password does not match"
-            }}
-          />
-          <CustomButton
-            text="Sign Up"
-            onPress={handleSubmit(onSignUpPressed)}
-          />
-          {/*
+            <View style={styles.pageBottom}>
+                <Text style={styles.logInHeading}>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New User?{'\n'}
+                    Sign Up Below!
+                </Text>
+                <View style={styles.logInForm}>
+                    <CustomInput
+                        name="fullname"
+                        control={control}
+                        placeholder="Name"
+                        rules={{required:'Name is required'}}
+                        
+                    />
+                    {/*
+                    <CustomInput
+                        name="username"
+                        control={control}
+                        placeholder="Username"
+                        rules={{
+                            required:'Username is required',
+                            minLength:{
+                                value: 5,
+                                message: 'Username should have a minimum of 5 characters',
+                            },
+                            maxLength:{
+                                value: 32,
+                                message: 'Username should have a maximum of 32 characters',
+                            },
+                        }}
+                    />
+                    */}
+                    <CustomInput
+                         name="emailaddress"
+                         control={control}
+                         placeholder="Email Address"
+                         rules={{
+                             required:'Email Address is required',
+                             pattern:{
+                                 value: email_regex,
+                                 message:'Please enter a valid email address'
+                             },
+                         }}
+                    />
+                    <CustomInput
+                        name="password"
+                        control={control}
+                        placeholder="Password"
+                        secureTextEntry={true}
+                        rules={{
+                            required:'Password is required',
+                            minLength:{
+                                value: 8,
+                                message: 'Password should have a minimum of 8 characters',
+                            }
+                        }}
+                    />
+                    <CustomInput
+                        name="confirmpassword"
+                        control={control}
+                        placeholder="Confirm Password"
+                        secureTextEntry={true}
+                        rules={{
+                            required:'Please confirm password',
+                            validate: value => 
+                                value == checkPassword || 'Password does not match',
+                        }}
+                    />
+                    <CustomButton
+                        text="Sign Up"
+                        onPress={handleSubmit(onSignUpPressed)}
+                    /> 
+                    {/*
                     <CustomButton
                         text="Check Program Table"
                         onPress={checkProgramTable}

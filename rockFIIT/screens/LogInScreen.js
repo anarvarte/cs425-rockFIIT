@@ -7,8 +7,12 @@ import '../assets/LogInScreenLogo.png';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 
+import Tabs from '../navigation/tabs';
+import SignUp from './SignUpScreen';
+
 import {useForm, Controller} from 'react-hook-form';
 import {database} from '../components/Database';
+import { UserObject } from "../user_object/UserObject";
 
 const LogIn = ({navigation}) => {
 
@@ -22,17 +26,6 @@ const LogIn = ({navigation}) => {
     var checkUserName = watch('username');
     var checkPassword = watch('password');
     
-    async function checkIfUserExists(){
-        var result = await database.getUserTable();
-        for(var i = 0; i < result.rows.length ; i++){
-            if((result.rows.item(i).userName == checkUserName) && (result.rows.item(i).password == checkPassword)){
-                alert('You are a registered user!')
-                navigation.navigate('Tabs');
-                return 0;
-            }
-        }
-        alert('Invalid Username and Password!');
-    }
    
     const onLogInPressed = (data) => {
         console.log(data);
@@ -46,8 +39,143 @@ const LogIn = ({navigation}) => {
     function navigateSignUp(){
         navigation.navigate('SignUp');
     }
-    
 
+    function navigateTabs(){
+        navigation.navigate('Tabs');
+        alert("Welcome Cyrille!");
+    }
+
+    /*
+    function exercisesTest(){
+        var exerciseList = reactAPI.getExerciseList();
+        console.log(exerciseList);
+    }
+    */
+    
+    
+    const [exerciseObjectList, setExerciseObjectList] = useState([]);
+    const [userNameList, setUserList] = useState([]);
+
+
+    
+    function exercisesTest(){
+        var exerciseList = []
+        fetch('https://servertesting.juancaridad.repl.co/exercises').then(response => response.json().then(data => {
+            setExerciseObjectList(data.data);
+          }))
+        
+        /*
+        for(var i = 0; i < exerciseObjectList.length; i++){
+            exerciseList[i] = exerciseObjectList[i];
+        }
+        */
+        
+        //console.log(exerciseObjectList);
+        console.log(exerciseObjectList);
+    }
+
+    function addExerciseTest(){
+        const newData = 
+            {
+                Category: 'Push',
+                Exercises: 'Decline Bench Press',
+                Description: 'test string',
+                Sets: 4,
+                Reps: 9,
+                Link: '',
+            };
+
+        fetch('https://servertesting.juancaridad.repl.co/addExercise', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json;',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(newData)
+        });
+
+    }
+    
+    function getUserTest(){
+        var userList = []
+        fetch('https://servertesting.juancaridad.repl.co/userName').then(response => response.json().then(data => {
+            setUserList(data.data);
+          }))
+    
+        for(var i = 0; i < userNameList.length; i++){
+            userList[i] = userNameList[i][0];
+        }
+    
+        console.log(userList);
+        console.log(userList.includes('NewUser1@gmail.com'));
+    }
+
+    
+    function addNewUser(){
+        const newData = 
+        {
+            userName: 'newtest@gmail.com',
+            password: 'password',
+            firstName: 'testname',
+            weight: '',
+        };
+
+        fetch('https://servertesting.juancaridad.repl.co/addUser', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json;',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(newData)
+        }).then(response => response.json().then(data => {
+            console.log(data.info);
+        }))
+    }
+
+    function userAuthenticate(){
+        const userCredentials =
+        {
+            userName: 'asldihf@gmail.com',
+            password: 'gamer77534',
+        }; 
+        fetch('https://servertesting.juancaridad.repl.co/activities', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json;',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(userCredentials)
+        }).then(response => response.json().then(data => {
+            console.log(data.info);
+        }))
+    
+    }
+
+    function checkIfUserExists(){
+        UserObject.userAuthenticate(checkUserName,checkPassword);
+
+        setTimeout(() => {
+            console.log('username in log in screen is' + UserObject.currentUser.username);
+        }, 3000);
+    
+        /*
+        setTimeout(() => {
+            
+            if(UserObject.currentUser.username == 'fail'){
+                alert("Invalid Username or Password");
+                
+            }
+            else{
+                alert("Welcome, " + UserObject.currentUser.username);
+    
+            }
+            
+        }, 5000);
+        */
+
+    }
+    
+    
     return(
         <View style={styles.mainView}>
             <View style={styles.pageTop}>
@@ -84,26 +212,69 @@ const LogIn = ({navigation}) => {
 
                     <CustomButton
                         text="Log In"
-                        onPress={handleSubmit(checkIfUserExists)}
+                        //onPress={handleSubmit(checkIfUserExists)}
+                        onPress={handleSubmit(navigateTabs)}
                     />  
-
+                    <CustomButton
+                        text="Create New Account"
+                        onPress={navigateSignUp}
+                        type="Tertiary"
+                    />
+                    {/*
+                    <CustomButton
+                        text="User Object Test"
+                        onPress={userObjectTest}
+                        type="Tertiary"
+                    />  
+                     */}
+                    {/*
                     <CustomButton
                         text="Forgot Password"
                         onPress={onForgotPasswordPressed}
                         type="Tertiary"
                     /> 
-
+                    */}  
+                    {/*
                     <CustomButton
-                        text="Create New Account"
-                        onPress={navigateSignUp}
+                        text="Add User Test"
+                        onPress={addNewUser}
+                        type="Tertiary"
+                    /> 
+                */} 
+                    {/*
+                    <CustomButton
+                        text="Fetch Exercises Test"
+                        onPress={exercisesTest}
+                        type="Tertiary"
+                    />
+                    */} 
+                    {/*
+                    <CustomButton
+                        text="Post Exercises Test"
+                        onPress={addExerciseTest}
                         type="Tertiary"
                     />  
+                    */}
+                    {/*
+                    <CustomButton
+                        text="Activities Test"
+                        onPress={userAuthenticate}
+                        type="Tertiary"
+                    />  
+                    */}
+                    {/*
+                    <CustomButton
+                        text="Get Users Test"
+                        onPress={getUserTest}
+                        type="Tertiary"
+                    />  
+                    */} 
 
                 </View>
             </View>
         </View>
     )
-}
+    }
 
 const styles = StyleSheet.create({
     mainView:{

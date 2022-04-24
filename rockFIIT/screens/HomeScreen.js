@@ -12,6 +12,7 @@ import { LongPressGestureHandler } from "react-native-gesture-handler";
 
 import PureChart from 'react-native-pure-chart';
 import Calendar from "../components/Calendar";
+import { UserObject } from "../user_object/UserObject";
 
 const homeImg = require("../assets/homeImg.png");
 
@@ -32,13 +33,17 @@ const HomeScreen = ({ navigation }) => {
     { x: "July", y: 265 },
     { x: "August", y: 300 },
     { x: "September", y: 315 },
-    { x: "October", y: 330 }
+    { x: "October", y: 330 },
   ];
 
   return (
     <View style={styles.container}>
       <ImageBackground source={homeImg} style={styles.image}>
         <DateTime current={data.current} timezone={data.timezone} />
+
+        <View>
+            <TextItem style={styles.subheading}>{/*UserObject.currentUser.Username*/}Welcome Cyrille!</TextItem>
+        </View>
 
         <View style={styles.graph}>
           <View>
@@ -73,7 +78,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "black",
     fontWeight: "300",
-    fontFamily: "Georgia"
+    fontFamily: "Georgia",
+    marginBottom: 20,
   },
   graph: {
     flex: 0.5,
