@@ -26,7 +26,7 @@ import DefaultExercise from "../components/DefaultExercise";
 //import Program from './ProgramScreen';
 
 const RealProgram = ({ navigation, route }) => {
-    const [isVisible, setisVisible] = useState(false);
+  const [isVisible, setisVisible] = useState(false);
 
   const [data, setData] = useState([]);
 
@@ -37,10 +37,10 @@ const RealProgram = ({ navigation, route }) => {
   for(var i = 1 ; i < exerciseList.length ; i++){
     displayedExercises[i] = exerciseList[i];
   }
-  
+
   var displayedExercisesMap = displayedExercises.map(exercises => 
     <DefaultExercise exerciseName={exercises}/>
-    )
+  )
 
   return (
     <ComponentContainer>
@@ -50,24 +50,19 @@ const RealProgram = ({ navigation, route }) => {
           {displayedExercisesMap}
         </ScrollView>
       </View>
-
-      <View style={{flex:1, flexDirection:'row', alignItems:'flex-end', marginLeft:60, marginBottom:30}}>     
+      <View style={{flex:1, flexDirection:'row', alignItems:'flex-end', marginLeft:60, marginBottom:60}}>     
             <TouchableOpacity style={{width:'40%'}} onPress={() => {navigation.navigate('Tabs')}}>
                 <View style={styles.addWrapper}>
                     <Text style={styles.addButtonText}>x</Text>
                 </View>
           </TouchableOpacity>
-        </View>
-
+       </View>
     </ComponentContainer>
   );
 };
 
-
-
 const HeaderText = styled.Text`
   color: white;
-  
   font-size: 30px;
   margin-top: 50px;
 `;
@@ -96,7 +91,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: '#C0C0C0',
     borderWidth: 1,
-      
   },
   addButtonText:{
       fontSize: 20,
@@ -104,7 +98,7 @@ const styles = StyleSheet.create({
   },
 });
 const ComponentContainer = styled.View`
-  background-color: #C6B8C1;
+  background-color: #6F93F5;
   height: 100%;
   flex-direction: column;
   align-items: center;

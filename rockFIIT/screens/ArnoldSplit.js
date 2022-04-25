@@ -24,26 +24,6 @@ import DefaultList from "../components/DefaultList";
 import DefaultExercise from "../components/DefaultExercise";
 
 const ArnoldSplitScreen = ({ navigation }) => {
-    const [isVisible, setisVisible] = useState(false);
-
-  const [data, setData] = useState([]);
-  const submitHandler = (value) => {
-    setData((prevTodo) => {
-      return [
-        {
-          value: value,
-          key: Math.random().toString(),
-        },
-        ...prevTodo,
-      ];
-    });
-  };
-  const deleteItem = (key) => {
-    setData((prevTodo) => {
-      return prevTodo.filter((todo) => todo.key != key);
-    });
-  };
-
 
   return (
     <ComponentContainer>

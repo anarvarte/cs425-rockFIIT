@@ -7,11 +7,7 @@ import '../assets/LogInScreenLogo.png';
 
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
-
-
-
-import useDatabase from '../components/UseDatabase';
-import {database} from '../components/Database';
+import { UserObject } from '../user_object/UserObject';
 
 const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
@@ -19,48 +15,24 @@ const SignUp = ({navigation}) => {
 
     const {control, handleSubmit, watch} = useForm();
 
-    const [userNameList, setUserList] = useState([]);
-    var possibleError = " ";
-
     var checkPassword = watch('password');
     var checkName = watch('fullname');
     var checkUserName = watch('username');
     var checkEmail = watch('emailaddress');
     
-
-    function onSignUpPressed(){
-        const newData = 
-        {
-            userName: checkEmail,
-            password: checkPassword,
-            firstName: checkName,
-            weight: '',
-        };
-
-        fetch('https://servertesting.juancaridad.repl.co/addUser', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json;',
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(newData)
-        }).then(response => response.json().then(data => {
-            possibleError = data.info
-        }))
-        setTimeout(() => {
-            if(possibleError == 'UNIQUE constraint failed: userTable.userName'){
-                alert('This username has already been registered with RockFIIT!');
-            }
-            else if(possibleError != 'UNIQUE constraint failed: userTable.userName'){
-                alert('New Account Successfully Created!');
-                navigateLogIn();
-            }
-            
-        }, 1500);
-    }
-
     const navigateLogIn = () =>{
         navigation.navigate('LogIn');
+    }
+
+    async function onSignUpPressed(){
+        var isUser = await UserObject.addNewUser(checkEmail, checkPassword, checkName);
+        if(isUser == 'false'){
+            alert("This username is already registered with RockFIIT!");
+        }
+        else{
+            alert("You have successfully made a new account!");
+            navigateLogIn();
+        }
     }
 
     return(

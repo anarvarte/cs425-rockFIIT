@@ -5,27 +5,32 @@ import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 
 
-export default function TodoList({ item, deleteItem }) {
+export default function TodoList({ item, deleteItem, completed }) {
 
     //KEEPS TRACK OF ICON CHANGE
     const [active, setActive] = useState(true);
+    const[isComplete, setIsComplete] = useState(completed)
     const handleChangeActive = () => {
+        setIsComplete(isComplete)
         setActive((val) => {
             return !val;
         });
 
     };
 
+  
+
+
   return (
     <ComponentContainer>
-      <ListContainer style={styles.completeGoal}>
+      <ListContainer style={[styles['goal_' + isComplete]]}>
         <CircleContainer>
           <TouchableOpacity>
             <Entypo name ={active ? 'circle' : 'circle-with-cross'} size={23} color="black" onPress={() => handleChangeActive()}/>
             </TouchableOpacity>
           </CircleContainer>
         <View>
-          <TextItem>{item.value}</TextItem>
+          <TextItem>{item}</TextItem>
         </View>
         <View style={styles.button}>
           <MaterialIcons name="delete" size={22} onPress={() => deleteItem(item.key)} />
@@ -83,16 +88,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5FCFF",
     
   },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF",
+    
+  },
   button: {
     paddingRight: 150,
     marginTop: 15,
     marginBottom: 15,
     flexDirection: "row",
   },
-  incompleteGoal:{
+  goal_0:{
     backgroundColor:'#FF7F7F',
   },
-  completeGoal:{
+  goal_1:{
     backgroundColor:'#90ee90',
   }
 

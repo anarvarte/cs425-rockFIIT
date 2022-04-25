@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { View, Text, TextInput, Button, StyleSheet, Modal, TouchableOpacity } from "react-native";
+import { View, ScrollView, Text, TextInput, Button, StyleSheet, Modal, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 import CustomButton from "../components/CustomButton";
@@ -28,6 +28,10 @@ function setExerciseDetails(){
   alert('New exercise successfully saved!');
   setModalVal(false);
   exerciseArray[exerciseArray.length] = 'Hamstring Curls';
+}
+
+function signOut(){
+
 }
   
 
@@ -85,12 +89,17 @@ function setExerciseDetails(){
                     </Text>
                 </View>
                 <View style={[styles.exerciseModalContainer]}>
+                    <ScrollView>
+
+                    </ScrollView>
+                    {/*
                     <FlatList
                         data={exerciseArray}
                         renderItem={renderItem}
                         keyExtractor={(item, index) => item}
                         onPress={() => setisVisible(false)}
                          /> 
+                     */}
                   <TouchableOpacity onPress={() => setisVisible(false) }>
                         <View style={styles.addWrapper}>
                             <Text style={styles.addButtonText}>x</Text>
@@ -134,7 +143,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#C6B8C1",
+    backgroundColor: "#6F93F5",
     fontFamily: 'Georgia',
     color: 'black',
   },

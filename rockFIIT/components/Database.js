@@ -41,7 +41,6 @@ function getExerciseTable(){
                     */
                     resolve(results);
                     return results;
-                    
                 },
                 (_, error) => { console.log("db error selecting from exercise tables"); console.log(error); reject(error) },
             );
@@ -65,7 +64,6 @@ function getUserTable(){
                     */
                     resolve(results);
                     return results;
-                    
                 },
                 (_, error) => { console.log("db error selecting from user tables"); console.log(error); reject(error)},
             );
