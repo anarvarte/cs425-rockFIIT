@@ -54,10 +54,11 @@ def addUser():
         responseMsg['info'] = 'Successfully added user'
         return jsonify(responseMsg), 201
     except sqlite3.Error as err:
-        responseMsg['info'] = 'duplicate user'
-        return jsonify(responseMsg), 500
+        responseMsg['info'] = 'Duplicate user'
+        return jsonify(responseMsg), 400
     finally:
         con.close()
+
 
 # Route to add an exercise to the exercise table
 @app.route('/addExercise', methods=['POST'])
@@ -71,7 +72,7 @@ def addExercise():
         for field in requiredFields:
             if field not in msg:
                 responseMsg['info'] = 'Missing required field'
-                return jsonify(responseMsg), 401
+                return jsonify(responseMsg), 400
     except:
         responseMsg['info'] = 'Request not json content'
         return jsonify(responseMsg), 400
@@ -281,7 +282,7 @@ def addProgram():
         dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
-        return jsonify(responseMsg), 5001
+        return jsonify(responseMsg), 500
     finally:
         con.close()
 
@@ -402,7 +403,7 @@ def addGoal():
         dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
-        return jsonify(responseMsg), 5001
+        return jsonify(responseMsg), 500
     finally:
         con.close()
 
@@ -466,7 +467,7 @@ def updateGoal():
         dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
     except sqlite3.Error as err:
         responseMsg['info'] = err.args[0]
-        return jsonify(responseMsg), 5001
+        return jsonify(responseMsg), 500
     finally:
         con.close()
 
