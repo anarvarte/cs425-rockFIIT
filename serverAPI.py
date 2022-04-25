@@ -162,7 +162,12 @@ def logActivity():
         return jsonify(responseMsg), 500
     finally:
         con.close()
-    dbPwd = dbPwd[0].encode()
+
+    if dbPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        dbPwd = dbPwd[0].encode()
 
 
     if bcrypt.checkpw(password.encode(), dbPwd):
@@ -221,7 +226,12 @@ def activities():
     finally:
         con.close()
 
-    dbPwd = dbPwd[0].encode()
+    if dbPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        dbPwd = dbPwd[0].encode()
+
 
     if bcrypt.checkpw(password.encode(), dbPwd):
         query = 'SELECT * FROM ' + exerciseLog + ' WHERE userName = ?'
@@ -274,7 +284,12 @@ def addProgram():
         return jsonify(responseMsg), 5001
     finally:
         con.close()
-    dbPwd = dbPwd[0].encode()
+
+    if dbPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        dbPwd = dbPwd[0].encode()
 
 
     if bcrypt.checkpw(password.encode(), dbPwd):
@@ -333,7 +348,11 @@ def programs():
     finally:
         con.close()
 
-    dbPwd = dbPwd[0].encode()
+    if dbPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        dbPwd = dbPwd[0].encode()
 
     if bcrypt.checkpw(password.encode(), dbPwd):
         query = 'SELECT * FROM ' + programTable + ' WHERE userName = ?'
@@ -386,7 +405,12 @@ def addGoal():
         return jsonify(responseMsg), 5001
     finally:
         con.close()
-    dbPwd = dbPwd[0].encode()
+
+    if dbPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        dbPwd = dbPwd[0].encode()
 
 
     if bcrypt.checkpw(password.encode(), dbPwd):
@@ -445,7 +469,12 @@ def updateGoal():
         return jsonify(responseMsg), 5001
     finally:
         con.close()
-    dbPwd = dbPwd[0].encode()
+
+    if dbPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        dbPwd = dbPwd[0].encode()
 
 
     if bcrypt.checkpw(password.encode(), dbPwd):
@@ -504,7 +533,11 @@ def goals():
     finally:
         con.close()
 
-    dbPwd = dbPwd[0].encode()
+    if dbPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        dbPwd = dbPwd[0].encode()
 
     if bcrypt.checkpw(password.encode(), dbPwd):
         query = 'SELECT * FROM ' + goalTable + ' WHERE userName = ?'
@@ -560,9 +593,12 @@ def changePassword():
     finally:
         con.close()
 
+    if oldHashedPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        oldHashedPwd = oldHashedPwd[0].encode()
 
-    oldHashedPwd = oldHashedPwd[0].encode()
-    #print(oldHashedPwd)
 
     if bcrypt.checkpw(oldPwd.encode(), oldHashedPwd):
 
