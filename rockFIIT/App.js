@@ -20,6 +20,7 @@ import { UserObject } from "./user_object/UserObject";
 
 const App: () =>  Node = () =>{
 
+  //SplashScreen.preventAutoHideAsync();
   const Stack = createStackNavigator();
 
   //const isDBLoadingComplete = useDatabase();

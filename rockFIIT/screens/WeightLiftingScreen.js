@@ -10,6 +10,8 @@ import {
   NativeModules,
   ScrollView,
 } from "react-native";
+
+import {useIsFocused} from '@react-navigation/native';
 import styled from "styled-components";
 import AddInput from "../components/AddInput";
 import ToDoList from "../components/ToDoList";
@@ -23,16 +25,9 @@ import PPLScreen from "./PPLScreen";
 import CustomProgramScreen from "./CustomProgramScreen";
 
 import { UserObject } from "../user_object/UserObject";
-import {useForm} from 'react-hook-form';
 
 
 const WeightLiftingScreen = ({ navigation }) => {
-
-  var userPrograms = UserObject.currentUser.programs;
-
-  var userProgramsList = userPrograms.map((programs) => 
-    <DefaultList item={programs[0]} navigation={navigation} exercises={programs} location={'Program'}/>
-    )
 
   const [newProgram, setNewProgram] = useState("");
   const[programList, setNewProgramList] = useState([]);
@@ -42,19 +37,36 @@ const WeightLiftingScreen = ({ navigation }) => {
   }
 
   function addNewProgram(){
-    userPrograms.push(newProgram);
-    //add to database too;
     setNewProgramList([... programList, {
       id: programList.length,
       value: newProgram,
     }])
+    programList.push(newProgram);
+
   }
-  
+
+  var userPrograms = UserObject.programListTest;
+
+  var userProgramsList = userPrograms.map((programs) => 
+   <DefaultList item={programs[0]} navigation={navigation} exercises={programs} location={'Program'}/>
+   )
+
+  useEffect(() => {
+    console.log("mounted");
+    
+    return () => {
+      console.log("unmounted");
+      programList.length = 0;
+    };
+  }, []);
+
+
+
 
   return (
     <ComponentContainer>
       <View>
-      <HeaderText> </HeaderText>
+      <HeaderText>Test</HeaderText>
         <StatusBar barStyle="light-content" backgroundColor="midnightblue" />
       </View>  
       <View>
@@ -64,7 +76,7 @@ const WeightLiftingScreen = ({ navigation }) => {
             }
             {
               programList.map(programs  => (
-                <DefaultList item={programs.value} navigation={navigation} exercises={[]} location={'CustomProgramScreen'}/>
+                <DefaultList item={programs.value} navigation={navigation} exercises={programs.value} location={'CustomProgramScreen'}/>
               ))
             }
           </ScrollView>
@@ -97,13 +109,12 @@ const styles = StyleSheet.create({
 });
 const HeaderText = styled.Text`
   color: white;
-  
   font-size: 30px;
   margin-top: 50px;
 `;
 
 const ComponentContainer = styled.View`
-  background-color: #C6B8C1;
+  background-color: #6F93F5;
   height: 100%;
   flex-direction: column;
   align-items: center;

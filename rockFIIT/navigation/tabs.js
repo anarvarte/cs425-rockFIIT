@@ -11,10 +11,12 @@ import SettingsScreen from "../screens/SettingsScreen";
 
 const Tab = createBottomTabNavigator();
 
-const Tabs = () => {
+const Tabs = ({route}) => {
+  //console.log(route.params);
   return (
     <Tab.Navigator
       screenOptions={{
+        unmountOnBlur: true,
         tabBarShowLabel: false,
         tabBarStyle: {
           position: "absolute",
@@ -29,8 +31,12 @@ const Tabs = () => {
       }}
     >
     <Tab.Screen
+      //initialParams={{id: 'test', num: 2}}
       name="Home"
-      component={HomeScreen}
+      //component={HomeScreen}
+      children={() =>
+        <HomeScreen propName={route.params}/>
+      }
       options={{
         headerShown: false,
         tabBarIcon: ({ focused }) => (
@@ -111,7 +117,7 @@ const Tabs = () => {
               />
               <Text style={{
                 fontFamily: 'Georgia',
-              }}>Programs</Text>
+              }}>Fitness</Text>
             </View>
           ),
         }}

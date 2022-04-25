@@ -40,11 +40,6 @@ const LogIn = ({navigation}) => {
         navigation.navigate('SignUp');
     }
 
-    function navigateTabs(){
-        navigation.navigate('Tabs');
-        alert("Welcome Cyrille!");
-    }
-
     /*
     function exercisesTest(){
         var exerciseList = reactAPI.getExerciseList();
@@ -56,11 +51,10 @@ const LogIn = ({navigation}) => {
     const [exerciseObjectList, setExerciseObjectList] = useState([]);
     const [userNameList, setUserList] = useState([]);
 
-
     
     function exercisesTest(){
         var exerciseList = []
-        fetch('https://servertesting.juancaridad.repl.co/exercises').then(response => response.json().then(data => {
+        fetch('http://192.168.1.192:5000/exercises').then(response => response.json().then(data => {
             setExerciseObjectList(data.data);
           }))
         
@@ -85,7 +79,7 @@ const LogIn = ({navigation}) => {
                 Link: '',
             };
 
-        fetch('https://servertesting.juancaridad.repl.co/addExercise', {
+        fetch('http://192.168.1.192:5000/addExercise', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -120,7 +114,7 @@ const LogIn = ({navigation}) => {
             weight: '',
         };
 
-        fetch('https://servertesting.juancaridad.repl.co/addUser', {
+        fetch('http://192.168.1.192:5000/addUser', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -135,10 +129,10 @@ const LogIn = ({navigation}) => {
     function userAuthenticate(){
         const userCredentials =
         {
-            userName: 'asldihf@gmail.com',
-            password: 'gamer77534',
+            userName: 'NewUser3@gmail.com',
+            password: 'gamer775',
         }; 
-        fetch('https://servertesting.juancaridad.repl.co/activities', {
+        fetch('http://192.168.1.192:5000/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -151,27 +145,36 @@ const LogIn = ({navigation}) => {
     
     }
 
-    function checkIfUserExists(){
-        UserObject.userAuthenticate(checkUserName,checkPassword);
 
-        setTimeout(() => {
-            console.log('username in log in screen is' + UserObject.currentUser.username);
-        }, 3000);
-    
-        /*
-        setTimeout(() => {
+    var currentUser = new UserObject.User();
+    async function checkIfUserExists(){
+        var userExists = await UserObject.userAuthenticate(checkUserName,checkPassword);
+
+        //console.log('userExists is  ' + userExists);
+        if(userExists == 'false'){
+            alert("Invalid Username or Password");
+        }
+        else{
+            currentUser.username = checkUserName;
+            currentUser.exercises = await UserObject.getUserLogs(checkUserName,checkPassword);
+            //currentUser.programs = await UserObject.getUserPrograms(checkUserName, checkPassword);
+            currentUser.programs = UserObject.programListTest;
+            currentUser.goals = await UserObject.getUserGoals(checkUserName, checkPassword);
+            currentUser.exerciseList = await UserObject.getExerciseList();
+
+            /*
+            console.log('The users username is ' + currentUser.username);
+            console.log('The users exercises are ' +currentUser.exercises);
+            console.log('The users programs are ' +currentUser.programs);
+            console.log('The users goals are ' + currentUser.goals);
+            */
+
+            //console.log(currentUser);
             
-            if(UserObject.currentUser.username == 'fail'){
-                alert("Invalid Username or Password");
-                
-            }
-            else{
-                alert("Welcome, " + UserObject.currentUser.username);
-    
-            }
+            alert("Welcome, " + currentUser.username);
+            navigation.navigate('Tabs', {currentUser});
             
-        }, 5000);
-        */
+        }
 
     }
     
@@ -212,8 +215,8 @@ const LogIn = ({navigation}) => {
 
                     <CustomButton
                         text="Log In"
-                        //onPress={handleSubmit(checkIfUserExists)}
-                        onPress={handleSubmit(navigateTabs)}
+                        onPress={handleSubmit(checkIfUserExists)}
+                        //onPress={handleSubmit(navigateTabs)}
                     />  
                     <CustomButton
                         text="Create New Account"
@@ -240,28 +243,28 @@ const LogIn = ({navigation}) => {
                         onPress={addNewUser}
                         type="Tertiary"
                     /> 
-                */} 
-                    {/*
+                    */} 
+                    {
                     <CustomButton
                         text="Fetch Exercises Test"
                         onPress={exercisesTest}
                         type="Tertiary"
                     />
-                    */} 
-                    {/*
+                    } 
+                    {
                     <CustomButton
                         text="Post Exercises Test"
                         onPress={addExerciseTest}
                         type="Tertiary"
                     />  
-                    */}
+                    }
                     {/*
                     <CustomButton
                         text="Activities Test"
                         onPress={userAuthenticate}
                         type="Tertiary"
                     />  
-                    */}
+                */}
                     {/*
                     <CustomButton
                         text="Get Users Test"

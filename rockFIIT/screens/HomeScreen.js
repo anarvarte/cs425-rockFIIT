@@ -8,26 +8,49 @@ import Workouts from '../components/workoutsHome';
 
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';
-import { LongPressGestureHandler } from "react-native-gesture-handler";
 
 import PureChart from 'react-native-pure-chart';
-import Calendar from "../components/Calendar";
 import { UserObject } from "../user_object/UserObject";
 
 const homeImg = require("../assets/homeImg.png");
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({propName}) => {
   const [item, setItem] = useState("");
-
   const [data, setData] = useState({});
 
-  async function loadUser() {
-    var result = await database.getExerciseValues();
-    console.log("LOADUSER: " + result);
-    //setItem(result);
+  var user = propName.currentUser;
+  console.log('route.params are ' + user);
+  var exerciseLogs = UserObject.exerciseLogTest;
+
+  let graphData = [];
+  let specificExercises = [];
+  let dropDownExercises = [];
+
+  function getSpecificExercise(exercise){
+    for(var i = 0; i < exerciseLogs.length ; i++){
+      if(exerciseLogs[i][2] == exercise){
+        var obj = {};
+        obj['exercise'] = UserObject.getExerciseFromId(exercise);
+        obj['date'] = exerciseLogs[i][7];
+        obj['weight'] = exerciseLogs[i][5];
+        specificExercises.push(obj);
+      }
+    }
   }
 
-  let sampleData = [
+  function loadGraphData(exercise){
+    getSpecificExercise(exercise);
+    for(var i = 0; i < specificExercises.length ; i++){
+      var obj = {};
+      obj['x'] = specificExercises[i]['date'];
+      obj['y'] = specificExercises[i]['weight'];
+      graphData.push(obj);
+    }
+  }
+
+  loadGraphData(0);
+  /*
+  graphData = [
     { x: "May", y: 215 },
     { x: "June", y: 245 },
     { x: "July", y: 265 },
@@ -35,21 +58,28 @@ const HomeScreen = ({ navigation }) => {
     { x: "September", y: 315 },
     { x: "October", y: 330 },
   ];
+  */
+  
 
   return (
     <View style={styles.container}>
       <ImageBackground source={homeImg} style={styles.image}>
-        <DateTime current={data.current} timezone={data.timezone} />
 
-        <View>
-            <TextItem style={styles.subheading}>{/*UserObject.currentUser.Username*/}Welcome Cyrille!</TextItem>
+        <View style={styles.header}>
+            <View style={{marginTop: 40, marginLeft:10}}>
+            <Text style={{color: 'grey', fontSize:20}}>Welcome,</Text>
+            <Text style={{color: 'black', fontSize: 28, fontWeight: 'bold'}}>
+              
+            </Text>
+          </View>
+          <DateTime current={data.current} timezone={data.timezone} />
         </View>
 
         <View style={styles.graph}>
+          <PureChart data={graphData} type="line" height={100} />
           <View>
-            <TextItem> Back Squat Max (by month): </TextItem>
+            <TextItem style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', marginTop:10}}> Back Squat Max  </TextItem>
           </View>
-          <PureChart data={sampleData} type="line" height={100} />
         </View>
 
         <Workouts workoutData={data.daily} />
@@ -64,6 +94,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: 50
+  },
+  header: {
+    paddingVertical: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    fontFamily: 'Georgia',
   },
   image: {
     flex: 1,
@@ -82,7 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column",
     height: 60,
-    paddingBottom: 25
+    paddingBottom: 25,
   },
   calendar: {
     flex: 1.2,
