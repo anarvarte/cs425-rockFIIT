@@ -1,9 +1,11 @@
 import requests
 
-api_host = 'https://rockFIITapi.lousterrd.repl.co'
+api_host = 'https://servertesting.juancaridad.repl.co'
 
 
-data = {'userName':'NewUser3@gmail.com', 'password':'gamer775'}
+data = {'userName':'NewUser3@gmail.com', 'password':'gamer7759'}
+
+data2 = {'userName':'Mari@gmail.com', 'password':'password'}
 
 
 path = '/activities'

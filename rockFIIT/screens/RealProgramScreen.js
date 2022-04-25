@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   View,
+  ScrollView,
   Text,
   Button,
   StyleSheet,
@@ -10,6 +11,7 @@ import {
   Modal,
   TouchableOpacity,
   Styles,
+  
 } from "react-native";
 
 import CustomInput from '../components/CustomInput';
@@ -20,57 +22,43 @@ import ExerciseList from "../components/ExerciseList";
 import LogIn from './LogInScreen';
 import AddExercise from "../components/AddExercise";
 import EmptyProgram from "../components/EmptyProgram";
+import DefaultExercise from "../components/DefaultExercise";
 //import Program from './ProgramScreen';
 
-const RealProgram = ({ navigation }) => {
+const RealProgram = ({ navigation, route }) => {
     const [isVisible, setisVisible] = useState(false);
 
   const [data, setData] = useState([]);
 
+  var exerciseList = route.params;
+  var programName = exerciseList[0];
+  var displayedExercises = [];
+
+  for(var i = 1 ; i < exerciseList.length ; i++){
+    displayedExercises[i] = exerciseList[i];
+  }
   
-
-  const pressHandler = (value) => {
-    setData((prevTodo) => {
-      return [
-        {
-          value: value,
-          key: Math.random().toString(),
-          
-        },
-        ...prevTodo
-      ];
-    });
-  };
-
-  const deleteItem = (key) => {
-    setData((prevTodo) => {
-      return prevTodo.filter((todo) => todo.key != key);
-    });
-  };
-
-  const navigateProgram = () => {
-    navigation.navigate("Program");
-  };
+  var displayedExercisesMap = displayedExercises.map(exercises => 
+    <DefaultExercise exerciseName={exercises}/>
+    )
 
   return (
     <ComponentContainer>
       <View style={styles.headerContainer}>
-        <HeaderText style={styles.programHeader}></HeaderText>
+        <HeaderText style={styles.programHeader}>{programName}</HeaderText>
+        <ScrollView>
+          {displayedExercisesMap}
+        </ScrollView>
       </View>
 
-      <View>
-        <FlatList
-          data={data}
-          ListEmptyComponent={() => <EmptyProgram />}
-          keyExtractor={(item) => item.key}
-          renderItem={({ item }) => (
-            <ExerciseList item={item} deleteItem={deleteItem} navigation={navigation}/>
-          )}
-        />
+      <View style={{flex:1, flexDirection:'row', alignItems:'flex-end', marginLeft:60, marginBottom:30}}>     
+            <TouchableOpacity style={{width:'40%'}} onPress={() => {navigation.navigate('Tabs')}}>
+                <View style={styles.addWrapper}>
+                    <Text style={styles.addButtonText}>x</Text>
+                </View>
+          </TouchableOpacity>
+        </View>
 
-        <AddExercise navigation={navigation} pressHandler={pressHandler}/>
-        
-      </View>
     </ComponentContainer>
   );
 };
@@ -92,12 +80,28 @@ const styles = StyleSheet.create({
     backgroundColor: "#C6B8C1",
   },
   headerContainer:{
-    marginTop:55,
+    marginTop:20,
   },
   programHeader:{
     fontWeight:'bold',
     color:'black',
-  }
+  },
+  addWrapper: {
+    width: 60,
+    height: 60,
+    marginLeft:10,
+    backgroundColor: 'white',
+    borderRadius: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+      
+  },
+  addButtonText:{
+      fontSize: 20,
+      
+  },
 });
 const ComponentContainer = styled.View`
   background-color: #C6B8C1;

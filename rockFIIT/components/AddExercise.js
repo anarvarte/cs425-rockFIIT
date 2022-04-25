@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Modal, } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
@@ -28,19 +28,14 @@ export default function AddExercise({ pressHandler, navigation }) {
       </TouchableOpacity>
   );
 
-    getExerciseList();
-
   return (
     <ComponentContainer>
-        {
-            
-        }
         {
             <Modal transparent visible={isVisible}>
             <View style={styles.exerciseModalBackground}>
                 <View>
                     <Text style={styles.modalHeader}>
-                        Exercise List
+                        Exercise List Test
                     </Text>
                 </View>
                 <View style={[styles.exerciseModalContainer]}>

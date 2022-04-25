@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   View,
+  ScrollView,
   Text,
   Button,
   StyleSheet,
@@ -10,71 +11,68 @@ import {
   Modal,
   TouchableOpacity,
   Styles,
+  
 } from "react-native";
 
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import styled from "styled-components";
+import AddInput from "../components/AddInput";
+import ExerciseList from "../components/ExerciseList";
+import LogIn from './LogInScreen';
 import AddExercise from "../components/AddExercise";
-import DefaultList from "../components/DefaultList";
+import EmptyProgram from "../components/EmptyProgram";
 import DefaultExercise from "../components/DefaultExercise";
-import SaveExercise from "../components/SaveExercise";
+//import Program from './ProgramScreen';
 
-const CustomProgramScreen = ({ navigation }) => {
+const CustomProgram = ({ navigation, route }) => {
     const [isVisible, setisVisible] = useState(false);
 
   const [data, setData] = useState([]);
-  const submitHandler = (value) => {
-    setData((prevTodo) => {
-      return [
-        {
-          value: value,
-          key: Math.random().toString(),
-        },
-        ...prevTodo,
-      ];
-    });
-  };
-  const deleteItem = (key) => {
-    setData((prevTodo) => {
-      return prevTodo.filter((todo) => todo.key != key);
-    });
-  };
 
+  var exerciseList = route.params;
+  var programName = exerciseList[0];
+  var displayedExercises = [];
+
+  for(var i = 1 ; i < exerciseList.length ; i++){
+    displayedExercises[i] = exerciseList[i];
+  }
+  
+  var displayedExercisesMap = displayedExercises.map(exercises => 
+    <DefaultExercise exerciseName={exercises}/>
+    )
 
   return (
     <ComponentContainer>
       <View style={styles.headerContainer}>
-        <HeaderText style={styles.programHeader}>Custom Program</HeaderText>
-        {/*
-        <DefaultExercise exerciseName={'Tricep Pushdowns'} sets={4} reps={12} weight={'60 LBS'} comments={'- Lock out elbows'}/>
-        <DefaultExercise exerciseName={'Tricep Kickbacks'} sets={4} reps={15} weight={'15 LBS'} />
-        <DefaultExercise exerciseName={'Bicep Curls'} sets={4} reps={10} weight={'30 LBS'}/>
-        */
-        }
-
+        <HeaderText style={styles.programHeader}>{programName}</HeaderText>
+        <ScrollView>
+          {displayedExercisesMap}
+        </ScrollView>
       </View>
-      <View style={{ top: 300, right:37}}>
-        <AddExercise navigation={navigation}/>
-            </View>
 
-      <View>
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.key}
-          renderItem={({  }) => (
-            <DefaultList item={'Bench Press'} deleteItem={deleteItem} navigation={navigation}/>
-          )}
-        />
-        
-        <SaveExercise navigation={navigation}/>
-          </View>
+      <View style={{flex:1, flexDirection:'row', alignItems:'flex-end', marginLeft:60, marginBottom:30}}>     
+          <TouchableOpacity  style={{width:'40%'}}>
+                <View style={styles.addWrapper}>
+                    <Text style={styles.addButtonText}>+</Text>
+                </View>
+              </TouchableOpacity>
+            <TouchableOpacity style={{width:'40%'}} onPress={() => {navigation.navigate('Tabs')}}>
+                <View style={styles.addWrapper}>
+                    <Text style={styles.addButtonText}>x</Text>
+                </View>
+          </TouchableOpacity>
+        </View>
+
     </ComponentContainer>
   );
 };
 
+
+
 const HeaderText = styled.Text`
   color: white;
+  
   font-size: 30px;
   margin-top: 50px;
 `;
@@ -87,21 +85,27 @@ const styles = StyleSheet.create({
     backgroundColor: "#C6B8C1",
   },
   headerContainer:{
-    marginTop:250,
+    marginTop:20,
   },
   programHeader:{
     fontWeight:'bold',
     color:'black',
-    marginTop:170,
-    marginBottom:15,
   },
-  exerciseGroup:{
-    fontStyle:'italic',
-    fontWeight: 'bold',
-    color:'black',
-    textDecorationLine: 'underline',
-    fontSize:25,
-    marginTop:20,
+  addWrapper: {
+    width: 60,
+    height: 60,
+    marginLeft:10,
+    backgroundColor: 'white',
+    borderRadius: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+      
+  },
+  addButtonText:{
+      fontSize: 20,
+      
   },
 });
 const ComponentContainer = styled.View`
@@ -112,4 +116,4 @@ const ComponentContainer = styled.View`
   justify-content: center;
 `;
 
-export default CustomProgramScreen;
+export default CustomProgram;

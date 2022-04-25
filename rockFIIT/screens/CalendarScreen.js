@@ -16,49 +16,22 @@ import { UserObject } from "../user_object/UserObject";
 
 const homeImg = require("../assets/homeImg.png");
 
-const HomeScreen = ({ navigation }) => {
-  const [item, setItem] = useState("");
+const CalendarScreen = ({ navigation }) => {
 
-  const [data, setData] = useState({});
-
-  async function loadUser() {
-    var result = await database.getExerciseValues();
-    console.log("LOADUSER: " + result);
-    //setItem(result);
-  }
-
-  let sampleData = [
-    { x: "May", y: 215 },
-    { x: "June", y: 245 },
-    { x: "July", y: 265 },
-    { x: "August", y: 300 },
-    { x: "September", y: 315 },
-    { x: "October", y: 330 },
-  ];
 
   return (
     <View style={styles.container}>
       <ImageBackground source={homeImg} style={styles.image}>
-        <DateTime current={data.current} timezone={data.timezone} />
 
-        <View>
-            <TextItem style={styles.subheading}>{/*UserObject.currentUser.Username*/}Welcome Cyrille!</TextItem>
+        <View style={styles.calendarView}>
+          <Calendar />
         </View>
-
-        <View style={styles.graph}>
-          <View>
-            <TextItem> Back Squat Max (by month): </TextItem>
-          </View>
-          <PureChart data={sampleData} type="line" height={100} />
-        </View>
-
-        <Workouts workoutData={data.daily} />
       </ImageBackground>
     </View>
   );
 };
 
-export default HomeScreen;
+export default CalendarScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -84,11 +57,18 @@ const styles = StyleSheet.create({
     height: 60,
     paddingBottom: 25
   },
+  calendarView: {
+    flex: 1.0,
+    justifyContent: "center",
+    flexDirection: "column",
+    height: 20,
+    paddingTop: 10
+  },
   calendar: {
     flex: 1.2,
     justifyContent: "center",
     flexDirection: "column",
-    height: 70,
+    height: 20,
     paddingTop: 10
   }
 });

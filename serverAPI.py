@@ -21,7 +21,6 @@ app = Flask(__name__)
 def index():
     return jsonify('RockFIIT Server API Homepage')
 
-
 # Route to add a user to the server-side database
 @app.route('/addUser', methods=['POST'])
 def addUser():
@@ -55,7 +54,7 @@ def addUser():
         responseMsg['info'] = 'Successfully added user'
         return jsonify(responseMsg), 201
     except sqlite3.Error as err:
-        responseMsg['info'] = err.args[0]
+        responseMsg['info'] = 'duplicate user'
         return jsonify(responseMsg), 500
     finally:
         con.close()
@@ -72,7 +71,7 @@ def addExercise():
         for field in requiredFields:
             if field not in msg:
                 responseMsg['info'] = 'Missing required field'
-                return jsonify(responseMsg), 400
+                return jsonify(responseMsg), 401
     except:
         responseMsg['info'] = 'Request not json content'
         return jsonify(responseMsg), 400
@@ -130,7 +129,6 @@ def exercises():
         return jsonify(responseMsg), 500
     finally:
         con.close()
-
 
 # Route to log new exercises completed
 @app.route('/logActivity', methods=['POST'])
@@ -209,7 +207,7 @@ def activities():
                 return jsonify(responseMsg), 400
     except:
         responseMsg['info'] = 'Request not json content'
-        return jsonify(responseMsg), 400
+        return jsonify(responseMsg), 401
 
     userName = msg[requiredFields[0]]
     password = msg[requiredFields[1]]

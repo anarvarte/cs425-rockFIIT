@@ -1,6 +1,6 @@
 import requests
 
-api_host = 'https://rockFIITapi.lousterrd.repl.co'
+api_host = 'http://172.27.32.199:5000'
 
 newExercise = {'Category':'Legs', 'Exercises':'Jump Squats',
 'Description':'', 'Sets':5, 'Reps':30, 'Link':''}

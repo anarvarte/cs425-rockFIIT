@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import styled from "styled-components";
+import CustomProgram from "../screens/CustomProgramScreen";
 
-
-const DefaultList = ({ item, deleteItem , navigation, location}) => {
+const DefaultList = ({ item, deleteItem , navigation, location, exercises}) => {
   return (
     <ComponentContainer>
       <ListContainer>
         <CircleContainer>
           <TouchableOpacity>
-            <Entypo name ="triangle-right" size={25} color="#DD7F4A" onPress={() => navigation.navigate(location)} />
+            <Entypo name ="triangle-right" size={25} color="#DD7F4A" onPress={() => navigation.navigate(location, exercises)} />
             </TouchableOpacity>
           </CircleContainer>
         <View>

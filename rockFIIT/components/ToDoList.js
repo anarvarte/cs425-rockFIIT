@@ -4,7 +4,7 @@ import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 
-const TodoList = ({ item, deleteItem , navigation}) => {
+const TodoList = ({ item, deleteItem , navigation, data}) => {
   return (
     <ComponentContainer>
       <ListContainer>
@@ -14,7 +14,7 @@ const TodoList = ({ item, deleteItem , navigation}) => {
             </TouchableOpacity>
           </CircleContainer>
         <View>
-          <TextItem>{item.value}</TextItem>
+          <TextItem>{item}</TextItem>
         </View>
 
         <View style={styles.button}>
