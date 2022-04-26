@@ -33,8 +33,7 @@ export default CalendarScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 50,
-    backgroundColor: "#00264D",
+    backgroundColor: "#f3f4f5",
   },
   image: {
     flex: 1,
@@ -56,11 +55,11 @@ const styles = StyleSheet.create({
     paddingBottom: 5
   },
   calendarView: {
-    flex: 1,
+    flex: .818,
     justifyContent: "center",
     flexDirection: "column",
-    height: 20,
-    paddingTop: 100
+    
+    paddingTop: 50
   },
   calendar: {
     flex: 1,
