@@ -107,17 +107,12 @@ function signOut(){
             </View>
         </Modal>
 
-       
-            <CustomButton
-                text="Weightlifting Exercise List"
-                onPress={() => setisVisible(true)}
-            />  
-            <CustomButton
-                text="Add New Exercise"
-                onPress={() => setModalVal(true)}
-            />  
             <CustomButton
                 text="Sign Out"
+                onPress={() => navigation.navigate('LogIn')}
+            />  
+            <CustomButton
+                text="Change Password"
                 onPress={() => navigation.navigate('LogIn')}
             />  
           </View>

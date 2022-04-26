@@ -224,6 +224,32 @@ async function addUserGoals(username, password, goal, isCompleted){
     })
 }
 
+async function logUserExercise(username, id, sets, reps, weight, notes, date, password){
+    return new Promise(() => {
+        const newData = 
+        {
+            userName: username,
+            exerciseID: id,
+            setsCompleted: sets,
+            repsCompleted: reps,
+            weight: weight,
+            notes: notes,
+            date: date,
+            password: password,
+        };
+        fetch('http://192.168.1.192:5000/logActivity', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json;',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(newData)
+        }).then(response => response.json().then(data => {
+            console.log(data.info);
+        }))
+    })
+}
+
 async function loadExerciseLibrary(){
     exerciseLibrary = await getExerciseList();
 }
@@ -235,6 +261,15 @@ function getExerciseFromId(id){
             return exerciseLibrary[i];
         }
     }
+}
+
+function getIdFromExercise(exercise){
+    for(var i = 0; i < exerciseLibrary.length ; i++){
+        if(exercise == exerciseLibrary[i][2]){
+            return exerciseLibrary[i][0];
+        }
+    }
+    return 'false';
 }
 
 exerciseLibrary
@@ -249,6 +284,8 @@ export var UserObject = {
     addUserGoals,
     setCurrentUser,
     getExerciseFromId,
+    getIdFromExercise,
+    logUserExercise,
     loadExerciseLibrary,
     User,
     programListTest,

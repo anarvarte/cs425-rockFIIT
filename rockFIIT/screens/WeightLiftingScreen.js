@@ -55,12 +55,12 @@ const WeightLiftingScreen = ({ propName }) => {
       value: newProgram,
     }])
     programList.push(newProgram);
+    console.log(programList)
   }
   
   var userProgramsList = userPrograms.map((programs) => 
       <DefaultList item={programs[2]} exercises={programs} location={'Program'}/>
    )
-   
    
   return (
     <ComponentContainer>
@@ -74,7 +74,7 @@ const WeightLiftingScreen = ({ propName }) => {
               userProgramsList
             }
             {
-              programList.map(programs  => (
+              programList.map((programs)  => (
                 <DefaultList item={programs.value} exercises={programs.value} location={'CustomProgramScreen'}/>
               ))
             }

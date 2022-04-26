@@ -69,8 +69,8 @@ const GoalsScreen = ({propName}) => {
             userGoalsList
           }
           {
-            goalList.map(programs => (
-              <GoalList item={programs.value} deleteItem={deleteItem} completed={0}/>
+            goalList.map(goals => (
+              <GoalList item={goals.value} deleteItem={deleteItem} completed={0}/>
             ))
           }
         </ScrollView>

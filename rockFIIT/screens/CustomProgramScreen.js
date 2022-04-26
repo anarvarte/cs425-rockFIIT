@@ -27,7 +27,7 @@ import DefaultExercise from "../components/DefaultExercise";
 
 import { UserObject } from "../user_object/UserObject";
 
-const CustomProgram = ({ navigation, route }) => {
+const CustomProgram = ({ route }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [newProgramExercises, setNewProgramExercises] = useState([]);
   const [modalVal, setModalVal] = useState(false);
@@ -71,21 +71,16 @@ const CustomProgram = ({ navigation, route }) => {
       </View>
 
       <View style={{flex:1, flexDirection:'row', alignItems:'flex-end', marginLeft:40, marginBottom:60}}>     
-          <TouchableOpacity  style={{width:'30%'}} onPress= {() => loadModalWithExercises()}>
+          <TouchableOpacity  style={{width:'40%'}} onPress= {() => loadModalWithExercises()}>
                 <View style={styles.addWrapper}>
-                    <Text style={styles.addButtonText}>Add</Text>
+                    <Text style={styles.addButtonText}>+</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity  style={{width:'30%'}}>
+              <TouchableOpacity  style={{width:'40%'}}>
                 <View style={styles.addWrapper}>
                     <Text style={styles.addButtonText}>Save</Text>
                 </View>
               </TouchableOpacity>
-            <TouchableOpacity style={{width:'30%'}} onPress={() => {navigation.navigate('Tabs')}}>
-                <View style={styles.addWrapper}>
-                    <Text style={styles.addButtonText}>x</Text>
-                </View>
-          </TouchableOpacity>
         </View>
 
         <Modal transparent visible={isVisible}>

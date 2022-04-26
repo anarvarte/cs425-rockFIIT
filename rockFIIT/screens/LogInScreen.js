@@ -68,6 +68,31 @@ const LogIn = ({navigation}) => {
         console.log(exerciseObjectList);
     }
 
+    function logExercisesTest(){
+        const newData = 
+        {
+            userName: 'NewUser3@gmail.com',
+            exerciseID: 3,
+            setsCompleted: 4,
+            repsCompleted: 12,
+            weight: 225,
+            notes:'Burned out',
+            date: '4/17/22',
+            password:'gamer775',
+        };
+
+    fetch('http://192.168.1.192:5000/logActivity', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json;',
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(newData)
+    }).then(response => response.json().then(data => {
+        console.log(data.info);
+    }))
+}
+
     function addExerciseTest(){
         const newData = 
             {
@@ -86,7 +111,9 @@ const LogIn = ({navigation}) => {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(newData)
-        });
+        }).then(response => response.json().then(data => {
+            console.log(data.info);
+        }))
 
     }
     
@@ -244,20 +271,25 @@ const LogIn = ({navigation}) => {
                         type="Tertiary"
                     /> 
                     */} 
-                    {
+                    {/*
                     <CustomButton
                         text="Fetch Exercises Test"
                         onPress={exercisesTest}
                         type="Tertiary"
                     />
-                    } 
-                    {
+                    */} 
+                    <CustomButton
+                        text="Log Exercise Test"
+                        onPress={logExercisesTest}
+                        type="Tertiary"
+                    />
+                    {/*
                     <CustomButton
                         text="Post Exercises Test"
                         onPress={addExerciseTest}
                         type="Tertiary"
                     />  
-                    }
+                    */}
                     {/*
                     <CustomButton
                         text="Activities Test"

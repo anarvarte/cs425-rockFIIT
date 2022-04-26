@@ -48,7 +48,7 @@ const Calendar: React.FC = () => {
                 alignItems: "center"
               }}
             >
-              <Text>{item.name} exercisesTest</Text>
+              <Text>{item.name}Workout</Text>
               <Avatar.Text label="J" />
             </View>
           </Card.Content>
@@ -62,7 +62,7 @@ const Calendar: React.FC = () => {
       <Agenda
         items={items}
         loadItemsForMonth={loadItems}
-        selected={"2022-04-20"}
+        selected={"2022/04/18"}
         renderItem={renderItem}
       />
     </View>
