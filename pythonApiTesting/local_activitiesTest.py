@@ -2,7 +2,7 @@ import requests
 
 api_host = 'http://localhost:5000'
 
-data = {'userName':'NewUs3@gmail.com', 'password':'gamer775'}
+data = {'userName':'NewUser3@gmail.com', 'password':'gamer775'}
 
 
 path = '/activities'
