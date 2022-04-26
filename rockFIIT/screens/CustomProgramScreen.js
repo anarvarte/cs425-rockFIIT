@@ -133,10 +133,13 @@ const styles = StyleSheet.create({
   },
   headerContainer:{
     marginTop:20,
+    alignItems:"center",
   },
   programHeader:{
-    fontWeight:'bold',
-    color:'black',
+    
+    color:'white',
+    fontFamily:"Georgia"
+    
   },
   addWrapper: {
     width: 60,

@@ -20,12 +20,10 @@ const CalendarScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={homeImg} style={styles.image}>
-
         <View style={styles.calendarView}>
           <Calendar />
         </View>
-      </ImageBackground>
+      
     </View>
   );
 };
@@ -36,7 +34,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: 50,
-    backgroundColor: "#097392",
+    backgroundColor: "#00264D",
   },
   image: {
     flex: 1,

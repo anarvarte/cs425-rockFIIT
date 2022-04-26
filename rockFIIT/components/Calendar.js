@@ -88,20 +88,28 @@ const Calendar: React.FC = () => {
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity style={{ marginRight: 10, marginTop: 25, height:80}}>
+      <TouchableOpacity style={{ marginRight: 20, marginTop: 25, height:100}}>
         <Card>
           <Card.Content>
             <View
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
-                alignItems: "center"
+                alignItems: "center",
+                
               }}
             > 
-              <View>
-                <Text></Text>
+              <View style={{flex: .5}}>
+                <Text style={{fontFamily: "Georgia", fontWeight: "bold"}}>Bench Press</Text>
+                <Text style={{fontFamily: "Georgia"}}>Reps Done: 12</Text>
+                <Text style={{fontFamily: "Georgia"}}>Sets Done: 2</Text>
+                <Text style={{fontFamily: "Georgia"}}>Weight: 130</Text>
               </View>
-              <Text>{item.name}</Text>
+              <View style={{flex: .5,flexDirection: "column", alignItems: "center"}}>
+              <Text style={{fontFamily: "Georgia"}}>Comments</Text>
+              <Text style={{fontFamily: "Georgia"}}> It was a difficult set ASDASDASDD</Text>
+              </View>
+              
             </View>
           </Card.Content>
         </Card>
@@ -110,8 +118,9 @@ const Calendar: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 , fontFamily: "Georgia"}}>
       <Agenda
+        
         items={items}
         loadItemsForMonth={loadItems}
         //selected={convertDate(exerciseLogs[0][7])}
