@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
     scrollView: {
         flex:0.4,
         backgroundColor: '#25374bcd',
-        padding:30
+        padding:30,
+        height:10,
     },
     image: {
         width: 150,
@@ -93,6 +94,7 @@ const ListContainer = styled.TouchableOpacity`
   flex-direction: row;
   padding: 10px;
   margin-right: 10px;
+  margin-top: 140px;
 `;
 
 

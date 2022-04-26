@@ -116,9 +116,9 @@ const HomeScreen = ({propName}) => {
         </View>
 
         <View style={styles.graph}>
-          <PureChart data={testGraphData} type="line" height={100} />
+          <PureChart data={testGraphData} type="line"  height={250} />
           <View>
-            <TextItem style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', marginTop:10}}> Back Squat Max  </TextItem>
+            <TextItem style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', marginTop:5}}> Back Squat Max  </TextItem>
           </View>
           <View>
             <Button title={'Dropdown Here'} onPress={() => setModalVis(true)}/>
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   subheading: {
     fontSize: 25,
@@ -213,6 +213,7 @@ const styles = StyleSheet.create({
     height: 60,
     paddingBottom: 25,
     backgroundColor:'rgba(52, 52, 52, 0)',
+    marginTop: 100,
   },
   calendar: {
     flex: 1.2,

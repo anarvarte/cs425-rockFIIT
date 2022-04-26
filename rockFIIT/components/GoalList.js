@@ -102,10 +102,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   goal_0:{
-    backgroundColor:'#FF7F7F',
+    backgroundColor:'#FFFFFF',
   },
   goal_1:{
-    backgroundColor:'#90ee90',
+    backgroundColor:'#808080',
   }
 
 });

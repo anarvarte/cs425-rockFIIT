@@ -79,4 +79,5 @@ const ListContainer = styled.TouchableOpacity`
   flex-direction: row;
   padding: 10px;
   margin-right: 10px;
+  margin-top: 140px;
 `;

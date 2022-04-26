@@ -119,7 +119,7 @@ const GoalsScreen = ({propName}) => {
 export default GoalsScreen;
 
 const ComponentContainer = styled.View`
-  background-color: #6F93F5;
+  background-color: #097392;
   height: 100%;
   flex-direction: column;
   align-items: center;
@@ -129,15 +129,16 @@ const ComponentContainer = styled.View`
 const InputContainer = styled.View`
   flex-direction: row;
   border-radius: 10px;
+  
 `;
 
 const Input = styled.TextInput`
   font-size: 20px;
   background-color: white;
-  width: 300px;
+  width: 230px;
   margin-right: 20px;
   padding: 10px;
-  margin-bottom: 180px;
+  margin-bottom: 136px;
   border-radius: 10px;
   fontFamily: Georgia;
 `;
@@ -147,6 +148,7 @@ const SubmitButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background-color: whitesmoke;
-  margin-bottom: 180px;
+  margin-bottom: 136px;
   border-radius: 50px;
+  
 `;

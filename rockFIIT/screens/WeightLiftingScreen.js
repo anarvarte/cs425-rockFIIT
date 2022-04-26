@@ -66,7 +66,7 @@ const WeightLiftingScreen = ({ propName }) => {
   return (
     <ComponentContainer>
       <View>
-      <HeaderText>Test</HeaderText>
+      <HeaderText>Fitness Programs</HeaderText>
         <StatusBar barStyle="light-content" backgroundColor="midnightblue" />
       </View>  
       <View>
@@ -110,11 +110,12 @@ const styles = StyleSheet.create({
 const HeaderText = styled.Text`
   color: white;
   font-size: 30px;
-  margin-top: 50px;
+  margin-top: 130px;
+  fontFamily: Georgia;
 `;
 
 const ComponentContainer = styled.View`
-  background-color: #6F93F5;
+  background-color: #097392;
   height: 100%;
   flex-direction: column;
   align-items: center;
@@ -131,10 +132,10 @@ const InputContainer = styled.View`
 const Input = styled.TextInput`
   font-size: 20px;
   background-color: white;
-  width: 300px;
+  width: 270px;
   margin-right: 20px;
   padding: 10px;
-  margin-bottom: 180px;
+  margin-bottom: 220px;
   border-radius: 10px;
   fontFamily: Georgia;
 `;
@@ -144,7 +145,7 @@ const SubmitButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background-color: whitesmoke;
-  margin-bottom: 180px;
+  margin-bottom: 220px;
   border-radius: 50px;
 `;
 

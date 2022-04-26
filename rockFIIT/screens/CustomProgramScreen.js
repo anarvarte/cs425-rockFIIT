@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#C6B8C1",
+    backgroundColor: "#097392",
   },
   headerContainer:{
     marginTop:20,
@@ -234,7 +234,7 @@ commentFieldInputs:{
 },
 });
 const ComponentContainer = styled.View`
-  background-color: #6F93F5;
+  background-color: #097392;
   height: 100%;
   flex-direction: column;
   align-items: center;

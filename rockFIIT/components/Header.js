@@ -14,14 +14,14 @@ export default function Header() {
 const ComponentContainer = styled.View`
   height: 80px;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
 `;
 
 
 const HeaderText = styled.Text`
-  color: black;
+  color: white;
   fontFamily: Georgia;
   font-size: 30px;
 `;

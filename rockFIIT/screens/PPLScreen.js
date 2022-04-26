@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#C6B8C1",
+    backgroundColor: "#097392",
   },
   headerContainer:{
     marginTop:250,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
 });
 const ComponentContainer = styled.View`
-  background-color: #C6B8C1;
+  background-color: #097392;
   height: 100%;
   flex-direction: column;
   align-items: center;
