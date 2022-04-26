@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#C6B8C1',
+        backgroundColor:'#097392',
     },
     pageTop:{
         width:'100%',
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
     pageBottom:{
         width:'100%',
         height:'68%',
-        backgroundColor:'#C6B8C1',
+        backgroundColor:'#097392',
         borderTopLeftRadius:35,
         borderTopRightRadius:35,
         alignItems:'center',
