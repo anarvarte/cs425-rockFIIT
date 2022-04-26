@@ -14,7 +14,6 @@ import PureChart from 'react-native-pure-chart';
 import { UserObject } from "../user_object/UserObject";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const homeImg = require("../assets/homeImg.png");
 
 const HomeScreen = ({propName}) => {
   console.log(propName.currentUser.username);
@@ -102,20 +101,19 @@ const HomeScreen = ({propName}) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={homeImg} style={styles.image}>
 
         <View style={styles.header}>
-            <View style={{ marginLeft:10}}>
-            <Text style={{color: 'black', fontSize:20, fontWeight: 'bold'}}>Welcome,</Text>
-            <Text style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
-              
-            </Text>
-          </View>
-          <DateTime current={data.current} timezone={data.timezone} />
+            <View style={{ marginLeft:12}}>
+              <Text style={{marginTop: 15,color: 'white', fontSize:30, fontFamily:"Georgia"}}>History</Text>
+            </View>
+            <View style={{ marginRight:10}}>
+            <DateTime current={data.current} timezone={data.timezone} />
+            </View>
+          
         </View>
         <View>
           <TouchableOpacity onPress={() => setModalVis(true)} style ={styles.Wrapper1}>
-          <TextItem  style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', color:'white', fontWeight: 'bold', marginTop: 5}}> Dropdown  </TextItem>
+          <TextItem  style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', color:'white', marginTop: 5}}> Dropdown  </TextItem>
           </TouchableOpacity>
             
           </View>
@@ -125,12 +123,12 @@ const HomeScreen = ({propName}) => {
           
           <View>
           <TouchableOpacity onPress={() => setModalVis(true)} style ={styles.Wrapper1}>
-          <TextItem  style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', color:'white', fontWeight: 'bold', marginTop: 5}}> Log Exercises  </TextItem>
+          <TextItem  style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', color:'white', marginTop: 5}}> Log Exercises  </TextItem>
           </TouchableOpacity>
           </View>
         </View>
         <TimerComponent/>
-      </ImageBackground>
+
 
       <Modal transparent visible={modalVis}>
             <View style={styles.exerciseModalBackground}>
@@ -188,6 +186,9 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#00264D",
+    justifyContent: "center",
+    alignItems: "center",
   },
   
   header: {
@@ -200,12 +201,11 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center",
-    alignItems: "center"
+    
   },
   Wrapper1: {
     backgroundColor: "#DD7F4A",
-    marginTop: 25,
+    marginTop: 35,
     borderRadius: 10,
     height: 35,
     width: 200,
@@ -224,7 +224,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor:'rgba(52, 52, 52, 0)',
     marginTop: 10,
-    alignItems: "center"
+    alignItems: "center",
+    
   },
   
 addExerciseWrapper: {

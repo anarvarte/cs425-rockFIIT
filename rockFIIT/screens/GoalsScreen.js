@@ -131,12 +131,14 @@ const InputContainer = styled.View`
   border-radius: 10px;
   
   
+  
+  
 `;
 
 const Input = styled.TextInput`
   font-size: 20px;
   background-color: white;
-  width: 230px;
+  width: 210px;
   margin-right: 20px;
   padding: 10px;
   margin-bottom: 136px;
@@ -151,6 +153,7 @@ const SubmitButton = styled.TouchableOpacity`
   background-color: #DD7F4A;
   margin-bottom: 136px;
   border-radius: 50px;
+  margin-right: 10px;
 
   
 `;

@@ -59,22 +59,17 @@ const styles = StyleSheet.create({
     },
     heading: {
         fontSize: 25,
-        color:'black',
-        fontWeight: 'bold',
+        color:'white',
         padding: 5,
-        paddingLeft:120,
+        paddingLeft:110,
         
-        textShadowColor: 'rgb(255,255,255)',
-        textShadowRadius: 3,
         fontFamily: 'Georgia',
     },
     subheading: {
         fontSize: 15,
-        color: 'black',
+        color: 'white',
         paddingLeft:105,
-        fontWeight: 'bold',
-        textShadowColor: 'rgb(255,255,255)',
-        textShadowRadius: 3,
+        
         fontFamily: 'Georgia',
     },
     rightAlign: {

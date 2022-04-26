@@ -120,7 +120,20 @@ const Calendar: React.FC = () => {
   return (
     <View style={{ flex: 1 , fontFamily: "Georgia"}}>
       <Agenda
-        
+        theme={{  
+          dotColor: 'white',
+        textSecondaryColor:"white",
+        textDayHeaderFontFamily: "Georgia",
+        dayTextColor:"white",
+        indicatorColor: 'white',
+        textDayFontFamily: "Georgia",
+        textColor: "white",
+        textSectionTitleColor: "white",
+        monthTextColor: "white",
+        calendarBackground: "#DD7F4A",
+        selectedDayBackgroundColor: '#00264D', 
+        selectedDayTextColor: "white"
+        }}
         items={items}
         loadItemsForMonth={loadItems}
         //selected={convertDate(exerciseLogs[0][7])}
