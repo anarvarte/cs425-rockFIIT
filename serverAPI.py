@@ -148,7 +148,7 @@ def logActivity():
         return jsonify(responseMsg), 400
 
     userName = msg[requiredFields[0]]
-    password = msg[requiredFields[7]]
+    password = msg[requiredFields[len(requiredFields)-1]]
     del msg['password']
 
     findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
@@ -211,7 +211,7 @@ def activities():
         return jsonify(responseMsg), 401
 
     userName = msg[requiredFields[0]]
-    password = msg[requiredFields[1]]
+    password = msg[requiredFields[len(requiredFields)-1]]
 
     # Authentication for users
     findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
@@ -271,7 +271,7 @@ def addProgram():
         return jsonify(responseMsg), 400
 
     userName = msg[requiredFields[0]]
-    password = msg[requiredFields[7]]
+    password = msg[requiredFields[len(requiredFields)-1]]
     del msg['password']
 
     findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
@@ -334,7 +334,7 @@ def programs():
         return jsonify(responseMsg), 400
 
     userName = msg[requiredFields[0]]
-    password = msg[requiredFields[1]]
+    password = msg[requiredFields[len(requiredFields)-1]]
 
     # Authentication for users
     findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
@@ -519,7 +519,7 @@ def goals():
         return jsonify(responseMsg), 400
 
     userName = msg[requiredFields[0]]
-    password = msg[requiredFields[1]]
+    password = msg[requiredFields[len(requiredFields)-1]]
 
     # Authentication for users
     findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
