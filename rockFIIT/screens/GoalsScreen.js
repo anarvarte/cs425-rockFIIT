@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   ScrollView,
@@ -17,20 +17,23 @@ import { UserObject } from "../user_object/UserObject";
 
 const GoalsScreen = ({ navigation, route }) => {
   const [data, setData] = useState([]);
+  const [userGoals, setUserGoals] = useState([]);
+  const [newGoal, setNewGoal] = useState("");
+  const[goalList, setNewGoalList] = useState([]);
+
+  useEffect(() => {
+    const requestData = async() => {
+      const userGoals = await UserObject.getUserGoals('NewUser3@gmail.com', 'gamer775');
+      setUserGoals(userGoals);
+    };
+    requestData();
+  }, [])
 
   const deleteItem = (key) => {
     setData((prevTodo) => {
       return prevTodo.filter((todo) => todo.key != key);
     });
   };
-
-  var userGoals = UserObject.goalListTest;
-  var userGoalsList = userGoals.map((goals) => 
-    <GoalList item={goals[2]} deleteItem={deleteItem} completed={goals[3]}/>
-  )
-
-  const [newGoal, setNewGoal] = useState("");
-  const[goalList, setNewGoalList] = useState([]);
 
   function getGoalName(val){
     setNewGoal(val);
@@ -42,9 +45,20 @@ const GoalsScreen = ({ navigation, route }) => {
       value: newGoal,
     }])
     goalList.push(newGoal);
-
-    //add to database
+  
   }
+  
+  async function saveNewGoals(){
+    for(var i = 0; i < goalList.length ; i++){
+      console.log(goalList[i].value);
+      await UserObject.addUserGoals('NewUser3@gmail.com', 'gamer775', goalList[i].value, 0);
+    }
+    alert('Successfully added new goals!');
+  }
+
+  var userGoalsList = userGoals.map((goals) => 
+  <GoalList item={goals[2]} deleteItem={deleteItem} completed={goals[3]}/>
+)
   
   return (
     <ComponentContainer>
@@ -68,7 +82,13 @@ const GoalsScreen = ({ navigation, route }) => {
                 }}>
                 <Text> + </Text>
               </SubmitButton>
-          </InputContainer>
+              <SubmitButton onPress={() => {
+                saveNewGoals();
+              }}>
+                <Text>Save</Text>
+              </SubmitButton>
+        </InputContainer>
+    
       </View>
 
       {/*
