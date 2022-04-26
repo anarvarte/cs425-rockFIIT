@@ -375,6 +375,66 @@ def programs():
         return jsonify(responseMsg), 403
 
 
+# Route to delete a user's program
+@app.route('/delProgram', methods=['POST'])
+def delProgram():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'programID', 'password')
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    programID = msg[requiredFields[1]]
+    password = msg[requiredFields[len(requiredFields)-1]]
+    del msg['password']
+
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
+
+    if dbPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        dbPwd = dbPwd[0].encode()
+
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        deleteQuery ='DELETE FROM ' + programTable + ' WHERE ' + \
+        'userName = ? AND programID = ?'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            cur.execute(deleteQuery, (userName,programID))
+            con.commit()
+
+            responseMsg['info'] = 'Successfully deleted program'
+            return jsonify(responseMsg), 201
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
 
 # Route to add new user goal
 @app.route('/addGoal', methods=['POST'])
@@ -500,6 +560,67 @@ def updateGoal():
         responseMsg['info'] = 'Authentication failed'
         return jsonify(responseMsg), 403
 
+
+# Route to delete a user's goal
+@app.route('/delGoal', methods=['POST'])
+def delGoal():
+    responseMsg = {'info' : '', 'data' : False}
+    requiredFields = ('userName', 'goalID', 'password')
+    try:
+        msg = request.json
+        for field in requiredFields:
+            if field not in msg:
+                responseMsg['info'] = 'Missing required field'
+                return jsonify(responseMsg), 400
+    except:
+        responseMsg['info'] = 'Request not json content'
+        return jsonify(responseMsg), 400
+
+    userName = msg[requiredFields[0]]
+    goalID = msg[requiredFields[1]]
+    password = msg[requiredFields[len(requiredFields)-1]]
+    del msg['password']
+
+    findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
+    'userName = ?'
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        dbPwd = cur.execute(findUserQuery, [userName]).fetchone()
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
+
+    if dbPwd == None:
+        responseMsg['info'] = 'No user found with that userName'
+        return jsonify(responseMsg), 401
+    else:
+        dbPwd = dbPwd[0].encode()
+
+
+    if bcrypt.checkpw(password.encode(), dbPwd):
+        deleteQuery ='DELETE FROM ' + goalTable + ' WHERE ' + \
+        'userName = ? AND goalID = ?'
+
+        try:
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+            cur.execute(deleteQuery, (userName,goalID))
+            con.commit()
+
+            responseMsg['info'] = 'Successfully deleted program'
+            return jsonify(responseMsg), 201
+        except sqlite3.Error as err:
+            responseMsg['info'] = err.args[0]
+            return jsonify(responseMsg), 500
+        finally:
+            con.close()
+    else:
+        responseMsg['info'] = 'Authentication failed'
+        return jsonify(responseMsg), 403
 
 
 # Route to get a user's goals from the goalTable
