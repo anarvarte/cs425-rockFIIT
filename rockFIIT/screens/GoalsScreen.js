@@ -56,9 +56,16 @@ const GoalsScreen = ({propName}) => {
     alert('Successfully added new goals!');
   }
 
-  var userGoalsList = userGoals.map((goals) => 
+  var testUserGoals = [
+    ['NewUser3@gmail.com', 'gamer775', 'Bench 315 LBS', 0],
+    ['NewUser3@gmail.com', 'gamer775', 'Squat 405 LBS', 1 ],
+  ]
+
+  var userGoalsList = testUserGoals.map((goals) => 
   <GoalList item={goals[2]} deleteItem={deleteItem} completed={goals[3]}/>
   )
+
+  
   
   return (
     <ComponentContainer>

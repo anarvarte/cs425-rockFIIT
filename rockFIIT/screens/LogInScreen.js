@@ -40,6 +40,11 @@ const LogIn = ({navigation}) => {
         navigation.navigate('SignUp');
     }
 
+    function navigateTabs(){
+        var currentUser = new UserObject.User();
+        navigation.navigate('Tabs', {currentUser});
+    }
+
     /*
     function exercisesTest(){
         var exerciseList = reactAPI.getExerciseList();
@@ -54,7 +59,7 @@ const LogIn = ({navigation}) => {
     
     function exercisesTest(){
         var exerciseList = []
-        fetch('http://192.168.1.192:5000/exercises').then(response => response.json().then(data => {
+        fetch('https://RockFIIT-DB-Test.cybern.repl.co/exercises').then(response => response.json().then(data => {
             setExerciseObjectList(data.data);
           }))
         
@@ -173,11 +178,11 @@ const LogIn = ({navigation}) => {
     }
 
 
-    var currentUser = new UserObject.User();
+    
 
     async function checkIfUserExists(){
         var userExists = await UserObject.userAuthenticate(checkUserName,checkPassword);
-
+        console.log(userExists);
         //console.log('userExists is  ' + userExists);
         if(userExists == 'false'){
             alert("Invalid Username or Password");
@@ -242,8 +247,8 @@ const LogIn = ({navigation}) => {
 
                     <CustomButton
                         text="Log In"
-                        onPress={handleSubmit(checkIfUserExists)}
-                        //onPress={handleSubmit(navigateTabs)}
+                        //onPress={handleSubmit(checkIfUserExists)}
+                        onPress={handleSubmit(navigateTabs)}
                     />  
                     <CustomButton
                         text="Create New Account"
@@ -271,13 +276,13 @@ const LogIn = ({navigation}) => {
                         type="Tertiary"
                     /> 
                     */} 
-                    {/*
+                    {
                     <CustomButton
                         text="Fetch Exercises Test"
                         onPress={exercisesTest}
                         type="Tertiary"
                     />
-                    */} 
+                    } 
                     <CustomButton
                         text="Log Exercise Test"
                         onPress={logExercisesTest}

@@ -32,11 +32,6 @@ const WeightLiftingScreen = ({ propName }) => {
   const[programList, setNewProgramList] = useState([]);
   const[userPrograms, setUserPrograms] = useState([]);
 
-  const currentUser={
-    username: propName.currentUser.username,
-    password: propName.currentUser.password,
-  }
-
   useEffect(() => {
     const requestData = async() => {
       const userPrograms = await UserObject.getUserPrograms(propName.currentUser.username, propName.currentUser.password);
@@ -57,8 +52,14 @@ const WeightLiftingScreen = ({ propName }) => {
     programList.push(newProgram);
     console.log(programList)
   }
+
+  var userProgramsTest = UserObject.programListTest;
+  var customProgramsTest = [
+    {id: 0, value: 'CUSTOMPROGRAM'},
+    {id: 1, value: 'CUSTOMPROGRAM2'},
+  ]
   
-  var userProgramsList = userPrograms.map((programs) => 
+  var userProgramsList = userProgramsTest.map((programs) => 
       <DefaultList item={programs[2]} exercises={programs} location={'Program'}/>
    )
    
@@ -74,7 +75,7 @@ const WeightLiftingScreen = ({ propName }) => {
               userProgramsList
             }
             {
-              programList.map((programs)  => (
+              customProgramsTest.map((programs)  => (
                 <DefaultList item={programs.value} exercises={programs.value} location={'CustomProgramScreen'}/>
               ))
             }

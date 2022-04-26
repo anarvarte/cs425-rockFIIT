@@ -60,7 +60,7 @@ async function addNewUser(username, password, name){
             firstName: name,
             weight: '',
         };
-        fetch('http://192.168.1.192:5000/addUser', {
+        fetch('https://RockFIIT-DB-Test.cybern.repl.co/addUser', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -79,7 +79,7 @@ async function addNewUser(username, password, name){
             else{
                 resolve('true');
             }
-        }, 1000);
+        }, 2000);
     })
 
 }
@@ -92,7 +92,7 @@ async function userAuthenticate(username, password){
             userName: username,
             password: password,
         }; 
-        fetch('http://192.168.1.192:5000/activities', {
+        fetch('https://RockFIIT-DB-Test.cybern.repl.co/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -104,13 +104,14 @@ async function userAuthenticate(username, password){
         }))
         
         setTimeout(() => {
+            console.log(responseMsg);
             if (responseMsg == 'Successfully retrieved user activity logs'){
                 resolve('true');
             }
             else{
                 resolve('false');
             }
-        }, 1000);
+        }, 2000);
     })
 }
 
@@ -118,12 +119,12 @@ async function getExerciseList(){
     var exerciseList = [];
     return new Promise((resolve) => {
         var exerciseList = []
-        fetch('http://192.168.1.192:5000/exercises').then(response => response.json().then(data => {
+        fetch('https://RockFIIT-DB-Test.cybern.repl.co/exercises').then(response => response.json().then(data => {
             exerciseList = data.data;
           }))
           setTimeout(() => {
             resolve(exerciseList);
-        }, 1000);
+        }, 2000);
     })
 }
 
@@ -135,7 +136,7 @@ async function getUserLogs(username,password){
             userName: username,
             password: password,
         }; 
-        fetch('http://192.168.1.192:5000/activities', {
+        fetch('https://RockFIIT-DB-Test.cybern.repl.co/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -148,7 +149,7 @@ async function getUserLogs(username,password){
 
         setTimeout(() => {
             resolve(userLogs);
-        }, 1000);
+        }, 2000);
     })
 }
 
@@ -162,7 +163,7 @@ async function getUserPrograms(username,password){
             userName: username,
             password: password,
         }; 
-        fetch('http://192.168.1.192:5000/programs', {
+        fetch('https://RockFIIT-DB-Test.cybern.repl.co/programs', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -174,7 +175,7 @@ async function getUserPrograms(username,password){
         }))
         setTimeout(() => {
             resolve(programData);
-        }, 1000);
+        }, 2000);
     })
 }
 
@@ -186,7 +187,7 @@ async function getUserGoals(username,password){
             userName: username,
             password: password,
         }; 
-        fetch('http://192.168.1.192:5000/goals', {
+        fetch('https://RockFIIT-DB-Test.cybern.repl.co/goals', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -198,7 +199,7 @@ async function getUserGoals(username,password){
         }))
         setTimeout(() => {
             resolve(userGoals);
-        }, 1000);
+        }, 2000);
     })
 }
 
@@ -211,7 +212,7 @@ async function addUserGoals(username, password, goal, isCompleted){
             completed: isCompleted,
             password: password,
         }; 
-        fetch('http://192.168.1.192:5000/addGoal', {
+        fetch('https://RockFIIT-DB-Test.cybern.repl.co/addGoal', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -237,7 +238,7 @@ async function logUserExercise(username, id, sets, reps, weight, notes, date, pa
             date: date,
             password: password,
         };
-        fetch('http://192.168.1.192:5000/logActivity', {
+        fetch('https://RockFIIT-DB-Test.cybern.repl.co/logActivity', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -272,7 +273,7 @@ function getIdFromExercise(exercise){
     return 'false';
 }
 
-exerciseLibrary
+//exerciseLibrary
 
 export var UserObject = {
     addNewUser,

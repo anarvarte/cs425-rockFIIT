@@ -18,7 +18,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const homeImg = require("../assets/homeImg.png");
 
 const HomeScreen = ({propName}) => {
-  console.log(propName.currentUser.exercises);
+  console.log(propName.currentUser.username);
   const [exerciseText, setExercise] = useState('');
   const [setsText, setSets] = useState('');
   const [repsText, setReps] = useState('');
