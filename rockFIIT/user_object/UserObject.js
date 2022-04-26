@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 
 class User {
-    constructor(username, programs, exercises, goals, exerciseList){
+    constructor(username, password, programs, exercises, goals, exerciseList){
         this.username = username;
+        this.passwword = password;
         this.programs = programs;
         this.exercises = exercises;
         this.goals = goals;
@@ -13,9 +14,9 @@ class User {
 let currentUserName = 'test';
 
 let programListTest = [
-    ['PPL Split', 'DB Bench', 'Barbell Squats', 'DB Shoulder Press'],
-    ['Strength Program', 'Walking DB Lunges', 'Max Hangs', 'Pull Ups'],
-    ['V4 Climb', 'Max Hangs', 'Lock Offs', 'Pull Ups', '4x4s'],
+    [1, 'NewUser3@gmail.com', 'PPL Split', 0, 2, 4, 9, 11],
+    [2, 'NewUser3@gmail.com', 'Strength Program', 4, 1, 6, 3, 8],
+    [3, 'NewUser3@gmail.com', 'V4 Climbing', 2, 12, 17, 18, 19],
 ]
 
 let exerciseListTest = [
@@ -151,6 +152,8 @@ async function getUserLogs(username,password){
     })
 }
 
+
+
 async function getUserPrograms(username,password){
     var programData = {};
     return new Promise((resolve) => {
@@ -169,22 +172,6 @@ async function getUserPrograms(username,password){
         }).then(response => response.json().then(data => {
             programData = data.data;
         }))
-        /*      
-        for(var i = 0, j = 0 ; i < programData.length ; i++){
-            if(!userPrograms.includes(programData[i][2])){
-                userPrograms[j][0] = programData[i][2];
-                userPrograms[j][userPrograms[j].length] = programData[i][3];
-                j++;
-            }
-            else{
-                for(var k = 0; k < userPrograms.length ; k++){
-                    if(userPrograms[k][0] == programData[i][2]){
-                        userPrograms[k][userPrograms[k].length] = programData[i][3];
-                    }
-                }
-            }
-        }
-        */
         setTimeout(() => {
             resolve(programData);
         }, 1000);

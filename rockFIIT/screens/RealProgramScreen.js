@@ -20,21 +20,24 @@ import styled from "styled-components";
 import AddInput from "../components/AddInput";
 import ExerciseList from "../components/ExerciseList";
 import LogIn from './LogInScreen';
+import Tabs from "../navigation/tabs";
 import AddExercise from "../components/AddExercise";
 import EmptyProgram from "../components/EmptyProgram";
 import DefaultExercise from "../components/DefaultExercise";
 //import Program from './ProgramScreen';
+import { useNavigation } from "@react-navigation/native";
 
-const RealProgram = ({ navigation, route }) => {
+const RealProgram = ({ route }) => {
+  const navigation = useNavigation();
   const [isVisible, setisVisible] = useState(false);
 
   const [data, setData] = useState([]);
 
-  var exerciseList = route.params;
-  var programName = exerciseList[0];
+  var exerciseList = route.params.exercises;
+  var programName = exerciseList[2];
   var displayedExercises = [];
 
-  for(var i = 1 ; i < exerciseList.length ; i++){
+  for(var i = 3 ; i < exerciseList.length ; i++){
     displayedExercises[i] = exerciseList[i];
   }
 
@@ -51,10 +54,7 @@ const RealProgram = ({ navigation, route }) => {
         </ScrollView>
       </View>
       <View style={{flex:1, flexDirection:'row', alignItems:'flex-end', marginLeft:60, marginBottom:60}}>     
-            <TouchableOpacity style={{width:'40%'}} onPress={() => {navigation.navigate('Tabs')}}>
-                <View style={styles.addWrapper}>
-                    <Text style={styles.addButtonText}>x</Text>
-                </View>
+            <TouchableOpacity style={{width:'40%'}} onPress={() => {navigation.navigate('Tabs', route.params.currentUser)}}>
           </TouchableOpacity>
        </View>
     </ComponentContainer>

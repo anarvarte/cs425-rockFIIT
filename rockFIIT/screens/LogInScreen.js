@@ -147,6 +147,7 @@ const LogIn = ({navigation}) => {
 
 
     var currentUser = new UserObject.User();
+
     async function checkIfUserExists(){
         var userExists = await UserObject.userAuthenticate(checkUserName,checkPassword);
 
@@ -156,10 +157,11 @@ const LogIn = ({navigation}) => {
         }
         else{
             currentUser.username = checkUserName;
+            currentUser.password = checkPassword;
             currentUser.exercises = await UserObject.getUserLogs(checkUserName,checkPassword);
             //currentUser.programs = await UserObject.getUserPrograms(checkUserName, checkPassword);
-            currentUser.programs = UserObject.programListTest;
-            currentUser.goals = await UserObject.getUserGoals(checkUserName, checkPassword);
+            //currentUser.programs = UserObject.programListTest;
+            //currentUser.goals = await UserObject.getUserGoals(checkUserName, checkPassword);
             currentUser.exerciseList = await UserObject.getExerciseList();
 
             /*
@@ -173,9 +175,7 @@ const LogIn = ({navigation}) => {
             
             alert("Welcome, " + currentUser.username);
             navigation.navigate('Tabs', {currentUser});
-            
         }
-
     }
     
     

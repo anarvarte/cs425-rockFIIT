@@ -13,6 +13,7 @@ import StrengthScreen from './screens/StrengthScreen';
 import PPLScreen from "./screens/PPLScreen";
 import CustomProgramScreen from "./screens/CustomProgramScreen";
 
+
 import useDatabase from './components/UseDatabase';
 import {database} from './components/Database';
 import { UserObject } from "./user_object/UserObject";

@@ -13,8 +13,6 @@ import {
 
 import {useIsFocused} from '@react-navigation/native';
 import styled from "styled-components";
-import AddInput from "../components/AddInput";
-import ToDoList from "../components/ToDoList";
 import DefaultList from "../components/DefaultList";
 import EmptyLifting from "../components/EmptyLifting";
 import useDatabase from '../components/UseDatabase';
@@ -25,13 +23,28 @@ import PPLScreen from "./PPLScreen";
 import CustomProgramScreen from "./CustomProgramScreen";
 
 import { UserObject } from "../user_object/UserObject";
+import { useNavigation } from "@react-navigation/native";
 
 
-const WeightLiftingScreen = ({ navigation }) => {
-
+const WeightLiftingScreen = ({ propName }) => {
+  const navigation = useNavigation();
   const [newProgram, setNewProgram] = useState("");
   const[programList, setNewProgramList] = useState([]);
+  const[userPrograms, setUserPrograms] = useState([]);
 
+  const currentUser={
+    username: propName.currentUser.username,
+    password: propName.currentUser.password,
+  }
+
+  useEffect(() => {
+    const requestData = async() => {
+      const userPrograms = await UserObject.getUserPrograms(propName.currentUser.username, propName.currentUser.password);
+      setUserPrograms(userPrograms);
+    };
+    requestData();
+  }, [])
+  
   function getProgramName(val){
     setNewProgram(val);
   }
@@ -42,27 +55,13 @@ const WeightLiftingScreen = ({ navigation }) => {
       value: newProgram,
     }])
     programList.push(newProgram);
-
   }
-
-  var userPrograms = UserObject.programListTest;
-
+  
   var userProgramsList = userPrograms.map((programs) => 
-   <DefaultList item={programs[0]} navigation={navigation} exercises={programs} location={'Program'}/>
+      <DefaultList item={programs[2]} exercises={programs} location={'Program'}/>
    )
-
-  useEffect(() => {
-    console.log("mounted");
-    
-    return () => {
-      console.log("unmounted");
-      programList.length = 0;
-    };
-  }, []);
-
-
-
-
+   
+   
   return (
     <ComponentContainer>
       <View>
@@ -76,7 +75,7 @@ const WeightLiftingScreen = ({ navigation }) => {
             }
             {
               programList.map(programs  => (
-                <DefaultList item={programs.value} navigation={navigation} exercises={programs.value} location={'CustomProgramScreen'}/>
+                <DefaultList item={programs.value} exercises={programs.value} location={'CustomProgramScreen'}/>
               ))
             }
           </ScrollView>

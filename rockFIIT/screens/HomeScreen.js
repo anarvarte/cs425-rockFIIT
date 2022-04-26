@@ -60,8 +60,8 @@ const HomeScreen = ({propName}) => {
     }
   }
 
-  /*
-  graphData = [
+  
+  var testGraphData = [
     { x: "May", y: 215 },
     { x: "June", y: 245 },
     { x: "July", y: 265 },
@@ -69,9 +69,9 @@ const HomeScreen = ({propName}) => {
     { x: "September", y: 315 },
     { x: "October", y: 330 },
   ];
-  */
   
-  console.log(exerciseLogs);
+
+  loadGraphData(0);
 
   return (
     <View style={styles.container}>
@@ -88,12 +88,12 @@ const HomeScreen = ({propName}) => {
         </View>
 
         <View style={styles.graph}>
-          <PureChart data={graphData} type="line" height={100} />
+          <PureChart data={testGraphData} type="line" height={100} />
           <View>
             <TextItem style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', marginTop:10}}> Back Squat Max  </TextItem>
           </View>
           <View>
-            {<Button title={'test button'}/>}
+            {<Button title={'test button'} onPress={loadGraphData(0)}/>}
           </View>
         </View>
 

@@ -4,13 +4,16 @@ import { Entypo } from "@expo/vector-icons";
 import styled from "styled-components";
 import CustomProgram from "../screens/CustomProgramScreen";
 
-const DefaultList = ({ item, deleteItem , navigation, location, exercises}) => {
+import { useNavigation } from "@react-navigation/native";
+
+const DefaultList = ({ item, deleteItem , location, exercises}) => {
+  const navigation = useNavigation();
   return (
     <ComponentContainer>
       <ListContainer>
         <CircleContainer>
           <TouchableOpacity>
-            <Entypo name ="triangle-right" size={25} color="#DD7F4A" onPress={() => navigation.navigate(location, exercises)} />
+            <Entypo name ="triangle-right" size={25} color="#DD7F4A" onPress={() => navigation.navigate(location, {exercises})} />
             </TouchableOpacity>
           </CircleContainer>
         <View>

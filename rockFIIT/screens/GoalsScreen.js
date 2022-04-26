@@ -15,7 +15,7 @@ import Header from "../components/Header";
 import Empty from "../components/Empty";
 import { UserObject } from "../user_object/UserObject";
 
-const GoalsScreen = ({ navigation, route }) => {
+const GoalsScreen = ({propName}) => {
   const [data, setData] = useState([]);
   const [userGoals, setUserGoals] = useState([]);
   const [newGoal, setNewGoal] = useState("");
@@ -23,10 +23,11 @@ const GoalsScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     const requestData = async() => {
-      const userGoals = await UserObject.getUserGoals('NewUser3@gmail.com', 'gamer775');
+      const userGoals = await UserObject.getUserGoals(propName.currentUser.username, propName.currentUser.password);
       setUserGoals(userGoals);
     };
     requestData();
+
   }, [])
 
   const deleteItem = (key) => {
@@ -45,7 +46,6 @@ const GoalsScreen = ({ navigation, route }) => {
       value: newGoal,
     }])
     goalList.push(newGoal);
-  
   }
   
   async function saveNewGoals(){
@@ -58,7 +58,7 @@ const GoalsScreen = ({ navigation, route }) => {
 
   var userGoalsList = userGoals.map((goals) => 
   <GoalList item={goals[2]} deleteItem={deleteItem} completed={goals[3]}/>
-)
+  )
   
   return (
     <ComponentContainer>

@@ -94,7 +94,10 @@ const Tabs = ({route}) => {
       />
       <Tab.Screen
         name="Weightlifting"
-        component={WeightLiftingScreen}
+        //component={WeightLiftingScreen}
+        children={() =>
+          <WeightLiftingScreen propName={route.params}/>
+        }
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
@@ -103,7 +106,6 @@ const Tabs = ({route}) => {
                 alignItems: "center",
                 justifyContent: "center",
                 top: 10,
-                
               }}
             >
               <Image
@@ -124,7 +126,10 @@ const Tabs = ({route}) => {
       />
             <Tab.Screen
         name="Goals"
-        component={GoalsScreen}
+        //component={GoalsScreen}
+        children={() =>
+          <GoalsScreen propName={route.params}/>
+        }
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (

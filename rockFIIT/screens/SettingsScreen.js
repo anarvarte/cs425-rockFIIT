@@ -24,7 +24,6 @@ function getExerciseList(){
 );  
 
 function setExerciseDetails(){
-
   alert('New exercise successfully saved!');
   setModalVal(false);
   exerciseArray[exerciseArray.length] = 'Hamstring Curls';
@@ -33,7 +32,6 @@ function setExerciseDetails(){
 function signOut(){
 
 }
-  
 
   return (
 
