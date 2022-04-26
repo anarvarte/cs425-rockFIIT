@@ -2,7 +2,9 @@ import requests
 
 api_host = 'https://rockFIITapi.lousterrd.repl.co'
 
-data = {'userName':'NewUser3@gmail.com', 'programName' : 'legs', 'exerciseID': 1, 'password':'gamer775'}
+data = {'userName':'NewUser3@gmail.com', 'programName' : 'example',
+        'exercise1': 1, 'exercise2': 3, 'exercise3': 2, 'exercise4': 4,
+        'exercise5': 5, 'password':'gamer775'}
 
 
 path = '/addProgram'

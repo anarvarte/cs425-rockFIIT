@@ -258,7 +258,8 @@ def activities():
 @app.route('/addProgram', methods=['POST'])
 def addProgram():
     responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ('userName', 'programName', 'exerciseID', 'password')
+    requiredFields = ('userName', 'programName', 'exercise1', 'exercise2',
+                      'exercise3', 'exercise4', 'exercise5', 'password')
     try:
         msg = request.json
         for field in requiredFields:
@@ -270,7 +271,7 @@ def addProgram():
         return jsonify(responseMsg), 400
 
     userName = msg[requiredFields[0]]
-    password = msg[requiredFields[3]]
+    password = msg[requiredFields[7]]
     del msg['password']
 
     findUserQuery = 'SELECT password FROM ' + userTable + ' WHERE ' + \
@@ -296,7 +297,7 @@ def addProgram():
     if bcrypt.checkpw(password.encode(), dbPwd):
         insertQuery = 'INSERT INTO ' + programTable + " (" + \
         ','.join(requiredFields[:len(requiredFields)-1]) + \
-        ') VALUES(?,?,?)'
+        ') VALUES(?,?,?,?,?,?,?)'
 
         try:
             con = sqlite3.connect(DATABASE)
