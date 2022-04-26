@@ -234,7 +234,7 @@ commentFieldInputs:{
 },
 });
 const ComponentContainer = styled.View`
-  background-color: #097392;
+  background-color: #00264D;
   height: 100%;
   flex-direction: column;
   align-items: center;

@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#097392',
+        backgroundColor:'#00264D',
     },
     pageTop:{
         width:'100%',
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     pageBottom:{
         width:'100%',
         height:'85%',
-        backgroundColor:'#097392',
+        backgroundColor:'#00264D',
         borderTopLeftRadius:35,
         borderTopRightRadius:35,
         alignItems:'center',

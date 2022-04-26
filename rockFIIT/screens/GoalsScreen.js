@@ -87,12 +87,12 @@ const GoalsScreen = ({propName}) => {
               <SubmitButton onPress={() => {
                   addNewGoal()
                 }}>
-                <Text> + </Text>
+                <Text style={{color:"white", fontSize: 20}}> + </Text>
               </SubmitButton>
               <SubmitButton onPress={() => {
                 saveNewGoals();
               }}>
-                <Text>Save</Text>
+                <Text style={{color: "white", fontSize: 18}}>Save</Text>
               </SubmitButton>
         </InputContainer>
     
@@ -119,7 +119,7 @@ const GoalsScreen = ({propName}) => {
 export default GoalsScreen;
 
 const ComponentContainer = styled.View`
-  background-color: #097392;
+  background-color: #00264D;
   height: 100%;
   flex-direction: column;
   align-items: center;
@@ -129,6 +129,7 @@ const ComponentContainer = styled.View`
 const InputContainer = styled.View`
   flex-direction: row;
   border-radius: 10px;
+  
   
 `;
 
@@ -147,8 +148,9 @@ const SubmitButton = styled.TouchableOpacity`
   width: 50px;
   justify-content: center;
   align-items: center;
-  background-color: whitesmoke;
+  background-color: #DD7F4A;
   margin-bottom: 136px;
   border-radius: 50px;
+
   
 `;

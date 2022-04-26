@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 
 import DateTime from '../components/DateTime';
-import Workouts from '../components/workoutsHome';
 
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';
@@ -56,17 +55,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column",
     height: 60,
-    paddingBottom: 25
+    paddingBottom: 5
   },
   calendarView: {
-    flex: 1.0,
+    flex: 1,
     justifyContent: "center",
     flexDirection: "column",
     height: 20,
-    paddingTop: 10
+    paddingTop: 100
   },
   calendar: {
-    flex: 1.2,
+    flex: 1,
     justifyContent: "center",
     flexDirection: "column",
     height: 20,

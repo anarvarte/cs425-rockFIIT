@@ -26,14 +26,16 @@ const TimerComponent = () => {
               //console.log(time);
             }}
           />
-          <TouchableHighlight
+        </View>
+        <View style={styles.rowStyle}>
+        <TouchableHighlight
             onPress={() => {
               setIsStopwatchStart(!isStopwatchStart);
               setResetStopwatch(false);
             }}
           >
             <Text style={styles.buttonText}>
-              {!isStopwatchStart ? "START" : "STOP"}
+              {!isStopwatchStart ? "START          " : "STOP          "}
             </Text>
           </TouchableHighlight>
           <TouchableHighlight
@@ -45,6 +47,7 @@ const TimerComponent = () => {
             <Text style={styles.buttonText}>RESET</Text>
           </TouchableHighlight>
         </View>
+        
       </View>
     </ListContainer>
   );
@@ -54,30 +57,36 @@ export default TimerComponent;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.5,
+    flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    
   },
   sectionStyle: {
-    flex: 0.5,
-    marginTop: 0,
+    flex: .7,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    
+  },
+  rowStyle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   buttonText: {
-    fontSize: 20,
-    marginTop: 1
+    fontSize: 23,
+    color: "white",
+    fontFamily: 'Georgia',
+    
   }
 });
 
 
 const ListContainer = styled.TouchableOpacity`
-  background-color: rgb(255, 255, 255);
-  height: 100px;
-  width: auto;
+  background-color: #DD7F4A;
+  height: 120px;
+  width: 250px;
   border-radius: 15px;
   flex-direction: row;
-  padding: 10px;
-  margin-right: 10px;
-  margin-top: 140px;
+  margin-Bottom: 90px;
+  
 `;

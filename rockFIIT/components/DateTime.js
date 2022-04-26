@@ -53,7 +53,7 @@ const DateTime = ({timezone}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex:.7,
+        flex:1,
         flexDirection:"row",
         justifyContent:'space-between',
     },
@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
         color:'black',
         fontWeight: 'bold',
         padding: 5,
-        paddingLeft:60,
-        paddingTop: 30,
+        paddingLeft:120,
+        
         textShadowColor: 'rgb(255,255,255)',
         textShadowRadius: 3,
         fontFamily: 'Georgia',
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     subheading: {
         fontSize: 15,
         color: 'black',
-        paddingLeft:65,
+        paddingLeft:105,
         fontWeight: 'bold',
         textShadowColor: 'rgb(255,255,255)',
         textShadowRadius: 3,
