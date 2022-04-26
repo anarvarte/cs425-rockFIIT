@@ -1,16 +1,18 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, Button, StyleSheet, ImageBackground } from "react-native";
 import styled from "styled-components";
 
 
 import DateTime from '../components/DateTime';
 import Workouts from '../components/workoutsHome';
+import CustomButton from "../components/CustomButton";
 
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';
 
 import PureChart from 'react-native-pure-chart';
 import { UserObject } from "../user_object/UserObject";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const homeImg = require("../assets/homeImg.png");
 
@@ -18,15 +20,24 @@ const HomeScreen = ({propName}) => {
   const [item, setItem] = useState("");
   const [data, setData] = useState({});
 
-  var user = propName.currentUser;
-  console.log('route.params are ' + user);
-  var exerciseLogs = UserObject.exerciseLogTest;
+  const [graphData, setGraphData] = useState([]);
+  const[specificExercises,setSpecificExercises] = useState([]);
+  const[dropDownExercises, setDropDownExercises] = useState([]);
+  const[exerciseLogs, setExerciseLogs] = useState([]);
 
-  let graphData = [];
-  let specificExercises = [];
-  let dropDownExercises = [];
+  
+  var user = propName.currentUser.exercises;
+
+  useEffect(() => {
+    const requestData = async() => {
+      const userLogs = await UserObject.getUserLogs('NewUser3@gmail.com', 'gamer775');
+      setExerciseLogs(userLogs);
+    };
+    requestData();
+  }, [])
 
   function getSpecificExercise(exercise){
+    var temp = []
     for(var i = 0; i < exerciseLogs.length ; i++){
       if(exerciseLogs[i][2] == exercise){
         var obj = {};
@@ -39,6 +50,7 @@ const HomeScreen = ({propName}) => {
   }
 
   function loadGraphData(exercise){
+    var temp = [];
     getSpecificExercise(exercise);
     for(var i = 0; i < specificExercises.length ; i++){
       var obj = {};
@@ -48,7 +60,6 @@ const HomeScreen = ({propName}) => {
     }
   }
 
-  loadGraphData(0);
   /*
   graphData = [
     { x: "May", y: 215 },
@@ -60,6 +71,7 @@ const HomeScreen = ({propName}) => {
   ];
   */
   
+  console.log(exerciseLogs);
 
   return (
     <View style={styles.container}>
@@ -79,6 +91,9 @@ const HomeScreen = ({propName}) => {
           <PureChart data={graphData} type="line" height={100} />
           <View>
             <TextItem style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', marginTop:10}}> Back Squat Max  </TextItem>
+          </View>
+          <View>
+            {<Button title={'test button'}/>}
           </View>
         </View>
 
@@ -120,6 +135,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     height: 60,
     paddingBottom: 25,
+    backgroundColor:'rgba(52, 52, 52, 0)',
   },
   calendar: {
     flex: 1.2,
