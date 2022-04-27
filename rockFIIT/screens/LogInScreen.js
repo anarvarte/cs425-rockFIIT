@@ -41,15 +41,9 @@ const LogIn = ({navigation}) => {
     }
 
     function navigateTabs(){
+        var currentUser = new UserObject.User();
         navigation.navigate('Tabs', {currentUser});
     }
-
-    /*
-    function exercisesTest(){
-        var exerciseList = reactAPI.getExerciseList();
-        console.log(exerciseList);
-    }
-    */
     
     
     const [exerciseObjectList, setExerciseObjectList] = useState([]);
@@ -182,7 +176,6 @@ const LogIn = ({navigation}) => {
     async function checkIfUserExists(){
         var userExists = await UserObject.userAuthenticate(checkUserName,checkPassword);
         console.log(userExists);
-        //console.log('userExists is  ' + userExists);
         if(userExists == 'false'){
             alert("Invalid Username or Password");
         }
@@ -194,21 +187,11 @@ const LogIn = ({navigation}) => {
             //currentUser.programs = UserObject.programListTest;
             //currentUser.goals = await UserObject.getUserGoals(checkUserName, checkPassword);
             currentUser.exerciseList = await UserObject.getExerciseList();
-
-            /*
-            console.log('The users username is ' + currentUser.username);
-            console.log('The users exercises are ' +currentUser.exercises);
-            console.log('The users programs are ' +currentUser.programs);
-            console.log('The users goals are ' + currentUser.goals);
-            */
-
-            //console.log(currentUser);
             
             alert("Welcome, " + currentUser.username);
             navigation.navigate('Tabs', {currentUser});
         }
     }
-    
     
     return(
         <View style={styles.mainView}>
@@ -228,13 +211,11 @@ const LogIn = ({navigation}) => {
                     &nbsp;&nbsp;&nbsp;Log In
                 </Text>
                 <View style={styles.logInForm}>
-
                    <CustomInput
                         name="username"
                         placeholder="Username"
                         control={control}
                         rules={{required:'Username is required'}}
-
                     />
                     <CustomInput
                         name="password"
@@ -243,7 +224,6 @@ const LogIn = ({navigation}) => {
                         secureTextEntry={true}
                         rules={{required: 'Password is required'}}
                     />
-
                     <CustomButton
                         text="Log In"
                         onPress={handleSubmit(checkIfUserExists)}
@@ -254,60 +234,6 @@ const LogIn = ({navigation}) => {
                         onPress={navigateSignUp}
                         type="Tertiary"
                     />
-                    {/*
-                    <CustomButton
-                        text="User Object Test"
-                        onPress={userObjectTest}
-                        type="Tertiary"
-                    />  
-                     */}
-                    {/*
-                    <CustomButton
-                        text="Forgot Password"
-                        onPress={onForgotPasswordPressed}
-                        type="Tertiary"
-                    /> 
-                    */}  
-                    {/*
-                    <CustomButton
-                        text="Add User Test"
-                        onPress={addNewUser}
-                        type="Tertiary"
-                    /> 
-                    */} 
-                    {
-                    <CustomButton
-                        text="Fetch Exercises Test"
-                        onPress={exercisesTest}
-                        type="Tertiary"
-                    />
-                    } 
-                    <CustomButton
-                        text="Log Exercise Test"
-                        onPress={logExercisesTest}
-                        type="Tertiary"
-                    />
-                    {/*
-                    <CustomButton
-                        text="Post Exercises Test"
-                        onPress={addExerciseTest}
-                        type="Tertiary"
-                    />  
-                    */}
-                    {/*
-                    <CustomButton
-                        text="Activities Test"
-                        onPress={userAuthenticate}
-                        type="Tertiary"
-                    />  
-                */}
-                    {/*
-                    <CustomButton
-                        text="Get Users Test"
-                        onPress={getUserTest}
-                        type="Tertiary"
-                    />  
-                    */} 
 
                 </View>
             </View>
