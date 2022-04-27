@@ -248,13 +248,9 @@ const LogIn = ({navigation}) => {
                         //onPress={handleSubmit(navigateTabs)}
                     />  
                     <CustomButton
+                        style={{marginTop:50}}
                         text="Create New Account"
                         onPress={navigateSignUp}
-                        type="Tertiary"
-                    />
-                    <CustomButton
-                        text="Loading Test"
-                        onPress={isLoading}
                         type="Tertiary"
                     />
 

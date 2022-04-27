@@ -36,9 +36,9 @@ const GoalsScreen = ({propName}) => {
 
   }, [])
 
-  const deleteItem = (key) => {
-    setData((prevTodo) => {
-      return prevTodo.filter((todo) => todo.key != key);
+  const deleteItem = (id) => {
+    setNewGoalList((items) => {
+      return items.filter((items) => items.key != id);
     });
   };
 
@@ -70,7 +70,7 @@ const GoalsScreen = ({propName}) => {
   */
 
   var userGoalsList = userGoals.map((goals) => 
-  <GoalList item={goals[2]} deleteItem={deleteItem} completed={goals[3]}/>
+  <GoalList item={goals[2]} deleteItem={deleteItem} completed={goals[3]} index/>
   )
 
   

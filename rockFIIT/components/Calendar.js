@@ -113,8 +113,8 @@ const Calendar = ({navigation, propName}) => {
         }}
         items={items}
         loadItemsForMonth={loadItems}
-        //selected={'2022-04-10'}
-        selected = {userLogs[0][7]}
+        selected={'2022-04-05'}
+        //selected = {userLogs[0][7]}
         renderItem={renderItem}
         renderEmptyDate={() => {
           return(

@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
         resizeMode:'contain',
     },
     logInHeading:{
-        color:'black',
+        color:'white',
         fontSize:32,
         fontWeight:'bold',
         justifyContent:'center',

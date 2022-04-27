@@ -18,12 +18,10 @@ export default function TodoList({ item, deleteItem, completed }) {
 
     };
 
-  
-
 
   return (
     <ComponentContainer style={active ? styles.fin : styles.notfin}>
-      <ListContainer style={[styles['goal_' + isComplete]]}>
+      <ListContainer>
         <CircleContainer>
           <TouchableOpacity>
             <Entypo name ={active ? 'circle' : 'circle-with-cross'} size={23} color="black" onPress={() => handleChangeActive()}/>
