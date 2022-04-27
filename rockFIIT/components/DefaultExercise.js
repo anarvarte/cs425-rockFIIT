@@ -7,8 +7,6 @@ import styled from "styled-components";
 
 const DefaultExercise = ({exerciseName, sets, reps, weight, comments}) => {
 
-  console.log(sets);
-
     const [modalVal, setModalVal] = useState(false);
   return (
     <ComponentContainer>

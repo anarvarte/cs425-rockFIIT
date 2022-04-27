@@ -52,7 +52,7 @@ const CustomProgram = ({ route }) => {
 
   var exerciseListMap = exerciseList.map(exercises => 
     <TouchableOpacity onPress={() => addNewProgramExercise(exercises[2])}>
-        <Text>{exercises[2]}</Text>
+        <Text style={{fontSize: 22, fontFamily:"Georgia"}}>- {exercises[2]}</Text>
     </TouchableOpacity>
   )
 
@@ -125,8 +125,8 @@ const CustomProgram = ({ route }) => {
                         {exerciseListMap}
                     </ScrollView>
                   <TouchableOpacity onPress={() => setIsVisible(false) }>
-                        <View style={styles.addWrapper}>
-                            <Text style={styles.addButtonText}>x</Text>
+                        <View style={styles.addWrapper2}>
+                            <Text style={{color:'white',fontSize:30}}>x</Text>
                         </View>
                  </TouchableOpacity>  
                 </View>
@@ -134,20 +134,22 @@ const CustomProgram = ({ route }) => {
         </Modal>
         <Modal transparent visible={modalProgramName}>
             <View style={styles.exerciseModalBackground}>
-                <View style={[styles.exerciseModalContainer]}>
+                <View style={[styles.saveModalContainer]}>
                 <Text style={styles.modalFieldLabels}>
                         Program Name: 
                     </Text>
                     <TextInput name='name' style={styles.modalFieldInputs} onChangeText={newText => setName(newText)}>
                     </TextInput>
                   <TouchableOpacity onPress={() => setModalProgramName(false) }>
-                        <View style={styles.addWrapper}>
-                            <Text style={styles.addButtonText}>x</Text>
+                        <View style={styles.addWrapper2}>
+                            <Text style={{fontSize: 20,
+      color: 'white',}}>x</Text>
                         </View>
                  </TouchableOpacity>  
                  <TouchableOpacity onPress={() => saveNewGoals() }>
-                        <View style={styles.addWrapper}>
-                            <Text style={styles.addButtonText}>Save</Text>
+                        <View style={styles.addWrapper2}>
+                            <Text style={{fontSize: 20,
+      color: 'white',}}>Save</Text>
                         </View>
                  </TouchableOpacity>  
                 </View>
@@ -181,26 +183,26 @@ const styles = StyleSheet.create({
     alignItems:"center",
   },
   programHeader:{
-    
+    marginTop:70,
     color:'white',
     fontFamily:"Georgia"
     
   },
   addWrapper: {
-    width: 60,
-    height: 60,
-    marginLeft:10,
-    backgroundColor: 'white',
-    borderRadius: 60,
+    width: 90,
+    height: 90,
+    marginLeft:20,
+    marginBottom:50,
+    backgroundColor: '#DD7F4A',
+    borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
+   
       
   },
   addButtonText:{
       fontSize: 20,
-      
+      color: 'white',
   },
 
   exerciseContainer:{
@@ -215,15 +217,14 @@ addExerciseWrapper: {
     alignItems: 'center',
 },
 addWrapper2: {
-  width: 45,
-  height: 45,
-  marginLeft:10,
-  backgroundColor: 'white',
+  width: 85,
+  height: 85,
+  marginLeft:40,
+  backgroundColor: '#00264D',
   borderRadius: 60,
   justifyContent: 'center',
   alignItems: 'center',
-  borderColor: '#C0C0C0',
-  borderWidth: 1,
+  marginTop: 30,
   
 },
 addButtonText:{
@@ -245,6 +246,17 @@ exerciseModalContainer:{
     alignItems:'flex-start', 
     flexDirection:'row',
     flexWrap: 'wrap',
+},
+saveModalContainer:{
+  width:'80%',
+  backgroundColor:'white',
+  paddingHorizontal:20,
+  paddingVertical:30,
+  borderRadius:15,
+  alignItems:'flex-start', 
+  flexDirection:'row',
+  flexWrap: 'wrap',
+  height: '25%',
 },
 modalFieldLabels:{
   width:'50%',

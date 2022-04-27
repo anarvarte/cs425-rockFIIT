@@ -110,10 +110,11 @@ addExerciseWrapper: {
     alignItems: 'center',
 },
 addWrapper: {
-    width: 30,
-    height: 30,
-    marginLeft:10,
-    backgroundColor: 'white',
+    width: 90,
+    height: 90,
+    marginTop: 30,
+    marginLeft:50,
+    backgroundColor: '#00264D',
     borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
@@ -135,6 +136,7 @@ addWrapper2: {
 },
 addButtonText:{
     fontSize: 20,
+    color: 'white',
     
 },
 exerciseModalBackground:{

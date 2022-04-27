@@ -90,7 +90,7 @@ const WeightLiftingScreen = ({ propName }) => {
               <SubmitButton onPress={() => {
                   addNewProgram()
                 }}>
-                <Text style={{color: "white", fontSize: 18}}> + </Text>
+                <Text style={{color: "white", fontSize: 18, fontFamily: "Georgia"}}> Add </Text>
               </SubmitButton>
             </InputContainer>
       </View>
@@ -130,7 +130,7 @@ const ComponentContainer = styled.View`
 const InputContainer = styled.View`
   flex-direction: row;
   border-radius: 10px;
-  
+  justify-content: center;
 `;
 
 const Input = styled.TextInput`
@@ -145,11 +145,12 @@ const Input = styled.TextInput`
 `;
 
 const SubmitButton = styled.TouchableOpacity`
-  width: 50px;
+  width: 75px;
+  height: 75px;
   justify-content: center;
   align-items: center;
   background-color: #DD7F4A;
-  margin-bottom: 220px;
+  margin-bottom: 250px;
   border-radius: 50px;
 `;
 

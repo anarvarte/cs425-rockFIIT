@@ -8,8 +8,6 @@ import '../assets/LogInScreenLogo.png';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 
-import Tabs from '../navigation/tabs';
-import SignUp from './SignUpScreen';
 
 import {useForm, Controller} from 'react-hook-form';
 import { UserObject } from "../user_object/UserObject";

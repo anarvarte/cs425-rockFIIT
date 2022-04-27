@@ -85,12 +85,12 @@ const HomeScreen = ({propName}) => {
   }
 
   var testGraphData = [
-    { x: "May", y: 215 },
-    { x: "June", y: 245 },
-    { x: "July", y: 265 },
-    { x: "August", y: 300 },
-    { x: "September", y: 315 },
-    { x: "October", y: 330 },
+    { x: "3-17-22", y: 215 },
+    { x: "3-19-22", y: 245 },
+    { x: "3-21-22", y: 265 },
+    { x: "3-23-22", y: 300 },
+    { x: "3-25-22", y: 315 },
+    { x: "3-27-22", y: 330 },
   ];
 
 
@@ -107,8 +107,8 @@ const HomeScreen = ({propName}) => {
           
         </View>
         <View>
-          <TouchableOpacity onPress={() => setModalVis(true)} style ={styles.Wrapper1}>
-          <TextItem  style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', color:'white', marginTop: 5}}> Dropdown  </TextItem>
+          <TouchableOpacity style ={styles.Wrapper1}>
+          <TextItem  style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', color:'white', marginTop: 5}}>Back Squats</TextItem>
           </TouchableOpacity>
             
           </View>
@@ -245,19 +245,22 @@ addWrapper: {
     fontWeight: 'bold',
 },
 addWrapper2: {
-  width: 45,
-  height: 45,
-  marginLeft:10,
-  backgroundColor: 'white',
+  width: 65,
+  height: 65,
+  backgroundColor: '#00264D',
   borderRadius: 60,
   justifyContent: 'center',
   alignItems: 'center',
   borderColor: '#C0C0C0',
   borderWidth: 1,
+  marginLeft: 5,
+  marginTop: 8,
   
 },
 addButtonText:{
     fontSize: 20,
+    color: 'white',
+    fontFamily: 'Georgia',
     
 },
 exerciseModalBackground:{
@@ -296,8 +299,10 @@ modalFieldInputs:{
 },
 modalHeader:{
     fontWeight: 'bold',
-    fontSize: 28,
+    fontSize: 38,
+    marginBottom: 10,
     color:'white',
+    fontFamily: "Georgia",
 },
 commentFieldInputs:{
   width:'50%',
