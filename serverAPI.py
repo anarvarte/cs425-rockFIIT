@@ -457,7 +457,7 @@ def delProgram():
 @app.route('/addGoal', methods=['POST'])
 def addGoal():
     responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ('userName', 'goalName', 'completed', 'password')
+    requiredFields = ('userName', 'exerciseGoal', 'weightGoal', 'completed', 'date', 'password')
     try:
         msg = request.json
         for field in requiredFields:
@@ -495,7 +495,7 @@ def addGoal():
     if bcrypt.checkpw(password.encode(), dbPwd):
         insertQuery = 'INSERT INTO ' + goalTable + " (" + \
         ','.join(requiredFields[:len(requiredFields)-1]) + \
-        ') VALUES(?,?,?)'
+        ') VALUES(?,?,?,?,?,?)'
 
         try:
             con = sqlite3.connect(DATABASE)
@@ -519,7 +519,7 @@ def addGoal():
 @app.route('/updateGoal', methods=['POST'])
 def updateGoal():
     responseMsg = {'info' : '', 'data' : False}
-    requiredFields = ('userName', 'goalName', 'completed', 'password')
+    requiredFields = ('userName', 'exerciseGoal', 'weightGoal', 'completed', 'password')
     try:
         msg = request.json
         for field in requiredFields:
@@ -531,8 +531,9 @@ def updateGoal():
         return jsonify(responseMsg), 400
 
     userName = msg[requiredFields[0]]
-    goalName = msg[requiredFields[1]]
-    completed = msg[requiredFields[2]]
+    exerciseGoal = msg[requiredFields[1]]
+    weightGoal = msg[requiredFields[2]]
+    completed = msg[requiredFields[3]]
     password = msg[requiredFields[len(requiredFields)-1]]
     del msg['password']
 
@@ -558,12 +559,12 @@ def updateGoal():
 
     if bcrypt.checkpw(password.encode(), dbPwd):
         updateQuery = 'UPDATE ' + goalTable + ' SET completed = ?' + \
-        ' WHERE userName = ? AND goalName = ?'
+        ' WHERE userName = ? AND exerciseGoal = ? AND weightGoal = ?'
 
         try:
             con = sqlite3.connect(DATABASE)
             cur = con.cursor()
-            cur.execute(updateQuery, (completed, userName, goalName))
+            cur.execute(updateQuery, (completed, userName, exerciseGoal, weightGoal))
             con.commit()
 
             responseMsg['info'] = 'Successfully updated goal'
