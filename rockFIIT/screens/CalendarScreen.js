@@ -24,14 +24,14 @@ const CalendarScreen = ({ navigation, propName }) => {
       setUserLogs(temp);
     };
     requestData();
-    console.log(userLogs);
+    //console.log(propName);
   }, []);
 
   return (
     <View style={styles.container}>
-      {userLogs &&
+      {
         <View style={styles.calendarView}>
-          <Calendar/>
+          <Calendar propName={propName}/>
         </View>
       } 
     </View>

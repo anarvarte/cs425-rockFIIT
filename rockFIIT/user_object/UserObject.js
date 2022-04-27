@@ -155,7 +155,17 @@ async function getUserLogs(username,password){
     })
 }
 
-
+async function getDefaultPrograms(){
+    var programList = {};
+    return new Promise((resolve) => {
+        fetch(unrIP + '/getProgram').then(response => response.json().then(data => {
+            programList = data.data;
+          }))
+          setTimeout(() => {
+            resolve(programList);
+        }, 800);
+    })
+}
 
 async function getUserPrograms(username,password){
     var programData = {};
@@ -308,6 +318,7 @@ export var UserObject = {
     userAuthenticate,
     getExerciseList,
     getUserLogs,
+    getDefaultPrograms,
     getUserPrograms,
     getUserGoals,
     addUserProgram,

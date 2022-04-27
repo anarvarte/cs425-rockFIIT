@@ -31,12 +31,16 @@ const WeightLiftingScreen = ({ propName }) => {
   const [newProgram, setNewProgram] = useState("");
   const[programList, setNewProgramList] = useState([]);
   const[userPrograms, setUserPrograms] = useState([]);
+  const[defaultPrograms, setDefaultPrograms] = useState([]);
 
 
   useEffect(() => {
     const requestData = async() => {
       const userPrograms = await UserObject.getUserPrograms(propName.currentUser.username, propName.currentUser.password);
+      const defaultPrograms = await UserObject.getDefaultPrograms();
       setUserPrograms(userPrograms);
+      setDefaultPrograms(defaultPrograms);
+      console.log(defaultPrograms);
     };
     requestData();
   }, [])
@@ -52,9 +56,16 @@ const WeightLiftingScreen = ({ propName }) => {
     navigation.navigate('CustomProgramScreen', {credentials})
   }
   
+
   var userProgramsList = userPrograms.map((programs) => 
       <DefaultList item={programs[2]} exercises={programs} location={'Program'}/>
    )
+   
+
+  var defaultProgramsList = defaultPrograms.map((programs) => 
+    <DefaultList item={programs[2]} exercises={programs} location={'Program'}/>
+)
+
    
   return (
     <ComponentContainer>
@@ -64,6 +75,9 @@ const WeightLiftingScreen = ({ propName }) => {
       </View>  
       <View>
           <ScrollView>
+            {
+              defaultProgramsList
+            }
             {
               userProgramsList
             }

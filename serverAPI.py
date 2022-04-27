@@ -12,6 +12,7 @@ exerciseLog = 'exerciseLog'
 userTable = 'userTable'
 programTable = 'programTable'
 goalTable = 'goalTable'
+defaultPrograms = 'defaultPrograms'
 
 app = Flask(__name__)
 
@@ -374,6 +375,22 @@ def programs():
         responseMsg['info'] = 'Authentication failed'
         return jsonify(responseMsg), 403
 
+@app.route('/getProgram', methods=['GET'])
+def getProgram():
+    responseMsg = {'info' : '', 'data' : False}
+    query = 'SELECT * FROM ' + defaultPrograms
+
+    try:
+        con = sqlite3.connect(DATABASE)
+        cur = con.cursor()
+        responseMsg['data'] = cur.execute(query).fetchall()
+        responseMsg['info'] = 'Successfully retrieved all exercises'
+        return jsonify(responseMsg), 200
+    except sqlite3.Error as err:
+        responseMsg['info'] = err.args[0]
+        return jsonify(responseMsg), 500
+    finally:
+        con.close()
 
 # Route to delete a user's program
 @app.route('/delProgram', methods=['POST'])

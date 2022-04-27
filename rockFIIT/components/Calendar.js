@@ -19,9 +19,11 @@ function convertDate(time){
 
 const Calendar = ({navigation, propName}) => {
 
+  console.log(propName.currentUser.exercises);
+
   const [items, setItems] = useState({});
   //const [userLogs, setUserLogs] = useState([]);
-  var userLogs = UserObject.exerciseLogTest;
+  var userLogs = propName.currentUser.exercises;
 
   async function loadItems(){
     setTimeout(() => {
