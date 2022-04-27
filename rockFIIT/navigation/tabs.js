@@ -64,7 +64,10 @@ const Tabs = ({route}) => {
     />
       <Tab.Screen
         name="Calendar"
-        component={CalendarScreen}
+        //component={CalendarScreen}
+        children={() =>
+          <CalendarScreen propName={route.params}/>
+        }
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (

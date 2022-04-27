@@ -32,6 +32,7 @@ const WeightLiftingScreen = ({ propName }) => {
   const[programList, setNewProgramList] = useState([]);
   const[userPrograms, setUserPrograms] = useState([]);
 
+
   useEffect(() => {
     const requestData = async() => {
       const userPrograms = await UserObject.getUserPrograms(propName.currentUser.username, propName.currentUser.password);
@@ -45,21 +46,13 @@ const WeightLiftingScreen = ({ propName }) => {
   }
 
   function addNewProgram(){
-    setNewProgramList([... programList, {
-      id: programList.length,
-      value: newProgram,
-    }])
-    programList.push(newProgram);
-    console.log(programList)
+    var credentials = []
+    credentials.push(propName.currentUser.username);
+    credentials.push(propName.currentUser.password);
+    navigation.navigate('CustomProgramScreen', {credentials})
   }
-
-  var userProgramsTest = UserObject.programListTest;
-  var customProgramsTest = [
-    {id: 0, value: 'CUSTOMPROGRAM'},
-    {id: 1, value: 'CUSTOMPROGRAM2'},
-  ]
   
-  var userProgramsList = userProgramsTest.map((programs) => 
+  var userProgramsList = userPrograms.map((programs) => 
       <DefaultList item={programs[2]} exercises={programs} location={'Program'}/>
    )
    
@@ -74,15 +67,14 @@ const WeightLiftingScreen = ({ propName }) => {
             {
               userProgramsList
             }
-            {
-              customProgramsTest.map((programs)  => (
+            {/*
+              programList.map((programs)  => (
                 <DefaultList item={programs.value} exercises={programs.value} location={'CustomProgramScreen'}/>
               ))
-            }
+              */}
           </ScrollView>
           
             <InputContainer>
-              <Input placeholder="Create Program..." onChangeText={getProgramName}/>
               <SubmitButton onPress={() => {
                   addNewProgram()
                 }}>

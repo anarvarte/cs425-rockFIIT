@@ -11,7 +11,9 @@ class User {
     }
 };
 
-let currentUserName = 'test';
+const homeIP = 'http://192.168.1.192:5000'
+const unrIP = 'http://172.27.32.199:5000'
+
 
 let programListTest = [
     [1, 'NewUser3@gmail.com', 'PPL Split', 0, 2, 4, 9, 11],
@@ -34,7 +36,7 @@ let exerciseLogTest = [
     [3, 'NewUser3@gmail.com', 0, 3, 10, 235.0, 'Easy Work', '4/9/22'],
     [4, 'NewUser3@gmail.com', 0, 3, 10, 240.0, 'Easy Work', '4/12/22'],
     [5, 'NewUser3@gmail.com', 0, 3, 10, 245.0, 'Easy Work', '4/13/22'],
-    [6, 'NewUser3@gmail.com', 1, 3, 10, 245.0, 'Easy Work', '4/13/22'],
+    [6, 'NewUser3@gmail.com', 1, 3, 10, 245.0, 'Easy Work', '4/14/22'],
 ];
 
 
@@ -60,7 +62,7 @@ async function addNewUser(username, password, name){
             firstName: name,
             weight: '',
         };
-        fetch('https://RockFIIT-DB-Test.cybern.repl.co/addUser', {
+        fetch(unrIP + '/addUser', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -79,7 +81,7 @@ async function addNewUser(username, password, name){
             else{
                 resolve('true');
             }
-        }, 2000);
+        }, 800);
     })
 
 }
@@ -92,7 +94,7 @@ async function userAuthenticate(username, password){
             userName: username,
             password: password,
         }; 
-        fetch('https://RockFIIT-DB-Test.cybern.repl.co/activities', {
+        fetch(unrIP + '/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -111,7 +113,7 @@ async function userAuthenticate(username, password){
             else{
                 resolve('false');
             }
-        }, 2000);
+        }, 800);
     })
 }
 
@@ -119,12 +121,12 @@ async function getExerciseList(){
     var exerciseList = [];
     return new Promise((resolve) => {
         var exerciseList = []
-        fetch('https://RockFIIT-DB-Test.cybern.repl.co/exercises').then(response => response.json().then(data => {
+        fetch(unrIP + '/exercises').then(response => response.json().then(data => {
             exerciseList = data.data;
           }))
           setTimeout(() => {
             resolve(exerciseList);
-        }, 2000);
+        }, 800);
     })
 }
 
@@ -136,7 +138,7 @@ async function getUserLogs(username,password){
             userName: username,
             password: password,
         }; 
-        fetch('https://RockFIIT-DB-Test.cybern.repl.co/activities', {
+        fetch(unrIP + '/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -149,7 +151,7 @@ async function getUserLogs(username,password){
 
         setTimeout(() => {
             resolve(userLogs);
-        }, 2000);
+        }, 800);
     })
 }
 
@@ -163,7 +165,7 @@ async function getUserPrograms(username,password){
             userName: username,
             password: password,
         }; 
-        fetch('https://RockFIIT-DB-Test.cybern.repl.co/programs', {
+        fetch(unrIP + '/programs', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -175,7 +177,7 @@ async function getUserPrograms(username,password){
         }))
         setTimeout(() => {
             resolve(programData);
-        }, 2000);
+        }, 800);
     })
 }
 
@@ -187,7 +189,7 @@ async function getUserGoals(username,password){
             userName: username,
             password: password,
         }; 
-        fetch('https://RockFIIT-DB-Test.cybern.repl.co/goals', {
+        fetch(unrIP + '/goals', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -199,7 +201,33 @@ async function getUserGoals(username,password){
         }))
         setTimeout(() => {
             resolve(userGoals);
-        }, 2000);
+        }, 800);
+    })
+}
+
+async function addUserProgram(username, program, e1, e2, e3, e4, e5, password){
+    return new Promise(() => {
+        const userCredentials =
+        {
+            userName: username,
+            programName: program,
+            exercise1 : e1,
+            exercise2 : e2,
+            exercise3 : e3,
+            exercise4 : e4,
+            exercise5 : e5,
+            password: password,
+        }; 
+        fetch(unrIP + '/addProgram', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json;',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(userCredentials)
+        }).then(response => response.json().then(data => {
+            console.log(data.info);
+        }))
     })
 }
 
@@ -212,7 +240,7 @@ async function addUserGoals(username, password, goal, isCompleted){
             completed: isCompleted,
             password: password,
         }; 
-        fetch('https://RockFIIT-DB-Test.cybern.repl.co/addGoal', {
+        fetch(unrIP + '/addGoal', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -238,7 +266,7 @@ async function logUserExercise(username, id, sets, reps, weight, notes, date, pa
             date: date,
             password: password,
         };
-        fetch('https://RockFIIT-DB-Test.cybern.repl.co/logActivity', {
+        fetch(unrIP + '/logActivity', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -253,7 +281,9 @@ async function logUserExercise(username, id, sets, reps, weight, notes, date, pa
 
 async function loadExerciseLibrary(){
     exerciseLibrary = await getExerciseList();
+    return exerciseLibrary;
 }
+
 loadExerciseLibrary();
 
 function getExerciseFromId(id){
@@ -273,8 +303,6 @@ function getIdFromExercise(exercise){
     return 'false';
 }
 
-//exerciseLibrary
-
 export var UserObject = {
     addNewUser,
     userAuthenticate,
@@ -282,15 +310,17 @@ export var UserObject = {
     getUserLogs,
     getUserPrograms,
     getUserGoals,
+    addUserProgram,
     addUserGoals,
+    logUserExercise,
     setCurrentUser,
     getExerciseFromId,
     getIdFromExercise,
-    logUserExercise,
     loadExerciseLibrary,
     User,
     programListTest,
     exerciseListTest,
     exerciseLogTest,
     goalListTest,
+    exerciseLibrary,
 }

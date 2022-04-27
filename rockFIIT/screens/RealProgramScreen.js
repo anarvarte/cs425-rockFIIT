@@ -26,6 +26,7 @@ import EmptyProgram from "../components/EmptyProgram";
 import DefaultExercise from "../components/DefaultExercise";
 //import Program from './ProgramScreen';
 import { useNavigation } from "@react-navigation/native";
+import { UserObject } from "../user_object/UserObject";
 
 const RealProgram = ({ route }) => {
   const navigation = useNavigation();
@@ -38,11 +39,11 @@ const RealProgram = ({ route }) => {
   var displayedExercises = [];
 
   for(var i = 3 ; i < exerciseList.length ; i++){
-    displayedExercises[i] = exerciseList[i];
+    displayedExercises[i] = UserObject.getExerciseFromId(exerciseList[i]);
   }
 
   var displayedExercisesMap = displayedExercises.map(exercises => 
-    <DefaultExercise exerciseName={exercises}/>
+    <DefaultExercise exerciseName={exercises[2]} sets={exercises[4]} reps={exercises[5]} comments={exercises[3]} />
   )
 
   return (

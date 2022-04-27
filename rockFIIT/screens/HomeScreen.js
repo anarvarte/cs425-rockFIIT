@@ -84,10 +84,7 @@ const HomeScreen = ({propName}) => {
       setModalVis(false);
       await UserObject.logUserExercise(propName.currentUser.username, id, setsText, repsText, weightText, commentsText, getCurrentDate(), propName.currentUser.password);
     }
-
   }
-
-  
 
   var testGraphData = [
     { x: "May", y: 215 },
@@ -104,7 +101,7 @@ const HomeScreen = ({propName}) => {
 
         <View style={styles.header}>
             <View style={{ marginLeft:12}}>
-              <Text style={{marginTop: 15,color: 'white', fontSize:30, fontFamily:"Georgia"}}>History</Text>
+              <Text style={{marginTop: 15,color: 'white', fontSize:30, fontFamily:"Georgia"}}>Welcome</Text>
             </View>
             <View style={{ marginRight:10}}>
             <DateTime current={data.current} timezone={data.timezone} />

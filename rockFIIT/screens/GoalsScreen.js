@@ -15,6 +15,10 @@ import Header from "../components/Header";
 import Empty from "../components/Empty";
 import { UserObject } from "../user_object/UserObject";
 
+function getGoalName(val){
+  setNewGoal(val);
+}
+
 const GoalsScreen = ({propName}) => {
   const [data, setData] = useState([]);
   const [userGoals, setUserGoals] = useState([]);
@@ -56,12 +60,14 @@ const GoalsScreen = ({propName}) => {
     alert('Successfully added new goals!');
   }
 
+  /*
   var testUserGoals = [
     ['NewUser3@gmail.com', 'gamer775', 'Bench 315 LBS', 0],
     ['NewUser3@gmail.com', 'gamer775', 'Squat 405 LBS', 1 ],
   ]
+  */
 
-  var userGoalsList = testUserGoals.map((goals) => 
+  var userGoalsList = userGoals.map((goals) => 
   <GoalList item={goals[2]} deleteItem={deleteItem} completed={goals[3]}/>
   )
 

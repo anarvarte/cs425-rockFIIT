@@ -15,6 +15,12 @@ const DefaultExercise = ({exerciseName, sets, reps, weight, comments}) => {
             <View style={styles.exerciseModalBackground}>
                 <View style={[styles.exerciseModalContainer]}>
                     <Text style={styles.modalFieldLabels}>
+                        Exercise:
+                    </Text>
+                    <Text style={styles.modalFieldContent}>
+                        {exerciseName}
+                    </Text>
+                    <Text style={styles.modalFieldLabels}>
                         Sets: 
                     </Text>
                     <Text style={styles.modalFieldContent}>
@@ -25,17 +31,11 @@ const DefaultExercise = ({exerciseName, sets, reps, weight, comments}) => {
                     </Text>
                     <Text style={styles.modalFieldContent}>
                         {reps}
-                    </Text>                   
-                    <Text style={styles.modalFieldLabels}>
-                        Weight: 
-                    </Text>
-                    <Text style={styles.modalFieldContent}>
-                        {weight}
-                    </Text>  
+                    </Text>                    
                     <Text style={styles.commentFieldLabel}>
                         Comments: 
                     </Text>
-                    <Text style={styles.modalFieldContent}>
+                    <Text >
                         {comments}
                     </Text> 
                     <TouchableOpacity onPress={() => setModalVal(false) }>

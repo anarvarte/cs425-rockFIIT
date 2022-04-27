@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   ScrollView,
   Text,
+  TextInput,
   Button,
   StyleSheet,
   StatusBar,
@@ -26,25 +27,34 @@ import DefaultExercise from "../components/DefaultExercise";
 //import Program from './ProgramScreen';
 
 import { UserObject } from "../user_object/UserObject";
+import { useNavigation } from "@react-navigation/native";
 
 const CustomProgram = ({ route }) => {
+
+  const navigation = useNavigation();
   const [isVisible, setIsVisible] = useState(false);
+  const [modalProgramName, setModalProgramName] = useState(false);
   const [newProgramExercises, setNewProgramExercises] = useState([]);
+  const [nameText, setName] = useState('');
   const [modalVal, setModalVal] = useState(false);
   const [data, setData] = useState([]);
+  const [exerciseList, setExerciseList] = useState([]);
+  
+  //route.params.credentials[0], route.params.credentials[1]
+  
+  useEffect(() => {
+    const requestData = async() => {
+      const exerciseList = await UserObject.loadExerciseLibrary();
+      setExerciseList(exerciseList);
+    };
+    requestData();
+  }, [])
 
-  var programName = route.params;
-  var exerciseList = UserObject.exerciseListTest;
   var exerciseListMap = exerciseList.map(exercises => 
-    <TouchableOpacity onPress={() => addNewProgramExercise(exercises[0])}>
-        <Text>{exercises[0]}</Text>
+    <TouchableOpacity onPress={() => addNewProgramExercise(exercises[2])}>
+        <Text>{exercises[2]}</Text>
     </TouchableOpacity>
   )
-
-  async function loadExerciseList(){
-    exerciseList = await UserObject.getExerciseList();
-    console.log('exerciseList is ' + exerciseList);
-  }
 
   async function loadModalWithExercises(){
     setIsVisible(true);
@@ -55,12 +65,32 @@ const CustomProgram = ({ route }) => {
       id: newProgramExercises.length,
       value : exercise
     }])
+    console.log(newProgramExercises);
+  }
+
+  async function saveNewGoals(){
+
+    for(var i = 0; i < newProgramExercises.length ; i++){
+      console.log(UserObject.getIdFromExercise(newProgramExercises[i].value));
+    }
+
+    if(nameText == ''){
+      alert('Please name your program!');
+    }
+    else{
+      alert('You have successfully created a new program!');
+      await UserObject.addUserProgram(route.params.credentials[0], nameText, UserObject.getIdFromExercise(newProgramExercises[0].value), UserObject.getIdFromExercise(newProgramExercises[1].value), UserObject.getIdFromExercise(newProgramExercises[2].value), UserObject.getIdFromExercise(newProgramExercises[3].value), UserObject.getIdFromExercise(newProgramExercises[4].value), route.params.credentials[1]);
+      navigation.navigate("WeightLiftingScreen");
+    }
+
+    //UserObject.getIdFromExercise(newProgramExercises[0].value);
+
   }
 
   return (
     <ComponentContainer>
       <View style={styles.headerContainer}>
-        <HeaderText style={styles.programHeader}>{programName}</HeaderText>
+        <HeaderText style={styles.programHeader}>Create New Program</HeaderText>
         <ScrollView>
           {
             newProgramExercises.map(programExercises => (
@@ -76,7 +106,7 @@ const CustomProgram = ({ route }) => {
                     <Text style={styles.addButtonText}>+</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity  style={{width:'40%'}}>
+              <TouchableOpacity  style={{width:'40%'}} onPress= {() => setModalProgramName(true)}>
                 <View style={styles.addWrapper}>
                     <Text style={styles.addButtonText}>Save</Text>
                 </View>
@@ -94,14 +124,6 @@ const CustomProgram = ({ route }) => {
                     <ScrollView>
                         {exerciseListMap}
                     </ScrollView>
-                    {/*
-                    <FlatList
-                        data={exerciseArray}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => item}
-                        onPress={() => setisVisible(false)}
-                         /> 
-                     */}
                   <TouchableOpacity onPress={() => setIsVisible(false) }>
                         <View style={styles.addWrapper}>
                             <Text style={styles.addButtonText}>x</Text>
@@ -110,6 +132,29 @@ const CustomProgram = ({ route }) => {
                 </View>
             </View>
         </Modal>
+        <Modal transparent visible={modalProgramName}>
+            <View style={styles.exerciseModalBackground}>
+                <View style={[styles.exerciseModalContainer]}>
+                <Text style={styles.modalFieldLabels}>
+                        Program Name: 
+                    </Text>
+                    <TextInput name='name' style={styles.modalFieldInputs} onChangeText={newText => setName(newText)}>
+                    </TextInput>
+                  <TouchableOpacity onPress={() => setModalProgramName(false) }>
+                        <View style={styles.addWrapper}>
+                            <Text style={styles.addButtonText}>x</Text>
+                        </View>
+                 </TouchableOpacity>  
+                 <TouchableOpacity onPress={() => saveNewGoals() }>
+                        <View style={styles.addWrapper}>
+                            <Text style={styles.addButtonText}>Save</Text>
+                        </View>
+                 </TouchableOpacity>  
+                </View>
+            </View>
+        </Modal>
+
+        
 
     </ComponentContainer>
   );

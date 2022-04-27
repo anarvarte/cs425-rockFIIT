@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { View, Text, Button, StyleSheet, ImageBackground } from "react-native";
 import styled from "styled-components";
 
@@ -15,15 +15,25 @@ import { UserObject } from "../user_object/UserObject";
 
 const homeImg = require("../assets/homeImg.png");
 
-const CalendarScreen = ({ navigation }) => {
+const CalendarScreen = ({ navigation, propName }) => {
+  const [userLogs, setUserLogs] = useState([]);
 
+  useEffect(() => {
+    const requestData = async() => {
+      const temp = await UserObject.getUserLogs(propName.currentUser.username, propName.currentUser.password);
+      setUserLogs(temp);
+    };
+    requestData();
+    console.log(userLogs);
+  }, []);
 
   return (
     <View style={styles.container}>
+      {userLogs &&
         <View style={styles.calendarView}>
-          <Calendar />
+          <Calendar/>
         </View>
-      
+      } 
     </View>
   );
 };

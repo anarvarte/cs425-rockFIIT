@@ -41,7 +41,6 @@ const LogIn = ({navigation}) => {
     }
 
     function navigateTabs(){
-        var currentUser = new UserObject.User();
         navigation.navigate('Tabs', {currentUser});
     }
 
@@ -179,7 +178,7 @@ const LogIn = ({navigation}) => {
 
 
     
-
+    var currentUser = new UserObject.User();
     async function checkIfUserExists(){
         var userExists = await UserObject.userAuthenticate(checkUserName,checkPassword);
         console.log(userExists);
@@ -247,8 +246,8 @@ const LogIn = ({navigation}) => {
 
                     <CustomButton
                         text="Log In"
-                        //onPress={handleSubmit(checkIfUserExists)}
-                        onPress={handleSubmit(navigateTabs)}
+                        onPress={handleSubmit(checkIfUserExists)}
+                        //onPress={handleSubmit(navigateTabs)}
                     />  
                     <CustomButton
                         text="Create New Account"
