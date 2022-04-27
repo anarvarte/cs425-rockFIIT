@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import CustomProgram from "../screens/CustomProgramScreen";
 
@@ -18,6 +19,9 @@ const DefaultList = ({ item, deleteItem , location, exercises}) => {
           </CircleContainer>
         <View>
           <TextItem>{item}</TextItem>
+        </View>
+        <View style={styles.button}>
+          <MaterialIcons name="delete" size={22} onPress={() => deleteItem(item.key)} />
         </View>
       </ListContainer>
     </ComponentContainer>

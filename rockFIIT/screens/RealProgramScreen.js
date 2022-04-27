@@ -40,11 +40,13 @@ const RealProgram = ({ route }) => {
 
   for(var i = 3 ; i < exerciseList.length ; i++){
     displayedExercises[i] = UserObject.getExerciseFromId(exerciseList[i]);
+    console.log(displayedExercises[i])
   }
 
   var displayedExercisesMap = displayedExercises.map(exercises => 
     <DefaultExercise exerciseName={exercises[2]} sets={exercises[4]} reps={exercises[5]} comments={exercises[3]} />
   )
+
 
   return (
     <ComponentContainer>
