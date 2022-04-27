@@ -275,18 +275,19 @@ const LogIn = ({navigation}) => {
                         type="Tertiary"
                     /> 
                     */} 
-                    {
+                    {/*
                     <CustomButton
                         text="Fetch Exercises Test"
                         onPress={exercisesTest}
                         type="Tertiary"
                     />
-                    } 
+                */} {/*
                     <CustomButton
                         text="Log Exercise Test"
                         onPress={logExercisesTest}
                         type="Tertiary"
                     />
+                */}
                     {/*
                     <CustomButton
                         text="Post Exercises Test"
