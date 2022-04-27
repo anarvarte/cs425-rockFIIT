@@ -76,10 +76,14 @@ const styles = StyleSheet.create({
   },
   headerContainer:{
     marginTop:20,
+    alignItems:"center",
+    
   },
   programHeader:{
-    fontWeight:'bold',
-    color:'black',
+
+    color:'white',
+    fontFamily:"Georgia"
+    
   },
   addWrapper: {
     width: 60,
@@ -98,7 +102,7 @@ const styles = StyleSheet.create({
   },
 });
 const ComponentContainer = styled.View`
-  background-color: #097392;
+  background-color: #00264D;
   height: 100%;
   flex-direction: column;
   align-items: center;

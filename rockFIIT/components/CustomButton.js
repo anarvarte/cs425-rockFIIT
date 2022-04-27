@@ -14,7 +14,7 @@ const CustomButton = ({onPress, text, type = "Primary"}) => {
 const styles = StyleSheet.create({
     buttonContainer:{
 
-        width:'50%',
+        width:'85%',
         padding:15,
 
         alignItems:'center',
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer_Primary:{
         backgroundColor:'#DD7F4A',
-        marginTop:20,
+        marginTop:30,
     },
     buttonContainer_Tertiary:{
         marginTop:10,
@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     buttonText_Tertiary:{
-        color:'black',
-        fontSize:14,
+        color:'white',
+        fontSize:18,
     }
 })
 

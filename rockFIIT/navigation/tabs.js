@@ -80,9 +80,10 @@ const Tabs = ({route}) => {
                 source={require("../assets/calendar.png")}
                 resizeMode="contain"
                 style={{
-                  width: 50,
+                  width: 40,
                   height: 50,
                   opacity: 0.7,
+                  tintColor: focused ? "#DD7F4A" : "#748c94",
                 }}
               />
               <Text style={{

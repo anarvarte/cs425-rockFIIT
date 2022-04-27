@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 
 import DateTime from '../components/DateTime';
-import Workouts from '../components/workoutsHome';
 
 import useDatabase from '../components/UseDatabase';
 import {database} from '../components/Database';
@@ -21,12 +20,10 @@ const CalendarScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={homeImg} style={styles.image}>
-
         <View style={styles.calendarView}>
           <Calendar />
         </View>
-      </ImageBackground>
+      
     </View>
   );
 };
@@ -36,8 +33,7 @@ export default CalendarScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 50,
-    backgroundColor: "#097392",
+    backgroundColor: "#f3f4f5",
   },
   image: {
     flex: 1,
@@ -56,17 +52,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column",
     height: 60,
-    paddingBottom: 25
+    paddingBottom: 5
   },
   calendarView: {
-    flex: 1.0,
+    flex: .818,
     justifyContent: "center",
     flexDirection: "column",
-    height: 20,
-    paddingTop: 10
+    
+    paddingTop: 50
   },
   calendar: {
-    flex: 1.2,
+    flex: 1,
     justifyContent: "center",
     flexDirection: "column",
     height: 20,

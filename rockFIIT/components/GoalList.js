@@ -22,7 +22,7 @@ export default function TodoList({ item, deleteItem, completed }) {
 
 
   return (
-    <ComponentContainer>
+    <ComponentContainer style={active ? styles.fin : styles.notfin}>
       <ListContainer style={[styles['goal_' + isComplete]]}>
         <CircleContainer>
           <TouchableOpacity>
@@ -88,18 +88,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5FCFF",
     
   },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF",
-    
-  },
   button: {
     paddingRight: 150,
     marginTop: 15,
     marginBottom: 15,
     flexDirection: "row",
+  },
+  fin: {
+    backgroundColor:'#FFFFFF',
+  },
+  notfin: {
+    backgroundColor:'#808080',
   },
   goal_0:{
     backgroundColor:'#FFFFFF',

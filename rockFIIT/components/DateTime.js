@@ -53,28 +53,23 @@ const DateTime = ({timezone}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex:.7,
+        flex:1,
         flexDirection:"row",
         justifyContent:'space-between',
     },
     heading: {
         fontSize: 25,
-        color:'black',
-        fontWeight: 'bold',
+        color:'white',
         padding: 5,
-        paddingLeft:60,
-        paddingTop: 30,
-        textShadowColor: 'rgb(255,255,255)',
-        textShadowRadius: 3,
+        paddingLeft:110,
+        
         fontFamily: 'Georgia',
     },
     subheading: {
         fontSize: 15,
-        color: 'black',
-        paddingLeft:65,
-        fontWeight: 'bold',
-        textShadowColor: 'rgb(255,255,255)',
-        textShadowRadius: 3,
+        color: 'white',
+        paddingLeft:105,
+        
         fontFamily: 'Georgia',
     },
     rightAlign: {

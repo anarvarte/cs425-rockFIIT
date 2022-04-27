@@ -2,9 +2,8 @@ import React, {useEffect, useState} from "react";
 import { View, Text, TextInput, Button, StyleSheet, ImageBackground, Modal} from "react-native";
 import styled from "styled-components";
 
-
+import TimerComponent from "../components/TimerComponent";
 import DateTime from '../components/DateTime';
-import Workouts from '../components/workoutsHome';
 import CustomButton from "../components/CustomButton";
 
 import useDatabase from '../components/UseDatabase';
@@ -15,7 +14,6 @@ import PureChart from 'react-native-pure-chart';
 import { UserObject } from "../user_object/UserObject";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const homeImg = require("../assets/homeImg.png");
 
 const HomeScreen = ({propName}) => {
   console.log(propName.currentUser.username);
@@ -103,31 +101,34 @@ const HomeScreen = ({propName}) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={homeImg} style={styles.image}>
 
         <View style={styles.header}>
-            <View style={{marginTop: 40, marginLeft:10}}>
-            <Text style={{color: 'grey', fontSize:20}}>Welcome,</Text>
-            <Text style={{color: 'black', fontSize: 28, fontWeight: 'bold'}}>
-              
-            </Text>
-          </View>
-          <DateTime current={data.current} timezone={data.timezone} />
+            <View style={{ marginLeft:12}}>
+              <Text style={{marginTop: 15,color: 'white', fontSize:30, fontFamily:"Georgia"}}>History</Text>
+            </View>
+            <View style={{ marginRight:10}}>
+            <DateTime current={data.current} timezone={data.timezone} />
+            </View>
+          
         </View>
+        <View>
+          <TouchableOpacity onPress={() => setModalVis(true)} style ={styles.Wrapper1}>
+          <TextItem  style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', color:'white', marginTop: 5}}> Dropdown  </TextItem>
+          </TouchableOpacity>
+            
+          </View>
 
         <View style={styles.graph}>
           <PureChart data={testGraphData} type="line"  height={250} />
+          
           <View>
-            <TextItem style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', marginTop:5}}> Back Squat Max  </TextItem>
-          </View>
-          <View>
-            <Button title={'Dropdown Here'} onPress={() => setModalVis(true)}/>
-            <Button title={'Log Exercises Here'} onPress={() => setModalVis(true)}/>
+          <TouchableOpacity onPress={() => setModalVis(true)} style ={styles.Wrapper1}>
+          <TextItem  style={{backgroundColor:'rgba(52, 52, 52, 0)', textAlign:'center', color:'white', marginTop: 5}}> Log Exercises  </TextItem>
+          </TouchableOpacity>
           </View>
         </View>
+        <TimerComponent/>
 
-        <Workouts workoutData={data.daily} />
-      </ImageBackground>
 
       <Modal transparent visible={modalVis}>
             <View style={styles.exerciseModalBackground}>
@@ -185,19 +186,30 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 50
+    backgroundColor: "#00264D",
+    justifyContent: "center",
+    alignItems: "center",
   },
+  
   header: {
-    paddingVertical: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     fontFamily: 'Georgia',
+    
   },
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center",
+    
+  },
+  Wrapper1: {
+    backgroundColor: "#DD7F4A",
+    marginTop: 35,
+    borderRadius: 10,
+    height: 35,
+    width: 200,
+    
   },
   subheading: {
     fontSize: 25,
@@ -207,24 +219,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   graph: {
-    flex: 0.5,
+    flex: 0.8,
     justifyContent: "center",
     flexDirection: "column",
-    height: 60,
-    paddingBottom: 25,
     backgroundColor:'rgba(52, 52, 52, 0)',
-    marginTop: 100,
+    marginTop: 10,
+    alignItems: "center",
+    
   },
-  calendar: {
-    flex: 1.2,
-    justifyContent: "center",
-    flexDirection: "column",
-    height: 70,
-    paddingTop: 10
-  },
-  exerciseContainer:{
-    marginTop:10,
-},
+  
 addExerciseWrapper: {
     position: 'absolute',
     bottom: 100,
