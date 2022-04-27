@@ -161,7 +161,10 @@ const Tabs = ({route}) => {
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        //component={SettingsScreen}
+        children={() =>
+          <SettingsScreen propName={route.params}/>
+        }
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (

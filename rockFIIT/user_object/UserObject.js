@@ -14,7 +14,6 @@ class User {
 const homeIP = 'http://192.168.1.192:5000'
 const unrIP = 'http://172.27.32.199:5000'
 
-
 let programListTest = [
     [1, 'NewUser3@gmail.com', 'PPL Split', 0, 2, 4, 9, 11],
     [2, 'NewUser3@gmail.com', 'Strength Program', 4, 1, 6, 3, 8],
@@ -32,10 +31,10 @@ let exerciseLibrary = [];
 
 let exerciseLogTest = [
     [1, 'NewUser3@gmail.com', 0, 3, 10, 225.0, 'Easy Work', '4/5/22'],
-    [2, 'NewUser3@gmail.com', 0, 3, 10, 230.0, 'Easy Work', '4/8/22'],
-    [3, 'NewUser3@gmail.com', 0, 3, 10, 235.0, 'Easy Work', '4/9/22'],
-    [4, 'NewUser3@gmail.com', 0, 3, 10, 240.0, 'Easy Work', '4/12/22'],
-    [5, 'NewUser3@gmail.com', 0, 3, 10, 245.0, 'Easy Work', '4/13/22'],
+    [2, 'NewUser3@gmail.com', 4, 3, 10, 230.0, 'Easy Work', '4/8/22'],
+    [3, 'NewUser3@gmail.com', 7, 3, 10, 235.0, 'Easy Work', '4/9/22'],
+    [4, 'NewUser3@gmail.com', 8, 3, 10, 240.0, 'Easy Work', '4/12/22'],
+    [5, 'NewUser3@gmail.com', 9, 3, 10, 245.0, 'Easy Work', '4/13/22'],
     [6, 'NewUser3@gmail.com', 1, 3, 10, 245.0, 'Easy Work', '4/14/22'],
 ];
 
@@ -62,7 +61,7 @@ async function addNewUser(username, password, name){
             firstName: name,
             weight: '',
         };
-        fetch(unrIP + '/addUser', {
+        fetch(homeIP + '/addUser', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -94,7 +93,7 @@ async function userAuthenticate(username, password){
             userName: username,
             password: password,
         }; 
-        fetch(unrIP + '/activities', {
+        fetch(homeIP + '/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -106,7 +105,6 @@ async function userAuthenticate(username, password){
         }))
         
         setTimeout(() => {
-            console.log(responseMsg);
             if (responseMsg == 'Successfully retrieved user activity logs'){
                 resolve('true');
             }
@@ -117,11 +115,31 @@ async function userAuthenticate(username, password){
     })
 }
 
+async function changePassword(username, oldPass, newPass){
+    return new Promise(() => {
+        const userCredentials =
+        {
+            userName: username,
+            oldPwd: oldPass,
+            newPwd: newPass,
+        }; 
+        fetch(homeIP + '/changePassword', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json;',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(userCredentials)
+        }).then(response => response.json().then(data => {
+            console.log(data.info);
+        }))
+    })
+}
+
 async function getExerciseList(){
     var exerciseList = [];
     return new Promise((resolve) => {
-        var exerciseList = []
-        fetch(unrIP + '/exercises').then(response => response.json().then(data => {
+        fetch(homeIP + '/exercises').then(response => response.json().then(data => {
             exerciseList = data.data;
           }))
           setTimeout(() => {
@@ -138,7 +156,7 @@ async function getUserLogs(username,password){
             userName: username,
             password: password,
         }; 
-        fetch(unrIP + '/activities', {
+        fetch(homeIP + '/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -158,7 +176,7 @@ async function getUserLogs(username,password){
 async function getDefaultPrograms(){
     var programList = {};
     return new Promise((resolve) => {
-        fetch(unrIP + '/getProgram').then(response => response.json().then(data => {
+        fetch(homeIP + '/getProgram').then(response => response.json().then(data => {
             programList = data.data;
           }))
           setTimeout(() => {
@@ -175,7 +193,7 @@ async function getUserPrograms(username,password){
             userName: username,
             password: password,
         }; 
-        fetch(unrIP + '/programs', {
+        fetch(homeIP + '/programs', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -199,7 +217,7 @@ async function getUserGoals(username,password){
             userName: username,
             password: password,
         }; 
-        fetch(unrIP + '/goals', {
+        fetch(homeIP + '/goals', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -228,7 +246,7 @@ async function addUserProgram(username, program, e1, e2, e3, e4, e5, password){
             exercise5 : e5,
             password: password,
         }; 
-        fetch(unrIP + '/addProgram', {
+        fetch(homeIP + '/addProgram', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -250,7 +268,7 @@ async function addUserGoals(username, password, goal, isCompleted){
             completed: isCompleted,
             password: password,
         }; 
-        fetch(unrIP + '/addGoal', {
+        fetch(homeIP + '/addGoal', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -276,7 +294,7 @@ async function logUserExercise(username, id, sets, reps, weight, notes, date, pa
             date: date,
             password: password,
         };
-        fetch(unrIP + '/logActivity', {
+        fetch(homeIP + '/logActivity', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -316,6 +334,7 @@ function getIdFromExercise(exercise){
 export var UserObject = {
     addNewUser,
     userAuthenticate,
+    changePassword,
     getExerciseList,
     getUserLogs,
     getDefaultPrograms,

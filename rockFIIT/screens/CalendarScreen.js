@@ -24,7 +24,6 @@ const CalendarScreen = ({ navigation, propName }) => {
       setUserLogs(temp);
     };
     requestData();
-    //console.log(propName);
   }, []);
 
   return (

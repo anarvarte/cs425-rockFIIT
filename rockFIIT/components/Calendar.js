@@ -19,11 +19,12 @@ function convertDate(time){
 
 const Calendar = ({navigation, propName}) => {
 
-  console.log(propName.currentUser.exercises);
-
   const [items, setItems] = useState({});
   //const [userLogs, setUserLogs] = useState([]);
   var userLogs = propName.currentUser.exercises;
+  //var userLogs = propName;
+
+  console.log(userLogs);
 
   async function loadItems(){
     setTimeout(() => {
@@ -41,6 +42,16 @@ const Calendar = ({navigation, propName}) => {
               comments: userLogs[i][6],
             }
           });
+        }else{
+          items[strTime].push({
+            name: {
+              exercise: UserObject.getExerciseFromId(userLogs[i][2]),
+              setsCompleted: userLogs[i][3],
+              repsCompleted: userLogs[i][4],
+              weight: userLogs[i][5],
+              comments: userLogs[i][6],
+            }
+          })
         }
       }
       const newItems = {};
@@ -48,7 +59,7 @@ const Calendar = ({navigation, propName}) => {
         newItems[key] = items[key];
       });
       setItems(newItems);
-    }, 2000);
+    }, 200);
   };
   
 
@@ -72,7 +83,7 @@ const Calendar = ({navigation, propName}) => {
                 <Text style={{fontFamily: "Georgia"}}>Weight: {item.name.weight}</Text>
               </View>
               <View style={{flex: .5,flexDirection: "column", alignItems: "center"}}>
-              <Text style={{fontFamily: "Georgia"}}>Comments</Text>
+              <Text style={{fontFamily: "Georgia", textDecorationLine:'underline'}}>Comments:</Text>
               <Text style={{fontFamily: "Georgia"}}> {item.name.comments}</Text>
               </View>
               
@@ -87,7 +98,7 @@ const Calendar = ({navigation, propName}) => {
     <View style={{ flex: 1 , fontFamily: "Georgia"}}>
       <Agenda
         theme={{  
-          dotColor: 'white',
+        dotColor: 'white',
         textSecondaryColor:"white",
         textDayHeaderFontFamily: "Georgia",
         dayTextColor:"white",
@@ -102,26 +113,29 @@ const Calendar = ({navigation, propName}) => {
         }}
         items={items}
         loadItemsForMonth={loadItems}
-        selected={userLogs[0][7]}
+        //selected={'2022-04-10'}
+        selected = {userLogs[0][7]}
         renderItem={renderItem}
         renderEmptyDate={() => {
-          <Card>
-            <Card.Content>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+          return(
+            <Card>
+              <Card.Content>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    
+                  }}
+                > 
+                  <View style={{flex: .5}}>
+                    <Text style={{fontFamily: "Georgia"}}>No Exercise Logged for Today!</Text>
+                  </View>
                   
-                }}
-              > 
-                <View style={{flex: .5}}>
-                  <Text style={{fontFamily: "Georgia"}}>No Exercise Logged for Today!</Text>
                 </View>
-                
-              </View>
-            </Card.Content>
-        </Card>
+              </Card.Content>
+          </Card>
+          )
         }}
       />
     

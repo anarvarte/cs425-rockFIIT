@@ -16,7 +16,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 const HomeScreen = ({propName}) => {
-  console.log(propName.currentUser.username);
+  //console.log(propName.currentUser.username);
   const [exerciseText, setExercise] = useState('');
   const [setsText, setSets] = useState('');
   const [repsText, setReps] = useState('');
@@ -31,8 +31,6 @@ const HomeScreen = ({propName}) => {
   const[specificExercises,setSpecificExercises] = useState([]);
   const[dropDownExercises, setDropDownExercises] = useState([]);
   const[exerciseLogs, setExerciseLogs] = useState([]);
-
-  //var user = propName.currentUser.exercises;
 
   useEffect(() => {
     const requestData = async() => {

@@ -40,7 +40,6 @@ const WeightLiftingScreen = ({ propName }) => {
       const defaultPrograms = await UserObject.getDefaultPrograms();
       setUserPrograms(userPrograms);
       setDefaultPrograms(defaultPrograms);
-      console.log(defaultPrograms);
     };
     requestData();
   }, [])
@@ -87,7 +86,6 @@ const WeightLiftingScreen = ({ propName }) => {
               ))
               */}
           </ScrollView>
-          
             <InputContainer>
               <SubmitButton onPress={() => {
                   addNewProgram()

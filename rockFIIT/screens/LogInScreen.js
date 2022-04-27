@@ -183,6 +183,7 @@ const LogIn = ({navigation}) => {
             currentUser.username = checkUserName;
             currentUser.password = checkPassword;
             currentUser.exercises = await UserObject.getUserLogs(checkUserName,checkPassword);
+            console.log(currentUser.exercises);
             //currentUser.programs = await UserObject.getUserPrograms(checkUserName, checkPassword);
             //currentUser.programs = UserObject.programListTest;
             //currentUser.goals = await UserObject.getUserGoals(checkUserName, checkPassword);

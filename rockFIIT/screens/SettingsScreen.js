@@ -1,111 +1,68 @@
 import React, {useState, useEffect} from "react";
 import { View, ScrollView, Text, TextInput, Button, StyleSheet, Modal, TouchableOpacity } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 import CustomButton from "../components/CustomButton";
-import { database } from "../components/Database";
+import { UserObject } from "../user_object/UserObject";
+import { useNavigation } from "@react-navigation/native";
 
-const SettingsScreen = ({ navigation }) => {
-  const [value, setValue] = useState('');
-  const [isVisible, setisVisible] = useState(false);
-  const [modalVal, setModalVal] = useState(false);
-  const [exerciseArray, setExerciseArray] = useState(['DB Bench Press', 'Incline Bench Press', 'Back Squats', 'Walking Lunges', 'Weighted Pullups', 'Calf Raises', 'Military Press', 'Bicep Curls']);
+const SettingsScreen = ({ propName }) => {
+    const navigation = useNavigation();
+    const [passwordText, setPasswordText] = useState('');
+    const [checkPasswordText, setCheckPasswordText] = useState('');
 
-function getExerciseList(){
-      setExerciseArray(result);
-  }
+    const [isVisible, setIsVisible] = useState(false);
 
-  const renderItem = ({ item } ) => (
-    <TouchableOpacity onPress={() => {
-      setValue(pressHandler(item));
-    }} >
-        <Text>{item}</Text>
-    </TouchableOpacity>
-);  
+    async function saveNewPassword(){
+        if(passwordText == ''){
+            alert('Please enter your old password.');
+        }
+        else if(checkPasswordText == ''){
+            alert('Please enter your new password.');
+        }
+        else if(passwordText == checkPasswordText){
+            alert('You cannot use the same password.');
+        }
+        else if(passwordText != propName.currentUser.password ){
+            alert('You have entered the wrong password.');
+        }
+        else{
+            alert('You have successfully changed your password!');
+            setIsVisible(false);
+            await UserObject.changePassword(propName.currentUser.username, passwordText, checkPasswordText);
+            
+        }
+    }
 
-function setExerciseDetails(){
-  alert('New exercise successfully saved!');
-  setModalVal(false);
-  exerciseArray[exerciseArray.length] = 'Hamstring Curls';
-}
-
-function signOut(){
-
-}
-
-  return (
+    return (
 
 
         <View style={styles.container}>
-                  <Modal transparent visible={modalVal}>
-            <View style={styles.exerciseModalBackground}>
-                <View style={[styles.exerciseModalContainer]}>
+            <Modal transparent visible={isVisible}>
+                <View style={styles.exerciseModalBackground}>
+                    <View style={[styles.exerciseModalContainer]}>
                     <Text style={styles.modalFieldLabels}>
-                        Exercise Name:
-                    </Text>
-                    <TextInput name='date' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Reps: 
-                    </Text>
-                    <TextInput name='sets' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Sets:
-                    </Text>
-                    <TextInput name='reps' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Weight:
-                    </Text>
-                    <TextInput name='reps' style={styles.modalFieldInputs}>
-                    </TextInput>
-                    <Text style={styles.modalFieldLabels}>
-                        Comments:
-                    </Text>
-                    <TextInput name='comments' style={styles.commentFieldInputs} multiline={true}>
-                    </TextInput>
-                    <TouchableOpacity onPress={() => setModalVal(false) }>
-                        <View style={styles.addWrapper2}>
-                            <Text style={styles.addButtonText}>x</Text>
-                        </View>
-                 </TouchableOpacity> 
-                 <TouchableOpacity onPress={() => setExerciseDetails() }>
-                        <View style={styles.addWrapper2} >
-                            <Text style={styles.addButtonText}>Add</Text>
-                        </View>
-                 </TouchableOpacity>     
-
+                            Old Password
+                        </Text>
+                        <TextInput name='password' secureTextEntry={true} style={styles.modalFieldInputs} onChangeText={newText => setPasswordText(newText)}>
+                        </TextInput>
+                        <Text style={styles.modalFieldLabels}>
+                            New Password
+                        </Text>
+                        <TextInput name='newPassword' secureTextEntry={true} style={styles.modalFieldInputs} onChangeText={newText => setCheckPasswordText(newText)}>
+                        </TextInput>
+                    <TouchableOpacity onPress={() => setIsVisible(false) }>
+                            <View style={styles.addWrapper}>
+                                <Text style={styles.addButtonText}>x</Text>
+                            </View>
+                    </TouchableOpacity>  
+                    <TouchableOpacity onPress={() => saveNewPassword() }>
+                            <View style={styles.addWrapper}>
+                                <Text style={styles.addButtonText}>Save</Text>
+                            </View>
+                    </TouchableOpacity>  
+                    </View>
                 </View>
-            </View>
-        </Modal>
-        <Modal transparent visible={isVisible}>
-            <View style={styles.exerciseModalBackground}>
-                <View>
-                    <Text style={styles.modalHeader}>
-                        Exercise List
-                    </Text>
-                </View>
-                <View style={[styles.exerciseModalContainer]}>
-                    <ScrollView>
-
-                    </ScrollView>
-                    {/*
-                    <FlatList
-                        data={exerciseArray}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => item}
-                        onPress={() => setisVisible(false)}
-                         /> 
-                     */}
-                  <TouchableOpacity onPress={() => setisVisible(false) }>
-                        <View style={styles.addWrapper}>
-                            <Text style={styles.addButtonText}>x</Text>
-                        </View>
-                 </TouchableOpacity>  
-                </View>
-            </View>
-        </Modal>
+            </Modal>
 
             <CustomButton
                 text="Sign Out"
@@ -113,12 +70,12 @@ function signOut(){
             />  
             <CustomButton
                 text="Change Password"
-                onPress={() => navigation.navigate('LogIn')}
+                onPress={() => setIsVisible(true)}
             />  
-          </View>
-      
+            </View>
+        
 
-  );
+    );
 };
 
 export default SettingsScreen;
@@ -186,7 +143,7 @@ exerciseModalBackground:{
     alignItems: 'center',
 },
 exerciseModalContainer:{
-    width:'80%',
+    width:'90%',
     backgroundColor:'white',
     paddingHorizontal:20,
     paddingVertical:30,

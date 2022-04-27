@@ -25,10 +25,12 @@ const GoalsScreen = ({propName}) => {
   const [newGoal, setNewGoal] = useState("");
   const[goalList, setNewGoalList] = useState([]);
 
+
   useEffect(() => {
     const requestData = async() => {
       const userGoals = await UserObject.getUserGoals(propName.currentUser.username, propName.currentUser.password);
       setUserGoals(userGoals);
+      console.log(userGoals);
     };
     requestData();
 
@@ -55,7 +57,7 @@ const GoalsScreen = ({propName}) => {
   async function saveNewGoals(){
     for(var i = 0; i < goalList.length ; i++){
       console.log(goalList[i].value);
-      await UserObject.addUserGoals('NewUser3@gmail.com', 'gamer775', goalList[i].value, 0);
+      await UserObject.addUserGoals(propName.currentUser.username, propName.currentUser.password, goalList[i].value, 0);
     }
     alert('Successfully added new goals!');
   }
