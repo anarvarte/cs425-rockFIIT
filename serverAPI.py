@@ -611,7 +611,7 @@ def delGoal():
             cur.execute(deleteQuery, (userName,goalID))
             con.commit()
 
-            responseMsg['info'] = 'Successfully deleted program'
+            responseMsg['info'] = 'Successfully deleted goal'
             return jsonify(responseMsg), 201
         except sqlite3.Error as err:
             responseMsg['info'] = err.args[0]
