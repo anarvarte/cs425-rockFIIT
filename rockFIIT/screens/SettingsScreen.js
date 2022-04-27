@@ -29,6 +29,7 @@ const SettingsScreen = ({ propName }) => {
             alert('You have successfully changed your password!');
             setIsVisible(false);
             await UserObject.changePassword(propName.currentUser.username, passwordText, checkPasswordText);
+            navigation.navigate("LogIn");
             
         }
     }
