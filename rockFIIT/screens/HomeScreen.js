@@ -13,7 +13,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 const HomeScreen = ({propName}) => {
-  //console.log(propName.currentUser.username);
   const [exerciseText, setExercise] = useState(' ');
   const [setsText, setSets] = useState(' ');
   const [repsText, setReps] = useState(' ');
@@ -83,16 +82,33 @@ const HomeScreen = ({propName}) => {
     }
   }
 
+  async function checkIfGoalMet(){
+    const userGoals = await UserObject.getUserGoals(propName.currentUser.username, propName.currentUser.password);
+    
+    for(var i = 0 ; i < userGoals.length ; i++){
+      if(UserObject.getExerciseNameFromId(userGoals[i][2]) == exerciseText){
+        if(weightText >= userGoals[i][3]){
+          alert('You have met one of your goals with this log!');
+          await UserObject.updateUserGoal(propName.currentUser.username, propName.currentUser.password, UserObject.getIdFromExercise(exerciseText), weightText)
+          return true;
+        }
+      }
+    }
+    return false;
+    
+  }
+
   async function logExercise(){
     var id = UserObject.getIdFromExercise(exerciseText);
     if(checkFieldEmpty()){
       alert('Please fill out your exercise log information!')
     }
     else{
-      alert('You have successfully logged your exercise!');
-      setModalVis(false);
-      await UserObject.logUserExercise(propName.currentUser.username, id, setsText, repsText, weightText, commentsText, getCurrentDate(), propName.currentUser.password);
+        alert('You have successfully logged your exercise!');
+        setModalVis(false);
+        await UserObject.logUserExercise(propName.currentUser.username, id, setsText, repsText, weightText, commentsText, getCurrentDate(), propName.currentUser.password);
     }
+
 
   }
 
@@ -114,6 +130,7 @@ const HomeScreen = ({propName}) => {
   ];
 
 
+
   return (
     <View style={styles.container}>
 
@@ -124,7 +141,6 @@ const HomeScreen = ({propName}) => {
             <View style={{ marginRight:10}}>
             <DateTime current={data.current} timezone={data.timezone} />
             </View>
-          
         </View>
         <View>
           <TouchableOpacity style ={styles.Wrapper1}>
@@ -161,10 +177,6 @@ const HomeScreen = ({propName}) => {
                       style={styles.dropdownStyle}
                       onChangeText={newText => setExercise(newText)}
                     />
-                    {/*
-                    <TextInput name='exercise' style={styles.modalFieldInputs} onChangeText={newText => setExercise(newText)}>
-                    </TextInput>
-                    */}
                     <Text style={styles.modalFieldLabels}>
                         Weight Used:
                     </Text>
@@ -190,7 +202,11 @@ const HomeScreen = ({propName}) => {
                             <Text style={styles.addButtonText}>x</Text>
                         </View>
                  </TouchableOpacity> 
-                 <TouchableOpacity onPress={() => logExercise()}>
+                 <TouchableOpacity onPress={() => {
+                      logExercise();
+                      checkIfGoalMet();
+                      }
+                      }>
                         <View style={styles.addWrapper2} >
                             <Text style={styles.addButtonText}>Log</Text>
                         </View>

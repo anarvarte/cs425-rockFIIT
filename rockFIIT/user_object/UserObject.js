@@ -283,6 +283,29 @@ async function addUserGoals(username, password, exercise, weight){
     })
 }
 
+async function updateUserGoal(username, password, exercise, weight){
+    return new Promise(() => {
+        const userCredentials =
+        {
+            userName: username,
+            exerciseGoal : exercise,
+            weightGoal : weight,
+            completed : 1,
+            password : password,
+        }; 
+        fetch(unrIP + '/updateGoal', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json;',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(userCredentials)
+        }).then(response => response.json().then(data => {
+            console.log(data);
+        }))
+    })
+}
+
 async function logUserExercise(username, id, sets, reps, weight, notes, date, password){
     return new Promise(() => {
         const newData = 
@@ -352,6 +375,7 @@ export var UserObject = {
     getUserGoals,
     addUserProgram,
     addUserGoals,
+    updateUserGoal,
     logUserExercise,
     setCurrentUser,
     getExerciseFromId,
