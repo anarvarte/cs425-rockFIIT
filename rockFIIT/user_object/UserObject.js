@@ -61,7 +61,7 @@ async function addNewUser(username, password, name){
             firstName: name,
             weight: '',
         };
-        fetch(homeIP + '/addUser', {
+        fetch(unrIP + '/addUser', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -93,7 +93,7 @@ async function userAuthenticate(username, password){
             userName: username,
             password: password,
         }; 
-        fetch(homeIP + '/activities', {
+        fetch(unrIP + '/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -123,7 +123,7 @@ async function changePassword(username, oldPass, newPass){
             oldPwd: oldPass,
             newPwd: newPass,
         }; 
-        fetch(homeIP + '/changePassword', {
+        fetch(unrIP + '/changePassword', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -139,7 +139,7 @@ async function changePassword(username, oldPass, newPass){
 async function getExerciseList(){
     var exerciseList = [];
     return new Promise((resolve) => {
-        fetch(homeIP + '/exercises').then(response => response.json().then(data => {
+        fetch(unrIP + '/exercises').then(response => response.json().then(data => {
             exerciseList = data.data;
           }))
           setTimeout(() => {
@@ -156,7 +156,7 @@ async function getUserLogs(username,password){
             userName: username,
             password: password,
         }; 
-        fetch(homeIP + '/activities', {
+        fetch(unrIP + '/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -176,7 +176,7 @@ async function getUserLogs(username,password){
 async function getDefaultPrograms(){
     var programList = {};
     return new Promise((resolve) => {
-        fetch(homeIP + '/getProgram').then(response => response.json().then(data => {
+        fetch(unrIP + '/getProgram').then(response => response.json().then(data => {
             programList = data.data;
           }))
           setTimeout(() => {
@@ -193,7 +193,7 @@ async function getUserPrograms(username,password){
             userName: username,
             password: password,
         }; 
-        fetch(homeIP + '/programs', {
+        fetch(unrIP + '/programs', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -217,7 +217,7 @@ async function getUserGoals(username,password){
             userName: username,
             password: password,
         }; 
-        fetch(homeIP + '/goals', {
+        fetch(unrIP + '/goals', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -246,7 +246,7 @@ async function addUserProgram(username, program, e1, e2, e3, e4, e5, password){
             exercise5 : e5,
             password: password,
         }; 
-        fetch(homeIP + '/addProgram', {
+        fetch(unrIP + '/addProgram', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -268,9 +268,9 @@ async function addUserGoals(username, password, exercise, weight){
             weightGoal : weight,
             completed : 0,
             date : '',
-            password : password,the 
+            password : password,
         }; 
-        fetch(homeIP + '/addGoal', {
+        fetch(unrIP + '/addGoal', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -296,7 +296,7 @@ async function logUserExercise(username, id, sets, reps, weight, notes, date, pa
             date: date,
             password: password,
         };
-        fetch(homeIP + '/logActivity', {
+        fetch(unrIP + '/logActivity', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',

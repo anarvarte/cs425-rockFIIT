@@ -495,7 +495,7 @@ def addGoal():
     if bcrypt.checkpw(password.encode(), dbPwd):
         insertQuery = 'INSERT INTO ' + goalTable + " (" + \
         ','.join(requiredFields[:len(requiredFields)-1]) + \
-        ') VALUES(?,?,?,?,?,?)'
+        ') VALUES(?,?,?,?,?)'
 
         try:
             con = sqlite3.connect(DATABASE)
