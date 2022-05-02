@@ -71,11 +71,6 @@ const WeightLiftingScreen = ({ propName }) => {
             {
               userProgramsList
             }
-            {/*
-              programList.map((programs)  => (
-                <DefaultList item={programs.value} exercises={programs.value} location={'CustomProgramScreen'}/>
-              ))
-              */}
           </ScrollView>
             <InputContainer>
               <SubmitButton onPress={() => {

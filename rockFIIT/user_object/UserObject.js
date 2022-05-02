@@ -14,6 +14,7 @@ class User {
 const homeIP = 'http://192.168.1.192:5000'
 const unrIP = 'http://172.27.32.199:5000'
 
+//These lists were used for testing purposes.
 let programListTest = [
     [1, 'NewUser3@gmail.com', 'PPL Split', 0, 2, 4, 9, 11],
     [2, 'NewUser3@gmail.com', 'Strength Program', 4, 1, 6, 3, 8],
