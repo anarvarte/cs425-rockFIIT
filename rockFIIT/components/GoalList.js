@@ -3,9 +3,10 @@ import { View, TouchableOpacity, Text, StyleSheet, Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
+import { UserObject } from "../user_object/UserObject";
 
 
-export default function TodoList({ item, deleteItem, completed }) {
+export default function TodoList({ item, weight, deleteItem, completed}) {
 
     //KEEPS TRACK OF ICON CHANGE
     const [active, setActive] = useState(true);
@@ -21,14 +22,14 @@ export default function TodoList({ item, deleteItem, completed }) {
 
   return (
     <ComponentContainer>
-      <ListContainer style={active ? styles.fin : styles.notfin}>
+      <ListContainer style={styles['goal_' + completed]}>
         <CircleContainer>
           <TouchableOpacity>
             <Entypo name ={active ? 'circle' : 'circle-with-cross'} size={23} color="black" onPress={() => handleChangeActive()}/>
             </TouchableOpacity>
           </CircleContainer>
         <View>
-          <TextItem>{item}</TextItem>
+          <TextItem>{UserObject.getExerciseFromId(item)[2]}: {weight} LBS</TextItem>
         </View>
         <View style={styles.button}>
           <MaterialIcons name="delete" size={22} onPress={() => deleteItem(item.key)} />
@@ -99,10 +100,9 @@ const styles = StyleSheet.create({
     backgroundColor:'#808080',
   },
   goal_0:{
-    backgroundColor:'#FFFFFF',
+    backgroundColor:'#808080',
   },
   goal_1:{
-    backgroundColor:'#808080',
+    backgroundColor:'#FFFFFF',
   }
-
 });

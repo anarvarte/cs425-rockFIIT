@@ -30,6 +30,8 @@
     "react-native": "0.64.3",
     "react-native-calendars": "^1.1282.0",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-material-dropdown": "^0.11.1",
+    "react-native-material-dropdown-v2": "^0.11.1",
     "react-native-paper": "^4.12.0",
     "react-native-pure-chart": "^0.0.24",
     "react-native-reanimated": "~2.2.0",

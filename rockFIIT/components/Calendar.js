@@ -11,12 +11,6 @@ const timeToStr = (time) => {
   return date.toISOString().split("T")[0];
 };
 
-function convertDate(time){
-  const newDate = new Date(time);
-
-  return newDate.toISOString().split("T")[0];
-}
-
 const Calendar = ({navigation, propName}) => {
 
   const [items, setItems] = useState({});
@@ -24,18 +18,17 @@ const Calendar = ({navigation, propName}) => {
   var userLogs = propName.currentUser.exercises;
   //var userLogs = propName;
 
-  console.log(userLogs);
-
   async function loadItems(){
     setTimeout(() => {
       for (let i = 0 ; i < userLogs.length ; i++){
+        const exerciseName = UserObject.getExerciseNameFromId(userLogs[i][2]);
         const time = userLogs[i][7];
         const strTime = timeToStr(time);
         if (!items[strTime]) {
           items[strTime] = [];
           items[strTime].push({
             name: {
-              exercise: UserObject.getExerciseFromId(userLogs[i][2]),
+              exercise: exerciseName,
               setsCompleted: userLogs[i][3],
               repsCompleted: userLogs[i][4],
               weight: userLogs[i][5],
@@ -45,7 +38,7 @@ const Calendar = ({navigation, propName}) => {
         }else{
           items[strTime].push({
             name: {
-              exercise: UserObject.getExerciseFromId(userLogs[i][2]),
+              exercise: exerciseName,
               setsCompleted: userLogs[i][3],
               repsCompleted: userLogs[i][4],
               weight: userLogs[i][5],
@@ -59,7 +52,7 @@ const Calendar = ({navigation, propName}) => {
         newItems[key] = items[key];
       });
       setItems(newItems);
-    }, 200);
+    }, 1500);
   };
   
 
@@ -77,7 +70,7 @@ const Calendar = ({navigation, propName}) => {
               }}
             > 
               <View style={{flex: .5}}>
-                <Text style={{fontFamily: "Georgia", fontWeight: "bold"}}>{item.name.exercise[2]}</Text>
+                <Text style={{fontFamily: "Georgia", fontWeight: "bold"}}>{item.name.exercise}</Text>
                 <Text style={{fontFamily: "Georgia"}}>Reps Done: {item.name.repsCompleted}</Text>
                 <Text style={{fontFamily: "Georgia"}}>Sets Done: {item.name.setsCompleted}</Text>
                 <Text style={{fontFamily: "Georgia"}}>Weight: {item.name.weight}</Text>

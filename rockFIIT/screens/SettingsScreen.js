@@ -120,7 +120,6 @@ addWrapper: {
     alignItems: 'center',
     borderColor: '#C0C0C0',
     borderWidth: 1,
-    
 },
 addWrapper2: {
   width: 45,

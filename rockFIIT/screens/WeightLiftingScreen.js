@@ -5,21 +5,12 @@ import {
   TextInput,
   Button,
   StyleSheet,
-  FlatList,
   StatusBar,
-  NativeModules,
   ScrollView,
 } from "react-native";
 
-import {useIsFocused} from '@react-navigation/native';
 import styled from "styled-components";
 import DefaultList from "../components/DefaultList";
-import EmptyLifting from "../components/EmptyLifting";
-import useDatabase from '../components/UseDatabase';
-import {database} from '../components/Database';
-import StrengthScreen from './StrengthScreen';
-import ArnoldSplitScreen from "./ArnoldSplit";
-import PPLScreen from "./PPLScreen";
 import CustomProgramScreen from "./CustomProgramScreen";
 
 import { UserObject } from "../user_object/UserObject";
@@ -94,6 +85,8 @@ const WeightLiftingScreen = ({ propName }) => {
               </SubmitButton>
             </InputContainer>
       </View>
+
+      
     </ComponentContainer>
   );
 };

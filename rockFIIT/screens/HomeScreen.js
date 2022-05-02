@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from "react";
 import { View, Text, TextInput, Button, StyleSheet, ImageBackground, Modal} from "react-native";
+import {Dropdown} from 'react-native-material-dropdown-v2';
 import styled from "styled-components";
 
 import TimerComponent from "../components/TimerComponent";
 import DateTime from '../components/DateTime';
 import CustomButton from "../components/CustomButton";
-
-import useDatabase from '../components/UseDatabase';
-import {database} from '../components/Database';
-import { useForm } from "react-hook-form";
 
 import PureChart from 'react-native-pure-chart';
 import { UserObject } from "../user_object/UserObject";
@@ -17,11 +14,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const HomeScreen = ({propName}) => {
   //console.log(propName.currentUser.username);
-  const [exerciseText, setExercise] = useState('');
-  const [setsText, setSets] = useState('');
-  const [repsText, setReps] = useState('');
-  const [commentsText, setComments] = useState('');
-  const [weightText, setWeight] = useState('');
+  const [exerciseText, setExercise] = useState(' ');
+  const [setsText, setSets] = useState(' ');
+  const [repsText, setReps] = useState(' ');
+  const [commentsText, setComments] = useState(' ');
+  const [weightText, setWeight] = useState(' ');
 
   const [modalVis, setModalVis] = useState(false);
   const [data, setData] = useState({});
@@ -31,11 +28,16 @@ const HomeScreen = ({propName}) => {
   const[specificExercises,setSpecificExercises] = useState([]);
   const[dropDownExercises, setDropDownExercises] = useState([]);
   const[exerciseLogs, setExerciseLogs] = useState([]);
+  const [exerciseList, setExerciseList] = useState([]);
+
+  const dropdownItems = [];
 
   useEffect(() => {
     const requestData = async() => {
       const userLogs = await UserObject.getUserLogs(propName.currentUser.username, propName.currentUser.password);
+      const exerciseList = await UserObject.loadExerciseLibrary();
       setExerciseLogs(userLogs);
+      setExerciseList(exerciseList);
     };
     requestData();
   }, [])
@@ -72,17 +74,35 @@ const HomeScreen = ({propName}) => {
     return month + '/' + date + '/' + year;
   }
 
+  function checkFieldEmpty(){
+    if( (exerciseText == ' ') || (setsText == ' ') || (repsText == ' ') || (commentsText == ' ') || (commentsText == ' ')){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   async function logExercise(){
     var id = UserObject.getIdFromExercise(exerciseText);
-    if(id == 'false' || id == 'undefined'){
-      alert('This exercise is not in your program!');
+    if(checkFieldEmpty()){
+      alert('Please fill out your exercise log information!')
     }
     else{
       alert('You have successfully logged your exercise!');
       setModalVis(false);
       await UserObject.logUserExercise(propName.currentUser.username, id, setsText, repsText, weightText, commentsText, getCurrentDate(), propName.currentUser.password);
     }
+
   }
+
+  for(var i = 0 ; i < exerciseList.length ; i++){
+    var currentExercise = {
+      value : exerciseList[i][2]
+    }
+    dropdownItems[i] = currentExercise;
+  }
+
 
   var testGraphData = [
     { x: "3-17-22", y: 215 },
@@ -136,8 +156,15 @@ const HomeScreen = ({propName}) => {
                     <Text style={styles.modalFieldLabels}>
                         Exercise:
                     </Text>
+                      <Dropdown 
+                      data={dropdownItems}
+                      style={styles.dropdownStyle}
+                      onChangeText={newText => setExercise(newText)}
+                    />
+                    {/*
                     <TextInput name='exercise' style={styles.modalFieldInputs} onChangeText={newText => setExercise(newText)}>
                     </TextInput>
+                    */}
                     <Text style={styles.modalFieldLabels}>
                         Weight Used:
                     </Text>
@@ -197,6 +224,12 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     
+  },
+  dropdownStyle: {
+    marginBottom: 10,
+    height: 35,
+    width:150,
+    fontFamily: 'Georgia',
   },
   Wrapper1: {
     backgroundColor: "#DD7F4A",
@@ -278,7 +311,7 @@ exerciseModalContainer:{
     alignItems:'flex-start', 
     flexDirection:'row',
     flexWrap: 'wrap',
-    height:'35%',
+    height:'38%',
 },
 modalFieldLabels:{
   width:'50%',
