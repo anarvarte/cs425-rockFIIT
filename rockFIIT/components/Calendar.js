@@ -3,7 +3,6 @@ import { Card, Avatar } from "react-native-paper";
 import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { UserObject } from "../user_object/UserObject";
-import { TabRouter } from "@react-navigation/native";
 
 const timeToStr = (time) => {
   const date = new Date(time);
@@ -14,9 +13,7 @@ const timeToStr = (time) => {
 const Calendar = ({navigation, propName}) => {
 
   const [items, setItems] = useState({});
-  //const [userLogs, setUserLogs] = useState([]);
   var userLogs = propName.currentUser.exercises;
-  //var userLogs = propName;
 
   async function loadItems(){
     setTimeout(() => {

@@ -2,37 +2,17 @@ import React, { useState } from "react";
 import {
   View,
   ScrollView,
-  Text,
-  Button,
   StyleSheet,
-  StatusBar,
-  FlatList,
-  KeyboardAvoidingView,
-  Modal,
   TouchableOpacity,
-  Styles,
-  
 } from "react-native";
 
-import CustomInput from '../components/CustomInput';
-import CustomButton from '../components/CustomButton';
 import styled from "styled-components";
-import AddInput from "../components/AddInput";
-import ExerciseList from "../components/ExerciseList";
-import LogIn from './LogInScreen';
-import Tabs from "../navigation/tabs";
-import AddExercise from "../components/AddExercise";
-import EmptyProgram from "../components/EmptyProgram";
 import DefaultExercise from "../components/DefaultExercise";
-//import Program from './ProgramScreen';
 import { useNavigation } from "@react-navigation/native";
 import { UserObject } from "../user_object/UserObject";
 
 const RealProgram = ({ route }) => {
   const navigation = useNavigation();
-  const [isVisible, setisVisible] = useState(false);
-
-  const [data, setData] = useState([]);
 
   var exerciseList = route.params.exercises;
   var programName = exerciseList[2];
@@ -40,14 +20,11 @@ const RealProgram = ({ route }) => {
 
   for(var i = 3 ; i < exerciseList.length ; i++){
     displayedExercises[i] = UserObject.getExerciseFromId(exerciseList[i]);
-    console.log(displayedExercises[i])
   }
 
   var displayedExercisesMap = displayedExercises.map(exercises => 
     <DefaultExercise exerciseName={exercises[2]} sets={exercises[4]} reps={exercises[5]} comments={exercises[3]} />
   )
-
-
   return (
     <ComponentContainer>
       <View style={styles.headerContainer}>

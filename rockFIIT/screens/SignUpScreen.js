@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput} from 'react-native';
 import {useForm} from 'react-hook-form';
-import * as SQLite from 'expo-sqlite';
 
 import '../assets/LogInScreenLogo.png';
 
@@ -60,24 +59,6 @@ const SignUp = ({navigation}) => {
                         rules={{required:'Name is required'}}
                         
                     />
-                    {/*
-                    <CustomInput
-                        name="username"
-                        control={control}
-                        placeholder="Username"
-                        rules={{
-                            required:'Username is required',
-                            minLength:{
-                                value: 5,
-                                message: 'Username should have a minimum of 5 characters',
-                            },
-                            maxLength:{
-                                value: 32,
-                                message: 'Username should have a maximum of 32 characters',
-                            },
-                        }}
-                    />
-                    */}
                     <CustomInput
                          name="emailaddress"
                          control={control}
@@ -118,11 +99,6 @@ const SignUp = ({navigation}) => {
                         text="Sign Up"
                         onPress={handleSubmit(onSignUpPressed)}
                     /> 
-                    {/*
-                    <CustomButton
-                        text="Check Program Table"
-                        onPress={checkProgramTable}
-                    />   */}
         </View>
 
         <CustomButton

@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-//let today = new Date().toISOString().slice(0, 10);
-
 export default function Header() {
   return (
     <ComponentContainer>
@@ -26,11 +24,9 @@ const HeaderText = styled.Text`
   font-size: 30px;
 `;
 
-//font-family: poppins-bold;
 const HeaderList = styled.Text`
   color: black;
   fontFamily: Georgia;
   font-size: 30px;
   margin-right: 20px;
 `;
-//  font-family: poppins-bold;

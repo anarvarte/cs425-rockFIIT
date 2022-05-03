@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {Text, StyleSheet, Button, View, ScrollView, Image, TextInput, Alert, Modal} from 'react-native';
-import ClipLoader from "react-spinners/ClipLoader"
-
 
 import '../assets/LogInScreenLogo.png';
 
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 
-
-import {useForm, Controller} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import { UserObject } from "../user_object/UserObject";
 
 const LogIn = ({navigation}) => {
@@ -26,153 +23,12 @@ const LogIn = ({navigation}) => {
 
     var checkUserName = watch('username');
     var checkPassword = watch('password');
-    
-   
-    const onLogInPressed = (data) => {
-        console.log(data);
-        navigation.navigate('Tabs');
-    };
-
-    const onForgotPasswordPressed = () => {
-        console.warn("FORGOT PASSWORD");
-    };
 
     function navigateSignUp(){
         navigation.navigate('SignUp');
     }
 
-    function navigateTabs(){
-        var currentUser = new UserObject.User();
-        navigation.navigate('Tabs', {currentUser});
-    }
-    
-    
-    const [exerciseObjectList, setExerciseObjectList] = useState([]);
-    const [userNameList, setUserList] = useState([]);
-
-    
-    function exercisesTest(){
-        var exerciseList = []
-        fetch('https://RockFIIT-DB-Test.cybern.repl.co/exercises').then(response => response.json().then(data => {
-            setExerciseObjectList(data.data);
-          }))
-        
-        /*
-        for(var i = 0; i < exerciseObjectList.length; i++){
-            exerciseList[i] = exerciseObjectList[i];
-        }
-        */
-        
-        //console.log(exerciseObjectList);
-        console.log(exerciseObjectList);
-    }
-
-    function logExercisesTest(){
-        const newData = 
-        {
-            userName: 'NewUser3@gmail.com',
-            exerciseID: 3,
-            setsCompleted: 4,
-            repsCompleted: 12,
-            weight: 225,
-            notes:'Burned out',
-            date: '4/17/22',
-            password:'gamer775',
-        };
-
-    fetch('http://192.168.1.192:5000/logActivity', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json;',
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify(newData)
-    }).then(response => response.json().then(data => {
-        console.log(data.info);
-    }))
-}
-
-    function addExerciseTest(){
-        const newData = 
-            {
-                Category: 'Push',
-                Exercises: 'Decline Bench Press',
-                Description: 'test string',
-                Sets: 4,
-                Reps: 9,
-                Link: '',
-            };
-
-        fetch('http://192.168.1.192:5000/addExercise', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json;',
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(newData)
-        }).then(response => response.json().then(data => {
-            console.log(data.info);
-        }))
-
-    }
-    
-    function getUserTest(){
-        var userList = []
-        fetch('https://servertesting.juancaridad.repl.co/userName').then(response => response.json().then(data => {
-            setUserList(data.data);
-          }))
-    
-        for(var i = 0; i < userNameList.length; i++){
-            userList[i] = userNameList[i][0];
-        }
-    
-        console.log(userList);
-        console.log(userList.includes('NewUser1@gmail.com'));
-    }
-
-    
-    function addNewUser(){
-        const newData = 
-        {
-            userName: 'newtest@gmail.com',
-            password: 'password',
-            firstName: 'testname',
-            weight: '',
-        };
-
-        fetch('http://192.168.1.192:5000/addUser', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json;',
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(newData)
-        }).then(response => response.json().then(data => {
-            console.log(data.info);
-        }))
-    }
-
-    function userAuthenticate(){
-        const userCredentials =
-        {
-            userName: 'NewUser3@gmail.com',
-            password: 'gamer775',
-        }; 
-        fetch('http://192.168.1.192:5000/activities', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json;',
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(userCredentials)
-        }).then(response => response.json().then(data => {
-            console.log(data.info);
-        }))
-    
-    }
-
     function isLoading(){
-        console.log('test');
         setIsVisible(true);
 
         setTimeout(() => {
@@ -181,11 +37,9 @@ const LogIn = ({navigation}) => {
     }
 
 
-    
     var currentUser = new UserObject.User();
     async function checkIfUserExists(){
         var userExists = await UserObject.userAuthenticate(checkUserName,checkPassword);
-        console.log(userExists);
         if(userExists == 'false'){
             alert("Invalid Username or Password");
         }
@@ -194,18 +48,12 @@ const LogIn = ({navigation}) => {
             currentUser.username = checkUserName;
             currentUser.password = checkPassword;
             currentUser.exercises = await UserObject.getUserLogs(checkUserName,checkPassword);
-            console.log(currentUser.exercises);
-            //currentUser.programs = await UserObject.getUserPrograms(checkUserName, checkPassword);
-            //currentUser.programs = UserObject.programListTest;
-            //currentUser.goals = await UserObject.getUserGoals(checkUserName, checkPassword);
             currentUser.exerciseList = await UserObject.getExerciseList();
             
             alert("Welcome, " + currentUser.username);
             navigation.navigate('Tabs', {currentUser});
         }
     }
-
-
     
     return(
 
@@ -243,7 +91,6 @@ const LogIn = ({navigation}) => {
                     <CustomButton
                         text="Log In"
                         onPress={handleSubmit(checkIfUserExists)}
-                        //onPress={handleSubmit(navigateTabs)}
                     />  
                     <CustomButton
                         style={{marginTop:50}}

@@ -62,7 +62,7 @@ async function addNewUser(username, password, name){
             firstName: name,
             weight: '',
         };
-        fetch(unrIP + '/addUser', {
+        fetch(homeIP + '/addUser', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -94,7 +94,7 @@ async function userAuthenticate(username, password){
             userName: username,
             password: password,
         }; 
-        fetch(unrIP + '/activities', {
+        fetch(homeIP + '/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -124,7 +124,7 @@ async function changePassword(username, oldPass, newPass){
             oldPwd: oldPass,
             newPwd: newPass,
         }; 
-        fetch(unrIP + '/changePassword', {
+        fetch(homeIP + '/changePassword', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -140,7 +140,7 @@ async function changePassword(username, oldPass, newPass){
 async function getExerciseList(){
     var exerciseList = [];
     return new Promise((resolve) => {
-        fetch(unrIP + '/exercises').then(response => response.json().then(data => {
+        fetch(homeIP + '/exercises').then(response => response.json().then(data => {
             exerciseList = data.data;
           }))
           setTimeout(() => {
@@ -157,7 +157,7 @@ async function getUserLogs(username,password){
             userName: username,
             password: password,
         }; 
-        fetch(unrIP + '/activities', {
+        fetch(homeIP + '/activities', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -177,7 +177,7 @@ async function getUserLogs(username,password){
 async function getDefaultPrograms(){
     var programList = {};
     return new Promise((resolve) => {
-        fetch(unrIP + '/getProgram').then(response => response.json().then(data => {
+        fetch(homeIP + '/getProgram').then(response => response.json().then(data => {
             programList = data.data;
           }))
           setTimeout(() => {
@@ -194,7 +194,7 @@ async function getUserPrograms(username,password){
             userName: username,
             password: password,
         }; 
-        fetch(unrIP + '/programs', {
+        fetch(homeIP + '/programs', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -218,7 +218,7 @@ async function getUserGoals(username,password){
             userName: username,
             password: password,
         }; 
-        fetch(unrIP + '/goals', {
+        fetch(homeIP + '/goals', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -247,7 +247,7 @@ async function addUserProgram(username, program, e1, e2, e3, e4, e5, password){
             exercise5 : e5,
             password: password,
         }; 
-        fetch(unrIP + '/addProgram', {
+        fetch(homeIP + '/addProgram', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -271,7 +271,7 @@ async function addUserGoals(username, password, exercise, weight){
             date : '',
             password : password,
         }; 
-        fetch(unrIP + '/addGoal', {
+        fetch(homeIP + '/addGoal', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -294,7 +294,7 @@ async function updateUserGoal(username, password, exercise, weight){
             completed : 1,
             password : password,
         }; 
-        fetch(unrIP + '/updateGoal', {
+        fetch(homeIP + '/updateGoal', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',
@@ -320,7 +320,7 @@ async function logUserExercise(username, id, sets, reps, weight, notes, date, pa
             date: date,
             password: password,
         };
-        fetch(unrIP + '/logActivity', {
+        fetch(homeIP + '/logActivity', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json;',

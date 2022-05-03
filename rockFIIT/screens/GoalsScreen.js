@@ -5,36 +5,25 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Button,
   StyleSheet,
   Modal,
 } from "react-native";
 import {Dropdown} from 'react-native-material-dropdown-v2';
 import styled from "styled-components";
-import AddGoal from "../components/AddGoal";
 import GoalList from "../components/GoalList";
 import Header from "../components/Header";
 import { UserObject } from "../user_object/UserObject";
 
-function getGoalName(val){
-  setNewGoal(val);
-}
-
 const GoalsScreen = ({propName}) => {
-  const [data, setData] = useState([]);
   const [userGoals, setUserGoals] = useState([]);
-  const [newGoal, setNewGoal] = useState("");
   const[goalList, setNewGoalList] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);
   const [modalVis, setModalVis] = useState(false);
-  const [selectedValue, setSelectedValue] = useState();
 
   const [exerciseText, setExercise] = useState(' ');
   const [weightText, setWeight] = useState(0);
 
-
   const dropdownItems = [];
-
 
   useEffect(() => {
     const requestData = async() => {
@@ -52,14 +41,7 @@ const GoalsScreen = ({propName}) => {
     });
   };
 
-  function getGoalName(val){
-    setNewGoal(val);
-  }
-
   async function addNewGoal(){
-    console.log(UserObject.getIdFromExercise(exerciseText));
-    console.log(weightText);
-
     if((exerciseText == ' ') || (weightText == 0)){
       alert('Please fill out your goal information!')
     }
@@ -68,14 +50,6 @@ const GoalsScreen = ({propName}) => {
       setModalVis(false);
       await UserObject.addUserGoals(propName.currentUser.username, propName.currentUser.password, UserObject.getIdFromExercise(exerciseText), weightText);
     }
-  }
-  
-  async function saveNewGoals(){
-    for(var i = 0; i < goalList.length ; i++){
-      console.log(goalList[i].value);
-      await UserObject.addUserGoals(propName.currentUser.username, propName.currentUser.password, goalList[i].value, 0);
-    }
-    alert('Successfully added new goals!');
   }
 
   var userGoalsList = userGoals.map((goals) => 
@@ -103,7 +77,6 @@ const GoalsScreen = ({propName}) => {
             ))
           }
         </ScrollView>
-
         <InputContainer>
               <SubmitButton onPress={() => {
                   setModalVis(true)
@@ -111,23 +84,6 @@ const GoalsScreen = ({propName}) => {
                 <Text style={{color: "white", fontSize: 18, fontFamily: "Georgia"}}> Add </Text>
               </SubmitButton>
         </InputContainer>
-
-          {/*
-        <InputContainer>
-              <Input placeholder="Create Goal..." onChangeText={getGoalName}/>
-              <SubmitButton onPress={() => {
-                  addNewGoal()
-                }}>
-                <Text style={{color:"white", fontSize: 20}}> + </Text>
-              </SubmitButton>
-              <SubmitButton onPress={() => {
-                saveNewGoals();
-              }}>
-                <Text style={{color: "white", fontSize: 18}}>Save</Text>
-              </SubmitButton>
-        </InputContainer>
-            */}
-    
       </View>
 
       <Modal transparent visible={modalVis}>
@@ -161,7 +117,6 @@ const GoalsScreen = ({propName}) => {
                             <Text style={styles.addButtonText}>Add</Text>
                         </View>
                  </TouchableOpacity>     
-
                 </View>
             </View>
         </Modal>

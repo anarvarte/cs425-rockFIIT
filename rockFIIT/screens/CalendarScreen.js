@@ -1,15 +1,7 @@
 import React, {useState, useEffect} from "react";
-import { View, Text, Button, StyleSheet, ImageBackground } from "react-native";
+import { View, StyleSheet } from "react-native";
 import styled from "styled-components";
 
-
-import DateTime from '../components/DateTime';
-
-import useDatabase from '../components/UseDatabase';
-import {database} from '../components/Database';
-import { LongPressGestureHandler } from "react-native-gesture-handler";
-
-import PureChart from 'react-native-pure-chart';
 import Calendar from "../components/Calendar";
 import { UserObject } from "../user_object/UserObject";
 

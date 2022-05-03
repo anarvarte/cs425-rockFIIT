@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Modal, } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Modal, } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components";
 import {database} from '../components/Database';
 
 export default function AddExercise({ pressHandler, navigation }) {
-  const [value, setValue] = useState('');
   const [isVisible, setisVisible] = useState(false);
   const [exerciseArray, setExerciseArray] = useState('');
-  const [data, setData] = useState([]);
   
-
   const onPressItem = (item) => {
     setValue(item);
   };

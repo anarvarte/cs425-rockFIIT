@@ -4,27 +4,12 @@ import {
   ScrollView,
   Text,
   TextInput,
-  Button,
   StyleSheet,
-  StatusBar,
-  FlatList,
-  KeyboardAvoidingView,
   Modal,
   TouchableOpacity,
-  Styles,
-  
 } from "react-native";
-
-import CustomInput from '../components/CustomInput';
-import CustomButton from '../components/CustomButton';
 import styled from "styled-components";
-import AddInput from "../components/AddInput";
-import ExerciseList from "../components/ExerciseList";
-import LogIn from './LogInScreen';
-import AddExercise from "../components/AddExercise";
-import EmptyProgram from "../components/EmptyProgram";
 import DefaultExercise from "../components/DefaultExercise";
-//import Program from './ProgramScreen';
 
 import { UserObject } from "../user_object/UserObject";
 import { useNavigation } from "@react-navigation/native";
@@ -36,11 +21,7 @@ const CustomProgram = ({ route }) => {
   const [modalProgramName, setModalProgramName] = useState(false);
   const [newProgramExercises, setNewProgramExercises] = useState([]);
   const [nameText, setName] = useState('');
-  const [modalVal, setModalVal] = useState(false);
-  const [data, setData] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);
-  
-  //route.params.credentials[0], route.params.credentials[1]
   
   useEffect(() => {
     const requestData = async() => {
@@ -65,14 +46,9 @@ const CustomProgram = ({ route }) => {
       id: newProgramExercises.length,
       value : exercise
     }])
-    console.log(newProgramExercises);
   }
 
   async function saveNewGoals(){
-
-    for(var i = 0; i < newProgramExercises.length ; i++){
-      console.log(UserObject.getIdFromExercise(newProgramExercises[i].value));
-    }
 
     if(nameText == ''){
       alert('Please name your program!');
@@ -82,8 +58,6 @@ const CustomProgram = ({ route }) => {
       await UserObject.addUserProgram(route.params.credentials[0], nameText, UserObject.getIdFromExercise(newProgramExercises[0].value), UserObject.getIdFromExercise(newProgramExercises[1].value), UserObject.getIdFromExercise(newProgramExercises[2].value), UserObject.getIdFromExercise(newProgramExercises[3].value), UserObject.getIdFromExercise(newProgramExercises[4].value), route.params.credentials[1]);
       navigation.navigate("WeightLiftingScreen");
     }
-
-    //UserObject.getIdFromExercise(newProgramExercises[0].value);
 
   }
 
@@ -156,17 +130,12 @@ const CustomProgram = ({ route }) => {
             </View>
         </Modal>
 
-        
-
     </ComponentContainer>
   );
 };
 
-
-
 const HeaderText = styled.Text`
   color: white;
-  
   font-size: 30px;
   margin-top: 50px;
 `;

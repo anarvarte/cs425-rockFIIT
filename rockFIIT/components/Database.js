@@ -1,30 +1,6 @@
-import React from 'react';
-
 import * as SQLite from 'expo-sqlite';
-import * as FileSystem from 'expo-file-system';
-import {Asset} from 'expo-asset';
 
 const db = SQLite.openDatabase('rockFIITLocalDb.db');
-
-/*
-function getUsers(){
-    db.transaction(
-        tx => {
-        tx.executeSql(
-            'SELECT exercise FROM exerciseLibrary',
-            [],
-            (tx, results) =>{
-                var parName = results.rows.item(7).exercise;
-                console.log('name is ' + parName);
-                //return parName;
-                
-            },
-            (t, error) => { console.log("db error getUsers"); console.log(error);},
-        );
-    }
-    );
-}
-*/ 
 
 function getExerciseTable(){
     return new Promise((resolve) => {
@@ -34,11 +10,7 @@ function getExerciseTable(){
                 'SELECT * FROM exerciseLibrary;',
                 [],
                 (tx, results) =>{
-                    /*
-                    for(var i = 0; i < results.rows.length; i++){
-                        userList[i]= results.rows.item(i).userName;
-                    }
-                    */
+                    
                     resolve(results);
                     return results;
                 },
@@ -57,11 +29,6 @@ function getUserTable(){
                 'SELECT * FROM userTable;',
                 [],
                 (tx, results) =>{
-                    /*
-                    for(var i = 0; i < results.rows.length; i++){
-                        userList[i]= results.rows.item(i).userName;
-                    }
-                    */
                     resolve(results);
                     return results;
                 },
@@ -80,11 +47,6 @@ function getProgramTable(){
                 'SELECT * FROM programTable;',
                 [],
                 (tx, results) =>{
-                    /*
-                    for(var i = 0; i < results.rows.length; i++){
-                        userList[i]= results.rows.item(i).userName;
-                    }
-                    */
                     resolve(results);
                     return results;
                     

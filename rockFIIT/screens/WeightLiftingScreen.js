@@ -19,8 +19,6 @@ import { useNavigation } from "@react-navigation/native";
 
 const WeightLiftingScreen = ({ propName }) => {
   const navigation = useNavigation();
-  const [newProgram, setNewProgram] = useState("");
-  const[programList, setNewProgramList] = useState([]);
   const[userPrograms, setUserPrograms] = useState([]);
   const[defaultPrograms, setDefaultPrograms] = useState([]);
 
@@ -34,10 +32,6 @@ const WeightLiftingScreen = ({ propName }) => {
     };
     requestData();
   }, [])
-  
-  function getProgramName(val){
-    setNewProgram(val);
-  }
 
   function addNewProgram(){
     var credentials = []

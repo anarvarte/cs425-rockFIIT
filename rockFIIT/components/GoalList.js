@@ -16,10 +16,7 @@ export default function TodoList({ item, weight, deleteItem, completed}) {
         setActive((val) => {
             return !val;
         });
-
     };
-
-
   return (
     <ComponentContainer>
       <ListContainer style={styles['goal_' + completed]}>

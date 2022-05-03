@@ -102,8 +102,6 @@ const TextItem = styled.Text`
   margin-top: 12px;
   fontFamily: Georgia;
 `;
-//  font-family: poppins-regular;
-
 
 const styles = StyleSheet.create({
   container: {

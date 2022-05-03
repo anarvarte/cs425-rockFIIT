@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import TimerComponent from "../components/TimerComponent";
 import DateTime from '../components/DateTime';
-import CustomButton from "../components/CustomButton";
 
 import PureChart from 'react-native-pure-chart';
 import { UserObject } from "../user_object/UserObject";
@@ -25,7 +24,6 @@ const HomeScreen = ({propName}) => {
 
   const [graphData, setGraphData] = useState([]);
   const[specificExercises,setSpecificExercises] = useState([]);
-  const[dropDownExercises, setDropDownExercises] = useState([]);
   const[exerciseLogs, setExerciseLogs] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);
 
@@ -84,7 +82,6 @@ const HomeScreen = ({propName}) => {
 
   async function checkIfGoalMet(){
     const userGoals = await UserObject.getUserGoals(propName.currentUser.username, propName.currentUser.password);
-    
     for(var i = 0 ; i < userGoals.length ; i++){
       if(UserObject.getExerciseNameFromId(userGoals[i][2]) == exerciseText){
         if(weightText >= userGoals[i][3]){
@@ -119,7 +116,7 @@ const HomeScreen = ({propName}) => {
     dropdownItems[i] = currentExercise;
   }
 
-
+  //Unable to finish graph functionality. Test data is being used.
   var testGraphData = [
     { x: "3-17-22", y: 215 },
     { x: "3-19-22", y: 245 },
@@ -128,8 +125,6 @@ const HomeScreen = ({propName}) => {
     { x: "3-25-22", y: 315 },
     { x: "3-27-22", y: 330 },
   ];
-
-
 
   return (
     <View style={styles.container}>

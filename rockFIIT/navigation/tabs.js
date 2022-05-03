@@ -1,18 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { Text, View, Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeScreen from "../screens/HomeScreen";
 import WeightLiftingScreen from "../screens/WeightLiftingScreen";
 import CalendarScreen from "../screens/CalendarScreen";
 import GoalsScreen from "../screens/GoalsScreen";
-import RockClimbingScreen from "../screens/RockClimbingScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 
 const Tab = createBottomTabNavigator();
 
 const Tabs = ({route}) => {
-  //console.log(route.params);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -31,9 +29,7 @@ const Tabs = ({route}) => {
       }}
     >
     <Tab.Screen
-      //initialParams={{id: 'test', num: 2}}
       name="Home"
-      //component={HomeScreen}
       children={() =>
         <HomeScreen propName={route.params}/>
       }
@@ -64,7 +60,6 @@ const Tabs = ({route}) => {
     />
       <Tab.Screen
         name="Calendar"
-        //component={CalendarScreen}
         children={() =>
           <CalendarScreen propName={route.params}/>
         }
@@ -98,7 +93,6 @@ const Tabs = ({route}) => {
       />
       <Tab.Screen
         name="Weightlifting"
-        //component={WeightLiftingScreen}
         children={() =>
           <WeightLiftingScreen propName={route.params}/>
         }
@@ -130,7 +124,6 @@ const Tabs = ({route}) => {
       />
             <Tab.Screen
         name="Goals"
-        //component={GoalsScreen}
         children={() =>
           <GoalsScreen propName={route.params}/>
         }
@@ -161,7 +154,6 @@ const Tabs = ({route}) => {
       />
       <Tab.Screen
         name="Settings"
-        //component={SettingsScreen}
         children={() =>
           <SettingsScreen propName={route.params}/>
         }
@@ -193,6 +185,5 @@ const Tabs = ({route}) => {
     </Tab.Navigator>
   );
 };
-
 
 export default Tabs;
