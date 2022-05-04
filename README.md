@@ -4,11 +4,6 @@
 Our creators all have a background in some sort of fitness, some of us are rock climbers, some of us are weightlifters, and some of us are both. The goal of RockFIIT, was to create an application that merged both these aspects of fitness together. Creating one centralized application where climbers and lifters could log their exercises, create their own programs and set their own fitness goals. 
 
 1. RockFIIT Functionalities
-   - Home Screen
-     - Graph that displays data based on logged exercises
-     - Timer, so the user is able to time their rest in between sets
-     - Log Exercise button, that takes the user to a modal, containing a drop down list of all exercises in the database so the user can select and log a workout
-     - Date and time
    - Login Screen
      - Basic login screen that has form validation so that it checks if the user has entered the required fields
      - If the user has created an account, when the login button is pressed the applicaiton will check within the database if the user exists
@@ -16,7 +11,12 @@ Our creators all have a background in some sort of fitness, some of us are rock 
    - Signup Screen
      - Basic signup screen with form validation to check if the user has entered the fields correctly
      - Once the user hits sign up, the application checks if the user is not yet within the database, if not the user has successfully created an account 
-   - Calendar
+   - Home Screen
+     - Graph that displays data based on logged exercises
+     - Timer, so the user is able to time their rest in between sets
+     - Log Exercise button, that takes the user to a modal, containing a drop down list of all exercises in the database so the user can select and log a workout
+     - Date and time
+   - Calendar Screen
      - Grabs all of the users previously and current logged exercises, and displays them on the date that they were logged
    - Fitness Screen
      - Comes with preloaded default exercises from the database, that users are able to choose and add to their account
@@ -55,6 +55,6 @@ In order to run you will need node.js and expo installed. Clone repository (or s
 NOTE: All of the dependencies should be included in the github folder. We have had some errors where some get uninstalled upon cloning, though. In this case, just run npm install ..., where ... is the dependency that the errors are saying could not be found. 
 
 ## Authors
-Cyrille Bernabe, Louis Doherty, Juan Caridad, Rommel Macatlan Jr., Aitor Navarte
+Cyrille Bernabe, Louis Doherty, Juan Caridad, Rommel Macatlang Jr., Aitor Narvarte
 
 *Note - Cyrille's contributions were not tracked correctly on this Github Repository. All of Cyrille's contributions can be viewed on the team's commit history under the name "Cyrille Bernabe", as well as the username "cyrilleeleazarb"
