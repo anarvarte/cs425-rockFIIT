@@ -56,3 +56,5 @@ NOTE: All of the dependencies should be included in the github folder. We have h
 
 ## Authors
 Cyrille Bernabe, Louis Doherty, Juan Caridad, Rommel Macatlan Jr., Aitor Navarte
+
+*Note - Cyrille's contributions were not tracked correctly on this Github Repository. All of Cyrille's contributions can be viewed on the team's commit history under the name "Cyrille Bernabe", as well as the username "cyrilleeleazarb"
